@@ -1,0 +1,55 @@
+if &compatible
+    set nocompatible
+end
+set t_Co=256
+
+call plug#begin('~/.vim/bundle')
+Plug 'chriskempson/base16-vim'
+Plug 'godlygeek/csapprox'
+Plug 'kien/ctrlp.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
+
+" Recently disabled
+" ack.vim
+" github-issues.vim
+" github-scheme
+" jellybeans.vim
+" molokai
+" tagbar
+" ultisnips
+" vim-airline
+" vim-bufferline
+" vim-easymotion
+" vim-gitgutter
+" vim-jade
+" vim-javascript
+" vim-l9
+" vim-nerdtree-tabs
+" vim-numbertoggle
+" vim-snippets
+" vim-surround
+" YouCompleteMe
+
+" Disabled (longer ago)
+" commant-d
+" grep.vim
+" javascript.vim
+" node
+" showmarks
+" supertab
+" tern_for_vim
+" vim-autocomplpop
+" vim-fuzzyfinder
+" vim-indent-guides
+" vim-nodejs-complete
+
+if filereadable(expand("~/.vimrc.bundles.local"))
+    source ~/.vimrc.bundles.local
+endif
+call plug#end()

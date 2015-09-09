@@ -1,0 +1,6 @@
+data.location=/home/jens/.tasks
+
+report.inbox.columns = id,description
+report.inbox.labels = ID,Description
+report.inbox.description = Inbox
+report.inbox.filter = status:pending +inbox

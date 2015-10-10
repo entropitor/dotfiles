@@ -119,3 +119,4 @@ nnoremap <leader>b :b<Space>
 let g:syntastic_javascript_checkers = ['standard']
 "let g:indentLine_char = '︙'
 let g:indentLine_char = '|'
+let g:loaded_matchparen=1

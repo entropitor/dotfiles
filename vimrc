@@ -34,6 +34,7 @@ set hlsearch
 
 nmap <F8> :TagbarToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
+nmap <leader>sc :SyntasticToggleMode<CR>
 
 let g:indent_guides_enable_on_vim_startup = 1
 

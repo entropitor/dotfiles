@@ -36,6 +36,8 @@ DEFAULT_USER="jens"
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
+if [ -f ~/.zshrc.local ]; then
+    . ~/.zshrc.local
+fi
 
 export EDITOR="vim"
-export PATH="/usr/local/heroku/bin:/home/jens/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/jens/bin/gsutil:/home/jens/bin/android-sdk/tools"

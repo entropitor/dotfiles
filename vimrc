@@ -8,6 +8,8 @@ set backspace=indent,eol,start
 
 syntax on
 filetype plugin indent on
+au BufNewFile,BufRead *.pro set filetype=prolog
+au BufNewFile,BufRead *.pl set filetype=prolog
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -16,6 +18,8 @@ let mapleader = ","
 set noswapfile
 set nobackup
 set nowb
+
+set nopaste
 
 set autoread
 
@@ -118,6 +122,8 @@ nnoremap <leader>b :b<Space>
 
 "let g:syntastic_javascript_checkers = ['standard', 'jsxhint']
 let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_check_on_wq = 0
+nmap <leader>rn :let g:syntastic_javascript_checkers = ['eslint','flow']<CR>
 "let g:indentLine_char = '︙'
 let g:indentLine_char = '|'
 let g:loaded_matchparen=1

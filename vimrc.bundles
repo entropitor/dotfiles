@@ -16,6 +16,8 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
+"Plug 'mndrix/prolog.vim'
+
 " Recently disabled
 " ack.vim
 " github-issues.vim

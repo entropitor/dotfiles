@@ -1,0 +1,4 @@
+--langdef=Prolog
+--langmap=Prolog:.pl
+--regex-Prolog=/^([a-z0-9_]+)/\1/p,predicate,predicate definition/
+--regex-Prolog=/^:-[ \t]+(dynamic|multifile|thread_local)[ \t]+([a-z0-9_]+)/\2/p,predicate,predicate metadata/

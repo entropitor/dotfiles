@@ -16,6 +16,8 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
+Plug 'majutsushi/tagbar'
+
 "Plug 'mndrix/prolog.vim'
 
 " Recently disabled

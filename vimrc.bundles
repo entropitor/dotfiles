@@ -12,11 +12,19 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
 Plug 'majutsushi/tagbar'
+Plug 'neomake/neomake'
+
+Plug 'othree/yajs.vim'
+
+Plug 'Valloric/YouCompleteMe'
+Plug 'sirver/UltiSnips'
+Plug 'greg-js/vim-react-es6-snippets'
+
 
 "Plug 'mndrix/prolog.vim'
 

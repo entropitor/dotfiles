@@ -57,3 +57,6 @@ alias sonar='~/bin/sonar-3.7.4/bin/linux-x86-64/sonar.sh console'
 
 alias idp='~/bin/idp/bin/idp'
 alias 'idp-ide'='~/bin/idp-ide/webID'
+
+alias cwbezetting='xdg-open http://localhost:10080 && ssh -L 10080:mysql.cs.kotnet.kuleuven.be:80 st.cs'
+alias cwadd='ssh-add ~/.ssh/cs/id_rsa'

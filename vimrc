@@ -73,8 +73,8 @@ let g:tagbar_type_prolog = {
 
 let g:UltiSnips={}
 let g:UltiSnipsExpandTrigger = "<c-e>"
-let g:UltiSnipsJumpForwardTrigger = "<c-p>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-n>"
+let g:UltiSnipsJumpForwardTrigger = "<c-l>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
 ""let g:UltiSnips.always_use_first_snippet =1
 
 "nnoremap <leader>ff :FufFile ./**[^node_modules]/<CR>

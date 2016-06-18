@@ -21,9 +21,21 @@ Plug 'neomake/neomake'
 
 Plug 'othree/yajs.vim'
 
-Plug 'Valloric/YouCompleteMe'
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --tern-completer
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+
 Plug 'sirver/UltiSnips'
 Plug 'greg-js/vim-react-es6-snippets'
+Plug 'git@bitbucket.org:caske33/snippets.git'
 
 
 "Plug 'mndrix/prolog.vim'

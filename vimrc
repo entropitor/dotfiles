@@ -6,6 +6,7 @@ syntax on
 filetype plugin indent on
 au BufNewFile,BufRead *.pro set filetype=prolog
 au BufNewFile,BufRead *.pl set filetype=prolog
+autocmd BufNewFile,BufRead *.scss set ft=scss.css
 
 set noswapfile
 set nobackup

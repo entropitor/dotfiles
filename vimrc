@@ -57,9 +57,10 @@ if has('mouse') | set mouse=a | endif
 
 nnoremap <leader>b :b<Space>
 
-nmap <F8> :TagbarToggle<CR>
 nmap <F7> :NERDTreeToggle<CR>
+let g:NERDTreeShowHidden=1
 
+nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_prolog = {
     \ 'ctagstype' : 'Prolog',
     \ 'kinds' : [
@@ -83,8 +84,13 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
 "nnoremap <leader>fb :FufBuffer<CR>
 "nnoremap <leader>fb :FufBuffer<CR>
 
-nnoremap <C-P> <ESC>:CtrlP
+nnoremap <C-P> <ESC>:CtrlP<CR>
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+  \ }
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -112,8 +118,12 @@ let g:airline#extensions#tabline#enabled = 0
 "let g:neomake_javascript_standard_maker = { 'errorformat': '%E %f:%l:%c: %m' }
 let g:neomake_javascript_enabled_makers = ['standard', 'flow']
 autocmd! BufWritePost * Neomake
+nnoremap <leader>ss :Neomake!<CR>
+nnoremap <leader>sl :lopen<CR>
+"let g:neomake_open_list=2
 
 "let g:indentLine_char = '︙'
 let g:indentLine_char = '|'
 let g:loaded_matchparen=1
 let g:indent_guides_enable_on_vim_startup = 1
+

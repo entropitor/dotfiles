@@ -1,10 +1,11 @@
 {
   "plugins": {
-      "es_modules": {}
+    "es_modules": {},
+    "node": {}
   },
   "libs": [
-      "ecma5",
-      "ecma6"
+    "ecma5",
+    "ecma6"
   ],
   "ecmaVersion": 6
 }

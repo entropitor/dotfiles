@@ -116,7 +116,6 @@ let g:airline#extensions#tabline#enabled = 0
 "nmap <leader>rn :let g:syntastic_javascript_checkers = ['eslint','flow']<CR>
 "nmap <leader>sc :SyntasticToggleMode<CR>
 
-"let g:neomake_javascript_standard_maker = { 'errorformat': '%E %f:%l:%c: %m' }
 let g:neomake_javascript_enabled_makers = ['standard', 'flow']
 autocmd! BufWritePost * Neomake
 nnoremap <leader>ss :Neomake!<CR>

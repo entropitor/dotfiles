@@ -11,6 +11,6 @@ icon_size 24
 sticky true
 #window_strut none
 window_type dock
-window_layer bottom
+window_layer top
 #no_shrink false
 skip_taskbar true

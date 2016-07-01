@@ -17,20 +17,6 @@ xcompmgr -n &
 # Set background
 nitrogen --restore &
 
-# Start kupfer
-kupfer --no-splash &
-
-# Start help programs
-udiskie &
-xfce4-power-manager &
-indicator-cpufreq &
-
-# Set up an icon tray
-stalonetray -c .xmonad/stalonetrayrc &
-
-# Fire up apps
-xscreensaver -no-splash &
-
 # Displays
 xrandr --output "DP-1" --auto --primary
 xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of DP-1
@@ -40,9 +26,5 @@ xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of DP-1
 # as Empathy. This prevents prompts you may otherwise get for invalid
 # certificates and the like.
 gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
-
-if [ -x /usr/bin/nm-applet ] ; then
-   nm-applet --sm-disable &
-fi
 
 exec xmonad

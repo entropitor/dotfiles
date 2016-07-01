@@ -34,5 +34,6 @@ Config {
   ],
   sepChar = "%",
   alignSep = "}{",
-  template = "%StdinReader% } %multicpu% | %memory% | %dynnetwork% | %battery% { <fc=#ee9a00>%date%</fc>"
+  template = "%StdinReader% } %multicpu% | %memory% | %dynnetwork% | %battery% { <fc=#ee9a00>%date%</fc>",
+  lowerOnStart = False
 }

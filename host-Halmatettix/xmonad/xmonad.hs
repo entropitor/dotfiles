@@ -10,6 +10,23 @@ import System.IO
 
 altMask = mod1Mask
 
+{-
+  Alerts for sound settings
+-}
+alertDouble = alert . show . bound . round
+  where bound x | x < 0     = 0
+                | x > 100   = 100
+                | otherwise = x
+alert = dzenConfig centered
+  where centered = onCurr (center 150 66)
+                    >=> font "-*-helvetica-*-r-*-*-64-*-*-*-*-*-*-*"
+                    >=> addArgs ["-fg", "#ffffff"]
+                    >=> addArgs ["-bg", "#000040"]
+
+
+{-
+  Main configuration
+-}
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
   let config = defaultConfig {
@@ -17,7 +34,12 @@ main = do
       , layoutHook = avoidStruts  $  layoutHook defaultConfig
       , logHook = dynamicLogWithPP xmobarPP
         { ppOutput = hPutStrLn xmproc
-          , ppTitle = xmobarColor "green" "" . shorten 50
+          , ppTitle = xmobarColor "#abc" "" . shorten 80
+          , ppCurrent = xmobarColor "#e6744c" "" . wrap "[" "]"
+          , ppVisible = xmobarColor "#c185a7" "" . wrap "(" ")"
+          , ppUrgent = xmobarColor "#c00" "" . wrap "{" "}"
+          , ppHidden = xmobarColor "#ccc" ""
+          , ppHiddenNoWindows = xmobarColor "#333" ""
         }
       , modMask = mod4Mask   -- Rebind Mod to the Windows key
       , terminal = "gnome-terminal"
@@ -37,14 +59,3 @@ main = do
       -- old terminal shortcut
       , ((controlMask .|. altMask, xK_t), spawn $ terminal config)
     ]
-
-alertDouble = alert . show . bound . round
-  where bound x | x < 0     = 0
-                | x > 100   = 100
-                | otherwise = x
-alert = dzenConfig centered
-  where centered = onCurr (center 150 66)
-                    >=> font "-*-helvetica-*-r-*-*-64-*-*-*-*-*-*-*"
-                    >=> addArgs ["-fg", "#ffffff"]
-                    >=> addArgs ["-bg", "#000040"]
-

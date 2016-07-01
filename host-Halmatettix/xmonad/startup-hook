@@ -22,6 +22,22 @@ if [ -z "$(pgrep xfce4-power-man)" ] ; then
   xfce4-power-manager &
 fi
 
+if [ -z "$(pgrep gnome-sound-app)" ] ; then
+  gnome-sound-applet &
+fi
+
 if [ -z "$(pgrep indicator-cpufr)" ] ; then
   indicator-cpufreq &
+fi
+
+# Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
+# when using gnome applications which expect access to the keyring, such
+# as Empathy. This prevents prompts you may otherwise get for invalid
+# certificates and the like.
+if [ -z "$(pgrep gnome-keyring-d)" ] ; then
+  eval $(gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+  export GNOME_KEYRING_SOCKET
+  export GNOME_KEYRING_PID
+  export GNOME_KEYRING_CONTROL
+  export SSH_AUTH_SOCK
 fi

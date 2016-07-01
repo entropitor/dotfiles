@@ -21,10 +21,4 @@ nitrogen --restore &
 xrandr --output "DP-1" --auto --primary
 xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of DP-1
 
-# Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
-# when using gnome applications which expect access to the keyring, such
-# as Empathy. This prevents prompts you may otherwise get for invalid
-# certificates and the like.
-gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
-
 exec xmonad

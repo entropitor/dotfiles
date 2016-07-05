@@ -3,13 +3,11 @@ if [ -z "$(pgrep nm-applet)" ] ; then
   nm-applet --sm-disable &
 fi
 
-# Systray
 if [ -n "$(pgrep stalonetray)" ] ; then
   kill $(pgrep stalonetray)
 fi
 stalonetray -c ~/.xmonad/stalonetrayrc &
 
-# kupfer: application launcher
 if [ -z "$(pgrep kupf)" ] ; then
   kupfer --no-splash &
 fi
@@ -28,6 +26,10 @@ fi
 
 if [ -z "$(pgrep indicator-cpufr)" ] ; then
   indicator-cpufreq &
+fi
+
+if [ -z "$(pgrep gnome-settings-)" ] ; then
+  gnome-settings-daemon &
 fi
 
 # Run the gnome-keyring-daemon to avoid issues you otherwise may encounter

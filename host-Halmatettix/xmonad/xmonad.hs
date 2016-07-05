@@ -9,6 +9,7 @@ import XMonad.Util.Dzen
 import System.IO
 
 altMask = mod1Mask
+myModMask = mod4Mask
 
 {-
   Alerts for sound settings
@@ -41,7 +42,7 @@ main = do
           , ppHidden = xmobarColor "#ccc" ""
           , ppHiddenNoWindows = xmobarColor "#333" ""
         }
-      , modMask = mod4Mask   -- Rebind Mod to the Windows key
+      , modMask = myModMask   -- Rebind Mod to the Windows key
       , terminal = "gnome-terminal"
       , startupHook = do
           setWMName "LG3D"
@@ -49,8 +50,9 @@ main = do
     }
 
   xmonad $ config `additionalKeys`
-    [ ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
-      , ((0, xK_Print), spawn "scrot")
+    [ ((0, xK_Print), spawn "sleep 0.2; gnome-screenshot -c -a") -- sleep to get keyboard!
+      , ((controlMask, xK_Print), spawn "gnome-screenshot -c -w")
+      , ((controlMask .|. shiftMask, xK_Print), spawn "gnome-screenshot -i -a")
       -- http://superuser.com/questions/389737/how-do-you-make-volume-keys-and-mute-key-work-in-xmonad
       -- http://dmwit.com/volume/
       , ((0, 0x1008FF11), lowerVolume 5 >>= alertDouble)
@@ -58,4 +60,5 @@ main = do
       , ((0, 0x1008FF12), toggleMuteChannels ["Master", "Speaker", "Headphone", "Headphone 1"] >>= \muted -> alert (if muted then "off" else "on"))
       -- old terminal shortcut
       , ((controlMask .|. altMask, xK_t), spawn $ terminal config)
+      , ((myModMask, xK_e), spawn "nautilus --new-window")
     ]

@@ -9,9 +9,11 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
+import XMonad.Prompt (defaultXPConfig)
+import XMonad.Prompt.Window
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Util.Dzen
+import XMonad.Util.Dzen (dzenConfig, center, (>=>), onCurr, addArgs, font)
 import System.IO
 
 -- general config
@@ -39,7 +41,7 @@ myWorkspaces =
 startupWorkspace = myWorkspace5
 
 -- My Layouts
-defaultLayouts = showWName (tiled ||| simpleTabbedBottom ||| Grid ||| noBorders Full ||| Mirror tiled)
+defaultLayouts = showWName (tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled)
   where tiled = Tall 1 (3/100) (1/2)
 --defaultLayouts = Tall 1 (3/100) (1/2) ||| Full
 --myLayouts = onWorkspace myWorkspace1 Full $ defaultLayouts
@@ -58,6 +60,8 @@ myKeyBindings =
     -- old terminal shortcut
     , ((controlMask .|. altMask, xK_t), spawn myTerminal)
     , ((myModMask, xK_e), spawn "nautilus --new-window")
+    , ((myModMask .|. shiftMask, xK_b), windowPromptBring defaultXPConfig)
+    , ((myModMask .|. shiftMask, xK_g), windowPromptGoto defaultXPConfig)
   ]
 
 {-

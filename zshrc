@@ -41,3 +41,9 @@ if [ -f ~/.zshrc.local ]; then
 fi
 
 export EDITOR="vim"
+
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
+
+#set -o vi

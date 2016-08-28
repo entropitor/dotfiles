@@ -106,7 +106,7 @@ main = do
     , modMask = myModMask
     , terminal = myTerminal
     , workspaces = myWorkspaces
-    , layoutHook = (avoidStruts . showWName) myLayouts
+    , layoutHook = (avoidStruts {-. showWName-}) myLayouts
     , manageHook = manageDocks
         <+> manageHook defaultConfig
         <+> composeAll myManagementHooks

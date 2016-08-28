@@ -1,6 +1,6 @@
 import XMonad
 import XMonad.Actions.Volume
-import XMonad.Layout.PerWorkspace (onWorkspace)
+import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ShowWName
 import XMonad.Layout.Tabbed
@@ -14,6 +14,7 @@ import XMonad.Prompt.Window
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Dzen (dzenConfig, center, (>=>), onCurr, addArgs, font)
+import qualified XMonad.StackSet as W
 import System.IO
 
 -- general config
@@ -24,14 +25,14 @@ myTerminal = "gnome-terminal"
 
 -- My workspaces
 myWorkspace1 = "1:WF"
-myWorkspace2 = "2:Pinned"
-myWorkspace3 = "3:Chrome"
-myWorkspace4 = "4:Term"
-myWorkspace5 = "5:Main"
-myWorkspace6 = "6:Extra"
-myWorkspace7 = "7:Mail"
-myWorkspace8 = "8:Hang"
-myWorkspace9 = "9:Slack"
+myWorkspace2 = "2:Pin"
+myWorkspace3 = "3:Chr"
+myWorkspace4 = "4:Trm"
+myWorkspace5 = "5:Dev"
+myWorkspace6 = "6:Xtr"
+myWorkspace7 = "7:Hng"
+myWorkspace8 = "8:Ml"
+myWorkspace9 = "9:Slk"
 myWorkspaces =
   [
     myWorkspace1, myWorkspace2, myWorkspace3,
@@ -41,11 +42,13 @@ myWorkspaces =
 startupWorkspace = myWorkspace5
 
 -- My Layouts
-defaultLayouts = showWName (tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled)
+defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled
   where tiled = Tall 1 (3/100) (1/2)
---defaultLayouts = Tall 1 (3/100) (1/2) ||| Full
---myLayouts = onWorkspace myWorkspace1 Full $ defaultLayouts
-myLayouts = defaultLayouts
+myLayouts =
+  onWorkspace myWorkspace5 (Full ||| defaultLayouts)
+  $ onWorkspaces [myWorkspace8, myWorkspace9] (simpleTabbedBottom ||| defaultLayouts)
+  $ defaultLayouts
+-- myLayouts = defaultLayouts
 
 -- My key bindings
 myKeyBindings =
@@ -59,19 +62,31 @@ myKeyBindings =
     , ((0, 0x1008FF12), toggleMuteChannels ["Master", "Speaker", "Headphone", "Headphone 1"] >>= \muted -> alert (if muted then "off" else "on"))
     -- old terminal shortcut
     , ((controlMask .|. altMask, xK_t), spawn myTerminal)
-    , ((myModMask, xK_e), spawn "nautilus --new-window")
+    , ((myModMask, xK_x), spawn "nautilus --new-window")
+    , ((myModMask, xK_c), kill)
     , ((myModMask .|. shiftMask, xK_b), windowPromptBring defaultXPConfig)
     , ((myModMask .|. shiftMask, xK_g), windowPromptGoto defaultXPConfig)
   ]
 
-{-
-  Main configuration
--}
+-- My Management hooks
+myManagementHooks = [
+  className =? "Slack" --> doF (W.shift myWorkspace9)
+  , className =? "Nylas N1" --> doF (W.shift myWorkspace8)
+  , className =? "Thunderbird" --> doF (W.shift myWorkspace8)
+  , resource =? "crx_knipolnnllmklapflnccelgolnpehhpl" --> doF (W.shift myWorkspace7) -- Hangouts
+  , resource =? "crx_koegeopamaoljbmhnfjbclbocehhgmkm" --> doF (W.shift myWorkspace1) -- Workflowy
+  , className =? "jetbrains-rubymine" --> doF (W.shift myWorkspace5)
+  , className =? "jetbrains-webstorm" --> doF (W.shift myWorkspace5)
+  , className =? "jetbrains-studio" --> doF (W.shift myWorkspace5)
+  , resource =? "vstudio" --> doF (W.shift myWorkspace6)
+  , title =? "SuperGenPass for Google Chrome™ by Denis" --> doFloat
+  ]
+
+-- Main configuration
 main = do
   xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
   xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
-    manageHook = manageDocks <+> manageHook defaultConfig
-    , logHook = dynamicLogWithPP xmobarPP {
+    logHook = dynamicLogWithPP xmobarPP {
         ppOutput = hPutStrLn xmproc
         , ppTitle = xmobarColor "#abc" "" . shorten 70
         , ppCurrent = xmobarColor "#e6744c" "" . wrap "[" "]"
@@ -83,7 +98,10 @@ main = do
     , modMask = myModMask
     , terminal = myTerminal
     , workspaces = myWorkspaces
-    , layoutHook = avoidStruts $ myLayouts
+    , layoutHook = (avoidStruts . showWName) myLayouts
+    , manageHook = manageDocks
+        <+> manageHook defaultConfig
+        <+> composeAll myManagementHooks
     , startupHook = do
         setWMName "LG3D"
         spawn "~/.xmonad/startup-hook"

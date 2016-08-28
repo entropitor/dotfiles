@@ -29,18 +29,18 @@ pre_window: source ~/.rvm/scripts/rvm
 
 windows:
   - mailer:
-      root: ~/datacamp/mailer
-      layout: 0a34,205x57,0,0{102x57,0,0,0,102x57,103,0[102x28,103,0,1,102x28,103,29,2]}
-      panes:
-        - gst
-        - dotenv rails s -p 3001
-        - dotenv rails c
-  - backend:
-      root: ~/datacamp/backend
+      root: ~/Workspace/datacamp/messenger-app
       layout: 0a34,205x57,0,0{102x57,0,0,0,102x57,103,0[102x28,103,0,1,102x28,103,29,2]}
       panes:
         - gst
         - dotenv rails s
         - dotenv rails c
+  #- backend:
+  #    root: ~/Workspace/datacamp/backend
+  #    layout: 0a34,205x57,0,0{102x57,0,0,0,102x57,103,0[102x28,103,0,1,102x28,103,29,2]}
+  #    panes:
+  #      - gst
+  #      - dotenv rails s
+  #      - dotenv rails c
   #- server: bundle exec rails s -p 3001
   #- logs: tail -f log/development.log

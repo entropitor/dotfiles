@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# See also https://github.com/davidbrewer/xmonad-ubuntu-conf
+# http://beginners-guide-to-xmonad.readthedocs.io/intro.html
+
+export GTK2_RC_FILES="$HOME/.xmonad/gtkrc-2.0"
+synclient HorizEdgeScroll=1
+
+# Load resources
+xrdb -merge .Xresources
+
+# Start compositing to support transparency. You can omit this
+# if you prefer not to use any transparency, but it is likely to cause
+# ugly black fringing with some programs such as synapse that expect
+# transparency support.
+xcompmgr -n &
+
+# Set background
+nitrogen --restore &
+
+# Displays
+xrandr --output "DP-1" --auto --primary
+xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of DP-1
+
+exec xmonad

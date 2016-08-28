@@ -1,0 +1,39 @@
+Config {
+  font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*",
+  borderColor = "black",
+  border = TopB,
+  bgColor = "black",
+  fgColor = "grey",
+  position = TopSize L 100 24,
+  commands = [
+    Run DynNetwork [
+      "-S", "True",
+      "-t", "<dev>: <rx>, <tx> "
+    ] 10,
+
+    Run MultiCpu [
+      "-H", "50",
+      "--high", "red"
+    ] 10,
+
+    Run Battery [
+      "-t", "<acstatus>",
+      "--",
+      "-o", "<left>% charging",
+      "-O", "<left>% (<timeleft>)",
+      "-i", ""
+    ] 10,
+
+    Run Memory [
+      "-t","Mem: <usedratio>%"
+    ] 10,
+
+    Run Date "%a %b %_d %Y %H:%M:%S" "date" 10,
+
+    Run StdinReader
+  ],
+  sepChar = "%",
+  alignSep = "}{",
+  template = "%StdinReader% } %multicpu% | %memory% | %dynnetwork% | %battery% { <fc=#ee9a00>%date%</fc>",
+  lowerOnStart = False
+}

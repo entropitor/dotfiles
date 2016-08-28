@@ -25,29 +25,23 @@ myTerminal = "gnome-terminal"
 
 
 -- My workspaces
-myWorkspace1 = "1:WF"
-myWorkspace2 = "2:Pin"
-myWorkspace3 = "3:Chr"
-myWorkspace4 = "4:Trm"
-myWorkspace5 = "5:Dev"
-myWorkspace6 = "6:Xtr"
-myWorkspace7 = "7:Hng"
-myWorkspace8 = "8:Ml"
-myWorkspace9 = "9:Slk"
-myWorkspaces =
-  [
-    myWorkspace1, myWorkspace2, myWorkspace3,
-    myWorkspace4, myWorkspace5, myWorkspace6,
-    myWorkspace7, myWorkspace8, myWorkspace9
+myWorkspaces = clickable [
+  "WF", "Pin", "Chr",
+  "Trm", "Dev", "Xtr",
+  "Hng", "Ml", "Slk"
   ]
-startupWorkspace = myWorkspace5
+  where clickable l = ["<action=xdotool key super+" ++ show i ++ ">" ++ show i ++ ":" ++ ws ++ "</action>" | (i,ws) <- zip [1..] l]
+[ wsWorkflowy, wsPinned, wsChrome,
+  wsTerminal, wsMain, wsExtra,
+  wsHangouts, wsMail, wsSlack ] = myWorkspaces
+startupWorkspace = wsMain
 
 -- My Layouts
 defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled
   where tiled = Tall 1 (3/100) (1/2)
 myLayouts =
-  onWorkspace myWorkspace5 (Full ||| defaultLayouts)
-  $ onWorkspaces [myWorkspace8, myWorkspace9] (simpleTabbedBottom ||| defaultLayouts)
+  onWorkspace wsMain (Full ||| defaultLayouts)
+  $ onWorkspaces [wsMail, wsSlack] (simpleTabbedBottom ||| defaultLayouts)
   $ defaultLayouts
 -- myLayouts = defaultLayouts
 
@@ -84,30 +78,30 @@ myKeyBindings =
 
 -- My Management hooks
 myManagementHooks = [
-  className =? "Slack" --> doF (W.shift myWorkspace9)
-  , className =? "Nylas N1" --> doF (W.shift myWorkspace8)
-  , className =? "Thunderbird" --> doF (W.shift myWorkspace8)
-  , resource =? "crx_knipolnnllmklapflnccelgolnpehhpl" --> doF (W.shift myWorkspace7) -- Hangouts
-  , resource =? "crx_koegeopamaoljbmhnfjbclbocehhgmkm" --> doF (W.shift myWorkspace1) -- Workflowy
-  , className =? "jetbrains-rubymine" --> doF (W.shift myWorkspace5)
-  , className =? "jetbrains-webstorm" --> doF (W.shift myWorkspace5)
-  , className =? "jetbrains-studio" --> doF (W.shift myWorkspace5)
-  , resource =? "vstudio" --> doF (W.shift myWorkspace6)
+  className =? "Slack" --> doF (W.shift wsSlack)
+  , className =? "Nylas N1" --> doF (W.shift wsMail)
+  , className =? "Thunderbird" --> doF (W.shift wsMail)
+  , resource =? "crx_knipolnnllmklapflnccelgolnpehhpl" --> doF (W.shift wsHangouts) -- Hangouts
+  , resource =? "crx_koegeopamaoljbmhnfjbclbocehhgmkm" --> doF (W.shift wsHangouts) -- Workflowy
+  , className =? "jetbrains-rubymine" --> doF (W.shift wsMain)
+  , className =? "jetbrains-webstorm" --> doF (W.shift wsMain)
+  , className =? "jetbrains-studio" --> doF (W.shift wsMain)
+  , resource =? "vstudio" --> doF (W.shift wsExtra)
   , title =? "SuperGenPass for Google Chrome™ by Denis" --> doFloat
   ]
 
 -- Main configuration
 main = do
-  xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
+  xmproc <- spawnPipe "LANG=en_US.UTF-8 xmobar ~/.xmonad/xmobarrc"
   xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
     logHook = dynamicLogWithPP xmobarPP {
         ppOutput = hPutStrLn xmproc
-        , ppTitle = xmobarColor "#abc" "" . shorten 70
+        , ppTitle = xmobarColor "#90b7bb" "" . shorten 100
         , ppCurrent = xmobarColor "#e6744c" "" . wrap "[" "]"
         , ppVisible = xmobarColor "#c185a7" "" . wrap "(" ")"
         , ppUrgent = xmobarColor "#c00" "" . wrap "{" "}"
         , ppHidden = xmobarColor "#ccc" ""
-        , ppHiddenNoWindows = xmobarColor "#333" ""
+        , ppHiddenNoWindows = xmobarColor "#555" ""
       }
     , modMask = myModMask
     , terminal = myTerminal
@@ -118,6 +112,7 @@ main = do
         <+> composeAll myManagementHooks
     , startupHook = do
         setWMName "LG3D"
+        -- windows $ W.greedyView startupWorkspace
         spawn "~/.xmonad/startup-hook"
   } `additionalKeys` myKeyBindings
 

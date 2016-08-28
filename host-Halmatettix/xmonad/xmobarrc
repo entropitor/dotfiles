@@ -1,39 +1,41 @@
 Config {
-  font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*",
+  -- font = "xft:DejaVu Sans Mono Bold Oblique for Powerline-9:bold",
+  font = "xft:Ubuntu Mono derivative Powerline Bold-9:bold",
   borderColor = "black",
   border = TopB,
-  bgColor = "black",
+  bgColor = "#333333",
   fgColor = "grey",
   position = TopSize L 100 24,
   commands = [
     Run DynNetwork [
       "-S", "True",
-      "-t", "<dev>: <rx>, <tx> "
+      "-t", "⬇<rx> ⬆<tx> "
     ] 10,
 
     Run MultiCpu [
       "-H", "50",
-      "--high", "red"
+      "--high", "red",
+      "-t", "⚙ <total>%"
     ] 10,
 
-    Run Battery [
-      "-t", "<acstatus>",
+    Run BatteryP ["BAT0"] [
+      "-t", "⚡ <acstatus>",
       "--",
-      "-o", "<left>% charging",
-      "-O", "<left>% (<timeleft>)",
-      "-i", ""
+      "-i", "idle",
+      "-o", "<left>% (<timeleft>)",
+      "-O", "<left>% charging"
     ] 10,
 
     Run Memory [
-      "-t","Mem: <usedratio>%"
+      "-t","▤ <usedratio>%"
     ] 10,
 
     Run Date "%a %b %_d %Y %H:%M:%S" "date" 10,
 
-    Run StdinReader
+    Run UnsafeStdinReader
   ],
   sepChar = "%",
   alignSep = "}{",
-  template = "%StdinReader% } %multicpu% | %memory% | %dynnetwork% | %battery% { <fc=#ee9a00>%date%</fc>",
+  template = "%UnsafeStdinReader%  }{ %multicpu% %memory% %dynnetwork% %battery%  <fc=#e95420>%date%</fc> ",
   lowerOnStart = False
 }

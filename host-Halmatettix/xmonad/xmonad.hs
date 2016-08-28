@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Actions.Volume
 import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces)
 import XMonad.Layout.NoBorders
@@ -66,6 +67,19 @@ myKeyBindings =
     , ((myModMask, xK_c), kill)
     , ((myModMask .|. shiftMask, xK_b), windowPromptBring defaultXPConfig)
     , ((myModMask .|. shiftMask, xK_g), windowPromptGoto defaultXPConfig)
+    -- CycleWS keys
+    , ((myModMask,               xK_Right), nextWS)
+    , ((myModMask,               xK_Left),  prevWS)
+    , ((myModMask .|. shiftMask, xK_Right), shiftToNext)
+    , ((myModMask .|. shiftMask, xK_Left),  shiftToPrev)
+    , ((myModMask,               xK_Up),    nextScreen)
+    , ((myModMask,               xK_Down),  prevScreen)
+    , ((myModMask .|. shiftMask, xK_Up),    shiftNextScreen)
+    , ((myModMask .|. shiftMask, xK_Down),  shiftPrevScreen)
+    , ((myModMask,               xK_z),     toggleWS)
+    , ((myModMask,               xK_e),     moveTo Next EmptyWS)
+    , ((myModMask .|. shiftMask, xK_e),     moveTo Prev EmptyWS)
+    , ((myModMask,               xK_s),     swapNextScreen)
   ]
 
 -- My Management hooks

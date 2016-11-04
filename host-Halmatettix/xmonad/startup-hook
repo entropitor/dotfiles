@@ -32,6 +32,18 @@ if [ -z "$(pgrep gnome-settings-)" ] ; then
   gnome-settings-daemon &
 fi
 
+if [ -z "$(pgrep xflux)" ] ; then
+  xflux -l 51 -g 4
+fi
+
+#if [ -z "$(pgrep stack)" ] ; then
+#  stack &
+#fi
+
+#if [ -z "$(pgrep Gitify)" ] ; then
+#  $HOME/bin/gitify/Gitify-linux-x64/Gitify &
+#fi
+
 # Run the gnome-keyring-daemon to avoid issues you otherwise may encounter
 # when using gnome applications which expect access to the keyring, such
 # as Empathy. This prevents prompts you may otherwise get for invalid

@@ -5,6 +5,7 @@ import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ShowWName
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Accordion
 import XMonad.Layout.Grid
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -37,7 +38,7 @@ myWorkspaces = clickable [
 startupWorkspace = wsMain
 
 -- My Layouts
-defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled
+defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled ||| Accordion
   where tiled = Tall 1 (3/100) (1/2)
 myLayouts =
   onWorkspace wsMain (Full ||| defaultLayouts)
@@ -86,8 +87,11 @@ myManagementHooks = [
   , className =? "jetbrains-rubymine" --> doF (W.shift wsMain)
   , className =? "jetbrains-webstorm" --> doF (W.shift wsMain)
   , className =? "jetbrains-studio" --> doF (W.shift wsMain)
+  , resource =? "emacs" --> doF (W.shift wsMain)
   , resource =? "vstudio" --> doF (W.shift wsExtra)
+  -- floats
   , title =? "SuperGenPass for Google Chrome™ by Denis" --> doFloat
+  , className =? "gitify" --> doFloat
   ]
 
 -- Main configuration

@@ -36,6 +36,10 @@ if [ -z "$(pgrep xflux)" ] ; then
   xflux -l 51 -g 4
 fi
 
+if [ -z "$(pgrep stack)" ] ; then
+  stack &
+fi
+
 #if [ -z "$(pgrep stack)" ] ; then
 #  stack &
 #fi

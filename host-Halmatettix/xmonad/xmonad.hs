@@ -27,14 +27,15 @@ myTerminal = "gnome-terminal"
 
 -- My workspaces
 myWorkspaces = clickable [
-  "WF", "Pin", "Chr",
-  "Trm", "Dev", "Xtr",
-  "Hng", "Ml", "Slk"
+  "WF", "Pin", "Xtr",
+  "Chr", "Dev", "Trm",
+  "Xtr", "Hng", "Slk"
   ]
   where clickable l = ["<action=xdotool key super+" ++ show i ++ ">" ++ show i ++ ":" ++ ws ++ "</action>" | (i,ws) <- zip [1..] l]
-[ wsWorkflowy, wsPinned, wsChrome,
-  wsTerminal, wsMain, wsExtra,
-  wsHangouts, wsMail, wsSlack ] = myWorkspaces
+[ wsWorkflowy, wsPinned, wsExtra,
+  wsChrome, wsMain, wsTerminal,
+  wsExtra2, wsHangouts, wsSlack ] = myWorkspaces
+wsMail = wsExtra2
 startupWorkspace = wsMain
 
 -- My Layouts
@@ -58,7 +59,9 @@ myKeyBindings =
     , ((0, 0x1008FF12), toggleMuteChannels ["Master", "Speaker", "Headphone", "Headphone 1"] >>= \muted -> alert (if muted then "off" else "on"))
     -- old terminal shortcut
     , ((controlMask .|. altMask, xK_t), spawn myTerminal)
+    , ((myModMask, xK_o), spawn myTerminal)
     , ((myModMask, xK_x), spawn "nautilus --new-window")
+    , ((myModMask, xK_i), spawn "google-chrome")
     , ((myModMask, xK_c), kill)
     , ((myModMask .|. shiftMask, xK_b), windowPromptBring defaultXPConfig)
     , ((myModMask .|. shiftMask, xK_g), windowPromptGoto defaultXPConfig)
@@ -88,7 +91,7 @@ myManagementHooks = [
   , className =? "jetbrains-webstorm" --> doF (W.shift wsMain)
   , className =? "jetbrains-studio" --> doF (W.shift wsMain)
   , resource =? "emacs" --> doF (W.shift wsMain)
-  , resource =? "vstudio" --> doF (W.shift wsExtra)
+  , resource =? "vstudio" --> doF (W.shift wsExtra2)
   -- floats
   , title =? "SuperGenPass for Google Chrome™ by Denis" --> doFloat
   , className =? "gitify" --> doFloat

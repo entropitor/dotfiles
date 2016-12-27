@@ -7,6 +7,7 @@ export PATH="/home/jens/.cabal/bin:$PATH"
 export PATH="/home/jens/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 export PATH="/home/jens/.cargo/bin:$PATH"
+export PATH="/home/jens/bin/anaconda2/bin:$PATH"
 export ANDROID_HOME=~/bin/android-sdk
 
 export RUST_SRC_PATH=/usr/local/src/rust/src

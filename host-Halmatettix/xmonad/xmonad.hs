@@ -19,6 +19,8 @@ import XMonad.Util.Dzen (dzenConfig, center, (>=>), onCurr, addArgs, font)
 import qualified XMonad.StackSet as W
 import System.IO
 
+import XMonad.Layout.Spiral
+
 -- general config
 altMask = mod1Mask
 myModMask = mod4Mask
@@ -39,7 +41,7 @@ wsMail = wsExtra2
 startupWorkspace = wsMain
 
 -- My Layouts
-defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled ||| Accordion
+defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled ||| Accordion ||| spiral (6/7)
   where tiled = Tall 1 (3/100) (1/2)
 myLayouts =
   onWorkspace wsMain (Full ||| defaultLayouts)
@@ -68,8 +70,8 @@ myKeyBindings =
     -- CycleWS keys
     , ((myModMask,               xK_Right), nextWS)
     , ((myModMask,               xK_Left),  prevWS)
-    , ((myModMask .|. shiftMask, xK_Right), shiftToNext)
-    , ((myModMask .|. shiftMask, xK_Left),  shiftToPrev)
+    , ((myModMask .|. shiftMask, xK_Right), shiftToNext >> nextWS)
+    , ((myModMask .|. shiftMask, xK_Left),  shiftToPrev >> prevWS)
     , ((myModMask,               xK_Up),    nextScreen)
     , ((myModMask,               xK_Down),  prevScreen)
     , ((myModMask .|. shiftMask, xK_Up),    shiftNextScreen)
@@ -92,6 +94,7 @@ myManagementHooks = [
   , className =? "jetbrains-studio" --> doF (W.shift wsMain)
   , resource =? "emacs" --> doF (W.shift wsMain)
   , resource =? "vstudio" --> doF (W.shift wsExtra2)
+  , resource =? "mendeleydesktop" --> doF (W.shift wsExtra2)
   -- floats
   , title =? "SuperGenPass for Google Chrome™ by Denis" --> doFloat
   , className =? "gitify" --> doFloat

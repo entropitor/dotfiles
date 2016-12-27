@@ -28,6 +28,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 Plug 'sirver/UltiSnips'
 Plug 'git@bitbucket.org:caske33/snippets.git'
 
+Plug 'ingydotnet/yaml-vim'
 
 "Plug 'mndrix/prolog.vim'
 

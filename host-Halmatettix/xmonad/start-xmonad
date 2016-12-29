@@ -17,7 +17,7 @@ xcompmgr -n &
 
 # Set background
 nitrogen --restore &
-nautilus --no-desktop -n &
+nautilus -n &
 
 # Displays
 xrandr --output "DP-1" --auto --primary

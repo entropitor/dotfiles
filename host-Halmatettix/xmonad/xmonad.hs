@@ -29,14 +29,18 @@ myTerminal = "gnome-terminal"
 
 -- My workspaces
 myWorkspaces = clickable [
+  "Xtr",
   "WF", "Pin", "Xtr",
   "Chr", "Dev", "Trm",
   "Xtr", "Hng", "Slk"
   ]
-  where clickable l = ["<action=xdotool key super+" ++ show i ++ ">" ++ show i ++ ":" ++ ws ++ "</action>" | (i,ws) <- zip [1..] l]
-[ wsWorkflowy, wsPinned, wsExtra,
+  -- where clickable l = ["<action=xdotool key super+" ++ show i ++ ">" ++ show i ++ ":" ++ ws ++ "</action>" | (i,ws) <- zip [1..] l]
+  where clickable l = [show i ++ ":" ++ ws | (i,ws) <- zip [0..] l]
+[ wsExtra3,
+  wsWorkflowy, wsPinned, wsExtra,
   wsChrome, wsMain, wsTerminal,
   wsExtra2, wsHangouts, wsSlack ] = myWorkspaces
+myWorkspacesCorrectOrder = tail myWorkspaces ++ [head myWorkspaces]
 wsMail = wsExtra2
 startupWorkspace = wsMain
 
@@ -45,7 +49,7 @@ defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mi
   where tiled = Tall 1 (3/100) (1/2)
 myLayouts =
   onWorkspace wsMain (Full ||| defaultLayouts)
-  $ onWorkspaces [wsMail, wsSlack] (simpleTabbedBottom ||| defaultLayouts)
+  $ onWorkspaces [wsSlack] (simpleTabbedBottom ||| defaultLayouts)
   $ defaultLayouts
 -- myLayouts = defaultLayouts
 
@@ -81,6 +85,10 @@ myKeyBindings =
     , ((myModMask .|. shiftMask, xK_e),     moveTo Prev EmptyWS)
     , ((myModMask,               xK_s),     swapNextScreen)
   ]
+  ++
+  [((m .|. myModMask, k), windows $ f i)
+        | (i, k) <- zip myWorkspaces [xK_0 .. xK_9]
+        , (f, m) <- [(W.greedyView, 0), (\i -> (W.greedyView i) . (W.shift i), shiftMask)]]
 
 -- My Management hooks
 myManagementHooks = [
@@ -100,6 +108,13 @@ myManagementHooks = [
   , className =? "gitify" --> doFloat
   ]
 
+myShowWNameConfig = defaultSWNConfig {
+  swn_font = "-misc-fixed-*-*-*-*-40-*-*-*-*-*-*-*"
+  , swn_bgcolor = "red"
+  , swn_color   = "white"
+  , swn_fade    = 1
+}
+
 -- Main configuration
 main = do
   xmproc <- spawnPipe "LANG=en_US.UTF-8 xmobar ~/.xmonad/xmobarrc"
@@ -115,8 +130,8 @@ main = do
       }
     , modMask = myModMask
     , terminal = myTerminal
-    , workspaces = myWorkspaces
-    , layoutHook = (avoidStruts {-. showWName-}) myLayouts
+    , workspaces = myWorkspacesCorrectOrder
+    , layoutHook = (avoidStruts . (showWName' myShowWNameConfig)) myLayouts
     , manageHook = manageDocks
         <+> manageHook defaultConfig
         <+> composeAll myManagementHooks

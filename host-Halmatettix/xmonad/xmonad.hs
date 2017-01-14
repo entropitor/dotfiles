@@ -29,27 +29,25 @@ myTerminal = "gnome-terminal"
 
 -- My workspaces
 myWorkspaces = clickable [
-  "Xtr",
-  "WF", "Pin", "Xtr",
-  "Chr", "Dev", "Trm",
-  "Xtr", "Hng", "Slk"
+  "Pin",
+  "Chr", "Main", "Trm",
+  "Xtr", "Xtr", "Xtr",
+  "Hng", "Mail", "Slk"
   ]
   -- where clickable l = ["<action=xdotool key super+" ++ show i ++ ">" ++ show i ++ ":" ++ ws ++ "</action>" | (i,ws) <- zip [1..] l]
   where clickable l = [show i ++ ":" ++ ws | (i,ws) <- zip [0..] l]
-[ wsExtra3,
-  wsWorkflowy, wsPinned, wsExtra,
+[ wsPinned,
   wsChrome, wsMain, wsTerminal,
-  wsExtra2, wsHangouts, wsSlack ] = myWorkspaces
+  wsExtra1, wsExtra2, wsExtra3,
+  wsHangouts, wsMail, wsSlack ] = myWorkspaces
 myWorkspacesCorrectOrder = tail myWorkspaces ++ [head myWorkspaces]
-wsMail = wsExtra2
-startupWorkspace = wsMain
 
 -- My Layouts
 defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled ||| Accordion ||| spiral (6/7)
   where tiled = Tall 1 (3/100) (1/2)
 myLayouts =
   onWorkspace wsMain (Full ||| defaultLayouts)
-  $ onWorkspaces [wsSlack] (simpleTabbedBottom ||| defaultLayouts)
+  $ onWorkspaces [wsMail, wsSlack] (simpleTabbedBottom ||| defaultLayouts)
   $ defaultLayouts
 -- myLayouts = defaultLayouts
 
@@ -96,13 +94,13 @@ myManagementHooks = [
   , className =? "Nylas N1" --> doF (W.shift wsMail)
   , className =? "Thunderbird" --> doF (W.shift wsMail)
   , resource =? "crx_knipolnnllmklapflnccelgolnpehhpl" --> doF (W.shift wsHangouts) -- Hangouts
-  , resource =? "crx_koegeopamaoljbmhnfjbclbocehhgmkm" --> doF (W.shift wsWorkflowy) -- Workflowy
+  {-, resource =? "crx_koegeopamaoljbmhnfjbclbocehhgmkm" --> dof (w.shift wsworkflowy) -- workflowy-}
   , className =? "jetbrains-rubymine" --> doF (W.shift wsMain)
   , className =? "jetbrains-webstorm" --> doF (W.shift wsMain)
   , className =? "jetbrains-studio" --> doF (W.shift wsMain)
   , resource =? "emacs" --> doF (W.shift wsMain)
-  , resource =? "vstudio" --> doF (W.shift wsExtra2)
-  , resource =? "mendeleydesktop" --> doF (W.shift wsExtra2)
+  , resource =? "vstudio" --> doF (W.shift wsExtra1)
+  , resource =? "mendeleydesktop" --> doF (W.shift wsExtra1)
   -- floats
   , title =? "SuperGenPass for Google Chrome™ by Denis" --> doFloat
   , className =? "gitify" --> doFloat
@@ -137,7 +135,7 @@ main = do
         <+> composeAll myManagementHooks
     , startupHook = do
         setWMName "LG3D"
-        -- windows $ W.greedyView startupWorkspace
+        -- windows $ W.greedyView wsMain
         spawn "~/.xmonad/startup-hook"
   } `additionalKeys` myKeyBindings
 

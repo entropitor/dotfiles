@@ -10,6 +10,9 @@ export PATH="/home/jens/.cargo/bin:$PATH"
 export PATH="/home/jens/bin/anaconda2/bin:$PATH"
 export PATH="/usr/local/sicstus4.3.5/bin:$PATH"
 
+export GOPATH="/usr/lib/go/packages"
+export PATH="${GOPATH//://bin:}/bin:$PATH"
+
 export ANDROID_HOME=~/bin/android-sdk
 
 export RUST_SRC_PATH=/usr/local/src/rust/src

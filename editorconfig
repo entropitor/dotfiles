@@ -9,6 +9,6 @@ end_of_line = lf
 insert_final_newline = true
 
 # Tab indentation (no size specified)
-[*.{js,html,py,erb,rb,json,hs,css,scss,sass,less}]
+[*.{js,html,py,erb,rb,json,hs,css,scss,sass,less,pl,rkt}]
 indent_style = space
 indent_size = 2

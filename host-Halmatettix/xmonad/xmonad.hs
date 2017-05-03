@@ -74,8 +74,10 @@ myKeyBindings =
     , ((myModMask,               xK_Left),  prevWS)
     , ((myModMask .|. shiftMask, xK_Right), shiftToNext >> nextWS)
     , ((myModMask .|. shiftMask, xK_Left),  shiftToPrev >> prevWS)
-    , ((myModMask,               xK_Up),    nextScreen)
-    , ((myModMask,               xK_Down),  prevScreen)
+    , ((myModMask,               xK_Up),    nextWS >> nextWS >> nextWS)
+    , ((myModMask,               xK_Down),  prevWS >> prevWS >> prevWS)
+    , ((myModMask .|. altMask,   xK_Up),    nextScreen)
+    , ((myModMask .|. altMask,   xK_Down),  prevScreen)
     , ((myModMask .|. shiftMask, xK_Up),    shiftNextScreen)
     , ((myModMask .|. shiftMask, xK_Down),  shiftPrevScreen)
     , ((myModMask,               xK_z),     toggleWS)
@@ -91,7 +93,7 @@ myKeyBindings =
 -- My Management hooks
 myManagementHooks = [
   className =? "Slack" --> doF (W.shift wsSlack)
-  , className =? "Nylas N1" --> doF (W.shift wsMail)
+  , className =? "Nylas Mail" --> doF (W.shift wsMail)
   , className =? "Thunderbird" --> doF (W.shift wsMail)
   , resource =? "crx_knipolnnllmklapflnccelgolnpehhpl" --> doF (W.shift wsHangouts) -- Hangouts
   {-, resource =? "crx_koegeopamaoljbmhnfjbclbocehhgmkm" --> dof (w.shift wsworkflowy) -- workflowy-}

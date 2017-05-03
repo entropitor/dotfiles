@@ -30,6 +30,8 @@ Plug 'git@bitbucket.org:caske33/snippets.git'
 
 Plug 'ingydotnet/yaml-vim'
 
+Plug 'mileszs/ack.vim'
+
 "Plug 'mndrix/prolog.vim'
 
 " Recently disabled

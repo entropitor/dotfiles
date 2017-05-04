@@ -3,3 +3,4 @@ if [ -f ~/.aliases.local ]; then
 fi
 
 alias gdf="git dsf"
+alias vi="vim"

@@ -89,7 +89,6 @@ myKeyBindings =
 myManagementHooks = [
   className =? "Slack" --> doF (W.shift wsSlack)
   , className =? "Nylas Mail" --> doF (W.shift wsMail)
-  , className =? "Thunderbird" --> doF (W.shift wsMail)
   , resource =? "crx_knipolnnllmklapflnccelgolnpehhpl" --> doF (W.shift wsHangouts) -- Hangouts
   {-, resource =? "crx_koegeopamaoljbmhnfjbclbocehhgmkm" --> dof (w.shift wsworkflowy) -- workflowy-}
   , className =? "jetbrains-rubymine" --> doF (W.shift wsMain)

@@ -1,6 +1,0 @@
-tunnels:
-  quivr:
-    subdomain: "quivr-mock"
-    proto:
-      http: 8081
-auth_token: UA7W15mmRsEubj_sDWjs

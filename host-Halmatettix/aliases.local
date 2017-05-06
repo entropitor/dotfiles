@@ -2,58 +2,16 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias kul='networklogin.py'
-alias ug='nohup ungit &'
-
-#export CDPATH=.:~/Workspace
-
-#alias hotspot='sudo ap-hotspot'
 
 alias andstud='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd && ~/bin/android-studio/bin/studio.sh &'
 alias pycharm='~/bin/pycharm-3.4.1/bin/pycharm.sh &'
 alias webstorm='~/bin/WebStorm/bin/webstorm.sh &'
 alias rubymine="~/bin/rubymine/bin/rubymine.sh &"
 
-alias quivr='cd ~/Quivr/Quivr-android'
-alias quivrr='quivr && git reset HEAD app .idea'
-alias quivra='quivr && cd assets && ./convert-all.sh'
-
+alias quivr='cd ~/stack/Quivr'
 alias clip='xclip -sel clip'
 
-#alias in='task add +inbox'
-#wait(){
-#  deadline = $1
-#  shift
-#  in wait:deadline $@
-#}
-#alias when='wait'
-#alias tom='tick tomorrow'
-#alias t='task'
-#
-#webpage_title (){
-#    wget -qO- "$*" | hxselect -s '\n' -c  'title' 2>/dev/null
-#}
-#read_and_review (){
-#    link="$1"
-#    title=$(webpage_title $link)
-#    echo $title
-#    descr="\"Read: $title\""
-#    id=$(task add +next +read "$descr" | sed -n 's/Created task \(.*\)./\1/p')
-#    task "$id" annotate "$link"
-#}
-#
-#alias read=read_and_review
-#
-#set_taskwarrior_filter (){
-#  export TASKWARRIOR_PROJECT="$1"
-#}
-#alias phome='set_taskwarrior_filter "pro:Home"'
-#alias pquivr='set_taskwarrior_filter "pro:Quivr"'
-#alias pnext='set_taskwarrior_filter "+next"'
-#alias pcustom=set_taskwarrior_filter
-
 alias reloadsh='source ~/.zshrc'
-
-alias sonar='~/bin/sonar-3.7.4/bin/linux-x86-64/sonar.sh console'
 
 alias idp='~/bin/idp/bin/idp'
 alias 'idp-ide'='~/bin/idp-ide/webID'

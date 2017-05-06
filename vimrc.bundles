@@ -5,6 +5,7 @@ set t_Co=256
 
 call plug#begin('~/.vim/bundle')
 Plug 'chriskempson/base16-vim'
+Plug 'joshdick/onedark.vim'
 Plug 'godlygeek/csapprox'
 Plug 'kien/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
@@ -31,6 +32,8 @@ Plug 'git@bitbucket.org:caske33/snippets.git'
 Plug 'ingydotnet/yaml-vim'
 
 Plug 'mileszs/ack.vim'
+
+Plug 'vim-airline/vim-airline'
 
 "Plug 'mndrix/prolog.vim'
 

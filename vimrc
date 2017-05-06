@@ -27,7 +27,8 @@ set showmatch
 set hlsearch
 nnoremap <leader><space> :noh<cr>
 
-colorscheme base16-tomorrow
+"colorscheme base16-tomorrow
+colorscheme onedark
 set background=dark
 set t_Co=256
 
@@ -98,7 +99,7 @@ if !exists('g:airline_symbols')
 endif
 
 set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
-let g:airline_theme = 'powerlineish'
+"let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts=1
 set laststatus=2 "Start drawing on start of session
 let g:airline_enable_branch = 1

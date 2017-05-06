@@ -5,7 +5,6 @@ import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ShowWName
 import XMonad.Layout.Tabbed
-import XMonad.Layout.Accordion
 import XMonad.Layout.Grid
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -18,8 +17,6 @@ import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Dzen (dzenConfig, center, (>=>), onCurr, addArgs, font)
 import qualified XMonad.StackSet as W
 import System.IO
-
-import XMonad.Layout.Spiral
 
 -- general config
 altMask = mod1Mask
@@ -43,7 +40,7 @@ myWorkspaces = clickable [
 myWorkspacesCorrectOrder = tail myWorkspaces ++ [head myWorkspaces]
 
 -- My Layouts
-defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled ||| Accordion ||| spiral (6/7)
+defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled
   where tiled = Tall 1 (3/100) (1/2)
 myLayouts =
   onWorkspace wsMain (Full ||| defaultLayouts)
@@ -70,17 +67,15 @@ myKeyBindings =
     , ((myModMask .|. shiftMask, xK_b), windowPromptBring defaultXPConfig)
     , ((myModMask .|. shiftMask, xK_g), windowPromptGoto defaultXPConfig)
     -- CycleWS keys
-    , ((myModMask,               xK_Right), nextWS)
-    , ((myModMask,               xK_Left),  prevWS)
-    , ((myModMask .|. shiftMask, xK_Right), shiftToNext >> nextWS)
-    , ((myModMask .|. shiftMask, xK_Left),  shiftToPrev >> prevWS)
-    , ((myModMask,               xK_Up),    nextWS >> nextWS >> nextWS)
-    , ((myModMask,               xK_Down),  prevWS >> prevWS >> prevWS)
-    , ((myModMask .|. altMask,   xK_Up),    nextScreen)
-    , ((myModMask .|. altMask,   xK_Down),  prevScreen)
-    , ((myModMask .|. shiftMask, xK_Up),    shiftNextScreen)
-    , ((myModMask .|. shiftMask, xK_Down),  shiftPrevScreen)
-    , ((myModMask,               xK_z),     toggleWS)
+    , ((myModMask,               xK_j),     nextWS)
+    , ((myModMask,               xK_k),     prevWS)
+    , ((myModMask .|. shiftMask, xK_j),     shiftToNext >> nextWS)
+    , ((myModMask .|. shiftMask, xK_k),     shiftToPrev >>  prevWS)
+    , ((myModMask,               xK_Right), nextScreen)
+    , ((myModMask,               xK_Left),  prevScreen)
+    , ((myModMask .|. shiftMask, xK_Right), shiftNextScreen)
+    , ((myModMask .|. shiftMask, xK_Left),  shiftPrevScreen)
+    , ((myModMask,               xK_b),     toggleWS)
     , ((myModMask,               xK_e),     moveTo Next EmptyWS)
     , ((myModMask .|. shiftMask, xK_e),     moveTo Prev EmptyWS)
     , ((myModMask,               xK_s),     swapNextScreen)

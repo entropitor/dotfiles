@@ -21,6 +21,5 @@ nautilus -n &
 
 # Displays
 xrandr --output "DP-1" --auto --primary
-xrandr | grep 'DP-2 connected' | ifne xrandr --output DP-2 --auto --left-of DP-1
 
 exec xmonad

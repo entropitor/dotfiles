@@ -8,6 +8,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
 import XMonad.Prompt (defaultXPConfig)
@@ -100,6 +101,7 @@ myManagementHooks = [
   -- floats
   , title =? "SuperGenPass for Google Chrome™ by Denis" --> doFloat
   , className =? "gitify" --> doFloat
+  , isFullscreen --> doFullFloat
   ]
 
 myShowWNameConfig = defaultSWNConfig {

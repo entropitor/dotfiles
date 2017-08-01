@@ -86,10 +86,11 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
 "nnoremap <leader>fb :FufBuffer<CR>
 "nnoremap <leader>fb :FufBuffer<CR>
 
-nnoremap <C-P> <ESC>:CtrlP<CR>
+nnoremap <C-P> <ESC>:CtrlPMRU<CR>
+nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules)$',
+  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
@@ -117,11 +118,18 @@ let g:airline#extensions#tabline#enabled = 0
 "nmap <leader>rn :let g:syntastic_javascript_checkers = ['eslint','flow']<CR>
 "nmap <leader>sc :SyntasticToggleMode<CR>
 
-let g:neomake_javascript_enabled_makers = ['standard', 'flow']
-autocmd! BufWritePost * Neomake
-nnoremap <leader>ss :Neomake!<CR>
-nnoremap <leader>sl :lopen<CR>
+"let g:neomake_javascript_enabled_makers = ['standard', 'flow']
+"autocmd! BufWritePost * Neomake
+"nnoremap <leader>ss :Neomake!<CR>
 "let g:neomake_open_list=2
+
+nnoremap <leader>sl :lopen<CR>
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = 'XX'
+let g:ale_sign_warning = '??'
+
+let g:flow#autoclose = 1
+let g:flow#enable = 0
 
 "let g:indentLine_char = '︙'
 let g:indentLine_char = '|'
@@ -130,4 +138,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
+endif
+
+if exists('&inccommand')
+  "highlight Search term=NONE cterm=NONE ctermfg=black ctermbg=9
+  "highlight IncSearch cterm=NONE ctermfg=black ctermbg=10
+  highlight Substitute cterm=NONE ctermfg=black ctermbg=9
+  set inccommand=split
 endif

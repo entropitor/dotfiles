@@ -29,7 +29,7 @@ Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g git+https://g
 Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --tern-completer' }
 
 Plug 'sirver/UltiSnips'
-Plug 'git@bitbucket.org:caske33/snippets.git'
+Plug 'git@bitbucket.org:entropitor/snippets.git'
 
 Plug 'ingydotnet/yaml-vim'
 

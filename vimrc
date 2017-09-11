@@ -62,6 +62,8 @@ nnoremap <leader>b :b<Space>
 nmap <F7> :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 
+let g:NERDSpaceDelims = 1
+
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_prolog = {
     \ 'ctagstype' : 'Prolog',
@@ -86,7 +88,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
 "nnoremap <leader>fb :FufBuffer<CR>
 "nnoremap <leader>fb :FufBuffer<CR>
 
-nnoremap <C-P> <ESC>:CtrlPMRU<CR>
+nnoremap <C-p> <ESC>:CtrlP<CR>
 nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
@@ -94,6 +96,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
+let g:ctrlp_show_hidden = 1
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -146,3 +149,8 @@ if exists('&inccommand')
   highlight Substitute cterm=NONE ctermfg=black ctermbg=9
   set inccommand=split
 endif
+
+tnoremap <Esc> <C-\><C-n>
+
+set foldmethod=syntax
+set foldlevelstart=1

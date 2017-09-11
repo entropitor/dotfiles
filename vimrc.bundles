@@ -21,7 +21,9 @@ Plug 'majutsushi/tagbar'
 " Plug 'scrooloose/syntastic'
 "Plug 'neomake/neomake'
 Plug 'w0rp/ale'
+Plug 'embear/vim-localvimrc'
 Plug 'flowtype/vim-flow'
+Plug 'jparise/vim-graphql'
 
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g git+https://github.com/ramitos/jsctags.git' }
@@ -36,6 +38,9 @@ Plug 'ingydotnet/yaml-vim'
 Plug 'mileszs/ack.vim'
 
 Plug 'vim-airline/vim-airline'
+
+Plug 'wakatime/vim-wakatime'
+Plug 'galooshi/vim-import-js'
 
 "Plug 'mndrix/prolog.vim'
 

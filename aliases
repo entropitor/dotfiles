@@ -4,3 +4,5 @@ fi
 
 alias gdf="git dsf"
 alias vi="vim"
+alias nr="npm run"
+alias nx="npx"

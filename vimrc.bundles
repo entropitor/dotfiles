@@ -23,7 +23,7 @@ Plug 'majutsushi/tagbar'
 "Plug 'neomake/neomake'
 Plug 'w0rp/ale'
 Plug 'embear/vim-localvimrc'
-Plug 'flowtype/vim-flow'
+" Plug 'flowtype/vim-flow'
 Plug 'jparise/vim-graphql'
 
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
@@ -32,6 +32,14 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 " Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --tern-completer' }
 " https://github.com/Valloric/YouCompleteMe/issues/2404
 " Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py' }
+"
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-flow.vim'
+Plug 'yami-beta/asyncomplete-omni.vim'
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'prabirshrestha/asyncomplete-emoji.vim'
 
 Plug 'sirver/UltiSnips'
 Plug 'git@bitbucket.org:entropitor/snippets.git'

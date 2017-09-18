@@ -173,16 +173,6 @@ set title
 "   let g:deoplete#sources#flow#flow_bin = g:flow_path
 " endif
 
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
-    \ 'name': 'flow',
-    \ 'whitelist': ['javascript'],
-    \ 'completor': function('asyncomplete#sources#flow#completor'),
-    \ 'config': {
-    \    'prefer_local': 1,
-    \    'flowbin_path': expand('~/bin/flow'),
-    \  },
-    \ }))
-
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
@@ -191,3 +181,35 @@ imap <c-space> <Plug>(asyncomplete_force_refresh)
 let g:asyncomplete_auto_popup = 1
 set completeopt+=preview
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
+  \ 'name': 'flow',
+  \ 'priority': 100,
+  \ 'whitelist': ['javascript'],
+  \ 'completor': function('asyncomplete#sources#flow#completor'),
+  \ 'config': {
+  \    'prefer_local': 1
+  \  },
+  \ }))
+call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+  \ 'name': 'ultisnips',
+  \ 'priority': 10,
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+  \ }))
+" call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+"   \ 'name': 'omni',
+"   \ 'whitelist': ['*'],
+"   \ 'completor': function('asyncomplete#sources#omni#completor')
+"   \  }))
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+  \ 'name': 'buffer',
+  \ 'whitelist': ['*'],
+  \ 'blacklist': ['go'],
+  \ 'completor': function('asyncomplete#sources#buffer#completor'),
+  \ }))
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
+  \ 'name': 'emoji',
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#emoji#completor'),
+  \ }))

@@ -15,6 +15,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 
 Plug 'majutsushi/tagbar'
@@ -26,9 +27,11 @@ Plug 'flowtype/vim-flow'
 Plug 'jparise/vim-graphql'
 
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g git+https://github.com/ramitos/jsctags.git' }
+" Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g git+https://github.com/ramitos/jsctags.git' }
 
-Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --tern-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --tern-completer' }
+" https://github.com/Valloric/YouCompleteMe/issues/2404
+" Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py' }
 
 Plug 'sirver/UltiSnips'
 Plug 'git@bitbucket.org:entropitor/snippets.git'
@@ -41,6 +44,13 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'wakatime/vim-wakatime'
 Plug 'galooshi/vim-import-js'
+
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-flow.vim'
+
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'steelsojka/deoplete-flow'
 
 "Plug 'mndrix/prolog.vim'
 

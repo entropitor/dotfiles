@@ -15,6 +15,7 @@ set nowb
 set nopaste
 set autoread
 set number
+set relativenumber
 
 let mapleader = ","
 imap jj <Esc>
@@ -80,6 +81,8 @@ let g:UltiSnips={}
 let g:UltiSnipsExpandTrigger = "<c-e>"
 let g:UltiSnipsJumpForwardTrigger = "<c-l>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
+let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
 ""let g:UltiSnips.always_use_first_snippet =1
 
 "nnoremap <leader>ff :FufFile ./**[^node_modules]/<CR>
@@ -107,7 +110,7 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
 let g:airline_powerline_fonts=1
 set laststatus=2 "Start drawing on start of session
 let g:airline_enable_branch = 1
-let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
 let g:airline#extensions#whitespace#show_message = 1
 let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
@@ -154,3 +157,37 @@ tnoremap <Esc> <C-\><C-n>
 
 set foldmethod=syntax
 set foldlevelstart=1
+
+let &titlestring = expand('%:t')
+set title
+
+" let g:deoplete#enable_at_startup = 1
+" inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : deoplete#mappings#manual_complete()
+" function! s:check_back_space() abort "{{{
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction"}}}
+
+" let g:flow_path = 'npx --no-install flow'
+" if g:flow_path != 'not found: flow'
+"   let g:deoplete#sources#flow#flow_bin = g:flow_path
+" endif
+
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
+    \ 'name': 'flow',
+    \ 'whitelist': ['javascript'],
+    \ 'completor': function('asyncomplete#sources#flow#completor'),
+    \ 'config': {
+    \    'prefer_local': 1,
+    \    'flowbin_path': expand('~/bin/flow'),
+    \  },
+    \ }))
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+let g:asyncomplete_auto_popup = 1
+set completeopt+=preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif

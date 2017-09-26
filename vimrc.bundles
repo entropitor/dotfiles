@@ -40,6 +40,9 @@ Plug 'yami-beta/asyncomplete-omni.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
 Plug 'prabirshrestha/asyncomplete-emoji.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'sirver/UltiSnips'
 Plug 'git@bitbucket.org:entropitor/snippets.git'
@@ -52,10 +55,6 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'wakatime/vim-wakatime'
 Plug 'galooshi/vim-import-js'
-
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-flow.vim'
 
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'steelsojka/deoplete-flow'

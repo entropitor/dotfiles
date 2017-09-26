@@ -56,6 +56,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+nnoremap <leader>qj :cnext<CR>
+nnoremap <leader>qk :cprevious<CR>
+
 if has('mouse') | set mouse=a | endif
 
 nnoremap <leader>b :b<Space>
@@ -182,30 +185,30 @@ let g:asyncomplete_auto_popup = 1
 set completeopt+=preview
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
-  \ 'name': 'flow',
-  \ 'priority': 100,
-  \ 'whitelist': ['javascript'],
-  \ 'completor': function('asyncomplete#sources#flow#completor'),
-  \ 'config': {
-  \    'prefer_local': 1
-  \  },
-  \ }))
+" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
+"   \ 'name': 'flow',
+"   \ 'priority': 100,
+"   \ 'whitelist': ['javascript'],
+"   \ 'completor': function('asyncomplete#sources#flow#completor'),
+"   \ 'config': {
+"   \    'prefer_local': 1
+"   \  },
+"   \ }))
 call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
   \ 'name': 'ultisnips',
   \ 'priority': 10,
   \ 'whitelist': ['*'],
   \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
   \ }))
-" call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-"   \ 'name': 'omni',
-"   \ 'whitelist': ['*'],
-"   \ 'completor': function('asyncomplete#sources#omni#completor')
-"   \  }))
+call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+  \ 'name': 'omni',
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#omni#completor')
+  \  }))
 call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
   \ 'name': 'buffer',
   \ 'whitelist': ['*'],
-  \ 'blacklist': ['go'],
+  \ 'blacklist': ['javascript'],
   \ 'completor': function('asyncomplete#sources#buffer#completor'),
   \ }))
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
@@ -213,3 +216,28 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
   \ 'whitelist': ['*'],
   \ 'completor': function('asyncomplete#sources#emoji#completor'),
   \ }))
+
+if executable('flow-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'flow-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
+        \ 'whitelist': ['javascript'],
+        \ })
+endif
+
+let g:lsp_async_completion = 1
+autocmd FileType javascript setlocal omnifunc=lsp#complete
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['flow-language-server', '--stdio'],
+    \ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>

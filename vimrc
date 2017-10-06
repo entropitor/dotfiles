@@ -58,6 +58,12 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <leader>qj :cnext<CR>
 nnoremap <leader>qk :cprevious<CR>
+nnoremap <leader>qo :copen<CR>
+nnoremap <leader>qc :cclose<CR>
+nnoremap <leader>lj :lnext<CR>
+nnoremap <leader>lk :lprevious<CR>
+nnoremap <leader>lo :lopen<CR>
+nnoremap <leader>lc :lclose<CR>
 
 if has('mouse') | set mouse=a | endif
 
@@ -240,4 +246,5 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <leader>ld :call LanguageClient_textDocument_documentSymbol()<CR>

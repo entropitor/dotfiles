@@ -47,3 +47,6 @@ if type nvim > /dev/null 2>&1; then
 fi
 
 #set -o vi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore node_modules/ --ignore build/ --ignore Build/ -g ""'

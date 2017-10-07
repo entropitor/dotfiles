@@ -109,6 +109,7 @@ myManagementHooks = [
   -- floats
   , title =? "SuperGenPass for Google Chrome™ by Denis" --> doFloat
   , className =? "gitify" --> doFloat
+  , className =? "Cerebro" --> doFloat
   , isFullscreen --> doFullFloat
   ]
 

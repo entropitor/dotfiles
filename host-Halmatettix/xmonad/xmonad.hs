@@ -30,14 +30,14 @@ myTerminal = "gnome-terminal"
 -- My workspaces
 myWorkspaces = clickable [
   "Pin",
-  "Chr", "Main", "Trm",
+  "Ffx", "Main", "Trm",
   "Xtr", "Xtr", "Xtr",
   "Hng", "Mail", "Slk"
   ]
   -- where clickable l = ["<action=xdotool key super+" ++ show i ++ ">" ++ show i ++ ":" ++ ws ++ "</action>" | (i,ws) <- zip [1..] l]
   where clickable l = [show i ++ ":" ++ ws | (i,ws) <- zip [0..] l]
 [ wsPinned,
-  wsChrome, wsMain, wsTerminal,
+  wsFirefox, wsMain, wsTerminal,
   wsExtra1, wsExtra2, wsExtra3,
   wsHangouts, wsMail, wsSlack ] = myWorkspaces
 myWorkspacesCorrectOrder = tail myWorkspaces ++ [head myWorkspaces]
@@ -64,7 +64,7 @@ myKeyBindings =
     , ((myModMask, xK_o), submap . Map.fromList $
       [ ((0, xK_e), spawn "emacs")
       , ((0, xK_s), spawn "slack")
-      , ((0, xK_c), spawn "google-chrome")
+      , ((0, xK_c), spawn "~/bin/firefox/firefox-bin")
       , ((0, xK_x), spawn "nautilus --new-window")
       , ((0, xK_t), spawn myTerminal)
       ])

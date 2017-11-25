@@ -11,6 +11,9 @@ stalonetray -c ~/.xmonad/stalonetrayrc &
 if [ -z "$(pgrep kupf)" ] ; then
   kupfer --no-splash &
 fi
+if [ -z "$(pgrep cerebro)" ] ; then
+  cerebro &
+fi
 
 if [ -z "$(pgrep udiskie)" ] ; then
   udiskie &
@@ -59,3 +62,6 @@ if [ -z "$(pgrep gnome-keyring-d)" ] ; then
   export GNOME_KEYRING_CONTROL
   export SSH_AUTH_SOCK
 fi
+
+# Don't turn off screen if inactive
+xset -dpms

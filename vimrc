@@ -100,6 +100,8 @@ let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
 "nnoremap <leader>fb :FufBuffer<CR>
 "nnoremap <leader>fb :FufBuffer<CR>
 
+autocmd BufEnter term://* startinsert
+
 nnoremap <C-p> <ESC>:CtrlP<CR>
 nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'ra'

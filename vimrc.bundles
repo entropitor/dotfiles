@@ -61,6 +61,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'wakatime/vim-wakatime'
 Plug 'galooshi/vim-import-js'
 
+Plug 'aklt/plantuml-syntax'
+
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'steelsojka/deoplete-flow'
 

@@ -44,10 +44,6 @@ if [ -z "$(pgrep keybase)" ] ; then
   keybase &
 fi
 
-#if [ -z "$(pgrep stack)" ] ; then
-#  stack &
-#fi
-
 #if [ -z "$(pgrep Gitify)" ] ; then
 #  $HOME/bin/gitify/Gitify-linux-x64/Gitify &
 #fi

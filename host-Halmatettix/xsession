@@ -1,0 +1,3 @@
+# Fix Libre Office for xmonad 
+# (https://github.com/rlopez1j/xmonad/issues/200#issuecomment-147562862)
+export SAL_USE_VCLPLUGIN=gen

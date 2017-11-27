@@ -4,6 +4,8 @@ end
 set t_Co=256
 
 call plug#begin('~/.vim/bundle')
+Plug 'roxma/nvim-yarp'
+
 Plug 'chriskempson/base16-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'godlygeek/csapprox'

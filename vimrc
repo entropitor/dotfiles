@@ -242,6 +242,8 @@ set hidden
 
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['flow-language-server', '--stdio'],
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio']
     \ }
 
 " Automatically start language servers.
@@ -250,3 +252,5 @@ nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<CR>
 nnoremap <silent> <leader>ld :call LanguageClient_textDocument_documentSymbol()<CR>
+nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>

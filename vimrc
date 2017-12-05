@@ -33,6 +33,15 @@ colorscheme onedark
 set background=dark
 set t_Co=256
 
+if (empty($TMUX))
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
 set list
 set listchars=tab:→\ ,trail:·
 nmap <leader>l :set list!<CR>
@@ -78,8 +87,8 @@ nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_prolog = {
     \ 'ctagstype' : 'Prolog',
     \ 'kinds' : [
-        \ 'p:Predicates',
-        \ ]
+	\ 'p:Predicates',
+	\ ]
     \ }
 
 "let g:ctags_statusline=1
@@ -172,18 +181,6 @@ set foldlevelstart=1
 let &titlestring = expand('%:t')
 set title
 
-" let g:deoplete#enable_at_startup = 1
-" inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : deoplete#mappings#manual_complete()
-" function! s:check_back_space() abort "{{{
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction"}}}
-
-" let g:flow_path = 'npx --no-install flow'
-" if g:flow_path != 'not found: flow'
-"   let g:deoplete#sources#flow#flow_bin = g:flow_path
-" endif
-
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
@@ -193,27 +190,18 @@ let g:asyncomplete_auto_popup = 1
 set completeopt+=preview
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
-"   \ 'name': 'flow',
-"   \ 'priority': 100,
-"   \ 'whitelist': ['javascript'],
-"   \ 'completor': function('asyncomplete#sources#flow#completor'),
-"   \ 'config': {
-"   \    'prefer_local': 1
-"   \  },
-"   \ }))
-call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
   \ 'name': 'ultisnips',
   \ 'priority': 10,
   \ 'whitelist': ['*'],
   \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
   \ }))
-call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
   \ 'name': 'omni',
   \ 'whitelist': ['*'],
   \ 'completor': function('asyncomplete#sources#omni#completor')
   \  }))
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
   \ 'name': 'buffer',
   \ 'whitelist': ['*'],
   \ 'blacklist': ['javascript'],
@@ -225,17 +213,17 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
   \ 'completor': function('asyncomplete#sources#emoji#completor'),
   \ }))
 
-if executable('flow-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'flow-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
-        \ 'whitelist': ['javascript'],
-        \ })
-endif
+" if executable('flow-language-server')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'flow-language-server',
+"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
+"         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
+"         \ 'whitelist': ['javascript'],
+"         \ })
+" endif
 
-let g:lsp_async_completion = 1
-autocmd FileType javascript setlocal omnifunc=lsp#complete
+" let g:lsp_async_completion = 1
+" autocmd FileType javascript setlocal omnifunc=lsp#complete
 
 " Required for operations modifying multiple buffers like rename.
 set hidden

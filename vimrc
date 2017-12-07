@@ -176,7 +176,7 @@ endif
 tnoremap <Esc> <C-\><C-n>
 
 set foldmethod=syntax
-set foldlevelstart=1
+set foldlevelstart=0
 
 let &titlestring = expand('%:t')
 set title
@@ -213,32 +213,41 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
   \ 'completor': function('asyncomplete#sources#emoji#completor'),
   \ }))
 
-" if executable('flow-language-server')
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'flow-language-server',
-"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
-"         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
-"         \ 'whitelist': ['javascript'],
-"         \ })
-" endif
+" vim-lsp settings
+if executable('flow-language-server')
+    au User lsp_setup call lsp#register_server({
+	\ 'name': 'flow-language-server',
+	\ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
+	\ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
+	\ 'whitelist': ['javascript'],
+	\ })
+endif
+let g:asyncomplete_auto_popup = 1
+set completeopt+=preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:lsp_async_completion = 1
+nnoremap <silent> K :LspHover<CR>
+nnoremap <silent> <CR> :LspHover<CR>
+nnoremap <silent> gd :LspDefinition<CR>
+nnoremap <silent> <leader>lr :LspRename<CR>
+nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
+nnoremap <silent> <leader>lf :LspDocumentFormat<CR>
+nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
+autocmd FileType javascript setlocal omnifunc=lsp#complete
 
-" let g:lsp_async_completion = 1
-" autocmd FileType javascript setlocal omnifunc=lsp#complete
-
+" "LanguageClient settings
+" Automatically start language servers.
+" let g:LanguageClient_autoStart = 1
 " Required for operations modifying multiple buffers like rename.
 set hidden
-
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['flow-language-server', '--stdio'],
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ 'ocaml': ['ocaml-language-server', '--stdio']
-    \ }
-
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> <leader>ld :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
-nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript': ['flow-language-server', '--stdio'],
+"     \ 'reason': ['ocaml-language-server', '--stdio'],
+"     \ 'ocaml': ['ocaml-language-server', '--stdio']
+"     \ }
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<CR>
+" nnoremap <silent> <leader>ld :call LanguageClient_textDocument_documentSymbol()<CR>
+" nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+" nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>

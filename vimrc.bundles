@@ -4,6 +4,8 @@ end
 set t_Co=256
 
 call plug#begin('~/.vim/bundle')
+Plug 'roxma/nvim-yarp'
+
 Plug 'chriskempson/base16-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'godlygeek/csapprox'
@@ -43,14 +45,14 @@ Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
 Plug 'prabirshrestha/asyncomplete-emoji.vim'
 Plug 'prabirshrestha/vim-lsp'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'sirver/UltiSnips'
-Plug 'git@bitbucket.org:entropitor/snippets.git'
+Plug 'git@github.com:entropitor/snippets.git'
 
 Plug 'ingydotnet/yaml-vim'
 
@@ -62,45 +64,13 @@ Plug 'wakatime/vim-wakatime'
 Plug 'galooshi/vim-import-js'
 
 Plug 'ledger/vim-ledger'
+Plug 'aklt/plantuml-syntax'
+Plug 'reasonml-editor/vim-reason-plus'
 
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'steelsojka/deoplete-flow'
 
 "Plug 'mndrix/prolog.vim'
-
-" Recently disabled
-" ack.vim
-" github-issues.vim
-" github-scheme
-" jellybeans.vim
-" molokai
-" tagbar
-" ultisnips
-" vim-airline
-" vim-bufferline
-" vim-easymotion
-" vim-gitgutter
-" vim-jade
-" vim-javascript
-" vim-l9
-" vim-nerdtree-tabs
-" vim-numbertoggle
-" vim-snippets
-" vim-surround
-" YouCompleteMe
-
-" Disabled (longer ago)
-" commant-d
-" grep.vim
-" javascript.vim
-" node
-" showmarks
-" supertab
-" tern_for_vim
-" vim-autocomplpop
-" vim-fuzzyfinder
-" vim-indent-guides
-" vim-nodejs-complete
 
 if filereadable(expand("~/.vimrc.bundles.local"))
     source ~/.vimrc.bundles.local

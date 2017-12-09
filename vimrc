@@ -33,6 +33,15 @@ colorscheme onedark
 set background=dark
 set t_Co=256
 
+if (empty($TMUX))
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
 set list
 set listchars=tab:→\ ,trail:·
 nmap <leader>l :set list!<CR>
@@ -78,8 +87,8 @@ nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_prolog = {
     \ 'ctagstype' : 'Prolog',
     \ 'kinds' : [
-        \ 'p:Predicates',
-        \ ]
+	\ 'p:Predicates',
+	\ ]
     \ }
 
 "let g:ctags_statusline=1
@@ -99,6 +108,8 @@ let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
 "nnoremap <leader>fr :FufFile<CR>
 "nnoremap <leader>fb :FufBuffer<CR>
 "nnoremap <leader>fb :FufBuffer<CR>
+
+autocmd BufEnter term://* startinsert
 
 nnoremap <C-p> <ESC>:CtrlP<CR>
 nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
@@ -165,87 +176,75 @@ endif
 tnoremap <Esc> <C-\><C-n>
 
 set foldmethod=syntax
-set foldlevelstart=1
+set foldlevelstart=0
 
 let &titlestring = expand('%:t')
 set title
-
-" let g:deoplete#enable_at_startup = 1
-" inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : deoplete#mappings#manual_complete()
-" function! s:check_back_space() abort "{{{
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction"}}}
-
-" let g:flow_path = 'npx --no-install flow'
-" if g:flow_path != 'not found: flow'
-"   let g:deoplete#sources#flow#flow_bin = g:flow_path
-" endif
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-let g:asyncomplete_auto_popup = 1
-set completeopt+=preview
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
-"   \ 'name': 'flow',
-"   \ 'priority': 100,
-"   \ 'whitelist': ['javascript'],
-"   \ 'completor': function('asyncomplete#sources#flow#completor'),
-"   \ 'config': {
-"   \    'prefer_local': 1
-"   \  },
-"   \ }))
-call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
   \ 'name': 'ultisnips',
   \ 'priority': 10,
   \ 'whitelist': ['*'],
   \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
   \ }))
-call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
   \ 'name': 'omni',
   \ 'whitelist': ['*'],
   \ 'completor': function('asyncomplete#sources#omni#completor')
   \  }))
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
   \ 'name': 'buffer',
   \ 'whitelist': ['*'],
   \ 'blacklist': ['javascript'],
   \ 'completor': function('asyncomplete#sources#buffer#completor'),
   \ }))
-call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
   \ 'name': 'emoji',
   \ 'whitelist': ['*'],
   \ 'blakclist': ['ledger'],
   \ 'completor': function('asyncomplete#sources#emoji#completor'),
   \ }))
 
+" vim-lsp settings
 if executable('flow-language-server')
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'flow-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
-        \ 'whitelist': ['javascript'],
-        \ })
+	\ 'name': 'flow-language-server',
+	\ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
+	\ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
+	\ 'whitelist': ['javascript'],
+	\ })
 endif
-
+let g:asyncomplete_auto_popup = 1
+set completeopt+=preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:lsp_async_completion = 1
+nnoremap <silent> K :LspHover<CR>
+nnoremap <silent> <CR> :LspHover<CR>
+nnoremap <silent> gd :LspDefinition<CR>
+nnoremap <silent> <leader>lr :LspRename<CR>
+nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
+nnoremap <silent> <leader>lf :LspDocumentFormat<CR>
+nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
 autocmd FileType javascript setlocal omnifunc=lsp#complete
 
+" "LanguageClient settings
+" Automatically start language servers.
+" let g:LanguageClient_autoStart = 1
 " Required for operations modifying multiple buffers like rename.
 set hidden
-
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['flow-language-server', '--stdio'],
-    \ }
-
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> <leader>ld :call LanguageClient_textDocument_documentSymbol()<CR>
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript': ['flow-language-server', '--stdio'],
+"     \ 'reason': ['ocaml-language-server', '--stdio'],
+"     \ 'ocaml': ['ocaml-language-server', '--stdio']
+"     \ }
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<CR>
+" nnoremap <silent> <leader>ld :call LanguageClient_textDocument_documentSymbol()<CR>
+" nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
+" nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>

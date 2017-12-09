@@ -20,3 +20,5 @@ export ANDROID_HOME=~/bin/android-sdk
 export RUST_SRC_PATH=/usr/local/src/rust/src
 
 alias kulscreen="xrandr --output DP-2 --same-as DP-1 --output DP-1 --scale-from 1280x1024"
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'

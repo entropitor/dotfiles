@@ -138,3 +138,5 @@ export NVM_DIR="/home/jens/.nvm"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

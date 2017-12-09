@@ -1,0 +1,3 @@
+--strict
+--explicit
+--date-format=%d-%b-%Y

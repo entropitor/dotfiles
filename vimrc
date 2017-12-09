@@ -217,9 +217,10 @@ call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options
   \ 'blacklist': ['javascript'],
   \ 'completor': function('asyncomplete#sources#buffer#completor'),
   \ }))
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
+call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
   \ 'name': 'emoji',
   \ 'whitelist': ['*'],
+  \ 'blakclist': ['ledger'],
   \ 'completor': function('asyncomplete#sources#emoji#completor'),
   \ }))
 

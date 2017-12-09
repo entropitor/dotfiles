@@ -66,6 +66,8 @@ Plug 'galooshi/vim-import-js'
 Plug 'ledger/vim-ledger'
 Plug 'aklt/plantuml-syntax'
 Plug 'reasonml-editor/vim-reason-plus'
+Plug 'leafgarland/typescript-vim'
+Plug 'jrozner/vim-antlr'
 
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'steelsojka/deoplete-flow'

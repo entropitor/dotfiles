@@ -6,6 +6,7 @@ syntax on
 filetype plugin indent on
 au BufNewFile,BufRead *.pro set filetype=prolog
 au BufNewFile,BufRead *.pl set filetype=prolog
+au BufNewFile,BufRead *.ts set filetype=typescript
 autocmd BufNewFile,BufRead *.scss set ft=scss.css
 
 set noswapfile
@@ -200,7 +201,7 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
   \ 'name': 'buffer',
   \ 'whitelist': ['*'],
-  \ 'blacklist': ['javascript'],
+  \ 'blacklist': ['javascript', 'typescript'],
   \ 'completor': function('asyncomplete#sources#buffer#completor'),
   \ }))
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
@@ -213,11 +214,21 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 " vim-lsp settings
 if executable('flow-language-server')
     au User lsp_setup call lsp#register_server({
-	\ 'name': 'flow-language-server',
-	\ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
-	\ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
-	\ 'whitelist': ['javascript'],
-	\ })
+        \ 'name': 'flow-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
+        \ 'whitelist': ['javascript'],
+        \ })
+    autocmd FileType javascript setlocal omnifunc=lsp#complete
+endif
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript'],
+        \ })
+    autocmd FileType typescript setlocal omnifunc=lsp#complete
 endif
 let g:asyncomplete_auto_popup = 1
 set completeopt+=preview
@@ -230,7 +241,6 @@ nnoremap <silent> <leader>lr :LspRename<CR>
 nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
 nnoremap <silent> <leader>lf :LspDocumentFormat<CR>
 nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
-autocmd FileType javascript setlocal omnifunc=lsp#complete
 
 " "LanguageClient settings
 " Automatically start language servers.

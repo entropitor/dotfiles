@@ -201,7 +201,7 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
   \ 'name': 'buffer',
   \ 'whitelist': ['*'],
-  \ 'blacklist': ['javascript', 'typescript'],
+  \ 'blacklist': ['javascript', 'typescript', 'go'],
   \ 'completor': function('asyncomplete#sources#buffer#completor'),
   \ }))
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
@@ -229,6 +229,14 @@ if executable('typescript-language-server')
         \ 'whitelist': ['typescript'],
         \ })
     autocmd FileType typescript setlocal omnifunc=lsp#complete
+endif
+if executable('go-langserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'go-langserver',
+        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
 endif
 let g:asyncomplete_auto_popup = 1
 set completeopt+=preview
@@ -258,3 +266,5 @@ set hidden
 " nnoremap <silent> <leader>ld :call LanguageClient_textDocument_documentSymbol()<CR>
 " nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
 " nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
+
+let g:go_fmt_command = "goimports"

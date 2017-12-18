@@ -30,18 +30,19 @@ set hlsearch
 nnoremap <leader><space> :noh<cr>
 
 "colorscheme base16-tomorrow
+set t_Co=256
 colorscheme onedark
 set background=dark
-set t_Co=256
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-if (empty($TMUX))
+" if (empty($TMUX))
   "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
   "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
   " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+if (has("termguicolors"))
+  set termguicolors
 endif
+" endif
 
 set list
 set listchars=tab:→\ ,trail:·
@@ -113,7 +114,7 @@ let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
 autocmd BufEnter term://* startinsert
 
 nnoremap <C-p> <ESC>:CtrlP<CR>
-nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
+" nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build)$',

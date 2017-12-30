@@ -202,13 +202,13 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
   \ 'name': 'buffer',
   \ 'whitelist': ['*'],
-  \ 'blacklist': ['javascript', 'typescript', 'go'],
+  \ 'blacklist': ['javascript', 'typescript', 'go', 'ledger'],
   \ 'completor': function('asyncomplete#sources#buffer#completor'),
   \ }))
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
   \ 'name': 'emoji',
   \ 'whitelist': ['*'],
-  \ 'blakclist': ['ledger'],
+  \ 'blacklist': ['ledger'],
   \ 'completor': function('asyncomplete#sources#emoji#completor'),
   \ }))
 

@@ -29,6 +29,10 @@ set showmatch
 set hlsearch
 nnoremap <leader><space> :noh<cr>
 
+" Configure tab completion
+set wildmode=longest,list,full
+set wildmenu
+
 "colorscheme base16-tomorrow
 set t_Co=256
 colorscheme onedark
@@ -159,10 +163,12 @@ let g:ale_sign_warning = '??'
 let g:flow#autoclose = 1
 let g:flow#enable = 0
 
-"let g:indentLine_char = '︙'
+" let g:indentLine_char = '︙'
 let g:indentLine_char = '|'
 let g:loaded_matchparen=1
 let g:indent_guides_enable_on_vim_startup = 1
+" let g:indentLine_setConceal = 0
+let g:indentLine_concealcursor = 'nc'
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -199,12 +205,12 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
   \ 'whitelist': ['*'],
   \ 'completor': function('asyncomplete#sources#omni#completor')
   \  }))
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-  \ 'name': 'buffer',
-  \ 'whitelist': ['*'],
-  \ 'blacklist': ['javascript', 'typescript', 'go', 'ledger'],
-  \ 'completor': function('asyncomplete#sources#buffer#completor'),
-  \ }))
+" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+"   \ 'name': 'buffer',
+"   \ 'whitelist': ['*'],
+"   \ 'blacklist': ['javascript', 'typescript', 'go', 'ledger'],
+"   \ 'completor': function('asyncomplete#sources#buffer#completor'),
+"   \ }))
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
   \ 'name': 'emoji',
   \ 'whitelist': ['*'],
@@ -244,7 +250,7 @@ set completeopt+=preview
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:lsp_async_completion = 1
 nnoremap <silent> K :LspHover<CR>
-nnoremap <silent> <CR> :LspHover<CR>
+" nnoremap <silent> <CR> :LspHover<CR>
 nnoremap <silent> gd :LspDefinition<CR>
 nnoremap <silent> <leader>lr :LspRename<CR>
 nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
@@ -269,3 +275,10 @@ set hidden
 " nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
 
 let g:go_fmt_command = "goimports"
+
+" vim-test settings
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>

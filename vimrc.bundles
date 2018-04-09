@@ -9,7 +9,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'chriskempson/base16-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'godlygeek/csapprox'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/indentLine'
@@ -29,6 +29,8 @@ Plug 'w0rp/ale'
 Plug 'embear/vim-localvimrc'
 " Plug 'flowtype/vim-flow'
 Plug 'jparise/vim-graphql'
+
+Plug 'vim-scripts/scratch.vim'
 
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 " Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g git+https://github.com/ramitos/jsctags.git' }
@@ -69,6 +71,13 @@ Plug 'reasonml-editor/vim-reason-plus'
 Plug 'leafgarland/typescript-vim'
 Plug 'jrozner/vim-antlr'
 Plug 'fatih/vim-go'
+Plug 'kburdett/vim-nuuid'
+
+Plug 'janko-m/vim-test'
+
+Plug 'ujihisa/repl.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Shougo/vimshell.vim'
 
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'steelsojka/deoplete-flow'

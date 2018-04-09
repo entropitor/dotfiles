@@ -52,7 +52,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'sirver/UltiSnips'
-Plug 'git@github.com:entropitor/snippets.git'
+Plug 'git@bitbucket.com:entropitor/snippets.git'
 
 Plug 'ingydotnet/yaml-vim'
 

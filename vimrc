@@ -239,6 +239,13 @@ if executable('go-langserver')
         \ })
     autocmd FileType go setlocal omnifunc=lsp#complete
 endif
+if executable('ocaml-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ocaml-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
+        \ 'whitelist': ['reason', 'ocaml'],
+        \ })
+endif
 let g:asyncomplete_auto_popup = 1
 set completeopt+=preview
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif

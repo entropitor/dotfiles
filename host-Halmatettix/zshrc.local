@@ -9,6 +9,7 @@ export PATH="./node_modules/.bin:$PATH"
 export PATH="/home/jens/.cargo/bin:$PATH"
 export PATH="/home/jens/bin/anaconda2/bin:$PATH"
 export PATH="/usr/local/sicstus4.3.5/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export GOPATH="/usr/lib/go/packages"
 export PATH="${GOPATH//://bin:}/bin:$PATH"

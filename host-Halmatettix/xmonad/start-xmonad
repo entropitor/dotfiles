@@ -20,6 +20,6 @@ nitrogen --restore &
 nautilus -n &
 
 # Displays
-xrandr --output "DP-1" --auto --primary
+xrandr --output HDMI-0 --above DP-1 --auto
 
 exec xmonad

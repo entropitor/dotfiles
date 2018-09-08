@@ -258,7 +258,7 @@ if executable('ocaml-language-server')
         \ })
 endif
 let g:asyncomplete_auto_popup = 1
-set completeopt+=preview
+set completeopt+=preview,noselect
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:lsp_async_completion = 1
 nnoremap <silent> K :LspHover<CR>

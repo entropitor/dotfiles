@@ -216,12 +216,12 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 "   \ 'blacklist': ['javascript', 'typescript', 'go', 'ledger'],
 "   \ 'completor': function('asyncomplete#sources#buffer#completor'),
 "   \ }))
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
-  \ 'name': 'emoji',
-  \ 'whitelist': ['*'],
-  \ 'blacklist': ['ledger'],
-  \ 'completor': function('asyncomplete#sources#emoji#completor'),
-  \ }))
+" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
+"   \ 'name': 'emoji',
+"   \ 'whitelist': ['*'],
+"   \ 'blacklist': ['ledger'],
+"   \ 'completor': function('asyncomplete#sources#emoji#completor'),
+"   \ }))
 
 " vim-lsp settings
 if executable('flow-language-server')
@@ -258,9 +258,12 @@ if executable('ocaml-language-server')
         \ })
 endif
 let g:asyncomplete_auto_popup = 1
-set completeopt+=preview,noselect
+" let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_remove_duplicates = 1
+set completeopt=noselect,menu,menuone,preview,noinsert
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:lsp_async_completion = 1
+autocmd FileType typescript let g:lsp_async_completion=0
 nnoremap <silent> K :LspHover<CR>
 " nnoremap <silent> <CR> :LspHover<CR>
 nnoremap <silent> gd :LspDefinition<CR>

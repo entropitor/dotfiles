@@ -79,6 +79,8 @@ Plug 'ujihisa/repl.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Shougo/vimshell.vim'
 
+Plug 'chrisbra/Colorizer'
+
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'steelsojka/deoplete-flow'
 

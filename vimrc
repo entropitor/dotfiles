@@ -199,7 +199,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-let g:colorizer_auto_filetype='css,html,javascript,typescript'
+let g:colorizer_auto_filetype='css,html'
 
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
   \ 'name': 'ultisnips',

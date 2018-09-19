@@ -118,7 +118,9 @@ let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
 autocmd BufEnter term://* startinsert
 
 nnoremap <C-p> <ESC>:CtrlP<CR>
-" nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
+nnoremap <C-S-p> <ESC>:CtrlPBuffer<CR>
+nnoremap <leader>fp <ESC>:CtrlP<CR>
+nnoremap <leader>fb <ESC>:CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build)$',

@@ -13,6 +13,11 @@ set noswapfile
 set nobackup
 set nowb
 
+" use spaces instead of tabs
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
 set nopaste
 set autoread
 set number

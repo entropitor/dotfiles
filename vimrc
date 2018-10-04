@@ -311,3 +311,7 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
+
+" config for ruanyl/vim-gh-line
+let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+let g:gh_use_canonical = 1

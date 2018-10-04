@@ -81,6 +81,8 @@ Plug 'Shougo/vimshell.vim'
 
 Plug 'chrisbra/Colorizer'
 
+Plug 'ruanyl/vim-gh-line'
+
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'steelsojka/deoplete-flow'
 

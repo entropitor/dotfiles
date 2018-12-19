@@ -37,5 +37,5 @@ Config {
   sepChar = "%",
   alignSep = "}{",
   template = "%UnsafeStdinReader%  }{ %multicpu% %memory% %dynnetwork% %battery%  <fc=#e95420>%date%</fc> ",
-  lowerOnStart = False
+  lowerOnStart = True
 }

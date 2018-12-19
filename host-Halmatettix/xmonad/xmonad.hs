@@ -43,7 +43,7 @@ myWorkspaces = clickable [
 myWorkspacesCorrectOrder = tail myWorkspaces ++ [head myWorkspaces]
 
 -- My Layouts
-defaultLayouts = tiled ||| simpleTabbedBottom ||| Full ||| Grid ||| Mirror tiled ||| noBorders Full
+defaultLayouts = tiled ||| simpleTabbedBottom ||| noBorders Full ||| Grid ||| Mirror tiled ||| Full
   where tiled = Tall 1 (3/100) (1/2)
 myLayouts =
   onWorkspace wsMain (Full ||| defaultLayouts)
@@ -65,6 +65,7 @@ myKeyBindings =
       [ ((0, xK_e), spawn "emacs")
       , ((0, xK_s), spawn "slack")
       , ((0, xK_c), spawn "~/bin/firefox/firefox-bin")
+      , ((0, xK_f), spawn "~/bin/firefox/firefox-bin")
       , ((0, xK_x), spawn "nautilus --new-window")
       , ((0, xK_t), spawn myTerminal)
       ])
@@ -88,6 +89,7 @@ myKeyBindings =
     , ((myModMask,               xK_b),     toggleWS)
     , ((myModMask,               xK_e),     moveTo Next EmptyWS)
     , ((myModMask .|. shiftMask, xK_e),     shiftTo Next EmptyWS)
+    , ((myModMask,               xK_f),     sendMessage ToggleStruts >> sendMessage FirstLayout >> sendMessage NextLayout >> sendMessage NextLayout)
   ]
   ++
   [((m .|. myModMask, k), windows $ f i)

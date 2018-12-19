@@ -16,7 +16,7 @@ import XMonad.Prompt (defaultXPConfig)
 import XMonad.Prompt.Window
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Util.Dzen (dzenConfig, center, (>=>), onCurr, addArgs, font)
+import XMonad.Util.Dzen (dzenConfig, center, (>=>), onCurr, addArgs, font, timeout)
 import qualified XMonad.StackSet as W
 import qualified Data.Map as Map
 import System.IO
@@ -58,8 +58,8 @@ myKeyBindings =
     , ((controlMask .|. shiftMask, xK_Print), spawn "gnome-screenshot -i -a")
     -- http://superuser.com/questions/389737/how-do-you-make-volume-keys-and-mute-key-work-in-xmonad
     -- http://dmwit.com/volume/
-    , ((0, 0x1008FF11), lowerVolume 5 >>= alertDouble)
-    , ((0, 0x1008FF13), raiseVolume 5 >>= alertDouble)
+    , ((0, 0x1008FF11), modifyVolume (\x -> fromInteger $ round (x - 1.4)) >>= alertDouble)
+    , ((0, 0x1008FF13), modifyVolume (\x -> fromInteger $ round (x + 1.4)) >>= alertDouble)
     , ((0, 0x1008FF12), toggleMuteChannels ["Master", "Speaker", "Headphone", "Headphone 1"] >>= \muted -> alert (if muted then "off" else "on"))
     , ((myModMask, xK_o), submap . Map.fromList $
       [ ((0, xK_e), spawn "emacs")
@@ -157,7 +157,8 @@ alertDouble = alert . show . bound . round
                 | x > 100   = 100
                 | otherwise = x
 alert = dzenConfig centered
-  where centered = onCurr (center 150 66)
+  where centered = onCurr (center 130 66)
                     >=> font "-*-helvetica-*-r-*-*-64-*-*-*-*-*-*-*"
-                    >=> addArgs ["-fg", "#ffffff"]
-                    >=> addArgs ["-bg", "#000040"]
+                    >=> timeout 0.3
+                    >=> addArgs ["-fg", "#ecf0f1"]
+                    >=> addArgs ["-bg", "#2c3e50"]

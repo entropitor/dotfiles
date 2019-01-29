@@ -179,6 +179,7 @@ let g:ale_fixers['json'] = ['prettier']
 let g:ale_fixers['html'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_fixers['python'] = ['autopep8']
 
 let g:flow#autoclose = 1
 let g:flow#enable = 0

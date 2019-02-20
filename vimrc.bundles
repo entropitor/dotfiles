@@ -88,6 +88,10 @@ Plug 'ruanyl/vim-gh-line'
 
 "Plug 'mndrix/prolog.vim'
 
+Plug 'easymotion/vim-easymotion'
+
+Plug 'vim-ruby/vim-ruby'
+
 if filereadable(expand("~/.vimrc.bundles.local"))
     source ~/.vimrc.bundles.local
 endif

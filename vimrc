@@ -54,7 +54,8 @@ endif
 " endif
 
 set list
-set listchars=tab:→\ ,trail:·
+" set listchars=tab:→\ ,trail:·
+set listchars=tab:>-,trail:~,nbsp:.,precedes:<,extends:>
 nmap <leader>l :set list!<CR>
 
 set hlsearch
@@ -179,6 +180,8 @@ let g:ale_fixers['json'] = ['prettier']
 let g:ale_fixers['html'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_fixers['ruby'] = ['rubocop']
+let g:ale_lint_delay = 750
 
 let g:flow#autoclose = 1
 let g:flow#enable = 0
@@ -274,12 +277,21 @@ if executable('ocaml-language-server')
         \ 'whitelist': ['reason', 'ocaml'],
         \ })
 endif
+if executable('solargraph')
+    " gem install solargraph
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+endif
 let g:asyncomplete_auto_popup = 1
-" let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_smart_completion = 0
 let g:asyncomplete_remove_duplicates = 1
 set completeopt=noselect,menu,menuone,preview,noinsert
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:lsp_async_completion = 1
+let g:lsp_async_completion = 0
 autocmd FileType typescript let g:lsp_async_completion=0
 nnoremap <silent> K :LspHover<CR>
 " nnoremap <silent> <CR> :LspHover<CR>

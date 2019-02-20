@@ -182,6 +182,7 @@ let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_fixers['ruby'] = ['rubocop']
 let g:ale_lint_delay = 750
+let g:ale_fixers['python'] = ['autopep8']
 
 let g:flow#autoclose = 1
 let g:flow#enable = 0

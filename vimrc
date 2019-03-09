@@ -129,7 +129,7 @@ nnoremap <leader>fp <ESC>:CtrlP<CR>
 nnoremap <leader>fb <ESC>:CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build)$',
+  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build|target)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }

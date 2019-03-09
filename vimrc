@@ -287,6 +287,20 @@ if executable('solargraph')
         \ 'whitelist': ['ruby'],
         \ })
 endif
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_smart_completion = 0
 let g:asyncomplete_remove_duplicates = 1
@@ -331,3 +345,8 @@ nmap <silent> <leader>tv :TestVisit<CR>
 " config for ruanyl/vim-gh-line
 let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 let g:gh_use_canonical = 1
+
+
+" Rust
+let g:rustfmt_autosave = 1
+let g:rustfmt_command = 'rustup run stable rustfmt'

@@ -91,6 +91,7 @@ Plug 'ruanyl/vim-gh-line'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'vim-ruby/vim-ruby'
+Plug 'rust-lang/rust.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
     source ~/.vimrc.bundles.local

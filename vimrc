@@ -152,7 +152,6 @@ let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_section_b = ''
 let g:airline_section_y = ''
-let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 

@@ -93,6 +93,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'vim-ruby/vim-ruby'
 Plug 'rust-lang/rust.vim'
 
+Plug 'vim-scripts/dbext.vim'
+
 if filereadable(expand("~/.vimrc.bundles.local"))
     source ~/.vimrc.bundles.local
 endif

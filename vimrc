@@ -349,3 +349,6 @@ let g:gh_use_canonical = 1
 " Rust
 let g:rustfmt_autosave = 1
 let g:rustfmt_command = 'rustup run stable rustfmt'
+
+" SQL
+" let g:omni_sql_no_default_maps = 1

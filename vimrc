@@ -38,7 +38,6 @@ nnoremap <leader><space> :noh<cr>
 set wildmode=longest,list,full
 set wildmenu
 
-"colorscheme base16-tomorrow
 set t_Co=256
 colorscheme onedark
 set background=dark

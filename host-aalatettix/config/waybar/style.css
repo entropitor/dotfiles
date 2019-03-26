@@ -7,14 +7,15 @@
 }
 
 window#waybar {
-    background: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    /* background: rgba(43, 48, 59, 0.5); */
+    background: transparent;
+    border-bottom: 3px solid transparent;
     color: #ffffff;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 8px;
     background: transparent;
     color: #ffffff;
     border-bottom: 3px solid transparent;
@@ -27,7 +28,7 @@ window#waybar {
 
 #mode {
     background: #64727D;
-    border-bottom: 3px solid #ffffff;
+    /* border-bottom: 3px solid #ffffff; */
 }
 
 #clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-spotify, #tray, #mode, #idle_inhibitor {
@@ -35,6 +36,10 @@ window#waybar {
     margin: 0 5px;
 }
 
+#window {
+  font-weight: bolder;
+}
+/*
 #clock {
     font-weight: bold;
     background-color: #64727D;
@@ -43,28 +48,6 @@ window#waybar {
 #battery {
     background-color: #ffffff;
     color: #000000;
-}
-
-#battery.charging {
-    color: #ffffff;
-    background-color: #26A65B;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-#battery.critical:not(.charging) {
-    background: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
 }
 
 #cpu {
@@ -84,31 +67,13 @@ window#waybar {
     background: #2980b9;
 }
 
-#network.disconnected {
-    background: #f53c3c;
-}
-
 #pulseaudio {
     background: #f1c40f;
     color: #000000;
 }
 
-#pulseaudio.muted {
-    background: #90b1b1;
-    color: #2a5c45;
-}
-
-#custom-spotify {
-    background: #66cc99;
-    color: #2a5c45;
-}
-
 #temperature {
     background: #f0932b;
-}
-
-#temperature.critical {
-    background: #eb4d4b;
 }
 
 #tray {
@@ -122,4 +87,40 @@ window#waybar {
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
     color: #2d3436;
+}
+*/
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#temperature.critical {
+    background: #eb4d4b;
+}
+
+#pulseaudio.muted {
+    background: #90b1b1;
+    color: #2a5c45;
+}
+
+#network.disconnected {
+    background: #f53c3c;
+}
+
+#battery.charging {
+    color: #ffffff;
+    background-color: #26A65B;
 }

@@ -304,7 +304,7 @@ let g:asyncomplete_smart_completion = 0
 let g:asyncomplete_remove_duplicates = 1
 set completeopt=noselect,menu,menuone,preview,noinsert
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:lsp_async_completion = 0
+let g:lsp_async_completion = 1
 autocmd FileType typescript let g:lsp_async_completion=0
 nnoremap <silent> K :LspHover<CR>
 " nnoremap <silent> <CR> :LspHover<CR>

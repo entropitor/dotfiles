@@ -39,10 +39,10 @@ bindsym $mod+s move workspace to output down
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f -i ~/Pictures/k73T5.jpg --indicator-radius 100' \
+         timeout 300 'swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100' \
          timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -i ~/Pictures/k73T5.jpg --indicator-radius 100'
+         before-sleep 'swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100'
 bindsym $mod+Shift+x exec swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -69,6 +69,11 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     natural_scroll disabled
     middle_emulation enabled
     scroll_method edge
+}
+input "1:1:AT_Translated_Set_2_keyboard" {
+    xkb_layout us
+    xkb_variant altgr-intl
+    xkb_numlock enabled
 }
 
 ### Key bindings

@@ -269,4 +269,6 @@ bindsym XF86MonBrightnessUp exec light -A 1
 bindsym Shift+XF86AudioLowerVolume exec light -U 1
 bindsym Shift+XF86AudioRaiseVolume exec light -A 1
 
+bindsym Print exec grim -g "$(slurp)" - | wl-copy
+
 exec mako --background-color=#285577aa --border-color=#285577cc --padding 10

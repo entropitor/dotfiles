@@ -21,7 +21,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git command-not-found docker httpie tmuxinator)
+plugins=(git command-not-found docker httpie)
 
 # User configuration
 
@@ -40,7 +40,7 @@ if [ -f ~/.zshrc.local ]; then
     . ~/.zshrc.local
 fi
 
-export EDITOR="vim"
+export EDITOR="nvim"
 
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'

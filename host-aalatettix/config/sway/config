@@ -29,16 +29,21 @@ output * bg ~/Pictures/k73T5.jpg fill
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+output HDMI-A-1 pos 0 0 res 1920x1080 enable
+output eDP-1 pos 0 1080 res 1920x1080 enable
+# bindsym $mod+Shift+s output HDMI-A-1 pos 0 0 res 1920x1080 enable; output eDP-1 pos 0 1080 res 1920x1080 enable
+bindsym $mod+s move workspace to output down
 
 ### Idle configuration
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#               resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+         timeout 300 'swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100'
+bindsym $mod+Shift+x exec swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -65,6 +70,11 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     middle_emulation enabled
     scroll_method edge
 }
+input "1:1:AT_Translated_Set_2_keyboard" {
+    xkb_layout us
+    xkb_variant altgr-intl
+    xkb_numlock enabled
+}
 
 ### Key bindings
 #
@@ -78,6 +88,7 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 
     # start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+Shift+d exec echo | dmenu | xargs swaymsg
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -91,24 +102,25 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+Ctrl+q exec swaynag -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown now?' -b 'Yes, shutdown' 'shutdown now'
 #
 # Moving around:
 #
-    bindsym $mod+$up workspace prev
-    bindsym $mod+$down workspace next
-    bindsym $mod+Shift+$up move container to workspace prev; workspace prev
-    bindsym $mod+Shift+$down move container to workspace next; workspace next
+    # bindsym $mod+$up workspace prev
+    # bindsym $mod+$down workspace next
+    # bindsym $mod+Shift+$up move container to workspace prev; workspace prev
+    # bindsym $mod+Shift+$down move container to workspace next; workspace next
     # # Move your focus around
-    # bindsym $mod+$left focus left
-    # bindsym $mod+$down focus down
-    # bindsym $mod+$up focus up
-    # bindsym $mod+$right focus right
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
 
     # # _move_ the focused window with the same, but add Shift
-    # bindsym $mod+Shift+$left move left
-    # bindsym $mod+Shift+$down move down
-    # bindsym $mod+Shift+$up move up
-    # bindsym $mod+Shift+$right move right
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
     
 #
 # Workspaces:
@@ -147,21 +159,23 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+space layout toggle splith tabbed splitv stacking
+    # bindsym $mod+w layout tabbed
+    # bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+Shift+Space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    # bindsym $mod+Return focus mode_toggle
 
     # move focus to the parent container
     bindsym $mod+a focus parent
+    bindsym $mod+Tab focus right
+    bindsym $mod+Shift+Tab focus left
 #
 # Scratchpad:
 #
@@ -198,6 +212,18 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+mode "open" {
+    bindsym f exec firefox; mode "default"
+    bindsym x exec nautilus; mode "default"
+    bindsym n exec nautilus; mode "default"
+    bindsym t exec kitty; mode "default"
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+o mode "open"
 
 #
 # Status Bar:
@@ -243,6 +269,6 @@ bindsym XF86MonBrightnessUp exec light -A 1
 bindsym Shift+XF86AudioLowerVolume exec light -U 1
 bindsym Shift+XF86AudioRaiseVolume exec light -A 1
 
-bindsym $mod+Shift+x exec swaylock -i ~/Pictures/k73T5.jpg
+bindsym Print exec grim -g "$(slurp)" - | wl-copy
 
 exec mako --background-color=#285577aa --border-color=#285577cc --padding 10

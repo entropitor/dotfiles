@@ -48,5 +48,9 @@ fi
 
 #set -o vi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore node_modules/ --ignore build/ --ignore Build/ -g ""'
+if [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+  export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore node_modules/ --ignore build/ --ignore Build/ -g ""'
+  alias preview="fzf --preview 'bat --color \"always\" {}'"
+  export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
+fi

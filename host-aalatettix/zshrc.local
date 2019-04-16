@@ -7,3 +7,4 @@ fi
 export LC_CTYPE=en_US.UTF-8
 
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin/"
+export PATH="$PATH:$HOME/.cargo/bin/"

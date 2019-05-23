@@ -21,19 +21,19 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-endwise'
+Plug 'easymotion/vim-easymotion'
 
 Plug 'majutsushi/tagbar'
 " Plug 'scrooloose/syntastic'
 "Plug 'neomake/neomake'
 Plug 'w0rp/ale'
 Plug 'embear/vim-localvimrc'
-" Plug 'flowtype/vim-flow'
 Plug 'jparise/vim-graphql'
 
 Plug 'vim-scripts/scratch.vim'
 
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g git+https://github.com/ramitos/jsctags.git' }
 
 " Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --tern-completer' }
 " https://github.com/Valloric/YouCompleteMe/issues/2404
@@ -88,9 +88,12 @@ Plug 'ruanyl/vim-gh-line'
 
 "Plug 'mndrix/prolog.vim'
 
-Plug 'easymotion/vim-easymotion'
-
+" Ruby
 Plug 'vim-ruby/vim-ruby'
+" Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-rails'
+
+" Rust
 Plug 'rust-lang/rust.vim'
 
 Plug 'vim-scripts/dbext.vim'

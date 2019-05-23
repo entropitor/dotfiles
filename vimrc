@@ -9,6 +9,8 @@ au BufNewFile,BufRead *.pl set filetype=prolog
 au BufNewFile,BufRead *.ts set filetype=typescript
 autocmd BufNewFile,BufRead *.scss set ft=scss.css
 
+autocmd FileType yaml setlocal foldmethod=indent
+
 set noswapfile
 set nobackup
 set nowb
@@ -172,6 +174,7 @@ let g:ale_sign_error = 'XX'
 let g:ale_sign_warning = '??'
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_typescript_prettier_use_local_config = 1
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['json'] = ['prettier']
@@ -348,6 +351,9 @@ let g:gh_use_canonical = 1
 " Rust
 let g:rustfmt_autosave = 1
 let g:rustfmt_command = 'rustup run stable rustfmt'
+
+" Ruby
+let g:ale_ruby_rubocop_executable = 'bin/rubocop'
 
 " SQL
 " let g:omni_sql_no_default_maps = 1

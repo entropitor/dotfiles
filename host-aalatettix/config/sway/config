@@ -33,6 +33,7 @@ output HDMI-A-1 pos 0 0 res 1920x1080 enable
 output eDP-1 pos 0 1080 res 1920x1080 enable
 # bindsym $mod+Shift+s output HDMI-A-1 pos 0 0 res 1920x1080 enable; output eDP-1 pos 0 1080 res 1920x1080 enable
 bindsym $mod+s move workspace to output down
+bindsym $mod+Shift+s output HDMI-A-1 disable
 
 ### Idle configuration
 #
@@ -272,3 +273,4 @@ bindsym Shift+XF86AudioRaiseVolume exec light -A 1
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
 
 exec mako --background-color=#285577aa --border-color=#285577cc --padding 10
+exec redshift-gtk

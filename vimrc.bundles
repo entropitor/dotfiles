@@ -4,101 +4,189 @@ end
 set t_Co=256
 
 call plug#begin('~/.vim/bundle')
-Plug 'roxma/nvim-yarp'
 
-Plug 'chriskempson/base16-vim'
-Plug 'joshdick/onedark.vim'
-Plug 'godlygeek/csapprox'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" ===========================
+" ===   Git Integration   ===
+" ===========================
+" Add git commands
 Plug 'tpope/vim-fugitive'
+
+" Add git diff symbols in the gutter
 Plug 'airblade/vim-gitgutter'
+
+" ========================
+" ===   Improved VIM   ===
+" ========================
+" Close brackets automatically
+Plug 'Raimondi/delimitMate'
+
+" Closes def automatically
+Plug 'tpope/vim-endwise'
+
+
+" Show indentation line
+Plug 'Yggdroot/indentLine'
+
+" (Un)comment line
+Plug 'scrooloose/nerdcommenter'
+
+" Easily handle quotes, ...
 Plug 'tpope/vim-surround'
+
+" Case-sensitive replace + conversion between cases (snake-case, ...)
 Plug 'tpope/vim-abolish'
+
+" Add extra [ commands
 Plug 'tpope/vim-unimpaired'
-" Plug 'tpope/vim-endwise'
+
+" Easily move to a certain spot in the file
 Plug 'easymotion/vim-easymotion'
 
-Plug 'majutsushi/tagbar'
-" Plug 'scrooloose/syntastic'
-"Plug 'neomake/neomake'
-Plug 'w0rp/ale'
+" Allow adding a local vimrc file to a project
 Plug 'embear/vim-localvimrc'
-Plug 'jparise/vim-graphql'
 
+" ================
+" ===   Repl   ===
+" ================
+" Plug 'ujihisa/repl.vim'
+" " Dependencies:
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Plug 'Shougo/vimshell.vim'
+
+" =====================
+" ===   Utilities   ===
+" =====================
+" Generate uuid
+Plug 'kburdett/vim-nuuid'
+
+" See colors inline
+Plug 'chrisbra/Colorizer'
+
+" Copy line on github
+Plug 'ruanyl/vim-gh-line'
+
+" Time tracking (WakaTime)
+Plug 'wakatime/vim-wakatime'
+
+" EditorConfig
+Plug 'editorconfig/editorconfig-vim'
+
+" Add a :Scratch buffer
 Plug 'vim-scripts/scratch.vim'
 
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-
-" Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py --tern-completer' }
-" https://github.com/Valloric/YouCompleteMe/issues/2404
-" Plug 'Valloric/YouCompleteMe', { 'do': 'git submodule update --init --recursive && ./install.py' }
-"
+" ==========================
+" ===   Autocompletion   ===
+" ==========================
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/asyncomplete-flow.vim'
 Plug 'yami-beta/asyncomplete-omni.vim'
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
-Plug 'prabirshrestha/asyncomplete-emoji.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
+" =============================
+" ===   Checkers/Builders   ===
+" =============================
+Plug 'w0rp/ale'
+
+" ==================
+" ===   Search   ===
+" ==================
+Plug 'mileszs/ack.vim'
+
+" ===========================
+" ===   File Management   ===
+" ===========================
+" FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'sirver/UltiSnips'
-Plug 'git@bitbucket.com:entropitor/snippets.git'
+" CtrlP
+" Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'ingydotnet/yaml-vim'
-
-Plug 'mileszs/ack.vim'
-
-Plug 'vim-airline/vim-airline'
-
-Plug 'wakatime/vim-wakatime'
-Plug 'galooshi/vim-import-js'
-
-Plug 'ledger/vim-ledger'
-Plug 'aklt/plantuml-syntax'
-Plug 'reasonml-editor/vim-reason-plus'
-Plug 'leafgarland/typescript-vim'
-Plug 'jrozner/vim-antlr'
-Plug 'fatih/vim-go'
-Plug 'kburdett/vim-nuuid'
-
+" ==========================
+" ===   Test Managment   ===
+" ==========================
 Plug 'janko-m/vim-test'
 
-Plug 'ujihisa/repl.vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Shougo/vimshell.vim'
+" ==============================
+" ===   Project Management   ===
+" ==============================
+" File Sidebar
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
-Plug 'chrisbra/Colorizer'
+" Tags sidebar
+Plug 'majutsushi/tagbar'
 
-Plug 'ruanyl/vim-gh-line'
+" bottombar
+Plug 'vim-airline/vim-airline'
 
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'steelsojka/deoplete-flow'
+" ==================
+" ===   Themes   ===
+" ==================
+Plug 'chriskempson/base16-vim'
+Plug 'joshdick/onedark.vim'
+Plug 'godlygeek/csapprox'
 
-"Plug 'mndrix/prolog.vim'
+" ====================
+" ===   Snippets   ===
+" ====================
+Plug 'sirver/UltiSnips'
+Plug 'entropitor/snippets'
+
+" =====================
+" ===   Languages   ===
+" =====================
+
+" Antlr
+Plug 'jrozner/vim-antlr', {'for': ['antlr']}
+
+" Go
+Plug 'fatih/vim-go', {'for': ['go']}
+
+" Graphql
+Plug 'jparise/vim-graphql', {'for': ['graphql']}
+
+" JavaScript
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript']}
+
+" Ledger
+Plug 'ledger/vim-ledger', {'for': ['ledger']}
+
+" Platuml
+Plug 'aklt/plantuml-syntax', {'for': ['plantuml']}
+
+" Prolog
+Plug 'mndrix/prolog.vim', {'for': ['prolog']}
+
+" Reason
+Plug 'reasonml-editor/vim-reason-plus', {'for': ['reason']}
 
 " Ruby
-Plug 'vim-ruby/vim-ruby'
-" Plug 'thoughtbot/vim-rspec'
-Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby', {'for': ['ruby']}
+Plug 'tpope/vim-rails', {'for': ['ruby']}
+" Plug 'thoughtbot/vim-rspec', {'for': ['ruby']}
 
 " Rust
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', {'for': ['rust']}
 
-Plug 'vim-scripts/dbext.vim'
+" SQL
+Plug 'tpope/vim-dadbod', {'for': ['sql']}
 
-if filereadable(expand("~/.vimrc.bundles.local"))
-    source ~/.vimrc.bundles.local
-endif
+" Typescript
+Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
+
+" Yaml
+Plug 'ingydotnet/yaml-vim', {'for': ['yaml']}
+
+
+" ================================
+" ===   Host Specific Config   ===
+" ================================
+" if filereadable(expand("~/.vimrc.bundles.local"))
+"     source ~/.vimrc.bundles.local
+" endif
+
 call plug#end()

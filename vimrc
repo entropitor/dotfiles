@@ -143,8 +143,8 @@ let g:gh_use_canonical = 1
 " ==========================
 " ===   Autocompletion   ===
 " ==========================
-inoremap <expr> <Tab> pumvisible() ? "\<Down>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<Up>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
 set completeopt=noselect,menu,menuone,preview,noinsert
@@ -152,8 +152,6 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " [Config for prabirshrestha/async.vim]:
 " [Config for prabirshrestha/asyncomplete.vim]:
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_smart_completion = 0
 let g:asyncomplete_remove_duplicates = 1
 
 " [Config for yami-beta/asyncomplete-omni.vim]:

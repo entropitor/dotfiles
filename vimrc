@@ -209,6 +209,7 @@ endif
 " [Config for junegunn/fzf.vim]: FZF
 nnoremap <C-p> <ESC>:Files<CR>
 let g:fzf_buffers_jump = 1
+autocmd BufLeave *#FZF :bd!  " Auto close window when leaving it
 
 " [Config for ctrlpvim/ctrlp.vim]: CtrlP
 " nnoremap <C-p> <ESC>:CtrlP<CR>

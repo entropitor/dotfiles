@@ -33,8 +33,8 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 DEFAULT_USER="jens"
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
+if [ -f ~/..zshrc.aliases ]; then
+    . ~/.zshrc.aliases
 fi
 if [ -f ~/.zshrc.local ]; then
     . ~/.zshrc.local

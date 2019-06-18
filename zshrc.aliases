@@ -1,5 +1,5 @@
-if [ -f ~/.aliases.local ]; then
-    . ~/.aliases.local
+if [ -f ~/.zshrc.aliases.local ]; then
+    . ~/.zshrc.aliases.local
 fi
 
 alias gdf="git dsf"

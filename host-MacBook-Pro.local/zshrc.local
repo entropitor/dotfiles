@@ -11,7 +11,7 @@ export MANPATH="/Users/jens/.opam/4.02.3/man:"
 export PERL5LIB="/Users/jens/.opam/4.02.3/lib/perl5"
 export OCAML_TOPLEVEL_PATH="/Users/jens/.opam/4.02.3/lib/toplevel"
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv > /dev/null; then eval "$(rbenv init -  --no-rehash)"; fi
 export PATH=/usr/local/bin:$PATH
 
 export GOROOT=/usr/local/go
@@ -26,7 +26,7 @@ export LANG=en_US.UTF-8
 export GPG_TTY=$(tty)
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
 export PATH="$HOME/.cargo/bin:$PATH"
 

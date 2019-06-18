@@ -50,7 +50,7 @@ fi
 
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
-  export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore node_modules/ --ignore build/ --ignore Build/ -g ""'
+  export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules/ --ignore build/ --ignore Build/ -g ""'
   alias preview="fzf --preview 'bat --color \"always\" {}'"
   export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 fi

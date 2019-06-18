@@ -42,9 +42,6 @@ Plug 'tpope/vim-unimpaired'
 " Easily move to a certain spot in the file
 Plug 'easymotion/vim-easymotion'
 
-" Allow adding a local vimrc file to a project
-Plug 'embear/vim-localvimrc'
-
 " ================
 " ===   Repl   ===
 " ================
@@ -108,6 +105,8 @@ Plug 'junegunn/fzf.vim'
 " ===   Test Managment   ===
 " ==========================
 Plug 'janko-m/vim-test'
+" Dependencies
+Plug 'tpope/vim-dispatch'
 
 " ==============================
 " ===   Project Management   ===
@@ -121,6 +120,15 @@ Plug 'majutsushi/tagbar'
 
 " bottombar
 Plug 'vim-airline/vim-airline'
+
+" ===============================
+" ===   Local Configuration   ===
+" ===============================
+" Project config
+Plug 'tpope/vim-projectionist'
+
+" Allow adding a local vimrc file to a project
+Plug 'embear/vim-localvimrc'
 
 " ==================
 " ===   Themes   ===

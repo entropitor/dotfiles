@@ -115,8 +115,6 @@ let g:NERDSpaceDelims = 1
 
 " [Config for easymotion/vim-easymotion]: Easily move to a certain spot in the file
 
-" [Config for embear/vim-localvimrc]: Allow adding a local vimrc file to a project
-
 " ================
 " ===   Repl   ===
 " ================
@@ -229,11 +227,14 @@ let g:fzf_buffers_jump = 1
 " ===   Test Managment   ===
 " ==========================
 " [Config for janko-m/vim-test]:
+let test#strategy = "dispatch"
 nmap <silent> <leader>tn :TestNearest<CR>
 nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
+
+" [Config for tpope/vim-dispatch]:
 
 " ==============================
 " ===   Project Management   ===
@@ -266,6 +267,13 @@ let g:airline_section_b = ''
 let g:airline_section_y = ''
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" ===============================
+" ===   Local Configuration   ===
+" ===============================
+" [Config for tpope/vim-projectionist]: Project config
+
+" [Config for embear/vim-localvimrc]: Allow adding a local vimrc file to a project
 
 " ==================
 " ===   Themes   ===

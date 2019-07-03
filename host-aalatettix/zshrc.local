@@ -1,5 +1,5 @@
 # If running from tty1 start sway
-export GTK_THEME="Nordic:dark"
+export GTK_THEME="Arc-Darker"
 if [ "$(tty)" = "/dev/tty1" ]; then
   exec sway
 fi
@@ -8,3 +8,6 @@ export LC_CTYPE=en_US.UTF-8
 
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin/"
 export PATH="$PATH:$HOME/.cargo/bin/"
+export PATH="$PATH:$HOME/.local/bin/"
+
+export TERMINAL="kitty"

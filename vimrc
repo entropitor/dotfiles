@@ -4,12 +4,6 @@ endif
 
 syntax on
 filetype plugin indent on
-au BufNewFile,BufRead *.pro set filetype=prolog
-au BufNewFile,BufRead *.pl set filetype=prolog
-au BufNewFile,BufRead *.ts set filetype=typescript
-autocmd BufNewFile,BufRead *.scss set ft=scss.css
-
-autocmd FileType yaml setlocal foldmethod=indent
 
 set noswapfile
 set nobackup
@@ -35,41 +29,25 @@ set incsearch
 set showmatch
 set hlsearch
 nnoremap <leader><space> :noh<cr>
+if exists('&inccommand')
+  highlight Substitute cterm=NONE ctermfg=black ctermbg=9
+  set inccommand=split
+endif
 
 " Configure tab completion
 set wildmode=longest,list,full
 set wildmenu
 
-set t_Co=256
-colorscheme onedark
-set background=dark
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-" if (empty($TMUX))
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-if (has("termguicolors"))
-  set termguicolors
-endif
-" endif
+set scrolloff=10
 
 set list
-" set listchars=tab:→\ ,trail:·
 set listchars=tab:>-,trail:~,nbsp:.,precedes:<,extends:>
 nmap <leader>l :set list!<CR>
-
-set hlsearch
-
-"nnoremap <tab> %
-"vnoremap <tab> %
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-"nnoremap j gj
-"nnoremap k gk
 
 nnoremap <leader>w <C-w>v<C-w>l
 
@@ -91,51 +69,184 @@ if has('mouse') | set mouse=a | endif
 
 nnoremap <leader>b :b<Space>
 
-nmap <F7> :NERDTreeToggle<CR>
-let g:NERDTreeShowHidden=1
-
-let g:NERDSpaceDelims = 1
-
-nmap <F8> :TagbarToggle<CR>
-let g:tagbar_type_prolog = {
-    \ 'ctagstype' : 'Prolog',
-    \ 'kinds' : [
-	\ 'p:Predicates',
-	\ ]
-    \ }
-
-"let g:ctags_statusline=1
-"let g:ctags_title=1
-"let generate_tags=1
-
-let g:UltiSnips={}
-let g:UltiSnipsExpandTrigger = "<c-e>"
-let g:UltiSnipsJumpForwardTrigger = "<c-l>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
-let g:UltiSnipsEditSplit = "vertical"
-let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
-""let g:UltiSnips.always_use_first_snippet =1
-
-"nnoremap <leader>ff :FufFile ./**[^node_modules]/<CR>
-"nnoremap <leader>fg :FufFile **/<CR>
-"nnoremap <leader>fr :FufFile<CR>
-"nnoremap <leader>fb :FufBuffer<CR>
-"nnoremap <leader>fb :FufBuffer<CR>
-
 autocmd BufEnter term://* startinsert
 
-nnoremap <C-p> <ESC>:CtrlP<CR>
-nnoremap <C-S-p> <ESC>:CtrlPBuffer<CR>
-nnoremap <leader>fp <ESC>:CtrlP<CR>
-nnoremap <leader>fb <ESC>:CtrlPBuffer<CR>
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build|target)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-  \ }
-let g:ctrlp_show_hidden = 1
+tnoremap <Esc> <C-\><C-n>
 
+set foldmethod=syntax
+set foldlevelstart=0
+
+let &titlestring = expand('%:t')
+set title
+
+" =======================================================================
+" ===   CONFIGURATION FOR PLUGINS IN SAME SECTIONS AS VIMRC.BUNDLES   ===
+" =======================================================================
+
+" ===========================
+" ===   Git Integration   ===
+" ===========================
+" [Config for tpope/vim-fugitive]: Add git commands
+
+" [Config for airblade/vim-gitgutter]: Add git diff symbols in the gutter
+
+" ========================
+" ===   Improved VIM   ===
+" ========================
+" [Config for Raimondi/delimitMate]: Close brackets automatically
+
+" [Config for tpope/vim-endwise]: Closes def automatically
+
+" [Config for Yggdroot/indentLine]: Show indentation line
+" let g:indentLine_char = '︙'
+let g:indentLine_char = '|'
+let g:indent_guides_enable_on_vim_startup = 1
+" let g:indentLine_setConceal = 0
+let g:indentLine_concealcursor = 'nc'
+
+" [scrooloose/nerdcommenter]: (Un)comment line
+let g:NERDSpaceDelims = 1
+
+" [Config for tpope/vim-surround]: Easily handle quotes, ...
+
+" [Config for tpope/vim-abolish]: Case-sensitive replace + conversion between cases (snake-case, ...)
+
+" [Config for tpope/vim-unimpaired]: Add extra [ commands
+
+" [Config for easymotion/vim-easymotion]: Easily move to a certain spot in the file
+
+" ================
+" ===   Repl   ===
+" ================
+" " [Config for ujihisa/repl.vim]:
+" " [Config for Shougo/vimproc.vim]:
+" " [Config for Shougo/vimshell.vim]:
+
+" =====================
+" ===   Utilities   ===
+" =====================
+" [Config for kburdett/vim-nuuid]: Generate uuid
+
+" [Config for chrisbra/Colorizer]: See colors inline
+let g:colorizer_auto_filetype='css,html'
+
+" [Config for ruanyl/vim-gh-line]: Copy line on github
+let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+let g:gh_use_canonical = 1
+
+" [Config for wakatime/vim-wakatime]: Time tracking (WakaTime)
+
+" [Config for editorconfig/editorconfig-vim]: EditorConfig
+
+" [Config for vim-scripts/scratch.vim]: Add a :Scratch buffer
+
+" ==========================
+" ===   Autocompletion   ===
+" ==========================
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+set completeopt=noselect,menu,menuone,preview,noinsert
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" [Config for prabirshrestha/async.vim]:
+" [Config for prabirshrestha/asyncomplete.vim]:
+let g:asyncomplete_remove_duplicates = 1
+
+" [Config for yami-beta/asyncomplete-omni.vim]:
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+  \ 'name': 'omni',
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#omni#completor')
+  \  }))
+" [Config for prabirshrestha/asyncomplete-ultisnips.vim]:
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+  \ 'name': 'ultisnips',
+  \ 'priority': 10,
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+  \ }))
+
+" [Config for prabirshrestha/vim-lsp]:
+let g:lsp_async_completion = 1
+nnoremap <silent> K :LspHover<CR>
+nnoremap <silent> gd :LspDefinition<CR>
+nnoremap <silent> <leader>lr :LspRename<CR>
+nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
+nnoremap <silent> <leader>lf :LspDocumentFormat<CR>
+nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
+
+" [Config for prabirshrestha/asyncomplete-lsp.vim]:
+" See Languages section for the config!
+
+" =============================
+" ===   Checkers/Builders   ===
+" =============================
+" [Config for w0rp/ale]:
+nnoremap <leader>sl :lopen<CR>
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = 'XX'
+let g:ale_sign_warning = '??'
+let g:ale_fix_on_save = 1
+let g:ale_lint_delay = 750
+let g:ale_fixers = {}
+" See Languages section for the rest!
+
+" ==================
+" ===   Search   ===
+" ==================
+" [Config for mileszs/ack.vim]:
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" ===========================
+" ===   File Management   ===
+" ===========================
+" [Config for junegunn/fzf.vim]: FZF
+nnoremap <C-p> <ESC>:Files<CR>
+let g:fzf_buffers_jump = 1
+autocmd BufLeave *#FZF :bd!  " Auto close window when leaving it
+
+" [Config for ctrlpvim/ctrlp.vim]: CtrlP
+" nnoremap <C-p> <ESC>:CtrlP<CR>
+" nnoremap <C-S-p> <ESC>:CtrlPBuffer<CR>
+" nnoremap <leader>fp <ESC>:CtrlP<CR>
+" nnoremap <leader>fb <ESC>:CtrlPBuffer<CR>
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build|target)$',
+"   \ 'file': '\v\.(exe|so|dll)$',
+"   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+"   \ }
+" let g:ctrlp_show_hidden = 1
+
+" ==========================
+" ===   Test Managment   ===
+" ==========================
+" [Config for janko-m/vim-test]:
+let test#strategy = "dispatch"
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
+
+" [Config for tpope/vim-dispatch]:
+
+" ==============================
+" ===   Project Management   ===
+" ==============================
+" [Config for scrooloose/nerdtree]: File Sidebar
+nmap <F7> :NERDTreeToggle<CR>
+let g:NERDTreeShowHidden=1
+" [Config for Xuyuanp/nerdtree-git-plugin]
+
+" [Config for majutsushi/tagbar]: Tags sidebar
+nmap <F8> :TagbarToggle<CR>
+
+" [Config for vim-airline/vim-airline]: bottombar
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -156,96 +267,80 @@ let g:airline_section_y = ''
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-""let g:syntastic_javascript_checkers = ['standard', 'jsxhint']
-""let g:syntastic_javascript_checkers = ['flow', 'standard']
-"let g:syntastic_javascript_checkers = ['standard', 'flow']
-"let g:syntastic_check_on_wq = 0
-"nmap <leader>rn :let g:syntastic_javascript_checkers = ['eslint','flow']<CR>
-"nmap <leader>sc :SyntasticToggleMode<CR>
+" ===============================
+" ===   Local Configuration   ===
+" ===============================
+" [Config for tpope/vim-projectionist]: Project config
 
-"let g:neomake_javascript_enabled_makers = ['standard', 'flow']
-"autocmd! BufWritePost * Neomake
-"nnoremap <leader>ss :Neomake!<CR>
-"let g:neomake_open_list=2
+" [Config for embear/vim-localvimrc]: Allow adding a local vimrc file to a project
 
-nnoremap <leader>sl :lopen<CR>
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = 'XX'
-let g:ale_sign_warning = '??'
-let g:ale_fix_on_save = 1
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_typescript_prettier_use_local_config = 1
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['json'] = ['prettier']
-let g:ale_fixers['html'] = ['prettier']
+" ==================
+" ===   Themes   ===
+" ==================
+set t_Co=256
+colorscheme onedark
+set background=dark
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" [Config for chriskempson/base16-vim]:
+" [Config for joshdick/onedark.vim]:
+" [Config for godlygeek/csapprox]:
+
+" ====================
+" ===   Snippets   ===
+" ====================
+let g:UltiSnips={}
+let g:UltiSnipsExpandTrigger = "<c-e>"
+let g:UltiSnipsJumpForwardTrigger = "<c-l>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
+let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
+""let g:UltiSnips.always_use_first_snippet =1
+
+" =====================
+" ===   Languages   ===
+" =====================
+
+" Antlr
+
+" C / C++
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+
+" CSS
+autocmd BufNewFile,BufRead *.scss set ft=scss.css
 let g:ale_fixers['css'] = ['prettier']
-let g:ale_fixers['typescript'] = ['prettier']
-let g:ale_fixers['ruby'] = ['rubocop']
-let g:ale_lint_delay = 750
-let g:ale_fixers['python'] = ['autopep8']
 
-let g:flow#autoclose = 1
-let g:flow#enable = 0
-
-" let g:indentLine_char = '︙'
-let g:indentLine_char = '|'
-let g:loaded_matchparen=1
-let g:indent_guides_enable_on_vim_startup = 1
-" let g:indentLine_setConceal = 0
-let g:indentLine_concealcursor = 'nc'
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+" Go
+if executable('go-langserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'go-langserver',
+        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
 endif
+" [Config for fatih/vim-go]:
+let g:go_fmt_command = "goimports"
 
-if exists('&inccommand')
-  "highlight Search term=NONE cterm=NONE ctermfg=black ctermbg=9
-  "highlight IncSearch cterm=NONE ctermfg=black ctermbg=10
-  highlight Substitute cterm=NONE ctermfg=black ctermbg=9
-  set inccommand=split
-endif
+" Graphql
 
-tnoremap <Esc> <C-\><C-n>
+" HTML
+let g:ale_fixers['html'] = ['prettier']
 
-set foldmethod=syntax
-set foldlevelstart=0
+" JSON
+let g:ale_fixers['json'] = ['prettier']
 
-let &titlestring = expand('%:t')
-set title
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-
-let g:colorizer_auto_filetype='css,html'
-
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-  \ 'name': 'ultisnips',
-  \ 'priority': 10,
-  \ 'whitelist': ['*'],
-  \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-  \ }))
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-  \ 'name': 'omni',
-  \ 'whitelist': ['*'],
-  \ 'completor': function('asyncomplete#sources#omni#completor')
-  \  }))
-" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-"   \ 'name': 'buffer',
-"   \ 'whitelist': ['*'],
-"   \ 'blacklist': ['javascript', 'typescript', 'go', 'ledger'],
-"   \ 'completor': function('asyncomplete#sources#buffer#completor'),
-"   \ }))
-" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
-"   \ 'name': 'emoji',
-"   \ 'whitelist': ['*'],
-"   \ 'blacklist': ['ledger'],
-"   \ 'completor': function('asyncomplete#sources#emoji#completor'),
-"   \ }))
-
-" vim-lsp settings
+" JavaScript / Typescript
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_javascript_prettier_use_local_config = 1
 if executable('flow-language-server')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'flow-language-server',
@@ -255,23 +350,25 @@ if executable('flow-language-server')
         \ })
     autocmd FileType javascript setlocal omnifunc=lsp#complete
 endif
-if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-        \ 'whitelist': ['typescript'],
-        \ })
-    autocmd FileType typescript setlocal omnifunc=lsp#complete
-endif
-if executable('go-langserver')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-endif
+
+" Ledger
+
+" Platuml
+
+" Prolog
+au BufNewFile,BufRead *.pro set filetype=prolog
+au BufNewFile,BufRead *.pl set filetype=prolog
+let g:tagbar_type_prolog = {
+    \ 'ctagstype' : 'Prolog',
+    \ 'kinds' : [
+      \ 'p:Predicates',
+    \ ]
+  \ }
+
+" Python
+let g:ale_fixers['python'] = ['autopep8']
+
+" Reason
 if executable('ocaml-language-server')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'ocaml-language-server',
@@ -279,6 +376,10 @@ if executable('ocaml-language-server')
         \ 'whitelist': ['reason', 'ocaml'],
         \ })
 endif
+
+" Ruby
+let g:ale_fixers['ruby'] = ['rubocop']
+let g:ale_ruby_rubocop_executable = 'bin/rubocop'
 if executable('solargraph')
     " gem install solargraph
     au User lsp_setup call lsp#register_server({
@@ -288,6 +389,8 @@ if executable('solargraph')
         \ 'whitelist': ['ruby'],
         \ })
 endif
+
+" Rust
 if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
@@ -295,65 +398,26 @@ if executable('rls')
         \ 'whitelist': ['rust'],
         \ })
 endif
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-endif
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_smart_completion = 0
-let g:asyncomplete_remove_duplicates = 1
-set completeopt=noselect,menu,menuone,preview,noinsert
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:lsp_async_completion = 1
-autocmd FileType typescript let g:lsp_async_completion=0
-nnoremap <silent> K :LspHover<CR>
-" nnoremap <silent> <CR> :LspHover<CR>
-nnoremap <silent> gd :LspDefinition<CR>
-nnoremap <silent> <leader>lr :LspRename<CR>
-nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
-nnoremap <silent> <leader>lf :LspDocumentFormat<CR>
-nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
-
-" "LanguageClient settings
-" Automatically start language servers.
-" let g:LanguageClient_autoStart = 1
-" Required for operations modifying multiple buffers like rename.
-set hidden
-" let g:LanguageClient_serverCommands = {
-"     \ 'javascript': ['flow-language-server', '--stdio'],
-"     \ 'reason': ['ocaml-language-server', '--stdio'],
-"     \ 'ocaml': ['ocaml-language-server', '--stdio']
-"     \ }
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <leader>lr :call LanguageClient_textDocument_rename()<CR>
-" nnoremap <silent> <leader>ld :call LanguageClient_textDocument_documentSymbol()<CR>
-" nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<cr>
-" nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
-
-let g:go_fmt_command = "goimports"
-
-" vim-test settings
-nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ts :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
-
-" config for ruanyl/vim-gh-line
-let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
-let g:gh_use_canonical = 1
-
-
-" Rust
+" [Config for rust-lang/rust.vim]:
 let g:rustfmt_autosave = 1
 let g:rustfmt_command = 'rustup run stable rustfmt'
 
-" Ruby
-let g:ale_ruby_rubocop_executable = 'bin/rubocop'
+" Typescript
+au BufNewFile,BufRead *.ts set filetype=typescript
+let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_typescript_prettier_use_local_config = 1
+autocmd FileType typescript let g:lsp_async_completion=0
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript'],
+        \ })
+    autocmd FileType typescript setlocal omnifunc=lsp#complete
+endif
 
 " SQL
-" let g:omni_sql_no_default_maps = 1
+
+" Yaml
+autocmd FileType yaml setlocal foldmethod=indent

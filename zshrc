@@ -33,8 +33,8 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 DEFAULT_USER="jens"
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
+if [ -f ~/.zshrc.aliases ]; then
+    . ~/.zshrc.aliases
 fi
 if [ -f ~/.zshrc.local ]; then
     . ~/.zshrc.local
@@ -50,7 +50,7 @@ fi
 
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
-  export FZF_DEFAULT_COMMAND='ag --ignore .git --ignore node_modules/ --ignore build/ --ignore Build/ -g ""'
+  export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules/ --ignore build/ --ignore Build/ -g ""'
   alias preview="fzf --preview 'bat --color \"always\" {}'"
   export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 fi

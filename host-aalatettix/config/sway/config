@@ -17,7 +17,7 @@ set $right l
 set $term kitty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu_path | dmenu | xargs swaymsg exec
+set $menu rofi -show combi
 
 ### Output configuration
 #
@@ -33,6 +33,7 @@ output HDMI-A-1 pos 0 0 res 1920x1080 enable
 output eDP-1 pos 0 1080 res 1920x1080 enable
 # bindsym $mod+Shift+s output HDMI-A-1 pos 0 0 res 1920x1080 enable; output eDP-1 pos 0 1080 res 1920x1080 enable
 bindsym $mod+s move workspace to output down
+bindsym $mod+Shift+s output HDMI-A-1 disable
 
 ### Idle configuration
 #
@@ -88,7 +89,8 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 
     # start your launcher
     bindsym $mod+d exec $menu
-    bindsym $mod+Shift+d exec echo | dmenu | xargs swaymsg
+    bindsym $mod+Shift+d exec echo | rofi -dmenu | xargs swaymsg | rofi -dmenu
+    bindsym $mod+Equal exec =
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -103,6 +105,7 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
     bindsym $mod+Shift+Ctrl+q exec swaynag -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown now?' -b 'Yes, shutdown' 'shutdown now'
+    bindsym $mod+Ctrl+q exec "~/.local/bin/rofi-power"
 #
 # Moving around:
 #
@@ -272,3 +275,4 @@ bindsym Shift+XF86AudioRaiseVolume exec light -A 1
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
 
 exec mako --background-color=#285577aa --border-color=#285577cc --padding 10
+exec redshift-gtk

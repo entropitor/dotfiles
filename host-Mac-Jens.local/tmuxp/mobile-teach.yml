@@ -1,0 +1,16 @@
+session_name: 'mobile-teach'
+start_directory: ~/stack/Workspace/datacamp/mobile/teach
+windows:
+- window_name: cli
+  panes: 
+  -
+- window_name: tests
+  panes: 
+  - yr test:watch
+- window_name: server
+  panes: 
+  - mobile-teach preview ../../mobile-courses/example-course/chapter1/lesson1.yml --use-local-bundle
+- window_name: course
+  start_directory: ~/stack/Workspace/datacamp/mobile-courses/example-course
+  panes: 
+  - mobile-teach check

@@ -1,0 +1,9 @@
+session_name: 'dotfiles'
+start_directory: ~/.dotfiles
+windows:
+- window_name: cli
+  panes: 
+  -
+- window_name: vim
+  panes: 
+  - vi -O vimrc vimrc.bundles

@@ -1,0 +1,17 @@
+session_name: 'mobile-frontend'
+start_directory: ~/stack/Workspace/datacamp/mobile/frontend
+windows:
+- window_name: cli
+  panes: 
+  -
+- window_name: tests
+  panes: 
+  - yr test:watch
+- window_name: packager
+  # layout: main-vertical
+  layout: tiled
+  panes: 
+  - yr start:reset
+  - yr start --port 8082
+  - yr practice-web:watch
+  - yr mobile-campus:watch

@@ -1,0 +1,6 @@
+session_name: 'mobile-root'
+start_directory: ~/stack/Workspace/datacamp/mobile
+windows:
+- window_name: cli
+  panes: 
+  -

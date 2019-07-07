@@ -41,8 +41,9 @@ bindsym $mod+Shift+s output HDMI-A-1 disable
 #
 exec swayidle -w \
          timeout 300 'swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100' \
-         timeout 600 'swaymsg "output * dpms off"' \
+         timeout 330 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
+         timeout 400 'systemctl suspend' \
          before-sleep 'swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100'
 bindsym $mod+Shift+x exec swaylock -f -i ~/Pictures/lockscreen.png --indicator-radius 100
 #

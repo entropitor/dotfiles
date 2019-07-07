@@ -1,5 +1,5 @@
 configuration {
-        modi: "window,run,combi,calc,ssh,keys";
+        modi: "window,drun,run,combi,calc,ssh,keys";
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
@@ -33,7 +33,7 @@ configuration {
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-        combi-modi: "window,run";
+        combi-modi: "window,drun,run";
         matching: "fuzzy";
 /*	tokenize: true;*/
 /*	m: "-5";*/

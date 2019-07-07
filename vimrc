@@ -38,7 +38,7 @@ endif
 set wildmode=longest,list,full
 set wildmenu
 
-set scrolloff=10
+" set scrolloff=10
 
 set list
 set listchars=tab:>-,trail:~,nbsp:.,precedes:<,extends:>
@@ -56,18 +56,16 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nnoremap <leader>qj :cnext<CR>
-nnoremap <leader>qk :cprevious<CR>
-nnoremap <leader>qo :copen<CR>
-nnoremap <leader>qc :cclose<CR>
-nnoremap <leader>lj :lnext<CR>
-nnoremap <leader>lk :lprevious<CR>
-nnoremap <leader>lo :lopen<CR>
-nnoremap <leader>lc :lclose<CR>
+" nnoremap <leader>qj :cnext<CR>
+" nnoremap <leader>qk :cprevious<CR>
+" nnoremap <leader>qo :copen<CR>
+" nnoremap <leader>qc :cclose<CR>
+" nnoremap <leader>lj :lnext<CR>
+" nnoremap <leader>lk :lprevious<CR>
+" nnoremap <leader>lo :lopen<CR>
+" nnoremap <leader>lc :lclose<CR>
 
 if has('mouse') | set mouse=a | endif
-
-nnoremap <leader>b :b<Space>
 
 autocmd BufEnter term://* startinsert
 
@@ -205,9 +203,11 @@ endif
 " ===   File Management   ===
 " ===========================
 " [Config for junegunn/fzf.vim]: FZF
+nnoremap <leader>b <ESC>:Buffers<CR>
+nnoremap <leader>f <ESC>:Files<CR>
 nnoremap <C-p> <ESC>:Files<CR>
 let g:fzf_buffers_jump = 1
-autocmd BufLeave *#FZF :bd!  " Auto close window when leaving it
+" autocmd BufLeave *#FZF :bd!  " Auto close window when leaving it
 
 " [Config for ctrlpvim/ctrlp.vim]: CtrlP
 " nnoremap <C-p> <ESC>:CtrlP<CR>
@@ -232,6 +232,7 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
+" au User BufEnter * let test#project_root=projectionist#path()
 
 " [Config for tpope/vim-dispatch]:
 
@@ -261,11 +262,12 @@ let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
 let g:airline#extensions#whitespace#show_message = 0
 let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
-let g:airline#extensions#tabline#enabled = 0
 let g:airline_section_b = ''
 let g:airline_section_y = ''
+let g:airline_section_z = ''
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " ===============================
 " ===   Local Configuration   ===

@@ -1,0 +1,13 @@
+session_name: 'community'
+start_directory: ~/stack/Workspace/datacamp/community
+windows:
+- window_name: cli
+  panes: 
+  -
+- window_name: tests
+  panes: 
+  -
+- window_name: server
+  panes: 
+  - shell_command:
+    - hotel run "yarn run dev"

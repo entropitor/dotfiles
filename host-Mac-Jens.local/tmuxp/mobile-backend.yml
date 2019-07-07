@@ -1,0 +1,14 @@
+session_name: 'mobile-backend'
+start_directory: ~/stack/Workspace/datacamp/mobile/backend
+windows:
+- window_name: cli
+  panes: 
+  -
+- window_name: tests
+  panes: 
+  - yr test:watch
+- window_name: server
+  panes: 
+  - shell_command:
+    - yr db:start
+    - hotel run --name mobile-api -p 3000 "yarn run start"

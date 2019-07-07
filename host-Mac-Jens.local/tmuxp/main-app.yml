@@ -1,0 +1,13 @@
+session_name: 'main-app'
+start_directory: ~/stack/Workspace/datacamp/main-app
+windows:
+- window_name: cli
+  panes: 
+  -
+- window_name: tests
+  panes: 
+  -
+- window_name: server
+  panes: 
+  - shell_command:
+    - hotel run -p 4000 "bin/rails s --port 4000"

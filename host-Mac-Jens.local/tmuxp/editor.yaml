@@ -1,0 +1,19 @@
+session_name: 'editor'
+start_directory: ~/stack/Workspace/datacamp
+windows:
+- start_directory: mobile
+  panes: 
+  - nvim
+  window_name: code
+- start_directory: main-app
+  panes: 
+  - nvim
+  window_name: main-app
+# - start_directory: mobile-courses
+#   panes: 
+#   - nvim
+#   window_name: courses
+# - start_directory: .
+#   panes: 
+#   - nvim
+#   window_name: root

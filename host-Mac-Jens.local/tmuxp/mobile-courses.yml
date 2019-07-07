@@ -1,0 +1,51 @@
+session_name: 'mobile-courses'
+start_directory: ~/stack/Workspace/datacamp/mobile-courses
+windows:
+- start_directory: example-course
+  window_name: example-course
+  panes:
+    -
+- start_directory: intro-to-python
+  window_name: course-1
+  panes:
+    -
+- start_directory: intermediate-python
+  window_name: course-2
+  panes:
+    -
+# - start_directory: example-course
+#   window_name: example-course
+#   panes:
+#     -
+# - start_directory: intro-to-r
+#   window_name: intro-to-r
+#   panes:
+#     -
+# - start_directory: intermediate-r
+#   window_name: intermediate-r
+#   panes:
+#     -
+# - start_directory: intro-to-python
+#   window_name: intro-to-python
+#   panes:
+#     -
+# - start_directory: intermediate-python
+#   window_name: intermediate-python
+#   panes:
+#     -
+# - start_directory: intro-to-sql
+#   window_name: intro-to-sql
+#   panes:
+#     -
+# - start_directory: intro-to-tidyverse
+#   window_name: intro-to-tidyverse
+#   panes:
+#     -
+# - start_directory: joining-data-in-sql
+#   window_name: joining-data-in-sql
+#   panes:
+#     -
+# - start_directory: analytics-in-sql
+#   window_name: analytics-in-sql
+#   panes:
+#     -

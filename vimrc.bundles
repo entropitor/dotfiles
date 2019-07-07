@@ -23,7 +23,6 @@ Plug 'Raimondi/delimitMate'
 " Closes def automatically
 Plug 'tpope/vim-endwise'
 
-
 " Show indentation line
 Plug 'Yggdroot/indentLine'
 
@@ -39,8 +38,14 @@ Plug 'tpope/vim-abolish'
 " Add extra [ commands
 Plug 'tpope/vim-unimpaired'
 
+" Allow repeating custom commands
+Plug 'tpope/vim-repeat'
+
 " Easily move to a certain spot in the file
 Plug 'easymotion/vim-easymotion'
+
+" Allow killing of buffers more easily
+Plug 'qpkorr/vim-bufkill'
 
 " ================
 " ===   Repl   ===
@@ -97,6 +102,10 @@ Plug 'mileszs/ack.vim'
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " CtrlP
 " Plug 'ctrlpvim/ctrlp.vim'
@@ -114,6 +123,9 @@ Plug 'tpope/vim-dispatch'
 " File Sidebar
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+
+" Allow running file commands from vim
+Plug 'tpope/vim-eunuch'
 
 " Tags sidebar
 Plug 'majutsushi/tagbar'
@@ -146,12 +158,15 @@ Plug 'entropitor/snippets'
 " =====================
 " ===   Languages   ===
 " =====================
+" All the languages
+Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ['javascript', 'markdown', 'yaml']
 
 " Antlr
 Plug 'jrozner/vim-antlr', {'for': ['antlr']}
 
 " Go
-Plug 'fatih/vim-go', {'for': ['go']}
+" Plug 'fatih/vim-go', {'for': ['go']}
 
 " Graphql
 Plug 'jparise/vim-graphql', {'for': ['graphql']}
@@ -164,27 +179,27 @@ Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript']}
 Plug 'ledger/vim-ledger', {'for': ['ledger']}
 
 " Platuml
-Plug 'aklt/plantuml-syntax', {'for': ['plantuml']}
+" Plug 'aklt/plantuml-syntax', {'for': ['plantuml']}
 
 " Prolog
 Plug 'mndrix/prolog.vim', {'for': ['prolog']}
 
 " Reason
-Plug 'reasonml-editor/vim-reason-plus', {'for': ['reason']}
+" Plug 'reasonml-editor/vim-reason-plus', {'for': ['reason']}
 
 " Ruby
-Plug 'vim-ruby/vim-ruby', {'for': ['ruby']}
+" Plug 'vim-ruby/vim-ruby', {'for': ['ruby']}
 Plug 'tpope/vim-rails', {'for': ['ruby']}
 " Plug 'thoughtbot/vim-rspec', {'for': ['ruby']}
 
 " Rust
-Plug 'rust-lang/rust.vim', {'for': ['rust']}
+" Plug 'rust-lang/rust.vim', {'for': ['rust']}
 
 " SQL
 Plug 'tpope/vim-dadbod', {'for': ['sql']}
 
 " Typescript
-Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
+" Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
 
 " Yaml
 Plug 'ingydotnet/yaml-vim', {'for': ['yaml']}

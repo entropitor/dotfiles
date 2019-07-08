@@ -30,4 +30,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
 export PATH="$HOME/.cargo/bin:$PATH"
 
-export NPM_TOKEN=$(cat ~/.npmrc | sed -e "s/.*_authToken=//")
+if [ -f ~/.npmrc ]; then
+  export NPM_TOKEN=$(cat ~/.npmrc | sed -e "s/.*_authToken=//")
+fi

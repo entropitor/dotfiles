@@ -25,9 +25,13 @@ Plug 'tpope/vim-endwise'
 
 " Show indentation line
 Plug 'Yggdroot/indentLine'
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indentLine_char = '|'                      " OR '︙'
+let g:indentLine_concealcursor = 'nc'            " Enabled in which modes?
 
 " (Un)comment line
 Plug 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1
 
 " Easily handle quotes, ...
 Plug 'tpope/vim-surround'
@@ -63,9 +67,12 @@ Plug 'kburdett/vim-nuuid'
 
 " See colors inline
 Plug 'chrisbra/Colorizer'
+let g:colorizer_auto_filetype='css,html'
 
 " Copy line on github
 Plug 'ruanyl/vim-gh-line'
+let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
+let g:gh_use_canonical = 1
 
 " Time tracking (WakaTime)
 Plug 'wakatime/vim-wakatime'
@@ -79,22 +86,69 @@ Plug 'vim-scripts/scratch.vim'
 " ==========================
 " ===   Autocompletion   ===
 " ==========================
-Plug 'prabirshrestha/async.vim'
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+set completeopt=noselect,menu,menuone,preview,noinsert
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
 Plug 'prabirshrestha/asyncomplete.vim'
+let g:asyncomplete_remove_duplicates = 1
+
+" Dependency
+Plug 'prabirshrestha/async.vim'
+
+" Plugin for omni completion
 Plug 'yami-beta/asyncomplete-omni.vim'
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+  \ 'name': 'omni',
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#omni#completor')
+  \  }))
+
+" Plugin for ultisnips
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-Plug 'prabirshrestha/vim-lsp'
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+  \ 'name': 'ultisnips',
+  \ 'priority': 10,
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+  \ }))
+
+" Plugin for language server protocol (lsp)
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" See Languages section for the config!
+
+" Add Language Server Protocol
+Plug 'prabirshrestha/vim-lsp'
+let g:lsp_async_completion = 1
+nnoremap <silent> K :LspHover<CR>
+nnoremap <silent> gd :LspDefinition<CR>
+nnoremap <silent> <leader>lr :LspRename<CR>
+nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
+nnoremap <silent> <leader>lf :LspDocumentFormat<CR>
+nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
 
 " =============================
 " ===   Checkers/Builders   ===
 " =============================
 Plug 'w0rp/ale'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = 'XX'
+let g:ale_sign_warning = '??'
+let g:ale_fix_on_save = 1
+let g:ale_lint_delay = 750
+let g:ale_fixers = {}
+" See Languages section for the rest!
 
 " ==================
 " ===   Search   ===
 " ==================
 Plug 'mileszs/ack.vim'
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " ===========================
 " ===   File Management   ===
@@ -102,6 +156,10 @@ Plug 'mileszs/ack.vim'
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+nnoremap <leader>b <ESC>:Buffers<CR>
+nnoremap <leader>f <ESC>:Files<CR>
+nnoremap <C-p> <ESC>:Files<CR>
+" let g:fzf_buffers_jump = 1
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* Ag
@@ -109,11 +167,30 @@ command! -bang -nargs=* Ag
 
 " CtrlP
 " Plug 'ctrlpvim/ctrlp.vim'
+" nnoremap <C-p> <ESC>:CtrlP<CR>
+" nnoremap <C-S-p> <ESC>:CtrlPBuffer<CR>
+" nnoremap <leader>fp <ESC>:CtrlP<CR>
+" nnoremap <leader>fb <ESC>:CtrlPBuffer<CR>
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build|target)$',
+"   \ 'file': '\v\.(exe|so|dll)$',
+"   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+"   \ }
+" let g:ctrlp_show_hidden = 1
 
 " ==========================
 " ===   Test Managment   ===
 " ==========================
 Plug 'janko-m/vim-test'
+let test#strategy = "dispatch"
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
+" au User BufEnter * let test#project_root=projectionist#path()
+
 " Dependencies
 Plug 'tpope/vim-dispatch'
 
@@ -122,6 +199,9 @@ Plug 'tpope/vim-dispatch'
 " ==============================
 " File Sidebar
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+nmap <F7> :NERDTreeToggle<CR>
+let g:NERDTreeShowHidden=1
+" Git Plugin for sidebar
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
 " Allow running file commands from vim
@@ -129,9 +209,25 @@ Plug 'tpope/vim-eunuch'
 
 " Tags sidebar
 Plug 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
 
 " bottombar
 Plug 'vim-airline/vim-airline'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+let g:airline_powerline_fonts=1
+set laststatus=2 "Start drawing on start of session
+let g:airline_enable_branch = 0
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline_section_b = ''
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " ===============================
 " ===   Local Configuration   ===
@@ -145,14 +241,30 @@ Plug 'embear/vim-localvimrc'
 " ==================
 " ===   Themes   ===
 " ==================
-Plug 'chriskempson/base16-vim'
-Plug 'joshdick/onedark.vim'
+" Colorscheme is selected in vimrc itself as it doesn't work when set here
+
+" Make gvim-only colorschemes work transparently in terminal vim
 Plug 'godlygeek/csapprox'
+set t_Co=256
+
+" One dark scheme
+Plug 'joshdick/onedark.vim'
+
+" Base16 color schemes
+Plug 'chriskempson/base16-vim'
 
 " ====================
 " ===   Snippets   ===
 " ====================
 Plug 'sirver/UltiSnips'
+let g:UltiSnips={}
+let g:UltiSnipsExpandTrigger = "<c-e>"
+let g:UltiSnipsJumpForwardTrigger = "<c-l>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
+let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
+
+" My snippets
 Plug 'entropitor/snippets'
 
 " =====================
@@ -162,50 +274,180 @@ Plug 'entropitor/snippets'
 Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['javascript', 'markdown', 'yaml']
 
-" Antlr
+" -----------------
+" ---   Antlr   ---
+" -----------------
 Plug 'jrozner/vim-antlr', {'for': ['antlr']}
 
-" Go
-" Plug 'fatih/vim-go', {'for': ['go']}
+" -------------------
+" ---   C / C++   ---
+" -------------------
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
 
-" Graphql
+" --------------
+" ---   Go   ---
+" --------------
+if executable('go-langserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'go-langserver',
+        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+endif
+
+" [Config for fatih/vim-go (through vim-polyglot)]:
+let g:go_fmt_command = "goimports"
+
+" -------------------
+" ---   Graphql   ---
+" -------------------
 Plug 'jparise/vim-graphql', {'for': ['graphql']}
 
-" IDP
-Plug 'vim-scripts/idp.vim'
+" ----------------
+" ---   HTML   ---
+" ----------------
+let g:ale_fixers['html'] = ['prettier']
+
+" ---------------
+" ---   IDP   ---
+" ---------------
 au BufNewFile,BufRead *.idp set filetype=idp
 
+Plug 'vim-scripts/idp.vim'
+
+" ----------------
+" ---   JSON   ---
+" ----------------
+let g:ale_fixers['json'] = ['prettier']
+
 " JavaScript
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_javascript_prettier_use_local_config = 1
+
+if executable('flow-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'flow-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio --try-flow-bin']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
+        \ 'whitelist': ['javascript'],
+        \ })
+    autocmd FileType javascript setlocal omnifunc=lsp#complete
+endif
+
+" Javascript engine
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
+
+" Fix import statements
 Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript']}
 
-" Ledger
+" ------------------
+" ---   Ledger   ---
+" ------------------
 Plug 'ledger/vim-ledger', {'for': ['ledger']}
 
-" Platuml
-" Plug 'aklt/plantuml-syntax', {'for': ['plantuml']}
+" ------------------
+" ---   Prolog   ---
+" ------------------
+au BufNewFile,BufRead *.pro set filetype=prolog
+au BufNewFile,BufRead *.pl set filetype=prolog
 
-" Prolog
 Plug 'mndrix/prolog.vim', {'for': ['prolog']}
+let g:tagbar_type_prolog = {
+    \ 'ctagstype' : 'Prolog',
+    \ 'kinds' : [
+      \ 'p:Predicates',
+    \ ]
+  \ }
 
-" Reason
-" Plug 'reasonml-editor/vim-reason-plus', {'for': ['reason']}
+" ------------------
+" ---   Python   ---
+" ------------------
+let g:ale_fixers['python'] = ['autopep8']
 
-" Ruby
-" Plug 'vim-ruby/vim-ruby', {'for': ['ruby']}
+" ------------------
+" ---   Reason   ---
+" ------------------
+if executable('ocaml-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ocaml-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
+        \ 'whitelist': ['reason', 'ocaml'],
+        \ })
+endif
+
+" ----------------
+" ---   Ruby   ---
+" ----------------
+let g:ale_fixers['ruby'] = ['rubocop']
+let g:ale_ruby_rubocop_executable = 'bin/rubocop'
+
+if executable('solargraph')
+    " gem install solargraph
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+endif
+
+" Add rails support
 Plug 'tpope/vim-rails', {'for': ['ruby']}
+
+" Add support for rspec
 " Plug 'thoughtbot/vim-rspec', {'for': ['ruby']}
 
-" Rust
-" Plug 'rust-lang/rust.vim', {'for': ['rust']}
+" ----------------
+" ---   Rust   ---
+" ----------------
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
 
-" SQL
+" [Config for rust-lang/rust.vim (added via polyglot)]:
+let g:rustfmt_autosave = 1
+let g:rustfmt_command = 'rustup run stable rustfmt'
+
+" ---------------
+" ---   SQL   ---
+" ---------------
 Plug 'tpope/vim-dadbod', {'for': ['sql']}
 
-" Typescript
-" Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
+" ----------------------
+" ---   Typescript   ---
+" ----------------------
+au BufNewFile,BufRead *.ts set filetype=typescript
 
-" Yaml
+let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_typescript_prettier_use_local_config = 1
+
+autocmd FileType typescript let g:lsp_async_completion=0
+
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript'],
+        \ })
+    autocmd FileType typescript setlocal omnifunc=lsp#complete
+endif
+
+" ----------------
+" ---   Yaml   ---
+" ----------------
+autocmd FileType yaml setlocal foldmethod=indent
 Plug 'ingydotnet/yaml-vim', {'for': ['yaml']}
 
 

@@ -171,6 +171,10 @@ Plug 'jrozner/vim-antlr', {'for': ['antlr']}
 " Graphql
 Plug 'jparise/vim-graphql', {'for': ['graphql']}
 
+" IDP
+Plug 'vim-scripts/idp.vim'
+au BufNewFile,BufRead *.idp set filetype=idp
+
 " JavaScript
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript']}

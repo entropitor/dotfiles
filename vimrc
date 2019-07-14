@@ -38,8 +38,6 @@ endif
 set wildmode=longest,list,full
 set wildmenu
 
-" set scrolloff=10
-
 set list
 set listchars=tab:>-,trail:~,nbsp:.,precedes:<,extends:>
 nmap <leader>l :set list!<CR>
@@ -55,15 +53,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" nnoremap <leader>qj :cnext<CR>
-" nnoremap <leader>qk :cprevious<CR>
-" nnoremap <leader>qo :copen<CR>
-" nnoremap <leader>qc :cclose<CR>
-" nnoremap <leader>lj :lnext<CR>
-" nnoremap <leader>lk :lprevious<CR>
-" nnoremap <leader>lo :lopen<CR>
-" nnoremap <leader>lc :lclose<CR>
 
 if has('mouse') | set mouse=a | endif
 

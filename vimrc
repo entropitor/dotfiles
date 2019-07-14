@@ -63,6 +63,9 @@ tnoremap <Esc> <C-\><C-n>
 set foldmethod=syntax
 set foldlevelstart=0
 
+" Allow buffer to be hidden (with unedited changes)
+set hidden
+
 let &titlestring = expand('%:t')
 set title
 

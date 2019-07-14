@@ -1,0 +1,68 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+
+# Developer tools
+brew "git"
+brew "tmux"
+brew "zsh"
+
+# Dotfiles
+tap "thoughtbot/formulae"
+brew "thoughtbot/formulae/rcm"
+
+# CLI Improved
+brew "bat"                  # Instead of cat
+brew "prettyping"           # Instead of ping
+brew "fzf"                  # Instead of Ctrl+R
+brew "htop"                 # Instead of top
+brew "diff-so-fancy"        # Instead of diff
+brew "fd"                   # Instead of find
+brew "the_silver_searcher"  # Instead of ack
+brew "tldr"                 # Instead of man
+brew "neovim"               # Instead of vim
+
+# JSON / HTTP tools
+brew "httpie"
+brew "jq"
+brew "jo"
+
+# Process tools
+brew "noti"
+
+# Languages
+brew "yarn"
+brew "python"
+brew "python3"
+
+# Plantuml
+cask "adoptopenjdk"
+brew "plantuml"
+
+# Docker
+brew "docker"
+brew "kubectl"
+brew "kubernetes-helm"
+cask "minikube"
+
+# Build tools
+brew "autoconf"
+brew "automake"
+brew "fswatch"
+brew "cmake"
+brew "coreutils"
+
+# Databases
+brew "mongodb", restart_service: true
+brew "mysql", restart_service: true
+brew "postgresql", restart_service: true
+brew "redis", restart_service: true
+
+# Applications
+cask "vlc"
+brew "imagemagick"
+cask "brainfm"
+cask "valentina-studio"
+cask "steam"
+cask "unified-remote"

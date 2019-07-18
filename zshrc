@@ -25,6 +25,9 @@ plugins=(git command-not-found docker httpie)
 
 # User configuration
 
+if [ -f ~/.zshrc.local ]; then
+    . ~/.zshrc.local
+fi
 source $ZSH/oh-my-zsh.sh
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -36,9 +39,6 @@ DEFAULT_USER="jens"
 if [ -f ~/.zshrc.aliases ]; then
     . ~/.zshrc.aliases
 fi
-if [ -f ~/.zshrc.local ]; then
-    . ~/.zshrc.local
-fi
 
 export EDITOR="nvim"
 
@@ -46,7 +46,7 @@ if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
 
-#set -o vi
+set -o vi
 
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh

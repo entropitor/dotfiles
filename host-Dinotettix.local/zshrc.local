@@ -1,3 +1,4 @@
+plugins=($plugins kubectl minikube)
 export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -27,6 +28,8 @@ export GPG_TTY=$(tty)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
+
+# Rust
 export PATH="$HOME/.cargo/bin:$PATH"
 
 if [ -f ~/.npmrc ]; then

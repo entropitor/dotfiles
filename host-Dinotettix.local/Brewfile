@@ -54,10 +54,10 @@ brew "cmake"
 brew "coreutils"
 
 # Databases
-brew "mongodb", restart_service: true
-brew "mysql", restart_service: true
-brew "postgresql", restart_service: true
-brew "redis", restart_service: true
+# brew "mongodb", restart_service: true
+# brew "mysql", restart_service: true
+# brew "postgresql", restart_service: true
+# brew "redis", restart_service: true
 
 # Applications
 cask "vlc"
@@ -66,3 +66,4 @@ cask "brainfm"
 cask "valentina-studio"
 cask "steam"
 cask "unified-remote"
+cask "keybase"

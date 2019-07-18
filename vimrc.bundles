@@ -380,6 +380,7 @@ if executable('ocaml-language-server')
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
         \ 'whitelist': ['reason', 'ocaml'],
         \ })
+    autocmd FileType reason setlocal omnifunc=lsp#complete
 endif
 
 " ----------------
@@ -396,6 +397,7 @@ if executable('solargraph')
         \ 'initialization_options': {"diagnostics": "true"},
         \ 'whitelist': ['ruby'],
         \ })
+    autocmd FileType ruby setlocal omnifunc=lsp#complete
 endif
 
 " Add rails support
@@ -413,6 +415,7 @@ if executable('rls')
         \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
         \ 'whitelist': ['rust'],
         \ })
+    autocmd FileType rust setlocal omnifunc=lsp#complete
 endif
 
 " [Config for rust-lang/rust.vim (added via polyglot)]:

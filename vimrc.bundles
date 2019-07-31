@@ -123,6 +123,8 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Add Language Server Protocol
 Plug 'prabirshrestha/vim-lsp'
 let g:lsp_async_completion = 1
+let g:lsp_preview_keep_focus = 1
+let g:lsp_preview_float = 1
 nnoremap <silent> K :LspHover<CR>
 nnoremap <silent> gd :LspDefinition<CR>
 nnoremap <silent> <leader>lr :LspRename<CR>
@@ -347,6 +349,11 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 " Fix import statements
 Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript']}
 
+" --------------------
+" ---   Markdown   ---
+" --------------------
+let g:ale_fixers['markdown'] = ['prettier']
+
 " ------------------
 " ---   Ledger   ---
 " ------------------
@@ -412,7 +419,7 @@ Plug 'tpope/vim-rails', {'for': ['ruby']}
 if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
         \ 'whitelist': ['rust'],
         \ })
     autocmd FileType rust setlocal omnifunc=lsp#complete
@@ -420,7 +427,7 @@ endif
 
 " [Config for rust-lang/rust.vim (added via polyglot)]:
 let g:rustfmt_autosave = 1
-let g:rustfmt_command = 'rustup run stable rustfmt'
+let g:rustfmt_command = 'rustup run nightly rustfmt'
 
 " ---------------
 " ---   SQL   ---
@@ -452,6 +459,7 @@ endif
 " ----------------
 autocmd FileType yaml setlocal foldmethod=indent
 Plug 'ingydotnet/yaml-vim', {'for': ['yaml']}
+let g:ale_fixers['yaml'] = ['prettier']
 
 
 " ================================

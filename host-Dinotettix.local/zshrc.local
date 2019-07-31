@@ -1,43 +1,21 @@
-plugins=($plugins kubectl minikube)
 export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
-
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-export PATH=$PATH:$HOME/.opam/4.02.3/bin/
-export CAML_LD_LIBRARY_PATH="/Users/jens/.opam/4.02.3/lib/stublibs"
-export OPAMUTF8MSGS="1"
-export MANPATH="/Users/jens/.opam/4.02.3/man:"
-export PERL5LIB="/Users/jens/.opam/4.02.3/lib/perl5"
-export OCAML_TOPLEVEL_PATH="/Users/jens/.opam/4.02.3/lib/toplevel"
-
-if which rbenv > /dev/null; then eval "$(rbenv init -  --no-rehash)"; fi
-export PATH=/usr/local/bin:$PATH
-
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export PATH=$PATH:$HOME/Library/Python/2.7/bin/
-
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+PATH=/usr/local/bin:$PATH
+PATH=$PATH:$HOME/Library/Python/2.7/bin/
+PATH="$HOME/.cargo/bin:$PATH"
+export PATH
+
 export GPG_TTY=$(tty)
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
-[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm zsh_completion
-
-# Rust
-export PATH="$HOME/.cargo/bin:$PATH"
-
-if [ -f ~/.npmrc ]; then
-  export NPM_TOKEN=$(cat ~/.npmrc | sed -e "s/.*_authToken=//")
-fi
+# if [ -f ~/.npmrc ]; then
+#   export NPM_TOKEN=$(cat ~/.npmrc | sed -e "s/.*_authToken=//")
+# fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jens/.bin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jens/.bin/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/jens/.bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jens/.bin/google-cloud-sdk/completion.zsh.inc'; fi
+

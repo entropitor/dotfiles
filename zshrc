@@ -1,48 +1,74 @@
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+# zmodload zsh/zprof
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
-# ZSH_THEME="agnoster"
+ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
+source "${HOME}/.zgen/zgen.zsh"
+if ! zgen saved; then
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+  zgen oh-my-zsh
+  zgen oh-my-zsh plugins/git
+  # zgen oh-my-zsh plugins/vi-mode
+  zgen oh-my-zsh plugins/httpie
+  zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/tmux
+
+  # zgen load denysdovhan/spaceship-prompt
+  # zgen oh-my-zsh themes/robbyrussell
+
+  zgen load mafredri/zsh-async
+  zgen load sindresorhus/pure
+
+  # generate the init script from plugins above
+  zgen save
+fi
+
+custom_get_prompt () {
+  kccc_alias=$(command -v kccc)
+
+  if [ -n "$kccc_alias" ]; then
+    echo "[%{$fg[magenta]%}$(kubectl config current-context)%{$reset_color%}]"
+  fi
+}
+PROMPT="\$(custom_get_prompt) $PROMPT"
+
+# Lazy load packages
+function kubectl() {
+  unfunction $0
+  zgen oh-my-zsh plugins/kubectl
+  $0 $@
+}
+function minikube() {
+  unfunction $0
+  zgen oh-my-zsh plugins/minikube
+  $0 $@
+}
+function nvm() {
+  unfunction $0
+  zgen load lukechilds/zsh-nvm
+  $0 $@
+}
+function rbenv() {
+  unfunction $0
+  zgen load kadaan/zsh-rbenv-lazy
+  $0 $@
+}
+
 HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd.mm.yyyy"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git command-not-found docker httpie)
+# plugins=(git command-not-found docker httpie)
 
 # User configuration
-
 if [ -f ~/.zshrc.local ]; then
     . ~/.zshrc.local
 fi
-source $ZSH/oh-my-zsh.sh
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER="jens"
 if [ -f ~/.zshrc.aliases ]; then
     . ~/.zshrc.aliases
 fi
 
-export EDITOR="nvim"
-
 if type nvim > /dev/null 2>&1; then
+  export EDITOR="nvim"
   alias vim='nvim'
 fi
 

@@ -2,9 +2,12 @@ export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export GOPATH=$HOME/.bin/gopath
+
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/Library/Python/2.7/bin/
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$GOPATH/bin:$PATH"
 export PATH
 
 export GPG_TTY=$(tty)

@@ -31,7 +31,10 @@ custom_get_prompt () {
 PROMPT="\$(custom_get_prompt) $PROMPT"
 
 # Lazy load packages
+alias k="kubectl > /dev/null"
 function kubectl() {
+  unalias k
+
   unfunction $0
   zgen oh-my-zsh plugins/kubectl
   $0 $@
@@ -49,6 +52,11 @@ function nvm() {
 function rbenv() {
   unfunction $0
   zgen load kadaan/zsh-rbenv-lazy
+  $0 $@
+}
+function helm() {
+  unfunction $0
+  zgen oh-my-zsh plugins/helm
   $0 $@
 }
 

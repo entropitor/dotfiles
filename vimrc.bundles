@@ -457,7 +457,7 @@ Plug 'tpope/vim-rails', {'for': ['ruby']}
 if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'cmd': {server_info->['rls']},
         \ 'whitelist': ['rust'],
         \ })
     autocmd FileType rust setlocal omnifunc=lsp#complete
@@ -465,7 +465,7 @@ endif
 
 " [Config for rust-lang/rust.vim (added via polyglot)]:
 let g:rustfmt_autosave = 1
-let g:rustfmt_command = 'rustup run nightly rustfmt'
+let g:rustfmt_command = 'rustfmt'
 
 " ---------------
 " ---   SQL   ---

@@ -50,6 +50,7 @@ Plug 'easymotion/vim-easymotion'
 
 " Allow killing of buffers more easily
 Plug 'qpkorr/vim-bufkill'
+nnoremap <leader>x :BD<cr>
 
 " ================
 " ===   Repl   ===
@@ -186,11 +187,38 @@ command! -bang -nargs=* Ag
 " ==========================
 Plug 'janko-m/vim-test'
 let test#strategy = "dispatch"
-nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ts :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
+
+" Fix vim-test
+" https://github.com/janko/vim-test/issues/272#issuecomment-515749091
+let g:root_markers = ['package.json', '.git/']
+function! s:RunVimTest(cmd)
+    " I guess this part could be replaced by projectionist#project_root
+    for marker in g:root_markers
+        let marker_file = findfile(marker, expand('%:p:h') . ';')
+        if strlen(marker_file) > 0
+            let g:test#project_root = fnamemodify(marker_file, ":p:h")
+            break
+        endif
+        let marker_dir = finddir(marker, expand('%:p:h') . ';')
+        if strlen(marker_dir) > 0
+            let g:test#project_root = fnamemodify(marker_dir, ":p:h")
+            break
+        endif
+    endfor
+
+    execute a:cmd
+endfunction
+
+nnoremap <leader>tf :call <SID>RunVimTest('TestFile')<cr>
+nnoremap <leader>tn :call <SID>RunVimTest('TestNearest')<cr>
+nnoremap <leader>ts :call <SID>RunVimTest('TestSuite')<cr>
+nnoremap <leader>tl :call <SID>RunVimTest('TestLast')<cr>
+nnoremap <leader>tv :call <SID>RunVimTest('TestVisit')<cr>
+" nmap <silent> <leader>tn :TestNearest<CR>
+" nmap <silent> <leader>tf :TestFile<CR>
+" nmap <silent> <leader>ts :TestSuite<CR>
+" nmap <silent> <leader>tl :TestLast<CR>
+" nmap <silent> <leader>tv :TestVisit<CR>
 " au User BufEnter * let test#project_root=projectionist#path()
 
 " Dependencies
@@ -295,12 +323,21 @@ endif
 " --------------
 " ---   Go   ---
 " --------------
-if executable('go-langserver')
+" if executable('go-langserver')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'go-langserver',
+"         \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+"         \ 'whitelist': ['go'],
+"         \ })
+"     autocmd FileType go setlocal omnifunc=lsp#complete
+" endif
+if executable('gopls')
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
         \ 'whitelist': ['go'],
         \ })
+    autocmd BufWritePre *.go LspDocumentFormatSync
     autocmd FileType go setlocal omnifunc=lsp#complete
 endif
 

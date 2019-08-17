@@ -1,3 +1,5 @@
+let mapleader = ","
+
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
@@ -19,7 +21,6 @@ set autoread
 set number
 set relativenumber
 
-let mapleader = ","
 imap jj <Esc>
 set backspace=indent,eol,start
 
@@ -61,7 +62,7 @@ autocmd BufEnter term://* startinsert
 tnoremap <Esc> <C-\><C-n>
 
 set foldmethod=syntax
-" set foldlevelstart=0
+set foldlevelstart=10000
 
 " Allow buffer to be hidden (with unedited changes)
 set hidden

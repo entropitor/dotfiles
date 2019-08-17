@@ -91,6 +91,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 
+" let g:asyncomplete_auto_completeopt=0
 set completeopt=noselect,menu,menuone,preview,noinsert
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -123,7 +124,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Add Language Server Protocol
 Plug 'prabirshrestha/vim-lsp'
-let g:lsp_async_completion = 1
+let g:lsp_async_completion = 0
 let g:lsp_preview_keep_focus = 1
 let g:lsp_preview_float = 1
 nnoremap <silent> K :LspHover<CR>
@@ -163,8 +164,8 @@ nnoremap <leader>b <ESC>:Buffers<CR>
 nnoremap <leader>f <ESC>:Files<CR>
 nnoremap <C-p> <ESC>:Files<CR>
 " let g:fzf_buffers_jump = 1
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" command! -bang -nargs=? -complete=dir Files
+"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
 

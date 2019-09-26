@@ -128,6 +128,7 @@ let g:lsp_async_completion = 0
 let g:lsp_preview_keep_focus = 1
 let g:lsp_preview_float = 1
 nnoremap <silent> K :LspHover<CR>
+nnoremap <silent> F :LspCodeAction<CR>
 nnoremap <silent> gd :LspDefinition<CR>
 nnoremap <silent> <leader>lr :LspRename<CR>
 nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>

@@ -75,7 +75,8 @@
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
         "format-wifi": " {essid} ({signalStrength}%)",
         "format-ethernet": " {ifname}: {ipaddr}/{cidr}",
-        "format-disconnected": "⚠ Disconnected"
+        "format-disconnected": "⚠ Disconnected",
+        "on-click": "networkmanager_dmenu"
     },
     "pulseaudio": {
         //"scroll-step": 1,

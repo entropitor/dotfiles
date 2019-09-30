@@ -15,7 +15,8 @@ if ! zgen saved; then
   # zgen oh-my-zsh themes/robbyrussell
 
   zgen load mafredri/zsh-async
-  zgen load sindresorhus/pure
+  # zgen load sindresorhus/pure
+  zgen load entropitor/purs
 
   # generate the init script from plugins above
   zgen save
@@ -28,7 +29,7 @@ custom_get_prompt () {
     echo "[%{$fg[magenta]%}$(kubectl config current-context)%{$reset_color%}]"
   fi
 }
-PROMPT="\$(custom_get_prompt) $PROMPT"
+PREPROMPT="\$(custom_get_prompt) "
 
 # Lazy load packages
 alias k="kubectl > /dev/null"

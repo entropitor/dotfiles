@@ -131,6 +131,7 @@ nnoremap <silent> K :LspHover<CR>
 nnoremap <silent> F :LspCodeAction<CR>
 nnoremap <silent> gd :LspDefinition<CR>
 nnoremap <silent> <leader>lr :LspRename<CR>
+nnoremap <silent> <leader>lf :LspCodeAction<CR>
 nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
 nnoremap <silent> <leader>lf :LspDocumentFormat<CR>
 nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
@@ -488,7 +489,7 @@ if executable('typescript-language-server')
         \ 'name': 'typescript-language-server',
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-        \ 'whitelist': ['typescript'],
+        \ 'whitelist': ['typescript', 'typescript.tsx'],
         \ })
     autocmd FileType typescript setlocal omnifunc=lsp#complete
 endif

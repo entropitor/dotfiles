@@ -402,6 +402,17 @@ let g:ale_fixers['markdown'] = ['prettier']
 " ------------------
 Plug 'ledger/vim-ledger', {'for': ['ledger']}
 
+" ---------------
+" ---   Lua   ---
+" ---------------
+if executable('lua-lsp')
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'lua-lsp',
+                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
+                \ 'whitelist': ['lua'],
+                \ })
+endif
+
 " ------------------
 " ---   Prolog   ---
 " ------------------
@@ -431,6 +442,7 @@ if executable('ocaml-language-server')
         \ 'whitelist': ['reason', 'ocaml'],
         \ })
     autocmd FileType reason setlocal omnifunc=lsp#complete
+    autocmd FileType ocaml setlocal omnifunc=lsp#complete
 endif
 
 " ----------------
@@ -504,6 +516,22 @@ autocmd FileType yaml setlocal foldmethod=indent
 Plug 'ingydotnet/yaml-vim', {'for': ['yaml']}
 let g:ale_fixers['yaml'] = ['prettier']
 
+" if executable('yaml-language-server')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'yaml-language-server',
+"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'yaml-language-server --stdio']},
+"         \ 'whitelist': ['yaml', 'yml'],
+"         \ 'workspace_config': {
+"         \   "yaml": {
+"         \     "format.enable": "true",
+"         \     "completion": "true",
+"         \     "schemas": {
+"         \     }
+"         \   }
+"         \  }
+"         \ })
+"     autocmd FileType yaml setlocal omnifunc=lsp#complete
+" endif
 
 " ================================
 " ===   Host Specific Config   ===

@@ -8,6 +8,8 @@ PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/Library/Python/2.7/bin/
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
+PATH="$HOME/.opam/default/bin:$PATH"
+PATH="$HOME/Library/Python/3.7/bin:$PATH"
 export PATH
 
 export GPG_TTY=$(tty)

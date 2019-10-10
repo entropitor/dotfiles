@@ -45,11 +45,6 @@ function minikube() {
   zgen oh-my-zsh plugins/minikube
   $0 $@
 }
-function nvm() {
-  unfunction $0
-  zgen load lukechilds/zsh-nvm
-  $0 $@
-}
 function rbenv() {
   unfunction $0
   zgen load kadaan/zsh-rbenv-lazy
@@ -60,6 +55,8 @@ function helm() {
   zgen oh-my-zsh plugins/helm
   $0 $@
 }
+
+eval $(fnm env --multi)
 
 HYPHEN_INSENSITIVE="true"
 HIST_STAMPS="dd.mm.yyyy"

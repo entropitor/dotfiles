@@ -162,12 +162,9 @@ endif
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-nnoremap <leader>b <ESC>:Buffers<CR>
-nnoremap <leader>f <ESC>:Files<CR>
-nnoremap <C-p> <ESC>:Files<CR>
-" let g:fzf_buffers_jump = 1
-" command! -bang -nargs=? -complete=dir Files
-"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>f :Files<CR>
+" nnoremap <C-p> <ESC>:Files<CR>
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
 
@@ -184,6 +181,12 @@ command! -bang -nargs=* Ag
 "   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
 "   \ }
 " let g:ctrlp_show_hidden = 1
+
+" vim-clap
+Plug 'liuchengxu/vim-clap'
+nnoremap <C-p> :Clap files ++externalfilter=fzf +async<CR>
+nnoremap <C-S-f> :Clap grep ++externalfilter=fzf +async<CR>
+nnoremap <C-S-b> :Clap buffers ++externalfilter=fzf +async<CR>
 
 " ==========================
 " ===   Test Managment   ===

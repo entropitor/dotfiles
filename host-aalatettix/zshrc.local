@@ -1,6 +1,7 @@
 # If running from tty1 start sway
 export GTK_THEME="Arc-Darker"
 if [ "$(tty)" = "/dev/tty1" ]; then
+  eval $(ssh-agent)
   exec sway
 fi
 

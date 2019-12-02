@@ -184,7 +184,7 @@ command! -bang -nargs=* Ag
 
 " vim-clap
 Plug 'liuchengxu/vim-clap'
-nnoremap <C-p> :Clap files ++externalfilter=fzf +async<CR>
+nnoremap <C-p> :Clap gfiles ++externalfilter=fzf +async<CR>
 nnoremap <C-S-f> :Clap grep ++externalfilter=fzf +async<CR>
 nnoremap <C-S-b> :Clap buffers ++externalfilter=fzf +async<CR>
 

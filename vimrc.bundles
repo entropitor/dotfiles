@@ -191,6 +191,7 @@ nnoremap <C-S-b> :Clap buffers ++externalfilter=fzf +async<CR>
 " ==========================
 " ===   Test Managment   ===
 " ==========================
+" let g:test#javascript#jest#file_pattern = '.*\.(spec|test)\.(js|jsx|coffee|ts|tsx)$'
 Plug 'janko-m/vim-test'
 let test#strategy = "dispatch"
 
@@ -198,19 +199,20 @@ let test#strategy = "dispatch"
 " https://github.com/janko/vim-test/issues/272#issuecomment-515749091
 let g:root_markers = ['package.json', '.git/']
 function! s:RunVimTest(cmd)
-    " I guess this part could be replaced by projectionist#project_root
-    for marker in g:root_markers
-        let marker_file = findfile(marker, expand('%:p:h') . ';')
-        if strlen(marker_file) > 0
-            let g:test#project_root = fnamemodify(marker_file, ":p:h")
-            break
-        endif
-        let marker_dir = finddir(marker, expand('%:p:h') . ';')
-        if strlen(marker_dir) > 0
-            let g:test#project_root = fnamemodify(marker_dir, ":p:h")
-            break
-        endif
-    endfor
+    " " I guess this part could be replaced by projectionist#project_root
+    " for marker in g:root_markers
+    "     let marker_file = findfile(marker, expand('%:p:h') . ';')
+    "     if strlen(marker_file) > 0
+    "         let g:test#project_root = fnamemodify(marker_file, ":p:h")
+    "         break
+    "     endif
+    "     let marker_dir = finddir(marker, expand('%:p:h') . ';')
+    "     if strlen(marker_dir) > 0
+    "         let g:test#project_root = fnamemodify(marker_dir, ":p:h")
+    "         break
+    "     endif
+    " endfor
+    let g:test#project_root = projectionist#path()
 
     execute a:cmd
 endfunction
@@ -229,6 +231,8 @@ nnoremap <leader>tv :call <SID>RunVimTest('TestVisit')<cr>
 
 " Dependencies
 Plug 'tpope/vim-dispatch'
+Plug 'craigdallimore/vim-jest-cli'
+let g:dispatch_compilers = { 'jest': 'jest-cli' }
 
 " ==============================
 " ===   Project Management   ===

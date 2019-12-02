@@ -139,7 +139,7 @@ nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
 " =============================
 " ===   Checkers/Builders   ===
 " =============================
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = 'XX'
 let g:ale_sign_warning = '??'
@@ -439,6 +439,9 @@ if executable('ocaml-language-server')
         \ 'whitelist': ['reason', 'ocaml'],
         \ })
 endif
+let g:ale_ocaml_ocamlformat_executable = "ocamlformat"
+let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
+let g:ale_fixers['ocaml'] = ['ocamlformat']
 
 " ----------------
 " ---   Ruby   ---
@@ -487,7 +490,7 @@ Plug 'tpope/vim-dadbod', {'for': ['sql']}
 " ----------------------
 au BufNewFile,BufRead *.ts set filetype=typescript
 
-let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_fixers['typescript'] = ['prettier', 'eslint']
 let g:ale_typescript_prettier_use_local_config = 1
 
 if executable('typescript-language-server')

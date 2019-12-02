@@ -124,7 +124,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Add Language Server Protocol
 Plug 'prabirshrestha/vim-lsp'
-let g:lsp_async_completion = 0
+let g:lsp_async_completion = 1
 let g:lsp_preview_keep_focus = 1
 let g:lsp_preview_float = 1
 nnoremap <silent> K :LspHover<CR>
@@ -335,7 +335,6 @@ endif
 "         \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
 "         \ 'whitelist': ['go'],
 "         \ })
-"     autocmd FileType go setlocal omnifunc=lsp#complete
 " endif
 if executable('gopls')
     au User lsp_setup call lsp#register_server({
@@ -344,7 +343,6 @@ if executable('gopls')
         \ 'whitelist': ['go'],
         \ })
     autocmd BufWritePre *.go LspDocumentFormatSync
-    autocmd FileType go setlocal omnifunc=lsp#complete
 endif
 
 " [Config for fatih/vim-go (through vim-polyglot)]:
@@ -383,7 +381,6 @@ if executable('flow-language-server')
         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
         \ 'whitelist': ['javascript'],
         \ })
-    autocmd FileType javascript setlocal omnifunc=lsp#complete
 endif
 
 " Javascript engine
@@ -441,8 +438,6 @@ if executable('ocaml-language-server')
         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
         \ 'whitelist': ['reason', 'ocaml'],
         \ })
-    autocmd FileType reason setlocal omnifunc=lsp#complete
-    autocmd FileType ocaml setlocal omnifunc=lsp#complete
 endif
 
 " ----------------
@@ -459,7 +454,6 @@ if executable('solargraph')
         \ 'initialization_options': {"diagnostics": "true"},
         \ 'whitelist': ['ruby'],
         \ })
-    autocmd FileType ruby setlocal omnifunc=lsp#complete
 endif
 
 " Add rails support
@@ -477,7 +471,6 @@ if executable('rls')
         \ 'cmd': {server_info->['rls']},
         \ 'whitelist': ['rust'],
         \ })
-    autocmd FileType rust setlocal omnifunc=lsp#complete
 endif
 
 " [Config for rust-lang/rust.vim (added via polyglot)]:
@@ -497,8 +490,6 @@ au BufNewFile,BufRead *.ts set filetype=typescript
 let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_typescript_prettier_use_local_config = 1
 
-autocmd FileType typescript let g:lsp_async_completion=0
-
 if executable('typescript-language-server')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'typescript-language-server',
@@ -506,7 +497,6 @@ if executable('typescript-language-server')
         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
         \ 'whitelist': ['typescript', 'typescript.tsx'],
         \ })
-    autocmd FileType typescript setlocal omnifunc=lsp#complete
 endif
 
 " ----------------
@@ -530,7 +520,6 @@ let g:ale_fixers['yaml'] = ['prettier']
 "         \   }
 "         \  }
 "         \ })
-"     autocmd FileType yaml setlocal omnifunc=lsp#complete
 " endif
 
 " ================================

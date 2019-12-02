@@ -55,8 +55,11 @@ function helm() {
   zgen oh-my-zsh plugins/helm
   $0 $@
 }
-
-eval $(fnm env --multi)
+function redis-cli() {
+  unfunction $0
+  zgen oh-my-zsh plugins/redis-cli
+  $0 $@
+}
 
 HYPHEN_INSENSITIVE="true"
 HIST_STAMPS="dd.mm.yyyy"
@@ -67,6 +70,8 @@ if [ -f ~/.zshrc.local ]; then
     . ~/.zshrc.local
 fi
 # source $ZSH/oh-my-zsh.sh
+
+eval $(fnm env --multi)
 
 DEFAULT_USER="jens"
 if [ -f ~/.zshrc.aliases ]; then

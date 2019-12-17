@@ -6,9 +6,9 @@ function is_installed() {
 }
 
 # Set up oh-my-zsh
-if [ ! -e ~/.oh-my-zsh ]; then
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
+# if [ ! -e ~/.oh-my-zsh ]; then
+#     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# fi
 
 # Set up vim-bundles
 if [ ! -e $HOME/.vim/autoload/plug.vim ]; then

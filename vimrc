@@ -21,6 +21,8 @@ set autoread
 set number
 set relativenumber
 
+set cursorline
+
 imap jj <Esc>
 set backspace=indent,eol,start
 

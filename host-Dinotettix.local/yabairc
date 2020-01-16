@@ -12,6 +12,7 @@ yabai -m config window_placement second_child
 # yabai -m config status_bar_space_icon_strip  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 yabai -m config top_padding                  20
 
+yabai -m config window_border                on
 yabai -m config window_border_width          5
 yabai -m config window_border_radius         0
 yabai -m config active_window_border_color   0xff775759

@@ -28,3 +28,6 @@ if [ -f '/Users/jens/.bin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jens/
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/jens/.bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jens/.bin/google-cloud-sdk/completion.zsh.inc'; fi
 
+# Wasmer
+export WASMER_DIR="/Users/jens/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"

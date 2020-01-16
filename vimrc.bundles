@@ -102,7 +102,7 @@ let g:asyncomplete_remove_duplicates = 1
 Plug 'prabirshrestha/async.vim'
 
 " Plugin for omni completion
-Plug 'yami-beta/asyncomplete-omni.vim'
+Plug 'entropitor/asyncomplete-omni.vim'
 au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
   \ 'name': 'omni',
   \ 'whitelist': ['*'],
@@ -118,23 +118,26 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
   \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
   \ }))
 
-" Plugin for language server protocol (lsp)
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" See Languages section for the config!
+Plug 'neovim/nvim-lsp'
+" Plug 'donniewest/asyncomplete_neovim_lsp'
+" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#lsp#get_source_options({}))
 
-" Add Language Server Protocol
-Plug 'prabirshrestha/vim-lsp'
-let g:lsp_async_completion = 1
-let g:lsp_preview_keep_focus = 1
-let g:lsp_preview_float = 1
-nnoremap <silent> K :LspHover<CR>
-nnoremap <silent> F :LspCodeAction<CR>
-nnoremap <silent> gd :LspDefinition<CR>
-nnoremap <silent> <leader>lr :LspRename<CR>
-nnoremap <silent> <leader>lf :LspCodeAction<CR>
-nnoremap <silent> <leader>ld :LspDocumentSymbol<CR>
-nnoremap <silent> <leader>lf :LspDocumentFormat<CR>
-nnoremap <silent> <leader>le :LspDocumentDiagnostics<CR>
+" lua print(vim.inspect(vim.lsp.buf))
+" completion, declaration, definition, formatting, hover, implementation, peek_definition, range_formatting, references, rename, signature_help, type_definition
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <leader>lt <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <leader>lc <cmd>lua vim.lsp.buf.completion()<CR>
+" force reload
+nnoremap <silent> <leader>lf <cmd>lua vim.lsp.stop_all_clients()<CR><cmd>edit<CR>
+" Capabilities
+nnoremap <silent> <leader>lx <cmd>lua print(vim.inspect(vim.lsp.buf))<CR>
 
 " =============================
 " ===   Checkers/Builders   ===
@@ -324,33 +327,10 @@ Plug 'jrozner/vim-antlr', {'for': ['antlr']}
 " -------------------
 " ---   C / C++   ---
 " -------------------
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-endif
 
 " --------------
 " ---   Go   ---
 " --------------
-" if executable('go-langserver')
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'go-langserver',
-"         \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
-"         \ 'whitelist': ['go'],
-"         \ })
-" endif
-if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd BufWritePre *.go LspDocumentFormatSync
-endif
-
 " [Config for fatih/vim-go (through vim-polyglot)]:
 let g:go_fmt_command = "goimports"
 
@@ -380,15 +360,6 @@ let g:ale_fixers['json'] = ['prettier']
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_javascript_prettier_use_local_config = 1
 
-if executable('flow-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'flow-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'flow-language-server --stdio --try-flow-bin']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
-        \ 'whitelist': ['javascript'],
-        \ })
-endif
-
 " Javascript engine
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
@@ -408,13 +379,6 @@ Plug 'ledger/vim-ledger', {'for': ['ledger']}
 " ---------------
 " ---   Lua   ---
 " ---------------
-if executable('lua-lsp')
-    au User lsp_setup call lsp#register_server({
-                \ 'name': 'lua-lsp',
-                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
-                \ 'whitelist': ['lua'],
-                \ })
-endif
 
 " ------------------
 " ---   Prolog   ---
@@ -438,13 +402,6 @@ let g:ale_fixers['python'] = ['autopep8']
 " ------------------
 " ---   Reason   ---
 " ------------------
-if executable('ocaml-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'ocaml-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'ocaml-language-server --stdio']},
-        \ 'whitelist': ['reason', 'ocaml'],
-        \ })
-endif
 let g:ale_ocaml_ocamlformat_executable = "ocamlformat"
 let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
 let g:ale_fixers['ocaml'] = ['ocamlformat']
@@ -455,16 +412,6 @@ let g:ale_fixers['ocaml'] = ['ocamlformat']
 let g:ale_fixers['ruby'] = ['rubocop']
 let g:ale_ruby_rubocop_executable = 'bin/rubocop'
 
-if executable('solargraph')
-    " gem install solargraph
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'initialization_options': {"diagnostics": "true"},
-        \ 'whitelist': ['ruby'],
-        \ })
-endif
-
 " Add rails support
 Plug 'tpope/vim-rails', {'for': ['ruby']}
 
@@ -474,14 +421,6 @@ Plug 'tpope/vim-rails', {'for': ['ruby']}
 " ----------------
 " ---   Rust   ---
 " ----------------
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rls']},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
-
 " [Config for rust-lang/rust.vim (added via polyglot)]:
 let g:rustfmt_autosave = 1
 let g:rustfmt_command = 'rustfmt'
@@ -499,15 +438,6 @@ au BufNewFile,BufRead *.ts set filetype=typescript
 let g:ale_fixers['typescript'] = ['prettier', 'eslint']
 let g:ale_typescript_prettier_use_local_config = 1
 
-if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-        \ 'whitelist': ['typescript', 'typescript.tsx'],
-        \ })
-endif
-
 " ----------------
 " ---   Yaml   ---
 " ----------------
@@ -515,27 +445,24 @@ autocmd FileType yaml setlocal foldmethod=indent
 Plug 'ingydotnet/yaml-vim', {'for': ['yaml']}
 let g:ale_fixers['yaml'] = ['prettier']
 
-" if executable('yaml-language-server')
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'yaml-language-server',
-"         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'yaml-language-server --stdio']},
-"         \ 'whitelist': ['yaml', 'yml'],
-"         \ 'workspace_config': {
-"         \   "yaml": {
-"         \     "format.enable": "true",
-"         \     "completion": "true",
-"         \     "schemas": {
-"         \     }
-"         \   }
-"         \  }
-"         \ })
-" endif
-
-" ================================
-" ===   Host Specific Config   ===
-" ================================
-" if filereadable(expand("~/.vimrc.bundles.local"))
-"     source ~/.vimrc.bundles.local
-" endif
-
 call plug#end()
+
+" ================================
+" ===   LSP Config   ===
+" ================================
+
+lua << EOF
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.tsserver.setup{
+  -- root_dir = nvim_lsp.util.root_pattern('tsconfig.json')
+}
+
+nvim_lsp.rls.setup{}
+nvim_lsp.gopls.setup{}
+nvim_lsp.flow.setup{}
+nvim_lsp.dockerls.setup{}
+nvim_lsp.bashls.setup{}
+
+EOF
+
+autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc

@@ -91,3 +91,6 @@ if [ -f ~/.fzf.zsh ]; then
   alias preview="fzf --preview 'bat --color \"always\" {}'"
   export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
 fi
+
+PATH="./node_modules/.bin:$PATH"
+export PATH="../node_modules/.bin:$PATH"

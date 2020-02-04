@@ -359,6 +359,7 @@ let g:ale_fixers['json'] = ['prettier']
 
 " JavaScript
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['javascriptreact'] = ['prettier']
 let g:ale_javascript_prettier_use_local_config = 1
 
 " Javascript engine

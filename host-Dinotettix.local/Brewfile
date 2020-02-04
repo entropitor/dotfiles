@@ -62,7 +62,6 @@ brew "coreutils"
 # Applications
 cask "vlc"
 brew "imagemagick"
-cask "brainfm"
 cask "valentina-studio"
 cask "steam"
 cask "unified-remote"

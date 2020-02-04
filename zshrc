@@ -77,6 +77,9 @@ fi
 # source $ZSH/oh-my-zsh.sh
 
 eval $(fnm env --multi)
+function chpwd {
+  fnm use 2> /dev/null
+}
 
 DEFAULT_USER="jens"
 if [ -f ~/.zshrc.aliases ]; then

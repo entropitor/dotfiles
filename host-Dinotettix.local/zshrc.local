@@ -10,6 +10,7 @@ PATH="$HOME/.cargo/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.opam/default/bin:$PATH"
 PATH="$HOME/Library/Python/3.7/bin:$PATH"
+PATH="$HOME/.bin:$PATH"
 export PATH
 
 export GPG_TTY=$(tty)
@@ -31,3 +32,13 @@ if [ -f '/Users/jens/.bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users
 # Wasmer
 export WASMER_DIR="/Users/jens/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+function dc () {
+  if [[ -d $HOME/Workspace/$1 ]]; then
+    cd $HOME/Workspace/$1
+  else
+    cd $HOME/Workspace
+    git clone git@github.com:datacamp-engineering/$1.git
+    cd $1
+  fi
+}

@@ -22,6 +22,8 @@ if ! zgen saved; then
   zgen save
 fi
 
+alias tal="tmux attach" # tmux attach last
+
 custom_get_prompt () {
   kccc_alias=$(command -v kccc)
 
@@ -38,6 +40,9 @@ function kubectl() {
 
   unfunction $0
   zgen oh-my-zsh plugins/kubectl
+  alias kg="kubectl get"
+  alias kd="kubectl describe"
+  alias kdel="kubectl delete"
   $0 $@
 }
 function minikube() {

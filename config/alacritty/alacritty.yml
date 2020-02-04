@@ -77,15 +77,6 @@ scrolling:
   # scrollback is enabled (history > 0).
   multiplier: 3
 
-  # Faux Scrolling
-  #
-  # The `faux_multiplier` setting controls the number of lines the terminal
-  # should scroll when the alternate screen buffer is active. This is used
-  # to allow mouse scrolling for applications like `man`.
-  #
-  # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
-
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
 
@@ -100,6 +91,8 @@ tabspaces: 8
 
 # Font configuration (changes require restart)
 font:
+  normal:
+    family: JetBrains Mono
   # Normal (roman) font face
   #normal:
     # Font family
@@ -236,7 +229,7 @@ colors:
 # Specifying a `duration` of `0` will disable the visual bell.
 visual_bell:
   animation: EaseOutExpo
-  duration: 0
+  duration: 5
   color: '0xffffff'
 
 # Background opacity
@@ -497,6 +490,9 @@ key_bindings:
   #- { key: Q,      mods: Command,         action: Quit             }
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
+
+  # Custom commands
+  #- { key: N,       mods: Command,         action: SpawnNewInstance }
 
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }

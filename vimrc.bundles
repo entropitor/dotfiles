@@ -119,8 +119,8 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
   \ }))
 
 Plug 'neovim/nvim-lsp'
-" Plug 'donniewest/asyncomplete_neovim_lsp'
-" au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#lsp#get_source_options({}))
+Plug 'donniewest/asyncomplete_neovim_lsp'
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#lsp#get_source_options({}))
 
 " lua print(vim.inspect(vim.lsp.buf))
 " completion, declaration, definition, formatting, hover, implementation, peek_definition, range_formatting, references, rename, signature_help, type_definition
@@ -475,4 +475,7 @@ nvim_lsp.yamlls.setup{}
 
 EOF
 
-autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
+" This conflicts with Plug 'donniewest/asyncomplete_neovim_lsp'
+" As we also have an asyncomplete omni completer which will cause double
+" completions
+" autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc

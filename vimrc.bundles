@@ -188,11 +188,11 @@ command! -bang -nargs=* Ag
 " let g:ctrlp_show_hidden = 1
 
 " vim-clap
-Plug 'liuchengxu/vim-clap'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 nnoremap <C-p> :Clap gfiles ++externalfilter=fzf +async<CR>
-nnoremap <C-S-p> :Clap files +async<CR>
-nnoremap <C-S-f> :Clap grep ++externalfilter=fzf +async<CR>
-nnoremap <C-S-b> :Clap buffers ++externalfilter=fzf +async<CR>
+" nnoremap <C-S-p> :Clap files +async<CR>
+nnoremap <C-f> :Clap grep ++externalfilter=fzf +async<CR>
+nnoremap <C-b> :Clap buffers ++externalfilter=fzf +async<CR>
 
 " ==========================
 " ===   Test Managment   ===

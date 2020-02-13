@@ -358,8 +358,8 @@ Plug 'vim-scripts/idp.vim'
 let g:ale_fixers['json'] = ['prettier']
 
 " JavaScript
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['javascriptreact'] = ['prettier']
+let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+let g:ale_fixers['javascriptreact'] = ['prettier', 'eslint']
 let g:ale_javascript_prettier_use_local_config = 1
 
 " Javascript engine
@@ -438,6 +438,7 @@ Plug 'tpope/vim-dadbod', {'for': ['sql']}
 au BufNewFile,BufRead *.ts set filetype=typescript
 
 let g:ale_fixers['typescript'] = ['prettier', 'eslint']
+let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
 let g:ale_typescript_prettier_use_local_config = 1
 
 " ----------------

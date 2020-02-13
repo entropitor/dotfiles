@@ -366,7 +366,9 @@ let g:ale_javascript_prettier_use_local_config = 1
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 " Fix import statements
-Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript']}
+Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact' ]}
+silent! nnoremap <silent> <leader>j :ImportJSWord<CR>
+silent! nnoremap <silent> <leader>i :ImportJSFix<CR>
 
 " --------------------
 " ---   Markdown   ---

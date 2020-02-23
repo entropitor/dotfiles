@@ -165,7 +165,7 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     # Switch the current container between different layout styles
     bindsym $mod+space layout toggle splith tabbed splitv stacking
     # bindsym $mod+w layout tabbed
-    # bindsym $mod+e layout toggle split
+    bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen

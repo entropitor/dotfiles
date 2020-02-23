@@ -378,6 +378,8 @@ let g:ale_fixers['markdown'] = ['prettier']
 " ------------------
 " ---   Ledger   ---
 " ------------------
+let g:ledger_main="journal.ledger"
+let g:ledger_bin="ledger"
 Plug 'ledger/vim-ledger', {'for': ['ledger']}
 
 " ---------------

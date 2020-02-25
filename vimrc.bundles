@@ -281,6 +281,18 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " ===============================
 " Project config
 Plug 'tpope/vim-projectionist'
+let g:projectionist_heuristics = {
+      \   "package.json": {
+      \     "*.ts":  {"alternate": ["{}.spec.ts", "{}.spec.tsx"]},
+      \     "*.tsx": {"alternate": ["{}.spec.tsx"]},
+      \     "*.spec.ts": {"alternate": ["{}.ts"]},
+      \     "*.spec.tsx": {"alternate": ["{}.ts", "{}.tsx"]},
+      \     "*.js":  {"alternate": ["{}.spec.js", "{}.spec.jsx"]},
+      \     "*.jsx": {"alternate": ["{}.spec.jsx"]},
+      \     "*.spec.js": {"alternate": ["{}.js"]},
+      \     "*.spec.jsx": {"alternate": ["{}.js", "{}.jsx"]}
+      \   }
+      \ }
 
 " Allow adding a local vimrc file to a project
 Plug 'embear/vim-localvimrc'

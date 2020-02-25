@@ -2,11 +2,7 @@ if [ -f ~/.zshrc.aliases.local ]; then
     . ~/.zshrc.aliases.local
 fi
 
-alias gdf="git dsf"
 alias vi="vim"
-alias nr="npm run"
-alias nx="npx"
-alias yr="yarn run"
 if [ -x "$(command -v htop)" ]; then
   alias top="htop"
 fi
@@ -21,3 +17,32 @@ function expose() {
   echo "Wait for a green message to say the domain is exposed"
   ssh -R $SUBDOMAIN:80:localhost:$PORT serveo.net
 }
+
+# NPM / Yarn
+alias nx="npx"
+alias nps="cat package.json | jq .scripts"
+function node_run() {
+  local runner=$1
+  local target=$2
+
+  if [[ -z $target ]]; then
+    target=$(cat package.json | jq -r '.scripts | to_entries[] | "\(.key) \([range(.key | length; 25) | " "] | add)# \(.value)"' | fzf | head -n 1 | sed "s/ *#.*//")
+  fi
+
+  if [[ -z $target ]]; then
+    return false
+  else
+    if [[ $# > 1 ]]; then
+      shift 2
+    else
+      shift 1
+    fi
+    echo "Running $runner run $target $@"
+    $runner run $target $@
+  fi
+}
+alias yr="node_run yarn $@"
+alias nr="node_run npm $@"
+
+# TMUX
+alias tal="tmux attach" # tmux attach last

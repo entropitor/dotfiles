@@ -22,8 +22,6 @@ if ! zgen saved; then
   zgen save
 fi
 
-alias tal="tmux attach" # tmux attach last
-
 custom_get_prompt () {
   kccc_alias=$(command -v kccc)
 

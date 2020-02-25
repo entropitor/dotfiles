@@ -455,6 +455,7 @@ au BufNewFile,BufRead *.ts set filetype=typescript
 let g:ale_fixers['typescript'] = ['prettier', 'eslint']
 let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
 let g:ale_typescript_prettier_use_local_config = 1
+let g:ale_linters_ignore = {'typescript': ['tslint'], 'typescriptreact': ['tslint']}
 
 " ----------------
 " ---   Yaml   ---

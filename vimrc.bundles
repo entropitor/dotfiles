@@ -129,7 +129,7 @@ nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr         <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <leader>lf <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <leader>lt <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>
@@ -175,25 +175,25 @@ command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " CtrlP
-" Plug 'ctrlpvim/ctrlp.vim'
-" nnoremap <C-p> <ESC>:CtrlP<CR>
-" nnoremap <C-S-p> <ESC>:CtrlPBuffer<CR>
-" nnoremap <leader>fp <ESC>:CtrlP<CR>
-" nnoremap <leader>fb <ESC>:CtrlPBuffer<CR>
-" let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build|target)$',
-"   \ 'file': '\v\.(exe|so|dll)$',
-"   \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-"   \ }
-" let g:ctrlp_show_hidden = 1
+Plug 'ctrlpvim/ctrlp.vim'
+nnoremap <C-p> <ESC>:CtrlP<CR>
+nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
+nnoremap <leader>fp <ESC>:CtrlP<CR>
+nnoremap <leader>fb <ESC>:CtrlPBuffer<CR>
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build|target|dist)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+  \ }
+let g:ctrlp_show_hidden = 1
 
 " vim-clap
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-nnoremap <C-p> :Clap gfiles ++externalfilter=fzf +async<CR>
-" nnoremap <C-S-p> :Clap files +async<CR>
-nnoremap <C-f> :Clap grep ++externalfilter=fzf +async<CR>
-nnoremap <C-b> :Clap buffers ++externalfilter=fzf +async<CR>
+" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+" nnoremap <C-p> :Clap gfiles ++externalfilter=fzf +async<CR>
+" " nnoremap <C-S-p> :Clap files +async<CR>
+" nnoremap <C-f> :Clap grep ++externalfilter=fzf +async<CR>
+" nnoremap <C-b> :Clap buffers ++externalfilter=fzf +async<CR>
 
 " ==========================
 " ===   Test Managment   ===
@@ -283,7 +283,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 Plug 'tpope/vim-projectionist'
 let g:projectionist_heuristics = {
       \   "package.json": {
-      \     "*.ts":  {"alternate": ["{}.spec.ts", "{}.spec.tsx"]},
+      \     "*.ts":  {"alternate": ["{}.spec.ts", "{}.spec.tsx", "{dirname}/__mocks__/{basename}.ts", "{dirname}/../{basename}.ts"]},
       \     "*.tsx": {"alternate": ["{}.spec.tsx"]},
       \     "*.spec.ts": {"alternate": ["{}.ts"]},
       \     "*.spec.tsx": {"alternate": ["{}.ts", "{}.tsx"]},
@@ -491,8 +491,8 @@ nvim_lsp.solargraph.setup{}
 nvim_lsp.terraformls.setup{}
 nvim_lsp.vimls.setup{}
 nvim_lsp.yamlls.setup{}
-
 EOF
+
 
 " This conflicts with Plug 'donniewest/asyncomplete_neovim_lsp'
 " As we also have an asyncomplete omni completer which will cause double

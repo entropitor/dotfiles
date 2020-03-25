@@ -68,7 +68,7 @@ function dc () {
       return false
     fi
 
-    aws ssm get-parameters-by-path --with-decryption --path $keypath | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
+    aws ssm get-parameters-by-path --path $keypath | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
   elif [[ $name == "open" ]]; then
     local name=$(pwd | sed "s/$(echo $HOME | sed 's/\//\\\//g')\/Workspace\/\([^\/]*\).*/\1/")
     open https://github.com/datacamp-engineering/$name
@@ -80,7 +80,7 @@ function dc () {
     local name=$(pwd | sed "s/$(echo $HOME | sed 's/\//\\\//g')\/Workspace\/\([^\/]*\).*/\1/")
     local branch=$(git rev-parse --abbrev-ref HEAD)
     local branch_encoded=$(echo $branch | jq -Rr @uri)
-    open "https://app.circleci.com/github/datacamp-engineering/${name}/pipelines?branch=${branch_encoded}"
+    open "https://app.circleci.com/pipelines/github/datacamp-engineering/${name}?branch=${branch_encoded}"
   elif [[ -z $name ]]; then
     local result=$(ls $workspace | cat - $repositories_cache | sort | uniq | fzf)
     if [[ -z $result ]]; then

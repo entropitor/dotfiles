@@ -86,3 +86,5 @@ endif
 " colorscheme onedark
 colorscheme base16-tomorrow-night-eighties
 set background=dark
+
+nnoremap <leader>bq :%bd\|:e#<CR>

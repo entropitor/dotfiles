@@ -11,6 +11,7 @@ PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.opam/default/bin:$PATH"
 PATH="$HOME/Library/Python/3.7/bin:$PATH"
 PATH="$HOME/.bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 export PATH
 
 export GPG_TTY=$(tty)
@@ -50,13 +51,14 @@ function dc () {
       return false
     fi
 
+    local AWS_PROFILE="$AWS_PROFILE"
     if [[ -z "$AWS_PROFILE" ]]; then
       if [[ $keypath == /datacamp-prod/* ]]; then
-        onelogin-aws-login --profile prod
-        export AWS_PROFILE="prod"
+        onelogin-aws-login --profile prod -C prod-readonly
+        AWS_PROFILE="prod"
       elif [[ $keypath == /datacamp-staging/* ]]; then
-        onelogin-aws-login --profile staging
-        export AWS_PROFILE="staging"
+        onelogin-aws-login --profile staging -C staging-readonly
+        AWS_PROFILE="staging"
       else
         echo "Did not match prod or staging"
         return false
@@ -68,7 +70,7 @@ function dc () {
       return false
     fi
 
-    aws ssm get-parameters-by-path --path $keypath | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
+    AWS_PROFILE="$AWS_PROFILE" aws ssm get-parameters-by-path --path $keypath | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
   elif [[ $name == "open" ]]; then
     local name=$(pwd | sed "s/$(echo $HOME | sed 's/\//\\\//g')\/Workspace\/\([^\/]*\).*/\1/")
     open https://github.com/datacamp-engineering/$name

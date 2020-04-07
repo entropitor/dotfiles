@@ -1,0 +1,111 @@
+#!/bin/bash
+
+workspace=$HOME/Workspace
+repositories_cache=$HOME/.cache/dc-repo/repositories
+# Assumes ~/Workspace/<name>
+repo_name=$(pwd | sed "s/$(echo $HOME | sed 's/\//\\\//g')\/Workspace\/\([^\/]*\).*/\1/")
+
+function change_dir () {
+  local name=$1
+
+  if [[ -z $name ]]; then
+    local result=$(ls $workspace | cat - $repositories_cache | sort | uniq | fzf)
+    if [[ -z $result ]]; then
+      return false
+    fi
+
+    change_dir $result
+  elif [[ -d $workspace/$name ]]; then
+    cd $workspace/$name
+  else
+    cd $workspace
+    git clone git@github.com:datacamp-engineering/$name.git
+    cd $name
+  fi
+}
+
+function update () {
+  if [[ ! -f $HOME/.github_token ]]; then
+    echo "No ~/.github_token found"
+    return false
+  fi
+
+  local page=0
+  local token=$(cat $HOME/.github_token)
+
+  mkdir -p $(dirname $repositories_cache)
+  echo '' > $repositories_cache
+
+  while true; do
+    echo "Fetching page $page"
+
+    local extra=$(https api.github.com/orgs/datacamp-engineering/repos\?page=$page Authorization:"token ${token}" --print b | jq -r '.[] | .name')
+    if [[ -z "$extra" ]]; then
+      break
+    fi
+    echo $extra >> $repositories_cache
+
+    page=$((page + 1))
+  done
+
+  echo "Updated!"
+}
+
+function show-env () {
+  local keypath=$1
+
+  local staging_profile="arn:aws:iam::301258414863:role/datacamp-prod-readonly"
+  local prod_profile="arn:aws:iam::487088987264:role/datacamp-staging-readonly"
+
+  if [[ -z $keypath ]]; then
+    echo "You need to specify a keypath, e.g. use $0 show-env /datacamp-prod/imb"
+    return false
+  fi
+
+  local AWS_PROFILE="$AWS_PROFILE"
+  if [[ -z "$AWS_PROFILE" ]]; then
+    if [[ $keypath == /datacamp-prod/* ]]; then
+      onelogin-aws-login --profile prod -C prod-readonly
+      AWS_PROFILE="prod"
+    elif [[ $keypath == /datacamp-staging/* ]]; then
+      onelogin-aws-login --profile staging -C staging-readonly
+      AWS_PROFILE="staging"
+    else
+      echo "Did not match prod or staging"
+      return false
+    fi
+  fi
+
+  if [[ -z "$AWS_PROFILE" ]]; then
+    echo "No profile selected"
+    return false
+  fi
+
+  AWS_PROFILE="$AWS_PROFILE" aws ssm get-parameters-by-path --path $keypath | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
+}
+
+function gh () {
+  open https://github.com/datacamp-engineering/${repo_name}
+}
+
+function pr () {
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  open https://github.com/datacamp-engineering/${repo_name}/compare/${branch}\?expand=1
+}
+
+function ci () {
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  local branch_encoded=$(echo $branch | jq -Rr @uri)
+  open "https://app.circleci.com/pipelines/github/datacamp-engineering/${repo_name}?branch=${branch_encoded}"
+}
+
+function all () {
+  echo "all gh pr ci update show-env"
+}
+
+if [[ $(all | grep -w ${1:-"not found"}) ]]; then
+  # Execute the arguments given
+  "$@"
+else
+  change_dir $@
+fi

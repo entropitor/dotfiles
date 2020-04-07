@@ -1,7 +1,9 @@
 #!/bin/bash
 
 workspace=$HOME/Workspace
-repositories_cache=$HOME/.cache/dc-repo/repositories
+cache_dir=$HOME/.cache/dc
+repositories_cache=$cache_dir/repositories
+token_cache=$cache_dir/github_token
 # Assumes ~/Workspace/<name>
 repo_name=$(pwd | sed "s/$(echo $HOME | sed 's/\//\\\//g')\/Workspace\/\([^\/]*\).*/\1/")
 
@@ -25,13 +27,13 @@ function change_dir () {
 }
 
 function update () {
-  if [[ ! -f $HOME/.github_token ]]; then
-    echo "No ~/.github_token found"
+  if [[ ! -f $token_cache ]]; then
+    echo "No token found for github. It should be at $token_cache"
     return false
   fi
 
   local page=0
-  local token=$(cat $HOME/.github_token)
+  local token=$(cat $token_cache)
 
   mkdir -p $(dirname $repositories_cache)
   echo '' > $repositories_cache

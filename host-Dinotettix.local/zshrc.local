@@ -35,3 +35,9 @@ export WASMER_DIR="/Users/jens/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 
 alias dc=". dc"
+
+function pyenv() {
+  unfunction $0
+  zgen oh-my-zsh plugins/pyenv
+  $0 $@
+}

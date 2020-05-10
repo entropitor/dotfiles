@@ -1,6 +1,6 @@
 yabai -m config layout bsp
-yabai -m config focus_follows_mouse         autofocus
-yabai -m config mouse_follows_focus         on
+# yabai -m config focus_follows_mouse         autofocus
+# yabai -m config mouse_follows_focus         on
 
 # yabai -m config window_opacity on
 # yabai -m config active_window_opacity 1.0

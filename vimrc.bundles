@@ -292,7 +292,7 @@ let g:UltiSnipsExpandTrigger = "<c-e>"
 let g:UltiSnipsJumpForwardTrigger = "<c-l>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
 let g:UltiSnipsEditSplit = "vertical"
-let g:UltiSnipsSnippetsDir = "~/.vim/bundle/snippets/UltiSnips"
+let g:UltiSnipsSnippetDirectories = ["~/.vim/bundle/snippets/UltiSnips/"]
 
 " My snippets
 Plug 'entropitor/snippets'

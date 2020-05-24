@@ -18,6 +18,8 @@ if ! zgen saved; then
   # zgen load sindresorhus/pure
   zgen load entropitor/purs
 
+  zgen load spwhitt/nix-zsh-completions
+
   # generate the init script from plugins above
   zgen save
 fi

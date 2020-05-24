@@ -43,3 +43,5 @@ function pyenv() {
 }
 
 eval $(opam env)
+
+. /Users/jens/.nix-profile/etc/profile.d/nix.sh

@@ -10,6 +10,7 @@ call plug#begin('~/.vim/bundle')
 " ===========================
 " Add git commands
 Plug 'tpope/vim-fugitive'
+Plug 'idanarye/vim-merginal'
 
 " Add git diff symbols in the gutter
 Plug 'airblade/vim-gitgutter'

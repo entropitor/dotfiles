@@ -267,7 +267,10 @@ let g:projectionist_heuristics = {
       \     "*.js":  {"alternate": ["{}.spec.js", "{}.spec.jsx"]},
       \     "*.jsx": {"alternate": ["{}.spec.jsx"]},
       \     "*.spec.js": {"alternate": ["{}.js"]},
-      \     "*.spec.jsx": {"alternate": ["{}.js", "{}.jsx"]}
+      \     "*.spec.jsx": {"alternate": ["{}.js", "{}.jsx"]},
+      \     "src/*.js":  {"alternate": ["test/{}.js", "spec/{}.js", "test/{}.jsx", "spec/{}.jsx"]},
+      \     "test/*.js":  {"alternate": ["src/{}.js", "src/{}.jsx"]},
+      \     "spec/*.js":  {"alternate": ["src/{}.js", "src/{}.jsx"]}
       \   }
       \ }
 

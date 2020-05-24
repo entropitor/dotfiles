@@ -41,3 +41,5 @@ function pyenv() {
   zgen oh-my-zsh plugins/pyenv
   $0 $@
 }
+
+eval $(opam env)

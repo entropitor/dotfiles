@@ -1,6 +1,5 @@
-:: default : yabai -m config active_window_border_color 0xff775759; yabai -m config window_border_width 5
-
-:: launch : yabai -m config active_window_border_color 0xff24ccaa; yabai -m config window_border_width 10
+:: default: osascript -e 'display notification "default mode" with title "SKHD" sound name "Submarine"'
+:: launch: osascript -e 'display notification "launch mode" with title "SKHD" sound name "Submarine"'
 ctrl + shift - o ; launch
 launch < f : /Applications/Firefox.app/Contents/MacOS/firefox
 launch < t : /Applications/Alacritty.app/Contents/MacOS/alacritty
@@ -137,9 +136,6 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 
 # toggle window native fullscreen
 shift + alt - f : yabai -m window --toggle native-fullscreen
-
-# toggle window border
-shift + alt - b : yabai -m window --toggle border
 
 # toggle window split type
 alt - e : yabai -m window --toggle split

@@ -202,6 +202,8 @@ let g:ctrlp_show_hidden = 1
 " ==========================
 Plug 'janko-m/vim-test'
 let test#strategy = "neovim"
+" let test#strategy = "dispatch"
+" let g:test#javascript#jest#options = '--reporters ~/.config/yarn/global/node_modules/jest-vim-reporter/index.js'
 
 nmap <silent> <leader>tn :TestNearest<CR>
 nmap <silent> <leader>tf :TestFile<CR>
@@ -211,8 +213,6 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 " Dependencies
 Plug 'tpope/vim-dispatch'
-Plug 'craigdallimore/vim-jest-cli'
-let g:dispatch_compilers = { 'jest': 'jest-cli' }
 
 " ==============================
 " ===   Project Management   ===

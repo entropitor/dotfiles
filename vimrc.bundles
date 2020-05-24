@@ -128,6 +128,8 @@ nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr         <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>lf <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
@@ -466,9 +468,59 @@ nvim_lsp.rust_analyzer.setup{}
 nvim_lsp.solargraph.setup{}
 nvim_lsp.terraformls.setup{}
 nvim_lsp.vimls.setup{}
-nvim_lsp.yamlls.setup{}
+nvim_lsp.yamlls.setup{
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = "*"
+      }
+    }
+  }
+}
+require'nvim_lsp'.jsonls.setup{
+  settings = {
+    json = {
+      schemas = {
+        {
+          description = 'TypeScript compiler configuration file',
+          fileMatch = {'tsconfig.json', 'tsconfig.*.json'},
+          url = 'http://json.schemastore.org/tsconfig'
+        },
+        {
+          description = 'NPM package.json',
+          fileMatch = {'package.json'},
+          url = 'http://json.schemastore.org/package'
+        },
+        {
+          description = 'Lerna config',
+          fileMatch = {'lerna.json'},
+          url = 'http://json.schemastore.org/lerna'
+        },
+        {
+          description = 'Babel configuration',
+          fileMatch = {'.babelrc.json', '.babelrc', 'babel.config.json'},
+          url = 'http://json.schemastore.org/lerna'
+        },
+        {
+          description = 'ESLint config',
+          fileMatch = {'.eslintrc.json', '.eslintrc'},
+          url = 'http://json.schemastore.org/eslintrc'
+        },
+        {
+          description = 'Bucklescript config',
+          fileMatch = {'bsconfig.json'},
+          url = 'https://bucklescript.github.io/bucklescript/docson/build-schema.json'
+        },
+        {
+          description = 'Prettier config',
+          fileMatch = {'.prettierrc', '.prettierrc.json', 'prettier.config.json'},
+          url = 'http://json.schemastore.org/prettierrc'
+        }
+      }
+    }
+  }
+}
 EOF
-
 
 " This conflicts with Plug 'donniewest/asyncomplete_neovim_lsp'
 " As we also have an asyncomplete omni completer which will cause double

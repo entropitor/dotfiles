@@ -18,5 +18,3 @@
 	# Then, run fugitive's :Gdiff in each tab, and finally
 	# tell vim-gitgutter to show +/- for changes since REVIEW_BASE
 	review = !nvim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
-
-

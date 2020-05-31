@@ -174,8 +174,20 @@ Plug 'junegunn/fzf.vim'
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Files<CR>
 " nnoremap <C-p> <ESC>:Files<CR>
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
+let s:rgoptions='rg
+      \ --column
+      \ --line-number
+      \ --no-heading
+      \ --fixed-strings
+      \ --ignore-case
+      \ --hidden
+      \ --follow
+      \ --glob "!.git/*"
+      \ --color "always" '
+command! -bang -nargs=* Rg call fzf#vim#grep(s:rgoptions.shellescape(<q-args>), 1, <bang>0)
+nnoremap <leader>fs :Rg<CR>
+
 
 " CtrlP
 Plug 'ctrlpvim/ctrlp.vim'

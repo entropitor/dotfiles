@@ -14,8 +14,8 @@ yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 off
 
 # refresh display workspaces
-yabai -m signal --add label=space-changed-reload event=space_changed action="~/.bin/zabai.sh reload"
-yabai -m signal --add label=display-changed-reload event=display_changed action="~/.bin/zabai.sh reload"
+yabai -m signal --add label=space-changed-reload event=space_changed action="~/.bin/zabai reload"
+yabai -m signal --add label=display-changed-reload event=display_changed action="~/.bin/zabai reload"
 
 # Rules for specific applications
 yabai -m rule --add label=timer app="AS Timer" sticky=on opacity=0.5

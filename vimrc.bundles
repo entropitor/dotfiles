@@ -383,9 +383,26 @@ let g:ale_fixers['markdown'] = ['prettier']
 " ------------------
 " ---   Ledger   ---
 " ------------------
-let g:ledger_main="journal.ledger"
-let g:ledger_bin="ledger"
-Plug 'ledger/vim-ledger', {'for': ['ledger']}
+let g:ledger_main = "journal.ledger"
+let g:ledger_default_commodity = "€"
+let g:ledger_commodity_sep = " "
+let g:ledger_commodity_before = 1
+let g:ledger_align_at = 70
+let g:ledger_align_commodity = 1
+augroup ledger-bindings
+  autocmd!
+  autocmd Filetype ledger inoremap <buffer> <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
+  autocmd Filetype ledger vnoremap <buffer> <silent> <Tab> :LedgerAlign<CR>
+  autocmd Filetype ledger nnoremap <buffer> <silent> <leader>la :LedgerAlign<CR>
+  autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lb :Balance<CR>
+  autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lf :Reconcile
+  autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lr :Register
+augroup end
+Plug 'entropitor/vim-ledger', {'for': ['ledger']}
+
+Plug 'arecarn/vim-selection'
+Plug 'arecarn/vim-crunch'
+let g:crunch_result_type_append=2
 
 " ---------------
 " ---   Lua   ---

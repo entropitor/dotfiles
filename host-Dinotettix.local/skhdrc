@@ -73,8 +73,8 @@ shift + ctrl + cmd - 1 : yabai -m space --display 1; yabai -m display --focus 1
 shift + ctrl + cmd - 2 : yabai -m space --display 2; yabai -m display --focus 2
 shift + ctrl + cmd - 3 : yabai -m space --display 3; yabai -m display --focus 3
 
-ctrl - s: (yabai -m space --display next || yabai -m space --display first) && zabai fix_padding 250
-ctrl + alt - s: (yabai -m space --display prev || yabai -m space --display last) && zabai fix_padding 250
+ctrl - s: ((yabai -m space --display next || yabai -m space --display first) && ~/.bin/zabai fix_padding 250)
+ctrl + alt - s: ((yabai -m space --display prev || yabai -m space --display last) && ~/.bin/zabai fix_padding 250)
 
 # focus monitor
 ctrl + alt - x  : yabai -m display --focus recent

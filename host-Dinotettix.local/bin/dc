@@ -67,10 +67,10 @@ function show-env () {
   local AWS_PROFILE="$AWS_PROFILE"
   if [[ -z "$AWS_PROFILE" ]]; then
     if [[ $keypath == /datacamp-prod/* ]]; then
-      onelogin-aws-login --profile prod -C prod-readonly
+      onelogin-aws-login --profile prod -C prod-readonly -u $(whoami)
       AWS_PROFILE="prod"
     elif [[ $keypath == /datacamp-staging/* ]]; then
-      onelogin-aws-login --profile staging -C staging-readonly
+      onelogin-aws-login --profile staging -C staging-readonly -u $(whoami)
       AWS_PROFILE="staging"
     else
       echo "Did not match prod or staging"

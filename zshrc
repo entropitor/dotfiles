@@ -1,4 +1,3 @@
-# zmodload zsh/zprof
 
 ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
 source "${HOME}/.zgen/zgen.zsh"
@@ -19,6 +18,9 @@ if ! zgen saved; then
   zgen load entropitor/purs
 
   zgen load spwhitt/nix-zsh-completions
+
+  zgen load zsh-users/zsh-autosuggestions
+  zgen load zsh-users/zsh-syntax-highlighting
 
   # generate the init script from plugins above
   zgen save
@@ -77,6 +79,7 @@ fi
 # source $ZSH/oh-my-zsh.sh
 
 eval $(fnm env --multi)
+fnm use 2> /dev/null
 function chpwd {
   fnm use 2> /dev/null
 }
@@ -104,3 +107,9 @@ PATH="./node_modules/.bin:$PATH"
 export PATH="../node_modules/.bin:$PATH"
 
 export REVIEW_BASE="master"
+
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+alias c='cdr $(cdr -l | fzf | awk -F " " "{print \$1}")'
+
+bindkey '^ ' autosuggest-accept

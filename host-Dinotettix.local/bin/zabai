@@ -42,11 +42,27 @@ function set_padding_mid() {
   yabai -m config --space ${index} ${where}_padding ${amount}
 }
 
-function fix_padding() {
+function fix_padding () {
   local amount="${1:-130}"
 
   yabai -m query --displays | jq '.[] | select(.frame.w==2560.0000 and .frame.h ==1440.000).spaces[]' | xargs -n1 -I% $0 set_padding_mid % ${amount} bottom
   yabai -m query --displays | jq '.[] | select((.frame.w==2560.0000 and .frame.h ==1440.000) | not).spaces[]' | xargs -n1 -I% $0 set_padding_mid % 0 bottom
 }
+
+function reorder_display () {
+  local display_index=$1
+  local spaces=$(yabai -m query --spaces --display $display_index)
+  local first_space=$(echo $spaces | jq '.[0].index')
+
+  local sorted_space_labels=$(echo $spaces | jq '.[].label' -r | sort -r)
+  for label in $sorted_space_labels; do
+    yabai -m space $label --move $first_space
+  done
+}
+
+function reorder() {
+  yabai -m query --displays | jq '.[] | .index' | xargs zabai reorder_display
+}
+
 
 "$@"

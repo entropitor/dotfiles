@@ -392,6 +392,7 @@ let g:ale_fixers['markdown'] = ['prettier']
 " ---   Ledger   ---
 " ------------------
 let g:ledger_main = "journal.ledger"
+let g:ledger_bin = "ledger"
 let g:ledger_default_commodity = "€"
 let g:ledger_commodity_sep = " "
 let g:ledger_commodity_before = 1
@@ -405,6 +406,16 @@ augroup ledger-bindings
   autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lb :Balance<CR>
   autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lf :Reconcile
   autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lr :Register
+  " Assign to Groceries
+  call setreg('g', '02wlRFood:Groceries')
+  " Assign to Resto
+  call setreg('r', '02wlRFood:Resto')
+  " Assign to Datacamp
+  call setreg('d', 'vt r RL:R:D	')
+  " Rewrite assignee
+  call setreg('a', '011wc$')
+  " Clear Expenses
+  call setreg('c', '0wvt r ')
 augroup end
 Plug 'entropitor/vim-ledger', {'for': ['ledger']}
 

@@ -3,10 +3,20 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 
-# Developer tools
-brew "git"
+# Basic Developer tools
+brew "openssl"
+brew "telnet"
 brew "tmux"
+brew "reattach-to-user-namespace"
+brew "tmate"
+brew "watch"
+brew "wget"
 brew "zsh"
+
+# Window management
+tap "koekeishiya/formulae"
+brew "koekeishiya/formulae/skhd"
+brew "koekeishiya/formulae/yabai"
 
 # Dotfiles
 tap "thoughtbot/formulae"
@@ -20,21 +30,50 @@ brew "htop"                 # Instead of top
 brew "diff-so-fancy"        # Instead of diff
 brew "fd"                   # Instead of find
 brew "the_silver_searcher"  # Instead of ack
+brew "ripgrep"              # Instead of ack
 brew "tldr"                 # Instead of man
-brew "neovim"               # Instead of vim
+brew "neovim", args: ["HEAD"] # Instead of vim
+brew "sd"                   # Instead of sed
+
+# CLI Extensions
+brew "noti"
+brew "tree"
+brew "up"
 
 # JSON / HTTP tools
+tap "ktr0731/evans"
+brew "ktr0731/evans/evans" # Grpc client
+brew "grpcurl"
 brew "httpie"
 brew "jq"
 brew "jo"
+brew "python-yq"
+tap "jzelinskie/faq"
+brew "jzelinskie/faq/faq"  # flexible jq
 
-# Process tools
-brew "noti"
+# Advanced Developer tools
+brew "adr-tools"
+brew "dnsmasq"
+brew "circleci"
+tap "warrensbox/tap"
+brew "warrensbox/tap/tfswitch" # Terraform switcher
+brew "mkcert"
+brew "watchman"
 
 # Languages
+cask "dotnet-sdk"
+brew "deno"
+tap "schniz/tap"
+brew "schniz/tap/fnm"
+brew "go"
+brew "lua"
+brew "ocaml"
+brew "opam"
+brew "pyenv"
+brew "r"
+brew "rbenv"
+brew "rustup-init"
 brew "yarn"
-brew "python"
-brew "python3"
 
 # Plantuml
 cask "adoptopenjdk"
@@ -42,9 +81,21 @@ brew "plantuml"
 
 # Docker
 brew "docker"
-brew "kubectl"
-brew "kubernetes-helm"
-cask "minikube"
+cask "docker"
+brew "dive"
+
+# Kubernetes
+brew "kubernetes-cli"
+brew "helm"
+brew "helmfile"
+brew "minikube"
+brew "krew"
+
+tap "derailed/k9s"
+brew "derailed/k9s/k9s"
+
+tap "kontena/lens"
+cask "kontena/lens/lens"
 
 # Build tools
 brew "autoconf"
@@ -53,6 +104,17 @@ brew "fswatch"
 brew "cmake"
 brew "coreutils"
 
+# Git
+brew "git"
+brew "git-delta"
+brew "git-standup"
+
+tap "extrawurst/tap"
+brew "extrawurst/tap/gitui"
+
+tap "jesseduffield/lazygit"
+brew "jesseduffield/lazygit/lazygit"
+
 # Databases
 # brew "mongodb", restart_service: true
 # brew "mysql", restart_service: true
@@ -60,9 +122,34 @@ brew "coreutils"
 # brew "redis", restart_service: true
 
 # Applications
-cask "vlc"
+cask "1password"
+cask "1password-cli"
+cask "alacritty"
+cask "alfred"
+cask "alinof-timer"
+cask "another-redis-desktop-manager"
+cask "dbeaver-community"
+cask "dash"
+cask "google-cloud-sdk"
+cask "graphql-playground"
 brew "imagemagick"
-cask "valentina-studio"
-cask "steam"
-cask "unified-remote"
 cask "keybase"
+cask "keycastr"
+cask "loom"
+cask "ngrok"
+cask "simplenote"
+cask "spotify"
+cask "steam"
+cask "tunnelblick"
+cask "unified-remote"
+cask "ubersicht"
+cask "valentina-studio"
+cask "visual-studio-code"
+cask "vlc"
+cask "workflowy"
+cask "zoomus"
+
+# Personal
+brew "ledger"
+brew "hledger"
+brew "ffmpeg"

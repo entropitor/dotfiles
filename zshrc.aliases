@@ -46,3 +46,13 @@ alias nr="node_run npm $@"
 
 # TMUX
 alias tal="tmux attach" # tmux attach last
+
+# Terraform
+alias tf="terraform"
+alias tfg="terraform get"
+alias tfv="terraform validate"
+alias tfp="terraform plan"
+alias tfi="terraform init"
+alias tff="terraform fmt"
+alias tfc="rm -rf .terraform/"
+alias tfs="tfswitch"

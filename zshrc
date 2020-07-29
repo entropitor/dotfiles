@@ -1,76 +1,63 @@
-
-ZGEN_RESET_ON_CHANGE=(${HOME}/.zshrc ${HOME}/.zshrc.local)
-source "${HOME}/.zgen/zgen.zsh"
-if ! zgen saved; then
-
-  zgen oh-my-zsh
-  zgen oh-my-zsh plugins/git
-  # zgen oh-my-zsh plugins/vi-mode
-  zgen oh-my-zsh plugins/httpie
-  zgen oh-my-zsh plugins/docker
-  zgen oh-my-zsh plugins/tmux
-
-  # zgen load denysdovhan/spaceship-prompt
-  # zgen oh-my-zsh themes/robbyrussell
-
-  zgen load mafredri/zsh-async
-  # zgen load sindresorhus/pure
-  zgen load entropitor/purs
-
-  zgen load spwhitt/nix-zsh-completions
-
-  zgen load zsh-users/zsh-autosuggestions
-  zgen load zsh-users/zsh-syntax-highlighting
-
-  # generate the init script from plugins above
-  zgen save
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-custom_get_prompt () {
-  kccc_alias=$(command -v kccc)
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit's installer chunk
 
-  if [ -n "$kccc_alias" ]; then
-    echo "[%{$fg[magenta]%}$(kubectl config current-context)%{$reset_color%}]"
-  fi
+zinit ice wait lucid atload="after_load_git"; zinit snippet OMZ::plugins/git/git.plugin.zsh
+function after_load_git () {
+  alias ggpush='git push origin "$(git rev-parse --abbrev-ref HEAD)"'
 }
-PREPROMPT="\$(custom_get_prompt) "
+
+zinit ice wait lucid; zinit light zsh-users/zsh-syntax-highlighting
+
+zinit ice wait lucid; zinit light zsh-users/zsh-completions
+
+function _bind_autosuggest_accept {
+  bindkey '^ ' autosuggest-accept
+}
+zinit ice wait lucid atload'_zsh_autosuggest_start; _bind_autosuggest_accept'
+zinit light zsh-users/zsh-autosuggestions
+
+# zinit light mafredri/zsh-async
+# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh' wait'!0' atload'prompt_pure_precmd'
+# zinit light sindresorhus/pure
+
+zinit ice atpull"make build" atclone"make build" wait'!0' lucid atload"_prompt_purs_precmd $(pwd)"
+zinit light entropitor/purs
+autoload -U colors && colors
+
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Lazy load packages
-alias k="kubectl > /dev/null"
-function kubectl() {
-  unalias k
-
-  unfunction $0
-  zgen oh-my-zsh plugins/kubectl
-  alias kg="kubectl get"
-  alias kd="kubectl describe"
-  alias kdel="kubectl delete"
-  $0 $@
-}
-function minikube() {
-  unfunction $0
-  zgen oh-my-zsh plugins/minikube
-  $0 $@
-}
-function rbenv() {
-  unfunction $0
-  zgen load kadaan/zsh-rbenv-lazy
-  $0 $@
-}
-function helm() {
-  unfunction $0
-  zgen oh-my-zsh plugins/helm
-  $0 $@
-}
-function redis-cli() {
-  unfunction $0
-  zgen oh-my-zsh plugins/redis-cli
-  $0 $@
-}
+zinit wait lucid for \
+  snippet OMZ::plugins/kubectl/kubectl.plugin.zsh \
+  snippet OMZ::plugins/minikube/minikube.plugin.zsh \
+  snippet OMZ::plugins/helm/helm.plugin.zsh \
+  snippet OMZ::plugins/rbenv/rbenv.plugin.zsh \
+  snippet OMZ::plugins/tmux/tmux.plugin.zsh \
+  snippet OMZ::plugins/terraform/terraform.plugin.zsh
+alias k="kubectl"
+alias kg="kubectl get"
+alias kd="kubectl describe"
+alias kdel="kubectl delete"
 
 HYPHEN_INSENSITIVE="true"
 HIST_STAMPS="dd.mm.yyyy"
-# plugins=(git command-not-found docker httpie)
+zinit snippet OMZ::lib/history.zsh
+
+zinit ice wait lucid; zinit light willghatch/zsh-cdr
+alias c='cdr $(cdr -l | fzf | awk -F " " "{print \$1}")'
+
+zinit ice wait lucid; zinit light zsh-users/zaw
 
 # User configuration
 if [ -f ~/.zshrc.local ]; then
@@ -108,8 +95,6 @@ export PATH="../node_modules/.bin:$PATH"
 
 export REVIEW_BASE="master"
 
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-alias c='cdr $(cdr -l | fzf | awk -F " " "{print \$1}")'
-
-bindkey '^ ' autosuggest-accept
+_zsh_cli_fg() { fg; }
+zle -N _zsh_cli_fg
+bindkey '^F' _zsh_cli_fg

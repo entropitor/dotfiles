@@ -102,43 +102,23 @@ Plug 'entropitor/snippets'
 " ==========================
 " ===   Autocompletion   ===
 " ==========================
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 
-" let g:asyncomplete_auto_completeopt=0
-set completeopt=noselect,menu,menuone,preview,noinsert
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ completion#trigger_completion()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <c-space> <c-r>=completion#trigger_completion()<CR>
+
+set completeopt=menuone,noinsert,noselect,menu
+set shortmess+=c
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-Plug 'prabirshrestha/asyncomplete.vim'
-let g:asyncomplete_remove_duplicates = 1
-
-" Dependency
-Plug 'prabirshrestha/async.vim'
-
-" Plugin for omni completion
-Plug 'entropitor/asyncomplete-omni.vim'
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-  \ 'name': 'omni',
-  \ 'whitelist': ['*'],
-  \ 'completor': function('asyncomplete#sources#omni#completor')
-  \  }))
-
-" Plugin for ultisnips
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-  \ 'name': 'ultisnips',
-  \ 'priority': 10,
-  \ 'whitelist': ['*'],
-  \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-  \ }))
-
 Plug 'neovim/nvim-lsp'
-Plug 'donniewest/asyncomplete_neovim_lsp'
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#lsp#get_source_options({}))
-
-" lua print(vim.inspect(vim.lsp.buf))
-" completion, declaration, definition, formatting, hover, implementation, peek_definition, range_formatting, references, rename, signature_help, type_definition
 nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr         <cmd>lua vim.lsp.buf.definition()<CR>
@@ -157,13 +137,63 @@ nnoremap <silent> <leader>lq <cmd>lua vim.lsp.stop_client(vim.lsp.get_active_cli
 " Capabilities
 nnoremap <silent> <leader>lx <cmd>lua print(vim.inspect(vim.lsp.buf))<CR>
 
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
+Plug 'haorenW1025/diagnostic-nvim'
+autocmd! User diagnostic-nvim autocmd BufEnter * lua require'diagnostic'.on_attach()
+let g:diagnostic_enable_virtual_text = 1
+" let g:diagnostic_insert_delay = 1
+nnoremap [d <cmd>PrevDiagnostic<CR>
+nnoremap [D <cmd>FirstDiagnostic<CR>
+nnoremap ]d <cmd>NextDiagnostic<CR>
+nnoremap ]D <cmd>LastDiagnostic<CR>
+" nnoremap <silent> <leader>ld <cmd>lua require'diagnostic.util'.show_line_diagnostics()<CR>
+
+let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_show_sign = 1
+let g:buf_diagnostics_underline = 1
+
+Plug 'haorenW1025/completion-nvim'
+autocmd! User completion-nvim autocmd BufEnter * lua require'completion'.on_attach()
+let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_auto_change_source = 1
+let g:completion_sorting = 'none'
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+let g:completion_enable_auto_popup = 1
+
+imap <c-j> <Plug>(completion_next_source)
+imap <c-k> <Plug>(completion_prev_source)
+
+let g:completion_chain_complete_list = {
+    \ 'default' : {
+    \   'default': [
+    \       {'complete_items': ['lsp']},
+    \       {'complete_items': ['snippet', 'tabnine']},
+    \       {'complete_items': ['buffers', 'path']},
+    \       {'mode': '<c-p>'},
+    \       {'mode': '<c-n>'}],
+    \   'comment': [
+    \       {'complete_items': ['tabnine', 'buffers']}],
+    \   'string': [
+    \       {'complete_items': ['tabnine', 'buffers']}]
+    \   }
+    \}
+
+Plug 'aca/completion-tabnine', { 'do': './install.sh' }
+let g:completion_tabnine_max_num_results=7
+let g:completion_tabnine_line_limit=1000
+
+Plug 'steelsojka/completion-buffers'
+
+" Plug 'vigoux/completion-treesitter'
+" let g:complete_ts_highlight_at_point = 1
+
 " =============================
 " ===   Checkers/Builders   ===
 " =============================
 Plug 'dense-analysis/ale'
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = 'XX'
-let g:ale_sign_warning = '??'
 let g:ale_fix_on_save = 1
 let g:ale_lint_delay = 750
 let g:ale_fixers = {}
@@ -494,33 +524,36 @@ autocmd FileType yaml setlocal foldmethod=indent
 Plug 'ingydotnet/yaml-vim', {'for': ['yaml']}
 let g:ale_fixers['yaml'] = ['prettier']
 
-call plug#end()
-
 " ================================
 " ===   LSP Config   ===
 " ================================
-
+function! SetupLspServers()
 lua << EOF
-local nvim_lsp = require'nvim_lsp'
-nvim_lsp.tsserver.setup{
-  -- root_dir = nvim_lsp.util.root_pattern('tsconfig.json')
-}
 
-nvim_lsp.clangd.setup{}
-nvim_lsp.bashls.setup{}
-nvim_lsp.dockerls.setup{}
-nvim_lsp.flow.setup{}
-nvim_lsp.gopls.setup{}
-nvim_lsp.hie.setup{}
-nvim_lsp.ocamlls.setup{}
-nvim_lsp.ocamllsp.setup{}
-nvim_lsp.pyls_ms.setup{}
-nvim_lsp.rls.setup{}
-nvim_lsp.rust_analyzer.setup{}
-nvim_lsp.solargraph.setup{}
-nvim_lsp.terraformls.setup{}
-nvim_lsp.vimls.setup{}
+local on_attach = function()
+  require'diagnostic'.on_attach()
+  require'completion'.on_attach()
+end
+
+nvim_lsp = require'nvim_lsp'
+
+nvim_lsp.clangd.setup{ on_attach = on_attach }
+nvim_lsp.bashls.setup{ on_attach = on_attach }
+nvim_lsp.dockerls.setup{ on_attach = on_attach }
+nvim_lsp.flow.setup{ on_attach = on_attach }
+nvim_lsp.gopls.setup{ on_attach = on_attach }
+nvim_lsp.hie.setup{ on_attach = on_attach }
+nvim_lsp.ocamlls.setup{ on_attach = on_attach }
+nvim_lsp.ocamllsp.setup{ on_attach = on_attach }
+nvim_lsp.pyls_ms.setup{ on_attach = on_attach }
+nvim_lsp.rls.setup{ on_attach = on_attach }
+nvim_lsp.rust_analyzer.setup{ on_attach = on_attach }
+nvim_lsp.solargraph.setup{ on_attach = on_attach }
+nvim_lsp.tsserver.setup{ on_attach = on_attach }
+nvim_lsp.terraformls.setup{ on_attach = on_attach }
+nvim_lsp.vimls.setup{ on_attach = on_attach }
 nvim_lsp.yamlls.setup{
+  on_attach = on_attach,
   settings = {
     yaml = {
       schemas = {
@@ -529,7 +562,8 @@ nvim_lsp.yamlls.setup{
     }
   }
 }
-require'nvim_lsp'.jsonls.setup{
+nvim_lsp.jsonls.setup{
+  on_attach = on_attach,
   settings = {
     json = {
       schemas = {
@@ -573,8 +607,15 @@ require'nvim_lsp'.jsonls.setup{
   }
 }
 EOF
+echom "Setup Lsp Servers"
+endfunction
+
+autocmd! User nvim-lsp call SetupLspServers()
 
 " This conflicts with Plug 'donniewest/asyncomplete_neovim_lsp'
 " As we also have an asyncomplete omni completer which will cause double
 " completions
 " autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+call plug#end()
+call SetupLspServers()

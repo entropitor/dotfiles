@@ -4,6 +4,7 @@ export LANG=en_US.UTF-8
 
 export GOPATH=$HOME/.bin/gopath
 
+PATH=$PATH:$HOME/.krew/bin
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/Library/Python/2.7/bin/
 PATH="$HOME/.cargo/bin:$PATH"

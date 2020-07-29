@@ -94,8 +94,7 @@ brew "krew"
 tap "derailed/k9s"
 brew "derailed/k9s/k9s"
 
-tap "kontena/lens"
-cask "kontena/lens/lens"
+cask "lens"
 
 # Build tools
 brew "autoconf"
@@ -122,7 +121,7 @@ brew "jesseduffield/lazygit/lazygit"
 # brew "redis", restart_service: true
 
 # Applications
-cask "1password"
+# cask "1password"
 cask "1password-cli"
 cask "alacritty"
 cask "alfred"

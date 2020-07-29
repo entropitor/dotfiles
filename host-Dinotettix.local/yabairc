@@ -18,6 +18,6 @@ yabai -m signal --add label=space-changed-reload event=space_changed action="~/.
 yabai -m signal --add label=display-changed-reload event=display_changed action="~/.bin/zabai reload"
 
 # Rules for specific applications
-yabai -m rule --add label=timer app="AS Timer" sticky=on opacity=0.5
+yabai -m rule --add label=dbeaver app="DBeaver Community" title!="DBeaver \d+.\d+.\d+.*" manage=off
 
 echo "yabai configuration loaded.."

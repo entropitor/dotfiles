@@ -77,13 +77,27 @@ let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 let g:gh_use_canonical = 1
 
 " Time tracking (WakaTime)
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 
 " EditorConfig
 Plug 'editorconfig/editorconfig-vim'
 
 " Add a :Scratch buffer
 Plug 'vim-scripts/scratch.vim'
+
+" ====================
+" ===   Snippets   ===
+" ====================
+Plug 'sirver/UltiSnips'
+let g:UltiSnips={}
+let g:UltiSnipsExpandTrigger = "<c-e>"
+let g:UltiSnipsJumpForwardTrigger = "<c-l>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
+let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsSnippetDirectories = ["~/.vim/bundle/snippets/UltiSnips/"]
+
+" My snippets
+Plug 'entropitor/snippets'
 
 " ==========================
 " ===   Autocompletion   ===
@@ -304,20 +318,6 @@ Plug 'joshdick/onedark.vim'
 " Base16 color schemes
 Plug 'chriskempson/base16-vim'
 
-" ====================
-" ===   Snippets   ===
-" ====================
-Plug 'sirver/UltiSnips'
-let g:UltiSnips={}
-let g:UltiSnipsExpandTrigger = "<c-e>"
-let g:UltiSnipsJumpForwardTrigger = "<c-l>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
-let g:UltiSnipsEditSplit = "vertical"
-let g:UltiSnipsSnippetDirectories = ["~/.vim/bundle/snippets/UltiSnips/"]
-
-" My snippets
-Plug 'entropitor/snippets'
-
 " =====================
 " ===   Languages   ===
 " =====================
@@ -333,6 +333,14 @@ Plug 'jrozner/vim-antlr', {'for': ['antlr']}
 " -------------------
 " ---   C / C++   ---
 " -------------------
+
+" --------------
+" ---   F#   ---
+" --------------
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
 
 " --------------
 " ---   Go   ---

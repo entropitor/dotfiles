@@ -34,11 +34,16 @@ brew "ripgrep"              # Instead of ack
 brew "tldr"                 # Instead of man
 brew "neovim", args: ["HEAD"] # Instead of vim
 brew "sd"                   # Instead of sed
+brew "exa"                  # Instead of ls
 
 # CLI Extensions
 brew "noti"
 brew "tree"
 brew "up"
+
+# Fonts and styling
+tap "homebrew/cask-fonts"
+cask "homebrew/cask-fonts/font-jetbrains-mono"
 
 # JSON / HTTP tools
 tap "ktr0731/evans"
@@ -53,8 +58,10 @@ brew "jzelinskie/faq/faq"  # flexible jq
 
 # Advanced Developer tools
 brew "adr-tools"
+brew "awscli"
 brew "dnsmasq"
 brew "circleci"
+cask "google-cloud-sdk"
 tap "warrensbox/tap"
 brew "warrensbox/tap/tfswitch" # Terraform switcher
 brew "mkcert"
@@ -129,13 +136,13 @@ cask "alinof-timer"
 cask "another-redis-desktop-manager"
 cask "dbeaver-community"
 cask "dash"
-cask "google-cloud-sdk"
 cask "graphql-playground"
 brew "imagemagick"
 cask "keybase"
 cask "keycastr"
 cask "loom"
 cask "ngrok"
+cask "rstudio"
 cask "simplenote"
 cask "spotify"
 cask "steam"

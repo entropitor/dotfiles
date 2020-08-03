@@ -56,8 +56,8 @@ function update () {
 function show-env () {
   local keypath=$1
 
-  local staging_profile="arn:aws:iam::301258414863:role/datacamp-prod-readonly"
-  local prod_profile="arn:aws:iam::487088987264:role/datacamp-staging-readonly"
+  # local staging_profile="arn:aws:iam::301258414863:role/datacamp-prod-readonly"
+  # local prod_profile="arn:aws:iam::487088987264:role/datacamp-staging-readonly"
 
   if [[ -z $keypath ]]; then
     echo "You need to specify a keypath, e.g. use $0 show-env /datacamp-prod/imb"
@@ -67,11 +67,15 @@ function show-env () {
   local AWS_PROFILE="$AWS_PROFILE"
   if [[ -z "$AWS_PROFILE" ]]; then
     if [[ $keypath == /datacamp-prod/* ]]; then
-      onelogin-aws-login --profile prod -C prod-readonly -u $(whoami)
       AWS_PROFILE="prod"
+      if ! AWS_PROFILE="${AWS_PROFILE}" aws sts get-caller-identity > /dev/null; then
+        onelogin-aws-login --profile prod -C prod-readonly -u $(whoami)
+      fi
     elif [[ $keypath == /datacamp-staging/* ]]; then
-      onelogin-aws-login --profile staging -C staging-readonly -u $(whoami)
       AWS_PROFILE="staging"
+      if ! AWS_PROFILE="${AWS_PROFILE}" aws sts get-caller-identity > /dev/null; then
+        onelogin-aws-login --profile staging -C staging-readonly -u $(whoami)
+      fi
     else
       echo "Did not match prod or staging"
       return false

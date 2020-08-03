@@ -11,6 +11,7 @@ PATH="$HOME/.cargo/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.opam/default/bin:$PATH"
 PATH="$HOME/Library/Python/3.7/bin:$PATH"
+PATH="$HOME/Library/Python/3.8/bin:$PATH"
 PATH="$HOME/.bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 export PATH
@@ -24,6 +25,7 @@ function load_npm_token() {
     echo 'No npm token found'
   fi
 }
+load_npm_token
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jens/.bin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jens/.bin/google-cloud-sdk/path.zsh.inc'; fi
@@ -37,12 +39,12 @@ export WASMER_DIR="/Users/jens/.wasmer"
 
 alias dc=". dc"
 
-function pyenv() {
-  unfunction $0
-  zgen oh-my-zsh plugins/pyenv
-  $0 $@
-}
-
 eval $(opam env)
 
-. /Users/jens/.nix-profile/etc/profile.d/nix.sh
+alias al="onelogin-aws-login"
+export ONELOGIN_AWS_CLI_USERNAME=jens
+
+zstyle ':completion:*' list-suffixes
+zstyle ':completion:*' expand prefix suffix
+
+# . /Users/jens/.nix-profile/etc/profile.d/nix.sh

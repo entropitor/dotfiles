@@ -39,12 +39,17 @@ autoload -U colors && colors
 
 # Lazy load packages
 zinit wait lucid for \
-  snippet OMZ::plugins/kubectl/kubectl.plugin.zsh \
-  snippet OMZ::plugins/minikube/minikube.plugin.zsh \
-  snippet OMZ::plugins/helm/helm.plugin.zsh \
-  snippet OMZ::plugins/rbenv/rbenv.plugin.zsh \
-  snippet OMZ::plugins/tmux/tmux.plugin.zsh \
-  snippet OMZ::plugins/terraform/terraform.plugin.zsh
+  OMZ::lib/compfix.zsh \
+  OMZ::lib/completion.zsh \
+  OMZ::lib/directories.zsh \
+  OMZ::lib/theme-and-appearance.zsh \
+  OMZ::plugins/kubectl/kubectl.plugin.zsh \
+  OMZ::plugins/minikube/minikube.plugin.zsh \
+  OMZ::plugins/helm/helm.plugin.zsh \
+  OMZ::plugins/rbenv/rbenv.plugin.zsh \
+  OMZ::plugins/pyenv/pyenv.plugin.zsh \
+  OMZ::plugins/tmux/tmux.plugin.zsh \
+  OMZ::plugins/terraform/terraform.plugin.zsh
 alias k="kubectl"
 alias kg="kubectl get"
 alias kd="kubectl describe"

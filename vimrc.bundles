@@ -190,6 +190,15 @@ Plug 'steelsojka/completion-buffers'
 " Plug 'vigoux/completion-treesitter'
 " let g:complete_ts_highlight_at_point = 1
 
+Plug 'pechorin/any-jump.vim'
+let g:any_jump_disable_default_keybindings = 1
+" Normal mode: Jump to definition under cursore
+nnoremap <leader>aj :AnyJump<CR>
+" Visual mode: jump to selected text in visual mode
+xnoremap <leader>aj :AnyJumpVisual<CR>
+" Normal mode: open last closed search window again
+nnoremap <leader>al :AnyJumpLastResults<CR>
+
 " =============================
 " ===   Checkers/Builders   ===
 " =============================

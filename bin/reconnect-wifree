@@ -1,0 +1,78 @@
+#!/bin/bash
+
+function is_ok {
+  ping google.be -c 1 -t 1
+}
+
+function change_mac {
+  openssl rand -hex 6 | sed 's/(..)/1:/g; s/.$//' | xargs sudo ifconfig en0 ether
+}
+
+function get_mac {
+  # sudo ifconfig en0 ether
+  sudo ifconfig en0 ether | tail -n -1 | sed 's/^.*ether //g'
+}
+
+function auth {
+  sudo -v
+}
+
+function connect {
+  echo "Connecting"
+  osascript \
+    -e'tell application "System Events"' \
+        -e 'tell process "SystemUIServer"' \
+            -e 'click (menu bar item 1 of menu bar 1 whose description contains "Wi-Fi")' \
+            -e 'click menu item "TelenetWiFree" of menu 1 of result' \
+        -e 'end tell' \
+    -e 'end tell'
+}
+
+function disconnect {
+  echo "Disconnecting"
+  sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -z
+}
+
+function main {
+  # if is_ok; then
+  #   return 0
+  # fi
+
+  auth
+
+  # local ten_attempts="0 1 2 3 4 5 6 7 8 9 10"
+  local ten_attempts="0 1 2 3"
+  for i in $ten_attempts; do
+    echo "Attempt $i"
+
+    disconnect
+
+    local mac=$(get_mac)
+
+    for j in $ten_attempts; do
+      echo "Resetting mac, attempt $j, mac: $(get_mac)"
+
+      if [[ $mac != $(get_mac) ]]; then
+        break
+      fi
+
+      change_mac
+    done
+
+    connect
+
+    # echo "Waiting a bit"
+    # sleep 10
+
+    echo "Tell me when connected"
+    read
+
+    if is_ok; then
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+main

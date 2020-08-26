@@ -53,6 +53,15 @@ Plug 'easymotion/vim-easymotion'
 Plug 'qpkorr/vim-bufkill'
 nnoremap <leader>x :BD<cr>
 
+" Plug 'liuchengxu/vim-which-key'
+" let g:which_key_map = {}
+" nnoremap <silent> <leader>      :<c-u>WhichKey       '<leader>'<CR>
+" vnoremap <silent> <leader>      :<c-u>WhichKeyVisual '<leader>'<CR>
+" nnoremap <silent> <localleader> :<c-u>WhichKey       '<localleader>'<CR>
+" vnoremap <silent> <localleader> :<c-u>WhichKeyVisual '<localleader>'<CR>
+" let g:which_key_map.g = { 'name' : '+goto' }
+" let g:spacevim#map#leader#desc =  get(g:, 'spacevim#map#leader#desc', g:which_key_map)
+
 " ================
 " ===   Repl   ===
 " ================
@@ -290,6 +299,8 @@ nmap <F7> :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1
 " Git Plugin for sidebar
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+" " Devicons for nerdtree, startify, ...
+" Plug 'ryanoasis/vim-devicons'
 
 " Start screen
 Plug 'mhinz/vim-startify'
@@ -570,9 +581,9 @@ nvim_lsp.yamlls.setup{
   on_attach = on_attach,
   settings = {
     yaml = {
-      schemas = {
-        kubernetes = "*"
-      }
+      -- schemas = {
+      --  kubernetes = "*"
+      --}
     }
   }
 }

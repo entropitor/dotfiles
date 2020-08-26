@@ -291,6 +291,10 @@ let g:NERDTreeShowHidden=1
 " Git Plugin for sidebar
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 
+" Start screen
+Plug 'mhinz/vim-startify'
+let g:startify_change_to_dir = 0
+
 " Allow running file commands from vim
 Plug 'tpope/vim-eunuch'
 

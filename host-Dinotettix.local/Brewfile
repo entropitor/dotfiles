@@ -44,6 +44,7 @@ brew "up"
 # Fonts and styling
 tap "homebrew/cask-fonts"
 cask "homebrew/cask-fonts/font-jetbrains-mono"
+cask "homebrew/cask-fonts/font-jetbrains-mono-nerd-font"
 
 # JSON / HTTP tools
 tap "ktr0731/evans"
@@ -160,3 +161,4 @@ cask "zoomus"
 brew "ledger"
 brew "hledger"
 brew "ffmpeg"
+cask "pinta"

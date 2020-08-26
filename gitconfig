@@ -1,10 +1,13 @@
 [include]
       path = ~/.gitconfig.local
+
 [core]
 	excludesfile = ~/.gitignore_global
 	pager = delta --theme base16
+
 [interactive]
         diffFilter = delta --theme base16 --color-only
+
 [alias]
 	# list files which have changed since REVIEW_BASE
 	# (REVIEW_BASE defaults to 'master' in zshrc)
@@ -18,3 +21,6 @@
 	# Then, run fugitive's :Gdiff in each tab, and finally
 	# tell vim-gitgutter to show +/- for changes since REVIEW_BASE
 	review = !nvim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+
+[pull]
+	ff = only

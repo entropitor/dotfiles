@@ -56,3 +56,5 @@ alias tfi="terraform init"
 alias tff="terraform fmt && fd -t d | xargs -n 1 terraform fmt"
 alias tfc="rm -rf .terraform/"
 alias tfs="tfswitch"
+
+alias lg="lazygit"

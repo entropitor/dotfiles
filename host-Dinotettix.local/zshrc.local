@@ -44,6 +44,8 @@ eval $(opam env)
 alias al="onelogin-aws-login"
 export ONELOGIN_AWS_CLI_USERNAME=jens
 
+alias opl='eval $(op signin datacamp)'
+
 zstyle ':completion:*' list-suffixes
 zstyle ':completion:*' expand prefix suffix
 

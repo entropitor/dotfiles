@@ -24,6 +24,7 @@ brew "thoughtbot/formulae/rcm"
 
 # CLI Improved
 brew "bat"                  # Instead of cat
+brew "mdcat"                # Instead of cat (for markdown files)
 brew "prettyping"           # Instead of ping
 brew "fzf"                  # Instead of Ctrl+R
 brew "htop"                 # Instead of top

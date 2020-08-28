@@ -49,4 +49,12 @@ alias opl='eval $(op signin datacamp)'
 zstyle ':completion:*' list-suffixes
 zstyle ':completion:*' expand prefix suffix
 
+function terraform-local {
+  onelogin-aws-login -C terraform-dev-staging
+  onelogin-aws-login -C terraform-dev-prod
+  export AWS_SDK_LOAD_CONFIG=true
+  export AWS_PROFILE=datacamp-prod
+}
+alias tfl="terraform-local"
+
 # . /Users/jens/.nix-profile/etc/profile.d/nix.sh

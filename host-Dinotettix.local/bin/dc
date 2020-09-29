@@ -67,14 +67,14 @@ function show-env () {
   local AWS_PROFILE="$AWS_PROFILE"
   if [[ -z "$AWS_PROFILE" ]]; then
     if [[ $keypath == /datacamp-prod/* ]]; then
-      AWS_PROFILE="prod"
-      if ! AWS_PROFILE="${AWS_PROFILE}" aws sts get-caller-identity > /dev/null; then
-        onelogin-aws-login --profile prod -C prod-readonly -u $(whoami)
+      AWS_PROFILE="datacamp-prod-readonly"
+      if ! AWS_PROFILE="${AWS_PROFILE}" aws sts get-caller-identity > /dev/null 2>&1; then
+        aws-login prod-readonly
       fi
     elif [[ $keypath == /datacamp-staging/* ]]; then
-      AWS_PROFILE="staging"
-      if ! AWS_PROFILE="${AWS_PROFILE}" aws sts get-caller-identity > /dev/null; then
-        onelogin-aws-login --profile staging -C staging-readonly -u $(whoami)
+      AWS_PROFILE="datacamp-staging-readonly"
+      if ! AWS_PROFILE="${AWS_PROFILE}" aws sts get-caller-identity > /dev/null 2>&1; then
+        aws-login staging-readonly
       fi
     else
       echo "Did not match prod or staging"
@@ -87,7 +87,7 @@ function show-env () {
     return false
   fi
 
-  AWS_PROFILE="$AWS_PROFILE" aws ssm get-parameters-by-path --path $keypath | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
+  AWS_PROFILE="$AWS_PROFILE" aws ssm get-parameters-by-path --path $keypath --region us-east-1 | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
 }
 
 function gh () {

@@ -7,6 +7,7 @@ export GOPATH=$HOME/.bin/gopath
 PATH=$PATH:$HOME/.krew/bin
 PATH=/usr/local/bin:$PATH
 PATH=$PATH:$HOME/Library/Python/2.7/bin/
+PATH="$HOME/.dotnet/tools:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.opam/default/bin:$PATH"
@@ -41,6 +42,12 @@ alias dc=". dc"
 
 eval $(opam env)
 
+function aws-login {
+  if [[ -z "$OP_SESSION_datacamp" ]]; then
+    eval $(op signin datacamp)
+  fi
+  jo username=jens password=$(op get item OneLogin | jq -r '.details.fields[] | select(.designation == "password").value') -s otp=$(op get totp OneLogin) | onelogin-aws login -C $1
+}
 alias al="onelogin-aws-login"
 export ONELOGIN_AWS_CLI_USERNAME=jens
 
@@ -50,8 +57,8 @@ zstyle ':completion:*' list-suffixes
 zstyle ':completion:*' expand prefix suffix
 
 function terraform-local {
-  onelogin-aws-login -C terraform-dev-staging
-  onelogin-aws-login -C terraform-dev-prod
+  aws-login terraform-dev-staging
+  aws-login terraform-dev-prod
   export AWS_SDK_LOAD_CONFIG=true
   export AWS_PROFILE=datacamp-prod
 }

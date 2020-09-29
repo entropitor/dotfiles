@@ -227,6 +227,7 @@ if executable('rg')
 elseif executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+nnoremap <leader>sr :Ack! 
 
 " ===========================
 " ===   File Management   ===
@@ -234,44 +235,11 @@ endif
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>f :Files<CR>
-" nnoremap <C-p> <ESC>:Files<CR>
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
-let s:rgoptions='rg
-      \ --column
-      \ --line-number
-      \ --no-heading
-      \ --fixed-strings
-      \ --ignore-case
-      \ --hidden
-      \ --follow
-      \ --glob "!.git/*"
-      \ --color "always" '
-command! -bang -nargs=* Rg call fzf#vim#grep(s:rgoptions.shellescape(<q-args>), 1, <bang>0)
-nnoremap <leader>fs :Rg<CR>
-
-
-" CtrlP
-Plug 'ctrlpvim/ctrlp.vim'
-nnoremap <C-p> <ESC>:CtrlP<CR>
-nnoremap <C-b> <ESC>:CtrlPBuffer<CR>
-nnoremap <leader>fp <ESC>:CtrlP<CR>
-nnoremap <leader>fb <ESC>:CtrlPBuffer<CR>
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]((\.(git|hg|svn))|node_modules|build|Build|target|dist)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-  \ }
-let g:ctrlp_show_hidden = 1
-
-" vim-clap
-" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-" nnoremap <C-p> :Clap gfiles ++externalfilter=fzf +async<CR>
-" " nnoremap <C-S-p> :Clap files +async<CR>
-" nnoremap <C-f> :Clap grep ++externalfilter=fzf +async<CR>
-" nnoremap <C-b> :Clap buffers ++externalfilter=fzf +async<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>fc :GFiles?<CR>
+nnoremap <leader>sf :Rg 
 
 " ==========================
 " ===   Test Managment   ===
@@ -305,7 +273,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 " Start screen
 Plug 'mhinz/vim-startify'
 let g:startify_change_to_dir = 0
-nnoremap <leader>s :Startify<ESC>
+nnoremap <leader>fs :Startify<ESC>
 
 " Allow running file commands from vim
 Plug 'tpope/vim-eunuch'

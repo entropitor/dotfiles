@@ -41,6 +41,7 @@ autoload -U colors && colors
 zinit wait lucid for \
   OMZ::lib/compfix.zsh \
   OMZ::lib/completion.zsh \
+  OMZ::lib/git.zsh \
   OMZ::lib/directories.zsh \
   OMZ::lib/theme-and-appearance.zsh \
   OMZ::plugins/kubectl/kubectl.plugin.zsh \

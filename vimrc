@@ -1,4 +1,5 @@
-let mapleader = ","
+nnoremap <SPACE> <Nop>
+let mapleader = " "
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
@@ -31,7 +32,7 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader><leader><space> :noh<cr>
 if exists('&inccommand')
   highlight Substitute cterm=NONE ctermfg=black ctermbg=9
   set inccommand=split

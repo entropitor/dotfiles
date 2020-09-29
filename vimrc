@@ -81,8 +81,8 @@ endif
 colorscheme base16-tomorrow-night-eighties
 set background=dark
 
-nnoremap <leader>v <C-w>v<C-w>l
-nnoremap <leader>s <C-w>s<C-w>l
+nnoremap <leader>wv <C-w>v<C-w>l
+nnoremap <leader>ws <C-w>s<C-w>l
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -91,10 +91,12 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <leader>bq :%bd\|:e#<CR>
 
-nnoremap <leader>wn :tabnew<CR>
-nnoremap <leader>wd :tabclose<CR>
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>td :tabclose<CR>
 nnoremap [w :tabprevious<CR>
 nnoremap ]w :tabnext<CR>
 nnoremap [W :tabfirst<CR>
 nnoremap ]W :tablast<CR>
 
+nnoremap <leader>nq :qa<CR>
+nnoremap <leader>nw :w<CR>

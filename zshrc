@@ -103,3 +103,6 @@ export REVIEW_BASE="master"
 _zsh_cli_fg() { fg; }
 zle -N _zsh_cli_fg
 bindkey '^F' _zsh_cli_fg
+
+unalias zi
+eval "$(zoxide init zsh)"

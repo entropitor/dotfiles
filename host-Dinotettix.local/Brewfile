@@ -69,6 +69,7 @@ tap "warrensbox/tap"
 brew "warrensbox/tap/tfswitch" # Terraform switcher
 brew "mkcert"
 brew "watchman"
+brew "zoxide"
 
 # Languages
 cask "dotnet-sdk"

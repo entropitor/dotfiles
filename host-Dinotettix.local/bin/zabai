@@ -61,7 +61,7 @@ function reorder_display () {
 }
 
 function reorder() {
-  yabai -m query --displays | jq '.[] | .index' | xargs zabai reorder_display
+  yabai -m query --displays | jq '.[] | .index' | xargs -n 1 zabai reorder_display
 }
 
 

@@ -2,7 +2,7 @@
       path = ~/.gitconfig.local
 
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore
 	pager = delta --theme base16
 
 [interactive]

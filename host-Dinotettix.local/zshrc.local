@@ -48,7 +48,7 @@ function aws-login {
   fi
   jo username=jens password=$(op get item OneLogin | jq -r '.details.fields[] | select(.designation == "password").value') -s otp=$(op get totp OneLogin) | onelogin-aws login -C $1
 }
-alias al="onelogin-aws-login"
+alias al="aws-login"
 export ONELOGIN_AWS_CLI_USERNAME=jens
 
 alias opl='eval $(op signin datacamp)'

@@ -64,6 +64,8 @@ brew "awscli"
 brew "dnsmasq"
 brew "circleci"
 cask "google-cloud-sdk"
+tap "orf/brew"
+brew "orf/brew/git-workspace"
 brew "silicon"
 tap "warrensbox/tap"
 brew "warrensbox/tap/tfswitch" # Terraform switcher

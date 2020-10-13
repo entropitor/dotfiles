@@ -141,7 +141,10 @@ nnoremap <silent> <leader>lt <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <leader>lc <cmd>lua vim.lsp.buf.completion()<CR>
 nnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
+vnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.range_code_action()<CR>
 nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> <leader>le <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>lw <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 " force reload
 nnoremap <silent> <leader>lq <cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR><cmd>edit<CR>
 " Capabilities

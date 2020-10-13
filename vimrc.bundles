@@ -127,7 +127,7 @@ set completeopt=menuone,noinsert,noselect,menu
 set shortmess+=c
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr         <cmd>lua vim.lsp.buf.definition()<CR>

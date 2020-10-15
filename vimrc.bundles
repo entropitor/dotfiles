@@ -333,8 +333,8 @@ Plug 'embear/vim-localvimrc'
 " Colorscheme is selected in vimrc itself as it doesn't work when set here
 
 " Make gvim-only colorschemes work transparently in terminal vim
-Plug 'godlygeek/csapprox'
-set t_Co=256
+" Plug 'godlygeek/csapprox'
+" set t_Co=256
 
 " One dark scheme
 Plug 'joshdick/onedark.vim'

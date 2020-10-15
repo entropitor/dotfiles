@@ -1,0 +1,41 @@
+snippet mock "jest mocked function"
+const $1Mock = ${1:mockedFunction} as jest.MockedFunction<
+  typeof $1
+>;
+endsnippet
+
+snippet df "default function"
+export default function ${1:`!p snip.rv = snip.basename`}($2): ${3:number} {
+  ${0:return 42};
+}
+endsnippet
+
+snippet df "default function (with named arguments)"
+interface $2 {
+  $4
+}
+export default function ${1:`!p snip.rv = snip.basename`}({}: ${2:`!p snip.rv = snip.basename[0].upper() + snip.basename[1:]`Args}): ${3:number} {
+  ${0:return 42;}
+}
+endsnippet
+
+
+snippet daf "default async function"
+export default async function ${1:`!p snip.rv = snip.basename`}($2): Promise<${3:number}> {
+  ${0:return 42;}
+}
+endsnippet
+snippet daf "default async function (with named arguments)"
+interface $2 {
+  $4
+}
+export default async function ${1:`!p snip.rv = snip.basename`}({}: ${2:`!p snip.rv = snip.basename[0].upper() + snip.basename[1:]`Args}): Promise<${3:number}> {
+  ${0:return 42;}
+}
+endsnippet
+
+snippet tf "test file"
+describe('${1:`!p snip.rv = snip.basename.replace('.spec', '')`}', () => {
+  it.todo('should test something');
+});
+endsnippet

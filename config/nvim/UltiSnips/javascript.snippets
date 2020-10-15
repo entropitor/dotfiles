@@ -1,0 +1,512 @@
+snippet l "log"
+console.log(${1:'foobar'})
+endsnippet
+
+snippet gfn "Generator function"
+function* ${1} (${2}) {
+  yield ${3}
+}
+endsnippet
+
+snippet => "Arrow function" i
+(${1}) => {
+  ${2}
+}
+endsnippet
+
+snippet =>( "Arrow expression" i
+(${1}) => (
+  ${2}
+)
+endsnippet
+
+snippet class
+class ${1} {
+  constructor(${2}) {
+    super(${2})
+    ${3}
+  }
+  ${4}
+}
+endsnippet
+
+snippet forof
+for (let ${1:s} of ${2:sequence}) {
+  ${3}
+}
+endsnippet
+
+snippet im
+import ${1} from '${2:$1}'
+endsnippet
+
+#
+#  React snippets
+#
+
+#
+## create class component
+#
+snippet rcc "create class component" b
+import React, { ${1:PropTypes, }Component } from 'react'
+
+class ${2} extends Component {
+  $0
+  render () {
+    return (
+      ${4:<div>
+        $5
+      </div>}
+    )
+  }
+}
+
+${3:export default $2}
+endsnippet
+
+#
+## functional component
+#
+
+snippet funCom "create simple functional component" b
+import React from 'react'
+
+const ${1} = (${2}) => ({
+  ${3:<div>
+    $4
+  </div>}
+})
+
+export default $1
+endsnippet
+
+#
+## class component
+#
+
+snippet classCom "create cimple class component" b
+import React, { Component } from 'react'
+
+class ${1} extends Component {
+  constructor (props) {
+    super(props)
+
+    ${2:this.state = {
+      $3
+    }}
+  }
+
+  $0
+  render () {
+    return (
+      ${4:<div>
+        $5
+      </div>}
+    )
+  }
+}
+
+export default $1
+endsnippet
+
+#
+## imports & exports
+#
+
+snippet impR "import React from 'react'" b
+import React from 'react'
+$0
+endsnippet
+
+snippet impD "import ReactDOM from 'react-dom'" b
+import ReactDOM from 'react-dom'
+$0
+endsnippet
+
+snippet impRD "import React & ReactDOM" b
+import React from 'react'
+import ReactDOM from 'react-dom'
+$0
+endsnippet
+
+snippet impC "import current directory" b
+import $1 from './${2:$1}'
+$0
+endsnippet
+
+snippet impP "import parent directory" b
+import $1 from '../${2:$1}'
+$0
+endsnippet
+
+snippet expdef "export default" b
+export default $0
+endsnippet
+
+#
+## return jsx
+#
+
+snippet ret() "return ()" b
+return (
+  ${1:<div>
+    $2
+  </div>}
+)
+endsnippet
+
+#
+## Component specs & lifecycle
+#
+
+snippet cs "React.addons.classSet" b
+var cx = React.addons.classSet
+endsnippet
+
+snippet cdm "component did mount" b
+componentDidMount () {
+  ${1}
+}$0
+endsnippet
+
+snippet cdup "component did update" b
+componentDidUpdate (prevProps, prevState) {
+  ${1}
+}$0
+endsnippet
+
+snippet scu "should component update"
+shouldComponentUpdate (nextProps, nextState) {
+  ${1}
+}$0
+endsnippet
+
+snippet cwm "component will mount" b
+componentWillMount () {
+  ${1}
+}$0
+endsnippet
+
+snippet cwr "component will receive props" b
+componentWillReceiveProps (nextProps) {
+  ${1}
+}$0
+endsnippet
+
+snippet cwun "component will unmount" b
+componentWillUnmount () {
+  ${1}
+}$0
+endsnippet
+
+snippet cwu "component will update" b
+componentWillUpdate (nextProps, nextState) {
+  ${1}
+}$0
+endsnippet
+
+snippet cx
+cx({
+  ${1}: ${2}
+})
+endsnippet
+
+snippet fup
+forceUpdate(${1:callback})
+endsnippet
+
+snippet gdp "get default props" b
+getDefaultProps () {
+  return {
+    ${1}
+  }
+}$0
+endsnippet
+
+snippet ism "is mounted"
+isMounted()
+endsnippet
+
+snippet ren
+render () {
+  return (
+    ${1:<div>
+      $2
+    </div>}
+  )
+}
+$0
+endsnippet
+
+#
+## state
+#
+
+snippet constr "construct state" b
+constructor (props) {
+  super(props)
+
+  ${1:this.state = {
+    $2
+  }}
+}
+
+$0
+endsnippet
+
+snippet gis "get initial state" b
+getInitialState () {
+  return {
+    ${1}: ${2}
+  }
+}
+
+$0
+endsnippet
+
+snippet pt "propTypes" b
+propTypes: {
+  ${1}: React.PropTypes.${2:string}
+},
+endsnippet
+
+snippet sst "set state" b
+this.setState({
+  ${1}: ${2}
+})$0
+endsnippet
+
+snippet props "get property" i
+this.props.${1}
+endsnippet
+
+snippet state "get state" i
+this.state.${1}
+endsnippet
+
+snippet trp
+this.transferPropsTo(${VISUAL}$0)
+endsnippet
+
+#
+## DOM render
+#
+
+snippet domren "render component to DOM" b
+ReactDOM.render(${1:<$2 />}, document.${3:querySelector('$4')})
+endsnippet
+
+#
+## React Redux
+#
+
+snippet impBAC "import bindActionCreators from redux" b
+import { bindActionCreators } from 'redux'
+endsnippet
+
+snippet impConn "import connect from react-redux" b
+import { connect } from 'react-redux'
+endsnippet
+
+snippet mstp "mapStateToProps" b
+const ${1:mapStateToProps} = (state) => ({
+  $2
+})
+endsnippet
+
+snippet mdtp "mapDispatchToProps" b
+const ${1:mapStateToProps} = (dispatch) => ({
+  $2
+})
+endsnippet
+
+snippet expConn "export default connect()()" b
+export default connect(${1:mapStateToProps}${2:, }${3:mapDispatchToProps})($4)
+endsnippet
+
+#
+## React Router
+#
+
+snippet impL "import Link from react-router" b
+import { Link } from 'react-router'
+endsnippet
+
+snippet routes "import Route, IndexRoute" b
+import React from 'react'
+import { Route, IndexRoute } from 'react-router'
+
+import ${1} from '${2}'
+import ${3} from '${4}'
+import ${6} from '${7}'
+$0
+export default (
+  <Route path="/" component={$1}>
+    <IndexRoute component={$3} />
+    <Route path="${5}" component={$6} />
+  </Route>
+)
+endsnippet
+
+snippet link "add react-router link"
+<Link to="${1}" ${2:className="${3}"}>
+  $4
+</Link>$0
+endsnippet
+
+snippet knexMigrateAddTable "Knex Migrate Add Table"
+exports.up = function (knex, Promise) {
+  return knex.schema.createTable('$1', function (table) {
+    table.increments()
+    ${2:table.string('name')
+    table.string('description')}
+    $0
+    table.timestamps(false, true)
+  })
+}
+
+exports.down = function (knex, Promise) {
+  return knex.schema.dropTable('$1')
+}
+endsnippet
+
+snippet knexMigrateAddJoinTable "Knex Migrate Add Join Table"
+exports.up = function (knex, Promise) {
+  return knex.schema.createTable('$1_$2s', function (table) {
+    table.integer('$1_id').references('$1s.id').onDelete('RESTRICT').notNullable()
+    table.integer('$2_id').references('$2s.id').onDelete('RESTRICT').notNullable()
+    table.primary(['$1_id', '$2_id'])
+    $0
+  })
+}
+
+exports.down = function (knex, Promise) {
+  return knex.schema.dropTable('$1_$2s')
+}
+endsnippet
+
+snippet reduxAction "Redux action"
+export const $1: '$1' = '$1'
+endsnippet
+
+# Constant: ${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}
+# Type: ${1/.*/\u$0/}
+# Action Creator: ${1}
+snippet action "Redux action boilerplate"
+export const ${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}: '${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}' = '${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}'
+type ${1/.*/\u$0/} = {
+  type: typeof ${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+  payload: {${2/(([^,:]*)(: ([^,]*))?),? ?/\n      $2: (?3:$4:???),/g}
+  },
+}
+export function ${1:createActionSnippet} (${2:arg1: string, arg2: number, arg3}): ${1/.*/\u$0/} {
+  return {
+    type: ${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+    payload: {${2/(([^,:]*)(: [^,]*)?),? ?/\n      $2,/g}
+    },
+  }
+}
+endsnippet
+
+snippet action:request "Redux action boilerplate"
+export const ${3/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}: '${3/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}' = '${3/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}'
+type ${3/.*/\u$0/} = {
+  type: typeof ${3/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+  payload: {${2/(([^,:]*)(: ([^,]*))?),? ?/\n      $2: (?3:$4:???),/g}
+  },
+}
+export function ${3:requestTo${1:CreateActionSnippet}} (${2:arg1: string, arg2: number, arg3}): ${3/.*/\u$0/} {
+  return {
+    type: ${3/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+    payload: {${2/(([^,:]*)(: [^,]*)?),? ?/\n      $2,/g}
+    },
+  }
+}
+endsnippet
+
+snippet action:result "Redux action boilerplate for result action"
+export const RESULT_OF_${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}: 'RESULT_OF_${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}' = 'RESULT_OF_${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}'
+type ResultOf${1/.*/\u$0/}= {
+  type: typeof RESULT_OF_${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+  error: false,
+  payload: {${2/(([^,:]*)(: ([^,]*))?),? ?/\n      $2: (?3:$4:???),/g}
+  },
+} | {
+  type: typeof RESULT_OF_${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+  error: true,
+  payload: $3,
+}
+export function ${1:createActionAsync}Success (${2:arg1: string, arg2: number, arg3}): ResultOf${1/.*/\u$0/}{
+  return {
+    type: RESULT_OF_${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+    error: false,
+    payload: {${2/(([^,:]*)(: [^,]*)?),? ?/\n      $2,/g}
+    },
+  }
+}
+export function $1Failure (error: ${3:Error}): ResultOf${1/.*/\u$0/}{
+  return {
+    type: RESULT_OF_${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+    error: true,
+    payload: error,
+  }
+}
+endsnippet
+
+snippet action:lib "Redux action boilerplate"
+export const ${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}: '${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}' = '${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g}'
+type ${1/.*/\u$0/} = {
+  type: typeof ${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+  payload: {${2/(([^,:]*)(: ([^,]*))?),? ?/\n      $2: (?3:$4:???),/g}
+  },
+}
+export const ${1:createActionSnippet}: ((${2:arg1: string, arg2: number, arg3}) => ${1/.*/\u$0/}) = createAction(
+  ${1/([a-z]*)([A-Z])([a-z]*)/\U$1_$2$3\E/g},
+  (${2/(([^,:]*)(: [^,]*)?), ?/$2, /g}) => ({ ${2/(([^,:]*)(: [^,]*)?), ?/$2, /g} }),
+)
+endsnippet
+
+snippet pure "create pure component" b
+/* @flow */
+import * as React from 'react'
+
+type Props = {||}
+export default class ${1:`!p snip.rv = snip.basename`} extends React.PureComponent<Props> {
+  render () {
+    return ${0:null}
+  }
+}
+
+const styles = StyleSheet.create({
+})
+endsnippet
+
+snippet memo "create pure component" b
+/* @flow */
+import React from 'react'
+
+type Props = {||}
+function ${1:`!p snip.rv = snip.basename`}(props: Props) {
+  return ${0:null}
+}
+export default React.memo<Props>($1)
+
+const styles = StyleSheet.create({
+})
+endsnippet
+
+snippet sheet "create stylesheet"
+const styles = StyleSheet.create({
+  ${0}
+})
+endsnippet
+
+snippet compTest "test a component"
+  it('renders ${1}', () => {
+    const tree = renderer
+      .create(${2})
+      .toJSON()
+
+    expect(tree).toMatchSnapshot()
+  })
+endsnippet

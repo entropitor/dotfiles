@@ -87,7 +87,7 @@ function show-env () {
     return false
   fi
 
-  AWS_PROFILE="$AWS_PROFILE" aws ssm get-parameters-by-path --path $keypath --region us-east-1 | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
+  AWS_PROFILE="$AWS_PROFILE" aws ssm get-parameters-by-path --recursive --path $keypath --region us-east-1 | jq -r '.Parameters[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
 }
 
 function gh () {

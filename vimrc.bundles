@@ -140,6 +140,7 @@ nnoremap <silent> <leader>lf <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
+inoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <leader>lt <cmd>lua vim.lsp.buf.type_definition()<CR>
 " force reload
 nnoremap <silent> <leader>lq <cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR><cmd>edit<CR>

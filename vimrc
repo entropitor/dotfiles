@@ -47,7 +47,6 @@ set wildmenu
 
 set list
 set listchars=tab:>-,trail:~,nbsp:.,precedes:<,extends:>
-nmap <leader>l :set list!<CR>
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>

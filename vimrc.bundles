@@ -53,14 +53,18 @@ Plug 'easymotion/vim-easymotion'
 Plug 'qpkorr/vim-bufkill'
 nnoremap <leader>x :BD<cr>
 
-" Plug 'liuchengxu/vim-which-key'
-" let g:which_key_map = {}
-" nnoremap <silent> <leader>      :<c-u>WhichKey       '<leader>'<CR>
-" vnoremap <silent> <leader>      :<c-u>WhichKeyVisual '<leader>'<CR>
-" nnoremap <silent> <localleader> :<c-u>WhichKey       '<localleader>'<CR>
-" vnoremap <silent> <localleader> :<c-u>WhichKeyVisual '<localleader>'<CR>
-" let g:which_key_map.g = { 'name' : '+goto' }
-" let g:spacevim#map#leader#desc =  get(g:, 'spacevim#map#leader#desc', g:which_key_map)
+Plug 'liuchengxu/vim-which-key'
+nnoremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
+nnoremap <silent> <leader>? :<c-u>WhichKey '<leader>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<leader>'<CR>
+set timeoutlen=500
+let g:which_key_flatten=0
+let g:which_key_default_group_name='which_key_ignore'
+let g:which_key_map = {}
+let g:which_key_map.f = { 'name': '+file' }
+let g:which_key_map.l = { 'name': '+language' }
+let g:which_key_map.s = { 'name': '+search' }
+let g:which_key_map.t = { 'name': '+test' }
 
 " ================
 " ===   Repl   ===
@@ -131,21 +135,29 @@ nnoremap <silent> gr         <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+let g:which_key_map.l.a = 'code-action'
 nnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
 vnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.range_code_action()<CR>
-" inoremap <silent> <leader>lc <cmd>lua vim.lsp.buf.completion()<CR>
+let g:which_key_map.l.d = 'document-symbol'
 nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.document_symbol()<CR>
+let g:which_key_map.l.e = 'show-line-diagnostics'
 nnoremap <silent> <leader>le <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+let g:which_key_map.l.f = 'show-references'
 nnoremap <silent> <leader>lf <cmd>lua vim.lsp.buf.references()<CR>
+let g:which_key_map.l.i = 'implementation'
 nnoremap <silent> <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>
+let g:which_key_map.l.r = 'rename'
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
+let g:which_key_map.l.s = 'signature-help'
 nnoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
 inoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
+let g:which_key_map.l.t = 'type-definition'
 nnoremap <silent> <leader>lt <cmd>lua vim.lsp.buf.type_definition()<CR>
-" force reload
+let g:which_key_map.l.q = 'force-reload'
 nnoremap <silent> <leader>lq <cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR><cmd>edit<CR>
+let g:which_key_map.l.w = 'workspace-symbol'
 nnoremap <silent> <leader>lw <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-" Capabilities
+let g:which_key_map.l.x = 'capabilities'
 nnoremap <silent> <leader>lx <cmd>lua print(vim.inspect(vim.lsp.buf))<CR>
 
 Plug 'hrsh7th/vim-vsnip'
@@ -236,11 +248,16 @@ nnoremap <leader>sr :Ack!
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+let g:which_key_map.f.b = 'buffers'
 nnoremap <leader>fb :Buffers<CR>
+let g:which_key_map.f.f = 'files'
 nnoremap <leader>ff :Files<CR>
+let g:which_key_map.f.g = 'git-files'
 nnoremap <leader>fg :GFiles<CR>
+let g:which_key_map.f.c = 'edited-files'
 nnoremap <leader>fc :GFiles?<CR>
-nnoremap <leader>sf :Rg 
+let g:which_key_map.s.f = 'file'
+nnoremap <leader>sf :Rg<space>
 
 " ==========================
 " ===   Test Managment   ===
@@ -250,10 +267,15 @@ let test#strategy = "neovim"
 " let test#strategy = "dispatch"
 " let g:test#javascript#jest#options = '--reporters ~/.config/yarn/global/node_modules/jest-vim-reporter/index.js'
 
+let g:which_key_map.t.n= 'test-nearest'
 nmap <silent> <leader>tn :TestNearest<CR>
+let g:which_key_map.t.f= 'test-file'
 nmap <silent> <leader>tf :TestFile<CR>
+let g:which_key_map.t.s= 'test-suite'
 nmap <silent> <leader>ts :TestSuite<CR>
+let g:which_key_map.t.l= 'test-last'
 nmap <silent> <leader>tl :TestLast<CR>
+let g:which_key_map.t.v= 'test-visit'
 nmap <silent> <leader>tv :TestVisit<CR>
 
 " Dependencies
@@ -274,7 +296,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 " Start screen
 Plug 'mhinz/vim-startify'
 let g:startify_change_to_dir = 0
+let g:which_key_map.f.s = 'start-screen'
 nnoremap <leader>fs :Startify<ESC>
+
 
 " Allow running file commands from vim
 Plug 'tpope/vim-eunuch'
@@ -613,4 +637,6 @@ autocmd! User nvim-lsp call SetupLspServers()
 " autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 call plug#end()
+
 call SetupLspServers()
+call which_key#register('<Space>', "g:which_key_map")

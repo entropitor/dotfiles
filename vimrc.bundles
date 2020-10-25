@@ -452,6 +452,18 @@ let g:ledger_commodity_sep = " "
 let g:ledger_commodity_before = 1
 let g:ledger_align_at = 70
 let g:ledger_align_commodity = 1
+function! LedgerSetupBindings ()
+  " Assign to Groceries
+  call setreg('g', '02wlRFood:Groceries')
+  " Assign to Resto
+  call setreg('r', '02wlRFood:Resto')
+  " Assign to Datacamp
+  call setreg('d', 'vt r RL:R:D	')
+  " Rewrite assignee
+  call setreg('a', '0f*f)wc$')
+  " Clear Expenses
+  call setreg('c', '0wvt r ')
+endfunction
 augroup ledger-bindings
   autocmd!
   autocmd Filetype ledger inoremap <buffer> <silent> <Tab> <C-r>=ledger#autocomplete_and_align()<CR>
@@ -460,16 +472,7 @@ augroup ledger-bindings
   autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lb :Balance<CR>
   autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lf :Reconcile
   autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lr :Register
-  " Assign to Groceries
-  call setreg('g', '02wlRFood:Groceries')
-  " Assign to Resto
-  call setreg('r', '02wlRFood:Resto')
-  " Assign to Datacamp
-  call setreg('d', 'vt r RL:R:D	')
-  " Rewrite assignee
-  call setreg('a', '011wc$')
-  " Clear Expenses
-  call setreg('c', '0wvt r ')
+  autocmd Filetype ledger call LedgerSetupBindings()
 augroup end
 Plug 'entropitor/vim-ledger', {'for': ['ledger']}
 

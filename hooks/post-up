@@ -20,3 +20,5 @@ vim -u $HOME/.vimrc.bundles +PlugInstall +PlugClean! +qa -
 if is_installed "brew" && [ -e ~/.Brewfile ]; then
   brew bundle install --file=~/.Brewfile --verbose
 fi
+
+~/.dotfiles/.base16/install.sh update

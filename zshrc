@@ -65,6 +65,8 @@ alias c='cdr $(cdr -l | fzf | awk -F " " "{print \$1}")'
 
 zinit ice wait lucid; zinit light zsh-users/zaw
 
+export THEME=onedark
+alias b="~/.dotfiles/.base16/install.sh"
 # User configuration
 if [ -f ~/.zshrc.local ]; then
     . ~/.zshrc.local
@@ -91,6 +93,9 @@ set -o vi
 
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
+  if [ ! -z "$THEME" ]; then
+    source ~/.dotfiles/.base16/templates/fzf/bash/base16-${THEME}.config
+  fi
   export FZF_DEFAULT_COMMAND='fd --hidden --no-ignore -E .git -E node_modules/ -E build/ -E Build/ -t file'
   alias preview="fzf --preview 'bat --color \"always\" {}'"
   export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"

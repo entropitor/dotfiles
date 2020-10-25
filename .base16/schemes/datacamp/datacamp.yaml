@@ -1,0 +1,20 @@
+scheme: "DataCamp"
+author: "Jens Claes"
+base00: "05192d" # background
+base01: "1e3042"
+base02: "213147"
+base03: "374757"
+base04: "505e6c"
+
+base05: "ffffff" # white
+base06: "e5e1da"
+base07: "efebe4"
+base09: "f7f3eb"
+base0F: "fffbf3"
+
+base08: "ff5400" # red
+base0A: "fcce0d" # yellow
+base0B: "03ef62" # green
+base0C: "ff6ea9" # pink
+base0D: "06bdfc" # blue
+base0E: "ff6ea9" # purple

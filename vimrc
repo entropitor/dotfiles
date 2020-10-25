@@ -80,7 +80,12 @@ if (has("termguicolors"))
 endif
 
 " colorscheme onedark
-colorscheme base16-tomorrow-night-eighties
+
+" Fall back to base16-eighties
+colorscheme base16-eighties
+" Use scheme set through env variable if available
+silent! colorscheme base16-$THEME
+
 set background=dark
 
 nnoremap <leader>wv <C-w>v<C-w>l

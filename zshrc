@@ -73,7 +73,7 @@ if [ -f ~/.zshrc.local ]; then
 fi
 # source $ZSH/oh-my-zsh.sh
 
-eval $(fnm env --multi)
+eval $(fnm env)
 fnm use 2> /dev/null
 function chpwd {
   fnm use 2> /dev/null

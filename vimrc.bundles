@@ -303,9 +303,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 " Start screen
 Plug 'mhinz/vim-startify'
 let g:startify_change_to_dir = 0
+let g:startify_update_oldfiles = 1
 let g:which_key_map.f.s = 'start-screen'
 nnoremap <leader>fs :Startify<ESC>
-
 
 " Allow running file commands from vim
 Plug 'tpope/vim-eunuch'

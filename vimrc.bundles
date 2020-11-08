@@ -598,7 +598,9 @@ nvim_lsp.pyls_ms.setup{ on_attach = on_attach }
 -- nvim_lsp.rls.setup{ on_attach = on_attach }
 nvim_lsp.rust_analyzer.setup{ on_attach = on_attach }
 nvim_lsp.solargraph.setup{ on_attach = on_attach }
-nvim_lsp.tsserver.setup{ on_attach = on_attach }
+nvim_lsp.tsserver.setup{
+  on_attach = on_attach,
+}
 nvim_lsp.terraformls.setup{ on_attach = on_attach }
 nvim_lsp.vimls.setup{ on_attach = on_attach }
 nvim_lsp.yamlls.setup{
@@ -664,7 +666,7 @@ autocmd! User nvim-lsp call SetupLspServers()
 " This conflicts with Plug 'donniewest/asyncomplete_neovim_lsp'
 " As we also have an asyncomplete omni completer which will cause double
 " completions
-" autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
+autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 call plug#end()
 
@@ -673,11 +675,11 @@ call which_key#register('<Space>', "g:which_key_map")
 
 lua <<EOF
 vim.lsp.callbacks['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-vim.lsp.callbacks['textDocument/references'] = require'lsputil.locations'.references_handler
-vim.lsp.callbacks['textDocument/definition'] = require'lsputil.locations'.definition_handler
-vim.lsp.callbacks['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-vim.lsp.callbacks['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-vim.lsp.callbacks['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-vim.lsp.callbacks['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-vim.lsp.callbacks['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+-- vim.lsp.callbacks['textDocument/references'] = require'lsputil.locations'.references_handler
+-- vim.lsp.callbacks['textDocument/definition'] = require'lsputil.locations'.definition_handler
+-- vim.lsp.callbacks['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+-- vim.lsp.callbacks['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+-- vim.lsp.callbacks['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+-- vim.lsp.callbacks['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+-- vim.lsp.callbacks['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 EOF

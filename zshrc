@@ -33,6 +33,9 @@ zinit light zsh-users/zsh-autosuggestions
 
 zinit ice atpull"make build" atclone"make build" wait'!0' lucid atload"_prompt_purs_precmd $(pwd)"
 zinit light entropitor/purs
+
+# zinit light denysdovhan/spaceship-prompt
+
 autoload -U colors && colors
 
 # zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -65,7 +68,8 @@ alias c='cdr $(cdr -l | fzf | awk -F " " "{print \$1}")'
 
 zinit ice wait lucid; zinit light zsh-users/zaw
 
-export THEME=onedark
+# Popular: onedark, datacamp, eighties
+export THEME=datacamp
 alias b="~/.dotfiles/.base16/install.sh"
 # User configuration
 if [ -f ~/.zshrc.local ]; then

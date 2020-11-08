@@ -1,10 +1,10 @@
 scheme: "DataCamp"
 author: "Jens Claes"
 base00: "05192d" # background
-base01: "1e3042"
-base02: "213147"
-base03: "374757"
-base04: "505e6c"
+base01: "374757"
+base02: "5d6a77"
+base03: "8f98a1"
+base04: "b5bac0"
 
 base05: "ffffff" # white
 base06: "e5e1da"

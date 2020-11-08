@@ -393,10 +393,19 @@ Plug 'jrozner/vim-antlr', {'for': ['antlr']}
 " --------------
 " ---   F#   ---
 " --------------
-Plug 'fsharp/vim-fsharp', {
-      \ 'for': 'fsharp',
-      \ 'do':  'make fsautocomplete',
-      \}
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'for': 'fsharp',
+    \ 'tag': '0.1.155',
+    \ 'do': 'bash install.sh',
+    \ }
+" This only works because vim-polyglot does some magic as well
+Plug 'ionide/Ionide-vim', {
+    \ 'for': 'fsharp',
+    \ 'do':  'make fsautocomplete',
+    \ }
+" This is a bug in LanguageClient-neovim that we are disabling
+autocmd BufEnter *.fs,*.fsx,*.fsi autocmd! languageClient CompleteDone
 
 " --------------
 " ---   Go   ---
@@ -559,6 +568,16 @@ let g:ale_fixers['yaml'] = ['prettier']
 function! SetupLspServers()
 lua << EOF
 
+local util = require 'nvim_lsp/util'
+local configs = require 'nvim_lsp/configs'
+configs.fsharp = {
+  default_config = {
+    cmd = {"dotnet", "/Users/jens/.vim/bundle/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/FSharpLanguageServer.dll"};
+    filetypes = {"fsharp"};
+    root_dir = util.root_pattern("*.fsproj", "*.sln", ".git");
+  };
+}
+
 local on_attach = function()
   require'diagnostic'.on_attach()
   require'completion'.on_attach()
@@ -570,6 +589,7 @@ nvim_lsp.clangd.setup{ on_attach = on_attach }
 nvim_lsp.bashls.setup{ on_attach = on_attach }
 nvim_lsp.dockerls.setup{ on_attach = on_attach }
 nvim_lsp.flow.setup{ on_attach = on_attach }
+nvim_lsp.fsharp.setup{ on_attach = on_attach }
 nvim_lsp.gopls.setup{ on_attach = on_attach }
 nvim_lsp.hie.setup{ on_attach = on_attach }
 nvim_lsp.ocamlls.setup{ on_attach = on_attach }

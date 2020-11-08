@@ -7,7 +7,7 @@ token_cache=$cache_dir/github_token
 # Assumes ~/Workspace/<name>
 repo_name=$(pwd | sed "s/$(echo $HOME | sed 's/\//\\\//g')\/Workspace\/\([^\/]*\).*/\1/")
 
-function change_dir () {
+function __dc_change_dir () {
   local name=$1
 
   if [[ -z $name ]]; then
@@ -16,7 +16,7 @@ function change_dir () {
       return false
     fi
 
-    change_dir $result
+    __dc_change_dir $result
   elif [[ -d $workspace/$name ]]; then
     cd $workspace/$name
   else
@@ -26,7 +26,7 @@ function change_dir () {
   fi
 }
 
-function update () {
+function __dc_update () {
   if [[ ! -f $token_cache ]]; then
     echo "No token found for github. It should be at $token_cache"
     return false
@@ -53,7 +53,7 @@ function update () {
   echo "Updated!"
 }
 
-function show-env () {
+function __dcs_show-env () {
   local keypath=$1
 
   # local staging_profile="arn:aws:iam::301258414863:role/datacamp-prod-readonly"
@@ -90,28 +90,28 @@ function show-env () {
   AWS_PROFILE="$AWS_PROFILE" aws ssm get-parameters-by-path --recursive --path $keypath --region us-east-1 | jq -r '.Parameters | map(if .Type == "SecureString" then .Value = "<encrypted>" else . end) | sort_by(.Name)[] | "\(.Name)=\(.Value)"' | sed "s/$(echo $keypath | sed 's/\//\\\//g')\///g"
 }
 
-function gh () {
+function __dc_gh () {
   open https://github.com/datacamp-engineering/${repo_name}
 }
 
-function pr () {
+function __dc_pr () {
   local branch=$(git rev-parse --abbrev-ref HEAD)
   open https://github.com/datacamp-engineering/${repo_name}/compare/${branch}\?expand=1
 }
 
-function ci () {
+function __dc_ci () {
   local branch=$(git rev-parse --abbrev-ref HEAD)
   local branch_encoded=$(echo $branch | jq -Rr @uri)
   open "https://app.circleci.com/pipelines/github/datacamp-engineering/${repo_name}?branch=${branch_encoded}"
 }
 
-function all () {
+function __dc_all () {
   echo "all gh pr ci update show-env"
 }
 
-if [[ $(all | grep -w ${1:-"not found"}) ]]; then
+if [[ $(__dc_all | grep -w ${1:-"not found"}) ]]; then
   # Execute the arguments given
-  "$@"
+  "__dc_$@"
 else
-  change_dir $@
+  __dc_change_dir $@
 fi

@@ -401,13 +401,33 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'tag': '0.1.155',
     \ 'do': 'bash install.sh',
     \ }
+" This is a bug in LanguageClient-neovim that we are disabling
+autocmd BufEnter *.fs,*.fsx,*.fsi autocmd! languageClient CompleteDone
+
 " This only works because vim-polyglot does some magic as well
 Plug 'ionide/Ionide-vim', {
     \ 'for': 'fsharp',
     \ 'do':  'make fsautocomplete',
     \ }
-" This is a bug in LanguageClient-neovim that we are disabling
-autocmd BufEnter *.fs,*.fsx,*.fsi autocmd! languageClient CompleteDone
+
+" Locally install fsharp-language-server so we can use it in vim-lsp below
+Plug 'fsprojects/fsharp-language-server', {
+    \ 'do': 'npm install && dotnet build -c Release'
+    \}
+" Setup fsharp-language-server
+function! SetupLspFsharp ()
+lua << EOF
+local util = require 'nvim_lsp/util'
+local configs = require 'nvim_lsp/configs'
+configs.fsharp = {
+  default_config = {
+    cmd = {"dotnet", "/Users/jens/.vim/bundle/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/FSharpLanguageServer.dll"};
+    filetypes = {"fsharp"};
+    root_dir = util.root_pattern("*.fsproj", "*.sln", ".git");
+  };
+}
+EOF
+endfunction
 
 " --------------
 " ---   Go   ---
@@ -568,18 +588,8 @@ let g:ale_fixers['yaml'] = ['prettier']
 " ===   LSP Config   ===
 " ================================
 function! SetupLspServers()
+call SetupLspFsharp()
 lua << EOF
-
-local util = require 'nvim_lsp/util'
-local configs = require 'nvim_lsp/configs'
-configs.fsharp = {
-  default_config = {
-    cmd = {"dotnet", "/Users/jens/.vim/bundle/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/FSharpLanguageServer.dll"};
-    filetypes = {"fsharp"};
-    root_dir = util.root_pattern("*.fsproj", "*.sln", ".git");
-  };
-}
-
 local on_attach = function()
   require'diagnostic'.on_attach()
   require'completion'.on_attach()

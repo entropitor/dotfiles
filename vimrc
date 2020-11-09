@@ -55,7 +55,7 @@ nnoremap <right> <nop>
 
 if has('mouse') | set mouse=a | endif
 
-autocmd BufEnter term://* startinsert
+" autocmd BufEnter term://* startinsert
 
 tnoremap <Esc> <C-\><C-n>
 

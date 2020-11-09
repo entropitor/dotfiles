@@ -152,6 +152,9 @@ let g:which_key_map.l.i = 'implementation'
 nnoremap <silent> <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>
 let g:which_key_map.l.r = 'rename'
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
+let g:which_key_map.l.p = 'format'
+nnoremap <silent> <leader>lp <cmd>lua vim.lsp.buf.formatting()<CR>
+vnoremap <silent> <leader>lp <cmd>lua vim.lsp.buf.range_formatting()<CR>
 let g:which_key_map.l.s = 'signature-help'
 nnoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
 inoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>

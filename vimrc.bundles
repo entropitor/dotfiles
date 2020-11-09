@@ -63,8 +63,10 @@ let g:which_key_default_group_name='which_key_ignore'
 let g:which_key_map = {}
 let g:which_key_map.f = { 'name': '+file' }
 let g:which_key_map.l = { 'name': '+language' }
+let g:which_key_map.n = { 'name': '+neovim' }
 let g:which_key_map.s = { 'name': '+search' }
 let g:which_key_map.t = { 'name': '+test' }
+let g:which_key_map.w = { 'name': '+tabs' }
 
 " ================
 " ===   Repl   ===

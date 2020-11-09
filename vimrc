@@ -98,12 +98,16 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <leader>bq :%bd\|:e#<CR>
 
-nnoremap <leader>tn :tabnew<CR>
+let g:which_key_map.w.n= 'create-tab'
+nnoremap <leader>wn :tabnew<CR>
+let g:which_key_map.w.d= 'close-tab'
 nnoremap <leader>td :tabclose<CR>
 nnoremap [w :tabprevious<CR>
 nnoremap ]w :tabnext<CR>
 nnoremap [W :tabfirst<CR>
 nnoremap ]W :tablast<CR>
 
+let g:which_key_map.n.q= 'quit-all'
 nnoremap <leader>nq :qa<CR>
+let g:which_key_map.n.w= 'save-file'
 nnoremap <leader>nw :w<CR>

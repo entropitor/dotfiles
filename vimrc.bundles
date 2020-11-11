@@ -399,13 +399,10 @@ Plug 'jrozner/vim-antlr', {'for': ['antlr']}
 " ---   F#   ---
 " --------------
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
+    \ 'branch': 'dev',
     \ 'for': 'fsharp',
-    \ 'tag': '0.1.155',
     \ 'do': 'bash install.sh',
     \ }
-" This is a bug in LanguageClient-neovim that we are disabling
-autocmd BufEnter *.fs,*.fsx,*.fsi autocmd! languageClient CompleteDone
 
 " This only works because vim-polyglot does some magic as well
 Plug 'ionide/Ionide-vim', {

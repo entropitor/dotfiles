@@ -404,7 +404,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-" This only works because vim-polyglot does some magic as well
+" The 'for: fsharp' only works because vim-polyglot does some magic as well
 Plug 'ionide/Ionide-vim', {
     \ 'for': 'fsharp',
     \ 'do':  'make fsautocomplete',
@@ -467,8 +467,8 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 " Fix import statements
 Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact' ]}
-silent! nnoremap <silent> <leader>j :ImportJSWord<CR>
-silent! nnoremap <silent> <leader>i :ImportJSFix<CR>
+silent! nnoremap <silent> <leader>ij :ImportJSWord<CR>
+silent! nnoremap <silent> <leader>ii :ImportJSFix<CR>
 
 " --------------------
 " ---   Markdown   ---

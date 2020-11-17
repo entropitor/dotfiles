@@ -116,3 +116,5 @@ bindkey '^F' _zsh_cli_fg
 
 unalias zi
 eval "$(zoxide init zsh)"
+
+export DOTNET_NEW_PREFERRED_LANG="F#"

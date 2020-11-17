@@ -114,17 +114,20 @@ let g:UltiSnipsSnippetDirectories = ["UltiSnips"]
 " ==========================
 " ===   Autocompletion   ===
 " ==========================
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+" function! s:check_back_space() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+" inoremap <silent><expr> <TAB>
+"   \ pumvisible() ? "\<C-n>" :
+"   \ <SID>check_back_space() ? "\<TAB>" :
+"   \ "\<Cmd>lua require'completion'.triggerCompletion()<CR>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ completion#trigger_completion()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-imap <c-space> <c-r>=completion#trigger_completion()<CR>
+imap <tab> <Plug>(completion_smart_tab)
+imap <s-tab> <Plug>(completion_smart_s_tab)
+
+imap <silent> <c-space> <Plug>(completion_trigger)
 
 set completeopt=menuone,noinsert,noselect,menu
 set shortmess+=c

@@ -176,19 +176,12 @@ Plug 'RishabhRD/nvim-lsputils'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
-Plug 'haorenW1025/diagnostic-nvim'
-autocmd! User diagnostic-nvim autocmd BufEnter * lua require'diagnostic'.on_attach()
-let g:diagnostic_enable_virtual_text = 1
-" let g:diagnostic_insert_delay = 1
-nnoremap [d <cmd>PrevDiagnostic<CR>
-nnoremap [D <cmd>FirstDiagnostic<CR>
-nnoremap ]d <cmd>NextDiagnostic<CR>
-nnoremap ]D <cmd>LastDiagnostic<CR>
-" nnoremap <silent> <leader>ld <cmd>lua require'diagnostic.util'.show_line_diagnostics()<CR>
-
-let g:diagnostic_enable_virtual_text = 1
-let g:diagnostic_show_sign = 1
-let g:buf_diagnostics_underline = 1
+nnoremap [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+" First Diagnostic
+nnoremap [D <cmd>lua vim.lsp.diagnostic.goto_next { cursor_position = {0,0} }<CR>
+" Last Diagnostic
+nnoremap ]D <cmd>lua vim.lsp.diagnostic.goto_prev { cursor_position = {0,0} }<CR>
 
 Plug 'haorenW1025/completion-nvim'
 autocmd! User completion-nvim autocmd BufEnter * lua require'completion'.on_attach()
@@ -594,7 +587,6 @@ function! SetupLspServers()
 call SetupLspFsharp()
 lua << EOF
 local on_attach = function()
-  require'diagnostic'.on_attach()
   require'completion'.on_attach()
 end
 

@@ -413,15 +413,18 @@ Plug 'fsprojects/fsharp-language-server', {
 " Setup fsharp-language-server
 function! SetupLspFsharp ()
 lua << EOF
-local util = require 'nvim_lsp/util'
-local configs = require 'nvim_lsp/configs'
-configs.fsharp = {
-  default_config = {
-    cmd = {"dotnet", "/Users/jens/.vim/bundle/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/FSharpLanguageServer.dll"};
-    filetypes = {"fsharp"};
-    root_dir = util.root_pattern("*.fsproj", "*.sln", ".git");
-  };
-}
+local lspconfig = require'lspconfig'
+local util = require'lspconfig/util'
+local configs = require'lspconfig/configs'
+if not configs.fsharp then
+  configs.fsharp = {
+    default_config = {
+      cmd = {"dotnet", "/Users/jens/.vim/bundle/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/FSharpLanguageServer.dll"};
+      filetypes = {"fsharp"};
+      root_dir = util.root_pattern("*.fsproj", "*.sln", ".git");
+    };
+  }
+end
 EOF
 endfunction
 
@@ -590,27 +593,27 @@ local on_attach = function()
   require'completion'.on_attach()
 end
 
-nvim_lsp = require'nvim_lsp'
+lspconfig = require'lspconfig'
 
-nvim_lsp.clangd.setup{ on_attach = on_attach }
-nvim_lsp.bashls.setup{ on_attach = on_attach }
-nvim_lsp.dockerls.setup{ on_attach = on_attach }
-nvim_lsp.flow.setup{ on_attach = on_attach }
-nvim_lsp.fsharp.setup{ on_attach = on_attach }
-nvim_lsp.gopls.setup{ on_attach = on_attach }
-nvim_lsp.hie.setup{ on_attach = on_attach }
-nvim_lsp.ocamlls.setup{ on_attach = on_attach }
-nvim_lsp.ocamllsp.setup{ on_attach = on_attach }
-nvim_lsp.pyls_ms.setup{ on_attach = on_attach }
--- nvim_lsp.rls.setup{ on_attach = on_attach }
-nvim_lsp.rust_analyzer.setup{ on_attach = on_attach }
-nvim_lsp.solargraph.setup{ on_attach = on_attach }
-nvim_lsp.tsserver.setup{
+lspconfig.clangd.setup{ on_attach = on_attach }
+lspconfig.bashls.setup{ on_attach = on_attach }
+lspconfig.dockerls.setup{ on_attach = on_attach }
+lspconfig.flow.setup{ on_attach = on_attach }
+lspconfig.fsharp.setup{ on_attach = on_attach }
+lspconfig.gopls.setup{ on_attach = on_attach }
+lspconfig.hie.setup{ on_attach = on_attach }
+lspconfig.ocamlls.setup{ on_attach = on_attach }
+lspconfig.ocamllsp.setup{ on_attach = on_attach }
+lspconfig.pyls_ms.setup{ on_attach = on_attach }
+-- lspconfig.rls.setup{ on_attach = on_attach }
+lspconfig.rust_analyzer.setup{ on_attach = on_attach }
+lspconfig.solargraph.setup{ on_attach = on_attach }
+lspconfig.tsserver.setup{
   on_attach = on_attach,
 }
-nvim_lsp.terraformls.setup{ on_attach = on_attach }
-nvim_lsp.vimls.setup{ on_attach = on_attach }
-nvim_lsp.yamlls.setup{
+lspconfig.terraformls.setup{ on_attach = on_attach }
+lspconfig.vimls.setup{ on_attach = on_attach }
+lspconfig.yamlls.setup{
   on_attach = on_attach,
   settings = {
     yaml = {
@@ -620,7 +623,7 @@ nvim_lsp.yamlls.setup{
     }
   }
 }
-nvim_lsp.jsonls.setup{
+lspconfig.jsonls.setup{
   on_attach = on_attach,
   settings = {
     json = {

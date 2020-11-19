@@ -5,6 +5,25 @@ set t_Co=256
 
 call plug#begin('~/.vim/bundle')
 
+" ======================================
+" ===   Show keybindings when lost   ===
+" ======================================
+Plug 'liuchengxu/vim-which-key'
+nnoremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
+nnoremap <silent> <leader>? :<c-u>WhichKey '<leader>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<leader>'<CR>
+set timeoutlen=500
+let g:which_key_flatten=0
+let g:which_key_default_group_name='which_key_ignore'
+let g:which_key_map = {}
+let g:which_key_map.f = { 'name': '+file' }
+let g:which_key_map.g = { 'name': '+git' }
+let g:which_key_map.l = { 'name': '+language' }
+let g:which_key_map.n = { 'name': '+neovim' }
+let g:which_key_map.s = { 'name': '+search' }
+let g:which_key_map.t = { 'name': '+test' }
+let g:which_key_map.w = { 'name': '+tabs' }
+
 " ===========================
 " ===   Git Integration   ===
 " ===========================
@@ -52,21 +71,6 @@ Plug 'easymotion/vim-easymotion'
 " Allow killing of buffers more easily
 Plug 'qpkorr/vim-bufkill'
 nnoremap <leader>x :BD<cr>
-
-Plug 'liuchengxu/vim-which-key'
-nnoremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
-nnoremap <silent> <leader>? :<c-u>WhichKey '<leader>'<CR>
-vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<leader>'<CR>
-set timeoutlen=500
-let g:which_key_flatten=0
-let g:which_key_default_group_name='which_key_ignore'
-let g:which_key_map = {}
-let g:which_key_map.f = { 'name': '+file' }
-let g:which_key_map.l = { 'name': '+language' }
-let g:which_key_map.n = { 'name': '+neovim' }
-let g:which_key_map.s = { 'name': '+search' }
-let g:which_key_map.t = { 'name': '+test' }
-let g:which_key_map.w = { 'name': '+tabs' }
 
 " ================
 " ===   Repl   ===

@@ -1,0 +1,2 @@
+COPY_ALWAYS="*/alacritty.yml"
+TAGS="git vim zsh"

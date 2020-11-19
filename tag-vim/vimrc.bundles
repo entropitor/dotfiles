@@ -29,6 +29,10 @@ let g:which_key_map.w = { 'name': '+tabs' }
 " ===========================
 " Add git commands
 Plug 'tpope/vim-fugitive'
+let g:which_key_map.g.s = 'git-status'
+nmap <leader>gs <cmd>:Gstatus<CR>
+let g:which_key_map.g.c = 'git-commit'
+nmap <leader>gc <cmd>:Gcommit --verbose<CR>
 Plug 'idanarye/vim-merginal'
 
 " Add git diff symbols in the gutter

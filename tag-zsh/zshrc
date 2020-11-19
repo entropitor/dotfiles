@@ -17,9 +17,9 @@ function after_load_git () {
   alias ggpush='git push origin "$(git rev-parse --abbrev-ref HEAD)"'
 }
 
-zinit ice wait lucid; zinit light zsh-users/zsh-syntax-highlighting
+zinit ice wait lucid blockf atpull'zinit creinstall -q .'; zinit light zsh-users/zsh-completions
 
-zinit ice wait lucid; zinit light zsh-users/zsh-completions
+zinit ice atload"zpcompinit" atclone'./zplug.zsh'; zinit light g-plane/zsh-yarn-autocompletions
 
 function _bind_autosuggest_accept {
   bindkey '^ ' autosuggest-accept
@@ -67,6 +67,9 @@ zinit ice wait lucid; zinit light willghatch/zsh-cdr
 alias c='cdr $(cdr -l | fzf | awk -F " " "{print \$1}")'
 
 zinit ice wait lucid; zinit light zsh-users/zaw
+
+zinit ice wait lucid atinit"zicompinit; zicdreplay"; zinit light zsh-users/zsh-syntax-highlighting
+
 
 # Popular: onedark, datacamp, eighties
 export THEME=datacamp
@@ -118,3 +121,4 @@ unalias zi
 eval "$(zoxide init zsh)"
 
 export DOTNET_NEW_PREFERRED_LANG="F#"
+

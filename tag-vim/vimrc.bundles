@@ -595,6 +595,86 @@ let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
 let g:ale_typescript_prettier_use_local_config = 1
 let g:ale_linters_ignore = {'typescript': ['tslint'], 'typescriptreact': ['tslint']}
 
+" See also https://github.com/microsoft/vscode-eslint/issues/1125 for the sed
+" command
+Plug 'microsoft/vscode-eslint', {
+    \ 'do': 'npm install && npm run webpack && sed -i=\"\" -E \"s/Number.MAX_VALUE/2147483647/g\" server/out/eslintServer.js'
+    \}
+" Setup eslint-server
+function! SetupLspEslint ()
+lua << EOF
+local lspconfig = require'lspconfig'
+local util = require'lspconfig/util'
+local configs = require'lspconfig/configs'
+if not configs.eslint then
+  configs.eslint = {
+    default_config = {
+      cmd = {"node", vim.env.HOME .. "/.vim/bundle/vscode-eslint/server/out/eslintServer.js", "--stdio"};
+      filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
+      -- root_dir = util.root_pattern(".eslintrc.json", ".eslintrc.js", "package.json", "tsconfig.json", ".git");
+      root_dir = util.root_pattern(".eslintrc.json", ".eslintrc.js");
+      settings = {
+        validate = "on";
+        packageManager = "yarn";
+        codeAction = {
+          disableRuleComment = {
+            enable = true;
+            location = 'separateLine'
+          };
+          showDocumentation = {
+            enable = true;
+          };
+        };
+        codeActionOnSave = {
+          enable = false;
+          mode = 'all';
+        };
+        format = false;
+        quiet = false;
+        onIgnoredFiles = 'off';
+        options = null;
+        run = 'onType';
+        nodePath = '/usr/local/bin/node';
+        workspaceFolder = null;
+      };
+      handlers = {
+        ['client/registerCapability'] = function(_, _, result, client_id)
+          if not result then return end
+          return {}
+        end;
+        ['eslint/noConfig'] = function(_, _, result, client_id)
+          if not result then return end
+          print('calling eslint/noConfig')
+          return {}
+        end;
+        ['eslint/noLibrary'] = function(_, _, result, client_id)
+          if not result then return end
+          print('calling eslint/noLibrary')
+          return {}
+        end;
+        ['eslint/openDoc'] = function(_, _, result, client_id)
+          if not result then return end
+          vim.cmd('!open ' .. result.url)
+          return {}
+        end;
+        ['eslint/probeFailed'] = function(_, _, result, client_id)
+          if not result then return end
+          print('calling eslint/probeFailed')
+          return {}
+        end;
+        ['eslint/confirmESLintExecution'] = function(_, _, result, client_id)
+          if not result then return end
+          print('asking for eslint execution')
+          return 4 -- approved
+        end;
+      }
+    };
+  }
+end
+EOF
+
+endfunction
+
 " ----------------
 " ---   Yaml   ---
 " ----------------
@@ -607,6 +687,8 @@ let g:ale_fixers['yaml'] = ['prettier']
 " ================================
 function! SetupLspServers()
 call SetupLspFsharp()
+call SetupLspEslint()
+
 lua << EOF
 local on_attach = function()
   require'completion'.on_attach()
@@ -617,6 +699,9 @@ lspconfig = require'lspconfig'
 lspconfig.clangd.setup{ on_attach = on_attach }
 lspconfig.bashls.setup{ on_attach = on_attach }
 lspconfig.dockerls.setup{ on_attach = on_attach }
+lspconfig.eslint.setup{
+  on_attach = on_attach,
+}
 lspconfig.flow.setup{ on_attach = on_attach }
 lspconfig.fsharp.setup{ on_attach = on_attach }
 lspconfig.gopls.setup{ on_attach = on_attach }

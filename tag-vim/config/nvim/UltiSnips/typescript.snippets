@@ -39,3 +39,20 @@ describe('${1:`!p snip.rv = snip.basename.replace('.spec', '')`}', () => {
   it.todo('should test something');
 });
 endsnippet
+
+snippet it "test"
+it('${1}', () => {
+  ${0}
+})
+endsnippet
+
+snippet testGroup "test group (describe)"
+describe('${1}', () => {
+  ${0}
+})
+endsnippet
+
+snippet exeq "expect toEqual"
+expect(${1}).toEqual(${2})
+endsnippet
+

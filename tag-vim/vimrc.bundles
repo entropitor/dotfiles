@@ -438,7 +438,7 @@ local configs = require'lspconfig/configs'
 if not configs.fsharp then
   configs.fsharp = {
     default_config = {
-      cmd = {"dotnet", "/Users/jens/.vim/bundle/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/FSharpLanguageServer.dll"};
+      cmd = {"dotnet", vim.env.HOME .. "/.vim/bundle/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/FSharpLanguageServer.dll"};
       filetypes = {"fsharp"};
       root_dir = util.root_pattern("*.fsproj", "*.sln", ".git");
     };

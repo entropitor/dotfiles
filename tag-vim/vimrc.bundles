@@ -729,6 +729,15 @@ lspconfig.yamlls.setup{
 }
 lspconfig.jsonls.setup{
   on_attach = on_attach,
+  capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          snippetSupport = true
+        }
+      }
+    }
+  },
   settings = {
     json = {
       schemas = {

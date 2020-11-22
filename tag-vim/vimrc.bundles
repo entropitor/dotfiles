@@ -590,6 +590,38 @@ Plug 'tpope/vim-dadbod', {'for': ['sql']}
 " ----------------------
 au BufNewFile,BufRead *.ts set filetype=typescript
 
+command! FileRename call TypescriptFileRename()
+function! TypescriptFileRename ()
+lua << EOF
+  local function ok_or_nil(status, ...)
+    if not status then return end
+    return ...
+  end
+  local function npcall(fn, ...)
+    return ok_or_nil(pcall(fn, ...))
+  end
+
+  old_uri = vim.uri_from_bufnr(0)
+  old_file = vim.fn.expand('%')
+  new_file = npcall(vim.fn.input, "New Name: ", old_file)
+  if not (new_file and #new_file > 0) then return end
+
+  local handler = function(_, _, result, client_id)
+    if not result then return end
+    print('moving file itself')
+    vim.api.nvim_command(":bdelete")
+    vim.api.nvim_command(":!mv " .. old_file .. " " .. new_file)
+    vim.api.nvim_command(":e " .. new_file)
+    return {}
+  end;
+
+  vim.lsp.buf_request(0, 'workspace/executeCommand', {
+    command='_typescript.applyRenameFile';
+    arguments={{sourceUri=old_uri; targetUri=vim.uri_from_fname(new_file)}};
+  }, handler)
+EOF
+endfunction
+
 let g:ale_fixers['typescript'] = ['prettier', 'eslint']
 let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
 let g:ale_typescript_prettier_use_local_config = 1

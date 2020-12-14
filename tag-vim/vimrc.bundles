@@ -726,6 +726,17 @@ call SetupLspEslint()
 lua << EOF
 local on_attach = function()
   require'completion'.on_attach()
+  vim.cmd('highlight LspDiagnosticsUnderlineError guibg=DarkRed gui=underline')
+  vim.cmd('highlight LspDiagnosticsSignError guibg=DarkRed')
+
+  vim.cmd('highlight LspDiagnosticsUnderlineWarning guibg=LightYellow gui=underline')
+  vim.cmd('highlight LspDiagnosticsSignWarning guibg=LightYellow')
+
+  vim.cmd('highlight LspDiagnosticsUnderlineInformation guibg=LightBlue gui=underline')
+  vim.cmd('highlight LspDiagnosticsSignInformation guibg=LightBlue')
+
+  vim.cmd('highlight LspDiagnosticsUnderlineHint guibg=LightGrey gui=underline')
+  vim.cmd('highlight LspDiagnosticsSignHint guibg=LightGrey')
 end
 
 lspconfig = require'lspconfig'

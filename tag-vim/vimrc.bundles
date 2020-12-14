@@ -745,6 +745,9 @@ lspconfig = require'lspconfig'
 -- typescript
 lspconfig.tsserver.setup{
   on_attach = on_attach,
+  root_dir = function(fname)
+    return lspconfig.util.find_git_ancestor(fname) or laspconfig.tsserver.default_config.root_dir(fname)
+  end;
 }
 lspconfig.eslint.setup{
   on_attach = on_attach,

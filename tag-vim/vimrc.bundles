@@ -493,6 +493,10 @@ silent! nnoremap <silent> <leader>ii :ImportJSFix<CR>
 " --------------------
 let g:ale_fixers['markdown'] = ['prettier']
 
+Plug 'entropitor/jot-lsp', {
+      \ 'do': 'cd server && yarn && yarn tsc'
+      \}
+
 " ------------------
 " ---   Ledger   ---
 " ------------------
@@ -739,6 +743,7 @@ local on_attach = function()
   vim.cmd('highlight LspDiagnosticsSignHint guibg=LightGrey')
 end
 
+require'jot-lsp'.setup()
 lspconfig = require'lspconfig'
 
 -- typescript
@@ -756,6 +761,9 @@ lspconfig.flow.setup{ on_attach = on_attach }
 lspconfig.fsharp.setup{ on_attach = on_attach }
 lspconfig.gopls.setup{ on_attach = on_attach }
 lspconfig.hie.setup{ on_attach = on_attach }
+lspconfig.jot.setup{
+  on_attach = on_attach
+}
 lspconfig.ocamlls.setup{ on_attach = on_attach }
 lspconfig.ocamllsp.setup{ on_attach = on_attach }
 lspconfig.pyls_ms.setup{ on_attach = on_attach }

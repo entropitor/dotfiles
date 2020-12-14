@@ -72,7 +72,7 @@ zinit ice wait lucid atinit"zicompinit; zicdreplay"; zinit light zsh-users/zsh-s
 
 
 # Popular: onedark, datacamp, eighties
-export THEME=datacamp
+export THEME=onedark
 alias b="~/.dotfiles/.base16/install.sh"
 # User configuration
 if [ -f ~/.zshrc.local ]; then

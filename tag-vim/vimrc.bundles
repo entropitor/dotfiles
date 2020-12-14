@@ -183,12 +183,6 @@ nnoremap <silent> <leader>lx <cmd>lua print(vim.inspect(vim.lsp.buf))<CR>
 
 Plug 'RishabhRD/popfix', { 'do': 'make' }
 Plug 'RishabhRD/nvim-lsputils'
-let g:lsp_utils_symbols_opts = {
-    \ 'mode': 'editor'
-    \}
-let g:lsp_utils_location_opts = {
-    \ 'mode': 'editor'
-    \}
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
@@ -860,7 +854,7 @@ vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definit
 vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
 vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
 vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
--- vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
 vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 
 EOF

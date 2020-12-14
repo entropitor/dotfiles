@@ -629,8 +629,11 @@ let g:ale_linters_ignore = {'typescript': ['tslint'], 'typescriptreact': ['tslin
 
 " See also https://github.com/microsoft/vscode-eslint/issues/1125 for the sed
 " command
+" Plug 'microsoft/vscode-eslint', {
+"     \ 'do': 'npm install && npm run webpack && sed -i=\"\" -E \"s/Number.MAX_VALUE/2147483647/g\" server/out/eslintServer.js'
+"     \}
 Plug 'microsoft/vscode-eslint', {
-    \ 'do': 'npm install && npm run webpack && sed -i=\"\" -E \"s/Number.MAX_VALUE/2147483647/g\" server/out/eslintServer.js'
+    \ 'do': 'npm install && npm run webpack'
     \}
 " Setup eslint-server
 function! SetupLspEslint ()
@@ -704,7 +707,6 @@ if not configs.eslint then
   }
 end
 EOF
-
 endfunction
 
 " ----------------

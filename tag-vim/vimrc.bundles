@@ -77,6 +77,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'qpkorr/vim-bufkill'
 nnoremap <leader>x :BD<cr>
 
+Plug 'mbbill/undotree'
+
 " ================
 " ===   Repl   ===
 " ================

@@ -23,7 +23,7 @@ set softtabstop=2
 set nopaste
 set autoread
 set number
-set relativenumber
+" set relativenumber
 
 set cursorline
 

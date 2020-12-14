@@ -741,12 +741,17 @@ end
 
 lspconfig = require'lspconfig'
 
-lspconfig.clangd.setup{ on_attach = on_attach }
-lspconfig.bashls.setup{ on_attach = on_attach }
-lspconfig.dockerls.setup{ on_attach = on_attach }
+-- typescript
+lspconfig.tsserver.setup{
+  on_attach = on_attach,
+}
 lspconfig.eslint.setup{
   on_attach = on_attach,
 }
+
+lspconfig.clangd.setup{ on_attach = on_attach }
+lspconfig.bashls.setup{ on_attach = on_attach }
+lspconfig.dockerls.setup{ on_attach = on_attach }
 lspconfig.flow.setup{ on_attach = on_attach }
 lspconfig.fsharp.setup{ on_attach = on_attach }
 lspconfig.gopls.setup{ on_attach = on_attach }
@@ -757,9 +762,6 @@ lspconfig.pyls_ms.setup{ on_attach = on_attach }
 -- lspconfig.rls.setup{ on_attach = on_attach }
 lspconfig.rust_analyzer.setup{ on_attach = on_attach }
 lspconfig.solargraph.setup{ on_attach = on_attach }
-lspconfig.tsserver.setup{
-  on_attach = on_attach,
-}
 lspconfig.terraformls.setup{ on_attach = on_attach }
 lspconfig.vimls.setup{ on_attach = on_attach }
 lspconfig.yamlls.setup{
@@ -848,7 +850,7 @@ vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definit
 vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
 vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
 vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+-- vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
 vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 
 EOF

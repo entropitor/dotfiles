@@ -181,7 +181,7 @@ nnoremap <silent> <leader>lw <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 let g:which_key_map.l.x = 'capabilities'
 nnoremap <silent> <leader>lx <cmd>lua print(vim.inspect(vim.lsp.buf))<CR>
 
-Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/popfix', { 'do': 'make' }
 Plug 'RishabhRD/nvim-lsputils'
 let g:lsp_utils_symbols_opts = {
     \ 'mode': 'editor'

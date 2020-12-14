@@ -59,3 +59,5 @@ alias tfc="rm -rf .terraform/"
 alias tfs="tfswitch"
 
 alias lg="lazygit"
+
+alias kc="kubectl config unset current-context"

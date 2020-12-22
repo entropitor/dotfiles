@@ -162,6 +162,8 @@ let g:which_key_map.l.e = 'show-line-diagnostics'
 nnoremap <silent> <leader>le <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
 let g:which_key_map.l.f = 'show-references'
 nnoremap <silent> <leader>lf <cmd>lua vim.lsp.buf.references()<CR>
+let g:which_key_map.l.h = 'highlight'
+nnoremap <silent> <leader>lh <cmd>lua vim.lsp.buf.document_highlight()<CR>
 let g:which_key_map.l.i = 'implementation'
 nnoremap <silent> <leader>li <cmd>lua vim.lsp.buf.implementation()<CR>
 let g:which_key_map.l.r = 'rename'

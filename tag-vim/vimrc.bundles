@@ -265,20 +265,31 @@ nnoremap <leader>sr :Ack!
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-let g:which_key_map.f.b = 'buffers'
-nnoremap <leader>fb :Buffers<CR>
-let g:which_key_map.f.f = 'files'
-nnoremap <leader>ff :Files<CR>
-let g:which_key_map.f.g = 'git-files'
-nnoremap <leader>fg :GFiles<CR>
-let g:which_key_map.f.c = 'edited-files'
-nnoremap <leader>fc :GFiles?<CR>
-
-let g:which_key_map.s.f = 'file'
-nnoremap <leader>sf :Rg<space>
 
 let g:which_key_map.e.s = 'insert-snippet'
 nnoremap <leader>es <cmd>Snippets<CR>
+
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+let g:which_key_map.f.b = 'buffers'
+nnoremap <leader>fb :Telescope buffers<CR>
+let g:which_key_map.f.f = 'files'
+nnoremap <leader>ff :Telescope find_files<CR>
+let g:which_key_map.f.g = 'git-files'
+nnoremap <leader>fg :Telescope git_files<CR>
+let g:which_key_map.f.c = 'edited-files'
+nnoremap <leader>fc :Telescope git_status<CR>
+
+let g:which_key_map.s.l = 'live-grep'
+nnoremap <leader>sl :Telescope live_grep<CR>
+let g:which_key_map.s.g = 'grep'
+nnoremap <leader>sg :Rg<CR>
+
+Plug 'nvim-telescope/telescope-github.nvim'
+
+let g:which_key_map.e.g = 'insert-gist'
+nnoremap <leader>eg <cmd>Telescope gh_gist<CR>
 
 " ==========================
 " ===   Test Managment   ===
@@ -847,8 +858,10 @@ autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 call plug#end()
 
+" After plug#end()
 call SetupLspServers()
 call which_key#register('<Space>', "g:which_key_map")
+lua require('telescope').load_extension('ghcli')
 
 lua <<EOF
 vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler

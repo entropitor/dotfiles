@@ -849,8 +849,6 @@ EOF
 echom "Setup Lsp Servers"
 endfunction
 
-autocmd! User nvim-lsp call SetupLspServers()
-
 " This conflicts with Plug 'donniewest/asyncomplete_neovim_lsp'
 " As we also have an asyncomplete omni completer which will cause double
 " completions

@@ -228,8 +228,8 @@ let g:completion_tabnine_line_limit=1000
 
 Plug 'steelsojka/completion-buffers'
 
-" Plug 'vigoux/completion-treesitter'
-" let g:complete_ts_highlight_at_point = 1
+Plug 'vigoux/completion-treesitter'
+let g:complete_ts_highlight_at_point = 1
 
 Plug 'pechorin/any-jump.vim'
 let g:any_jump_disable_default_keybindings = 1
@@ -363,6 +363,13 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#right_sep = ' '
 let g:airline#extensions#tabline#right_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+" =====================
+" ===   Treesitter  ===
+" =====================
+Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'}
+
+Plug 'romgrk/nvim-treesitter-context'
 
 " ===============================
 " ===   Local Configuration   ===
@@ -872,5 +879,25 @@ vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typ
 vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
 vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
 vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+EOF
 
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  highlight = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<leader>et",
+      node_incremental = "<leader>ej",
+      scope_incremental = "<leader>eJ",
+      node_decremental = "<leader>ek",
+    },
+  },
+  indent = {
+    enable = true,
+  },
+}
 EOF

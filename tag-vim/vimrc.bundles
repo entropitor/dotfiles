@@ -466,6 +466,14 @@ end
 EOF
 endfunction
 
+let g:ale_fixers['fsharp'] = [
+  \  { buffer -> {
+  \     'command': 'fantomas %t',
+  \     'read_temporary_file': 1,
+  \     }
+  \  }
+  \]
+
 " --------------
 " ---   Go   ---
 " --------------

@@ -16,6 +16,7 @@ set timeoutlen=500
 let g:which_key_flatten=0
 let g:which_key_default_group_name='which_key_ignore'
 let g:which_key_map = {}
+let g:which_key_map.d = { 'name': '+debug' }
 let g:which_key_map.e = { 'name': '+edit' }
 let g:which_key_map.f = { 'name': '+file' }
 let g:which_key_map.g = { 'name': '+git' }
@@ -367,6 +368,44 @@ let g:airline#extensions#tabline#right_sep = ' '
 let g:airline#extensions#tabline#right_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
+" =====================
+" ===   Debugging   ===
+" =====================
+Plug 'mfussenegger/nvim-dap'
+nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
+nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
+nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
+nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
+" let g:which_key_map.d.a = 'attach'
+" nnoremap <leader>da <cmd>lua require'dap'.attach('127.0.0.1', vim.fn.input('Port: '), require'dap'.configurations[vim.fn.input('Configuration')])<cr>
+let g:which_key_map.d.b = 'toggle-breakpoint'
+nnoremap <leader>db <cmd>lua require'dap'.toggle_breakpoint{}<cr>
+let g:which_key_map.d.B = 'set-conditional-breakpoint'
+nnoremap <silent> <leader>dB :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+let g:which_key_map.d.p = 'set-logpoint'
+nnoremap <silent> <leader>dp :lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+let g:which_key_map.d.c = 'continue'
+nnoremap <leader>dc <cmd>lua require'dap'.continue{}<cr>
+let g:which_key_map.d.r = 'repl-open'
+nnoremap <leader>dr <cmd>lua require'dap'.repl.open{}<cr>
+let g:which_key_map.d.l = 'run-last'
+nnoremap <leader>dl <cmd>lua require'dap'.run_last{}<cr>
+
+" Adapters
+Plug 'microsoft/vscode-node-debug2', { 'do': 'npm install && npm run-script build' }
+
+" Requires treesitter
+Plug 'theHamsta/nvim-dap-virtual-text'
+let g:dap_virtual_text=v:true
+
+Plug 'nvim-telescope/telescope-dap.nvim'
+let g:which_key_map.d.l = { 'name': '+list' }
+let g:which_key_map.d.l.b = 'list-breakpoints'
+nmap <leader>dlb <cmd>lua require'telescope'.extensions.dap.list_breakpoints{}<cr>
+let g:which_key_map.d.l.c = 'list-debug-configurations'
+nmap <leader>dlc <cmd>lua require'telescope'.extensions.dap.configurations{}<cr>
+let g:which_key_map.d.x = 'list-debug-commands'
+nmap <leader>dx <cmd>lua require'telescope'.extensions.dap.commands{}<cr>
 " =====================
 " ===   Treesitter  ===
 " =====================
@@ -881,6 +920,26 @@ call plug#end()
 call SetupLspServers()
 call which_key#register('<Space>', "g:which_key_map")
 lua require('telescope').load_extension('ghcli')
+lua require('telescope').load_extension('dap')
+
+lua << EOF
+local dap = require('dap')
+dap.adapters.node = {
+  type = 'executable';
+  command = 'node';
+  args = {
+    os.getenv('HOME') .. '/.vim/bundle/vscode-node-debug2/out/src/nodeDebug.js';
+  };
+}
+dap.configurations.javascript = {
+  {
+    type = 'node';
+    request = 'launch';
+    name = "Launch file";
+    program = "${workspaceFolder}/${file}";
+  },
+}
+EOF
 
 lua <<EOF
 vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler

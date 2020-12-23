@@ -293,6 +293,9 @@ Plug 'nvim-telescope/telescope-github.nvim'
 let g:which_key_map.e.g = 'insert-gist'
 nnoremap <leader>eg <cmd>Telescope gh_gist<CR>
 
+let g:which_key_map.x = 'commands'
+nnoremap <leader>x <cmd>Telescope commands<CR>
+
 " ==========================
 " ===   Test Managment   ===
 " ==========================

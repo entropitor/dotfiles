@@ -772,12 +772,13 @@ end
 
 require'jot-lsp'.setup()
 lspconfig = require'lspconfig'
+lsputil = require'lspconfig/util'
 
 -- typescript
 lspconfig.tsserver.setup{
   on_attach = on_attach,
   root_dir = function(fname)
-    return lspconfig.util.find_git_ancestor(fname) or laspconfig.tsserver.default_config.root_dir(fname)
+    return lspconfig.util.find_git_ancestor(fname) -- or lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")
   end;
 }
 lspconfig.eslint.setup{

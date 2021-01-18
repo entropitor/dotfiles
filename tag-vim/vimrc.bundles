@@ -574,16 +574,25 @@ let g:ledger_commodity_before = 1
 let g:ledger_align_at = 70
 let g:ledger_align_commodity = 1
 function! LedgerSetupBindings ()
-  " Assign to Groceries
-  call setreg('g', '02wlRFood:Groceries')
-  " Assign to Resto
-  call setreg('r', '02wlRFood:Resto')
-  " Assign to Datacamp
-  call setreg('d', 'vt r RL:R:D	')
-  " Rewrite assignee
-  call setreg('a', '0f*f)wc$')
-  " Clear Expenses
-  call setreg('c', '0wvt r ')
+lua <<EOF
+  -- @c: Clear Expenses
+  vim.api.nvim_buf_set_keymap(0, 'n', '@c', '0wvt r ', {})
+
+  -- @a: Rewrite assignee
+  vim.api.nvim_buf_set_keymap(0, 'n', '@a', '0f*f)wc$', {})
+  -- @d: Assign to Datacamp
+  vim.api.nvim_buf_set_keymap(0, 'n', '@d', '@cRL:R:D<Tab><Esc>', {})
+  -- @e: Edit Expenses
+  vim.api.nvim_buf_set_keymap(0, 'n', '@e', '0wf R', {})
+  -- @f: Shared with Sara (FakeRent)
+  vim.api.nvim_buf_set_keymap(0, 'n', '@f', '$A/2<Esc>vT g=yypvt r RL:S:Fa<Tab><Tab><Esc>', {})
+  -- @g: Assign to Groceries
+  vim.api.nvim_buf_set_keymap(0, 'n', '@g', '@cRExpenses:Food:Groceries<Esc>', {})
+  -- @r: Assign to Resto
+  vim.api.nvim_buf_set_keymap(0, 'n', '@r', '@cRExpenses:Food:Resto<Esc>', {})
+  -- @s: Shared with Sara (Food)
+  vim.api.nvim_buf_set_keymap(0, 'n', '@s', '$A/2<Esc>vT g=yypvt r RL:S:Fo<Tab><Tab><Esc>', {})
+EOF
 endfunction
 augroup ledger-bindings
   autocmd!

@@ -1,10 +1,9 @@
 :: default: osascript -e 'display notification "default mode" with title "SKHD" sound name "Submarine"'
 :: launch: osascript -e 'display notification "launch mode" with title "SKHD" sound name "Submarine"'
 ctrl + shift - o ; launch
-launch < f : /Applications/Firefox.app/Contents/MacOS/firefox
-launch < t : /Applications/Alacritty.app/Contents/MacOS/alacritty
-launch < k : /Applications/kitty.app/Contents/MacOS/kitty -1
-launch < q ; default
+launch < f : skhd -k escape ; /Applications/Firefox.app/Contents/MacOS/firefox
+launch < t : skhd -k escape ; /Applications/Alacritty.app/Contents/MacOS/alacritty
+launch < k : skhd -k escape ; /Applications/kitty.app/Contents/MacOS/kitty -1
 launch < escape ; default
 
 ctrl + shift - t : /Applications/Alacritty.app/Contents/MacOS/alacritty

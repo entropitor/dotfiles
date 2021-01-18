@@ -12,3 +12,7 @@ insert_final_newline = true
 [*.{js,html,py,erb,rb,json,hs,css,scss,sass,less,pl,rkt}]
 indent_style = space
 indent_size = 2
+
+[*.{fs,fsx}]
+indent_style = space
+indent_size = 4

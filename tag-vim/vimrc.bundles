@@ -292,7 +292,7 @@ nnoremap <leader>sg :Rg<CR>
 Plug 'nvim-telescope/telescope-github.nvim'
 
 let g:which_key_map.e.g = 'insert-gist'
-nnoremap <leader>eg <cmd>Telescope gh_gist<CR>
+nnoremap <leader>eg <cmd>Telescope gh gist<CR>
 
 let g:which_key_map.x = 'commands'
 nnoremap <leader>x <cmd>Telescope commands<CR>
@@ -919,7 +919,7 @@ call plug#end()
 " After plug#end()
 call SetupLspServers()
 call which_key#register('<Space>', "g:which_key_map")
-lua require('telescope').load_extension('ghcli')
+lua require('telescope').load_extension('gh')
 lua require('telescope').load_extension('dap')
 
 lua << EOF

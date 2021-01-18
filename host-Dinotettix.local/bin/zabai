@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function fix() {
-  local id=1
+  local id=0
   local space_ids=$(yabai -m query --displays | jq '[
       .[0].spaces,
       .[1].spaces[1:],
@@ -11,7 +11,11 @@ function fix() {
     | map(.[])[]
   ')
   for yabai_space_id in $space_ids; do
-    yabai -m space $yabai_space_id --label "@:$((id % 10))"
+    if [[ id -le 9 ]]; then
+      yabai -m space $yabai_space_id --label "@work:$((id % 10))"
+    else
+      yabai -m space $yabai_space_id --label "@personal:$((id % 10))"
+    fi
     id=$((id + 1))
   done
 }
@@ -62,6 +66,20 @@ function reorder_display () {
 
 function reorder() {
   yabai -m query --displays | jq '.[] | .index' | xargs -n 1 zabai reorder_display
+}
+
+function mode() {
+  cat ~/.cache/yabai-mode 2> /dev/null || echo work
+}
+
+function set_mode() {
+  local new_mode=$1
+  echo $new_mode > ~/.cache/yabai-mode
+}
+
+function move_mode() {
+  local new_mode=$1
+  yabai -m window --space "@${new_mode}:0"
 }
 
 

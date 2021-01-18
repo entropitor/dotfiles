@@ -966,6 +966,9 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
   highlight = {
     enable = true,
+    disable = {
+      "sh"
+    }
   },
   incremental_selection = {
     enable = true,
@@ -977,7 +980,7 @@ require'nvim-treesitter.configs'.setup {
     },
   },
   indent = {
-    enable = true,
+    enable = false,
   },
 }
 EOF

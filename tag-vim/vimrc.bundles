@@ -316,6 +316,8 @@ nmap <silent> <leader>tl :TestLast<CR>
 let g:which_key_map.t.v= 'test-visit'
 nmap <silent> <leader>tv :TestVisit<CR>
 
+let g:test#javascript#runner = 'jest'
+
 " Dependencies
 Plug 'tpope/vim-dispatch'
 

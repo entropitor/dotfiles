@@ -156,7 +156,7 @@ nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 let g:which_key_map.l.a = 'code-action'
 nnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
-vnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.range_code_action()<CR>
+vnoremap <silent> <leader>la :<C-U>lua vim.lsp.buf.range_code_action()<CR>
 let g:which_key_map.l.d = 'document-symbol'
 nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.document_symbol()<CR>
 let g:which_key_map.l.e = 'show-line-diagnostics'
@@ -171,7 +171,7 @@ let g:which_key_map.l.r = 'rename'
 nnoremap <silent> <leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
 let g:which_key_map.l.p = 'format'
 nnoremap <silent> <leader>lp <cmd>lua vim.lsp.buf.formatting()<CR>
-vnoremap <silent> <leader>lp <cmd>lua vim.lsp.buf.range_formatting()<CR>
+vnoremap <silent> <leader>lp :<C-U>lua vim.lsp.buf.range_formatting()<CR>
 let g:which_key_map.l.s = 'signature-help'
 nnoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
 inoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
@@ -706,11 +706,6 @@ let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
 let g:ale_typescript_prettier_use_local_config = 1
 let g:ale_linters_ignore = {'typescript': ['tslint'], 'typescriptreact': ['tslint']}
 
-" See also https://github.com/microsoft/vscode-eslint/issues/1125 for the sed
-" command
-" Plug 'microsoft/vscode-eslint', {
-"     \ 'do': 'npm install && npm run webpack && sed -i=\"\" -E \"s/Number.MAX_VALUE/2147483647/g\" server/out/eslintServer.js'
-"     \}
 Plug 'microsoft/vscode-eslint', {
     \ 'do': 'npm install && npm run webpack'
     \}
@@ -825,9 +820,9 @@ lsputil = require'lspconfig/util'
 -- typescript
 lspconfig.tsserver.setup{
   on_attach = on_attach,
-  root_dir = function(fname)
-    return lspconfig.util.find_git_ancestor(fname) -- or lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")
-  end;
+  -- root_dir = function(fname)
+  --   return lspconfig.util.find_git_ancestor(fname) -- or lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")
+  -- end;
 }
 lspconfig.eslint.setup{
   on_attach = on_attach,
@@ -855,6 +850,9 @@ lspconfig.yamlls.setup{
   on_attach = on_attach,
   settings = {
     yaml = {
+      schemaStore = {
+        enable = true
+      }
       -- schemas = {
       --  kubernetes = "*"
       --}
@@ -863,6 +861,7 @@ lspconfig.yamlls.setup{
 }
 lspconfig.jsonls.setup{
   on_attach = on_attach,
+  filetypes = {'json', 'jsonc'},
   capabilities = {
     textDocument = {
       completion = {
@@ -909,6 +908,11 @@ lspconfig.jsonls.setup{
           description = 'Prettier config',
           fileMatch = {'.prettierrc', '.prettierrc.json', 'prettier.config.json'},
           url = 'http://json.schemastore.org/prettierrc'
+        },
+        {
+          description = "DataCamp ecs.json",
+          fileMatch = {'ecs.json', 'ecs.*.json'},
+          url = 'https://assets.ops.datacamp.com/ecs.schema.json#',
         }
       }
     }

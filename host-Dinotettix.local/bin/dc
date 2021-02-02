@@ -53,7 +53,7 @@ function __dc_update () {
   echo "Updated!"
 }
 
-function __dcs_show-env () {
+function __dc_show-env () {
   local keypath=$1
 
   # local staging_profile="arn:aws:iam::301258414863:role/datacamp-prod-readonly"

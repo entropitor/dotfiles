@@ -111,3 +111,18 @@ let g:which_key_map.n.q= 'quit-all'
 nnoremap <leader>nq :qa<CR>
 let g:which_key_map.n.w= 'save-file'
 nnoremap <leader>nw :w<CR>
+
+lua <<EOF
+require'nvim-web-devicons'.setup{
+  default = true
+}
+EOF
+highlight TabLineSel guibg=Green
+lua <<EOF
+require'bufferline'.setup{
+  options = {
+    diagnostics = "nvim_lsp";
+    close_icon = "X";
+  };
+}
+EOF

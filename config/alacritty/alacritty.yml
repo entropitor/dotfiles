@@ -83,7 +83,7 @@ scrolling:
 # Font configuration (changes require restart)
 font:
   normal:
-    family: JetBrains Mono
+    family: JetBrainsMono Nerd Font
     style: Regular
     # family: monospace
   # Normal (roman) font face

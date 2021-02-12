@@ -103,6 +103,9 @@ Plug 'ruanyl/vim-gh-line'
 let g:gh_open_command = 'fn() { echo "$@" | pbcopy; }; fn '
 let g:gh_use_canonical = 1
 
+" Screenshot from lines
+Plug 'segeljakt/vim-silicon'
+
 " Time tracking (WakaTime)
 " Plug 'wakatime/vim-wakatime'
 

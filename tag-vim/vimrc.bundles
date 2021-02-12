@@ -804,6 +804,9 @@ end
 EOF
 endfunction
 
+command! EslintFixAll lua require'entropitor.hello'.eslint_fix_all()
+nmap <leader>lF <cmd>lua require'entropitor.hello'.eslint_fix_all()<CR>
+
 " ----------------
 " ---   Yaml   ---
 " ----------------

@@ -58,4 +58,14 @@ function M.all_code_actions ()
   })
 end
 
+function M.eslint_fix_all()
+  vim.lsp.buf.execute_command({
+    command = 'eslint.applyAllFixes';
+    arguments = {{
+        uri = vim.uri_from_bufnr(0),
+        version = vim.lsp.util.buf_versions[vim.fn.bufnr()],
+    }}
+  })
+end
+
 return M

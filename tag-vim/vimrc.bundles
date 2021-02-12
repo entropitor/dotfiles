@@ -569,11 +569,6 @@ let g:ale_linters_ignore['typescriptreact'] = ['deno']
 " Javascript engine
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
-" Fix import statements
-Plug 'galooshi/vim-import-js', {'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact' ]}
-silent! nnoremap <silent> <leader>ij :ImportJSWord<CR>
-silent! nnoremap <silent> <leader>ii :ImportJSFix<CR>
-
 " --------------------
 " ---   Markdown   ---
 " --------------------

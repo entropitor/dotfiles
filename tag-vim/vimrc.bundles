@@ -257,6 +257,7 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_lint_delay = 750
 let g:ale_fixers = {}
+let g:ale_linters_ignore = {}
 " See Languages section for the rest!
 
 " ==================
@@ -538,6 +539,11 @@ Plug 'jparise/vim-graphql', {'for': ['graphql']}
 let g:ale_fixers['html'] = ['prettier']
 
 " ---------------
+" ---   HCL   ---
+" ---------------
+let g:ale_fixers['terraform'] = ['terraform']
+
+" ---------------
 " ---   IDP   ---
 " ---------------
 au BufNewFile,BufRead *.idp set filetype=idp
@@ -553,6 +559,9 @@ let g:ale_fixers['json'] = ['prettier']
 let g:ale_fixers['javascript'] = ['prettier', 'eslint']
 let g:ale_fixers['javascriptreact'] = ['prettier', 'eslint']
 let g:ale_javascript_prettier_use_local_config = 1
+
+let g:ale_linters_ignore['typescript'] = ['deno']
+let g:ale_linters_ignore['typescriptreact'] = ['deno']
 
 " Javascript engine
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
@@ -712,7 +721,8 @@ endfunction
 let g:ale_fixers['typescript'] = ['prettier', 'eslint']
 let g:ale_fixers['typescriptreact'] = ['prettier', 'eslint']
 let g:ale_typescript_prettier_use_local_config = 1
-let g:ale_linters_ignore = {'typescript': ['tslint'], 'typescriptreact': ['tslint']}
+let g:ale_linters_ignore['typescript'] = ['tslint', 'deno']
+let g:ale_linters_ignore['typescriptreact'] = ['tslint', 'deno']
 
 Plug 'microsoft/vscode-eslint', {
     \ 'do': 'npm install && npm run webpack'

@@ -121,8 +121,22 @@ highlight TabLineSel guibg=Green
 lua <<EOF
 require'bufferline'.setup{
   options = {
-    diagnostics = "nvim_lsp";
-    close_icon = "X";
+    max_name_length = 30,
+    diagnostics = "nvim_lsp",
+  },
+  highlights = {
+    error = {
+      guifg = vim.g.base16_gui08,
+      guisp = vim.g.base16_gui08,
+    },
+    error_selected = {
+      guifg = vim.g.base16_gui08,
+      guisp = vim.g.base16_gui08,
+    },
+    error_visible = {
+      guifg = vim.g.base16_gui08,
+      guisp = vim.g.base16_gui08,
+    },
   };
 }
 EOF

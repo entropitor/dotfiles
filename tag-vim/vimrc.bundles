@@ -446,7 +446,9 @@ let g:projectionist_heuristics = {
       \     "*.spec.jsx": {"alternate": ["{}.js", "{}.jsx"]},
       \     "src/*.js":  {"alternate": ["test/{}.js", "spec/{}.js", "test/{}.jsx", "spec/{}.jsx"]},
       \     "test/*.js":  {"alternate": ["src/{}.js", "src/{}.jsx"]},
-      \     "spec/*.js":  {"alternate": ["src/{}.js", "src/{}.jsx"]}
+      \     "spec/*.js":  {"alternate": ["src/{}.js", "src/{}.jsx"]},
+      \     "*_test.rego":  {"alternate": ["{}.rego"]},
+      \     "*.rego":  {"alternate": ["{}_test.rego"]}
       \   }
       \ }
 

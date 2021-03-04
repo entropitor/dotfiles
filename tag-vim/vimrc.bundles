@@ -682,6 +682,16 @@ let g:ale_ocaml_ocamlformat_options = "--enable-outside-detected-project"
 let g:ale_fixers['ocaml'] = ['ocamlformat']
 
 " ----------------
+" ---   Rego   ---
+" ----------------
+let g:ale_fixers['rego'] = [
+  \  { buffer -> {
+  \     'command': 'opa fmt %t',
+  \     }
+  \  }
+  \]
+
+" ----------------
 " ---   Ruby   ---
 " ----------------
 let g:ale_fixers['ruby'] = ['rubocop']

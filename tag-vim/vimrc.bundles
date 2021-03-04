@@ -40,6 +40,8 @@ Plug 'idanarye/vim-merginal'
 " Add git diff symbols in the gutter
 Plug 'airblade/vim-gitgutter'
 
+Plug 'pwntester/octo.nvim'
+
 " ========================
 " ===   Improved VIM   ===
 " ========================

@@ -225,20 +225,16 @@ let g:completion_chain_complete_list = {
     \ 'default' : {
     \   'default': [
     \       {'complete_items': ['lsp']},
-    \       {'complete_items': ['snippet', 'tabnine']},
+    \       {'complete_items': ['snippet']},
     \       {'complete_items': ['buffers', 'path']},
     \       {'mode': '<c-p>'},
     \       {'mode': '<c-n>'}],
     \   'comment': [
-    \       {'complete_items': ['tabnine', 'buffers']}],
+    \       {'complete_items': ['buffers']}],
     \   'string': [
-    \       {'complete_items': ['tabnine', 'buffers']}]
+    \       {'complete_items': ['buffers']}]
     \   }
     \}
-
-Plug 'aca/completion-tabnine', { 'do': './install.sh' }
-let g:completion_tabnine_max_num_results=7
-let g:completion_tabnine_line_limit=1000
 
 Plug 'steelsojka/completion-buffers'
 

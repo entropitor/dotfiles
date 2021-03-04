@@ -124,3 +124,4 @@ export DOTNET_NEW_PREFERRED_LANG="F#"
 
 export DOCKER_BUILDKIT=1
 
+[ -f "/Users/jens/.ghcup/env" ] && source "/Users/jens/.ghcup/env" # ghcup-env

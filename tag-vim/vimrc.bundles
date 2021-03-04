@@ -1052,26 +1052,26 @@ vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.docum
 vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 EOF
 
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   ensure_installed = "all",
-"   highlight = {
-"     enable = false,
-"     disable = {
-"       "sh"
-"     }
-"   },
-"   incremental_selection = {
-"     enable = true,
-"     keymaps = {
-"       init_selection = "<leader>et",
-"       node_incremental = "<leader>ej",
-"       scope_incremental = "<leader>eJ",
-"       node_decremental = "<leader>ek",
-"     },
-"   },
-"   indent = {
-"     enable = false,
-"   },
-" }
-" EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  highlight = {
+    enable = true,
+    disable = {
+      "sh"
+    }
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<leader>et",
+      node_incremental = "<leader>ej",
+      scope_incremental = "<leader>eJ",
+      node_decremental = "<leader>ek",
+    },
+  },
+  indent = {
+    enable = false,
+  },
+}
+EOF

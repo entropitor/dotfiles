@@ -425,8 +425,9 @@ nmap <leader>dx <cmd>lua require'telescope'.extensions.dap.commands{}<cr>
 " ===   Treesitter  ===
 " =====================
 Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'}
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
-Plug 'romgrk/nvim-treesitter-context'
 
 " ===============================
 " ===   Local Configuration   ===

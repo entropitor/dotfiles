@@ -45,8 +45,8 @@ function M.code_action ()
         end
       end
     end
-    print(vim.inspect(all))
-    vim.lsp.handlers['textDocument/codeAction'](nil, 'textDocument/codeAction', all, 0, bufnr)
+    local default_handler = vim.lsp.handlers['textDocument/codeAction']
+    default_handler(nil, 'textDocument/codeAction', all, 0, bufnr)
   end
 
   requested.ids = vim.lsp.buf_request(0, 'textDocument/codeAction', params, handler)

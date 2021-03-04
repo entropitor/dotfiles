@@ -299,6 +299,11 @@ nnoremap <leader>fg :Telescope git_files<CR>
 let g:which_key_map.f.c = 'edited-files'
 nnoremap <leader>fc :Telescope git_status<CR>
 
+let g:which_key_map.f.v = 'edit-vimrc'
+nnoremap <leader>fv :e ~/.vimrc<CR>
+let g:which_key_map.f.V = 'edit-vimrc.bundles'
+nnoremap <leader>fV :e ~/.vimrc.bundles<CR>
+
 let g:which_key_map.s.l = 'live-grep'
 nnoremap <leader>sl :Telescope live_grep<CR>
 let g:which_key_map.s.g = 'grep'

@@ -542,6 +542,26 @@ let g:go_fmt_command = "goimports"
 " -------------------
 Plug 'jparise/vim-graphql', {'for': ['graphql']}
 
+" -------------------
+" ---   Haskell   ---
+" -------------------
+function! SetupLspHaskell ()
+lua << EOF
+local lspconfig = require'lspconfig'
+local util = require'lspconfig/util'
+local configs = require'lspconfig/configs'
+if not configs.haskell then
+  configs.haskell = {
+    default_config = {
+      cmd = {"haskell-language-server-wrapper", "--lsp"};
+      filetypes = {"haskell"};
+      root_dir = util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git");
+    };
+  }
+end
+EOF
+endfunction
+
 " ----------------
 " ---   HTML   ---
 " ----------------
@@ -819,8 +839,9 @@ let g:ale_fixers['yaml'] = ['prettier']
 " ===   LSP Config   ===
 " ================================
 function! SetupLspServers()
-call SetupLspFsharp()
 call SetupLspEslint()
+call SetupLspFsharp()
+call SetupLspHaskell()
 
 lua << EOF
 local on_attach = function()
@@ -859,7 +880,8 @@ lspconfig.dockerls.setup{ on_attach = on_attach }
 lspconfig.flow.setup{ on_attach = on_attach }
 lspconfig.fsharp.setup{ on_attach = on_attach }
 lspconfig.gopls.setup{ on_attach = on_attach }
-lspconfig.hie.setup{ on_attach = on_attach }
+-- lspconfig.hie.setup{ on_attach = on_attach }
+lspconfig.haskell.setup{ on_attach = on_attach }
 lspconfig.jot.setup{
   on_attach = on_attach
 }

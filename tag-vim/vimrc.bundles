@@ -866,6 +866,12 @@ local on_attach = function()
   vim.cmd('highlight LspDiagnosticsUnderlineHint guibg=LightGrey gui=underline')
   vim.cmd('highlight LspDiagnosticsSignHint guibg=LightGrey')
 end
+local on_init = function (client)
+  client.config.flags = {}
+  if client.config.flags then
+    client.config.flags.allow_incremental_sync = true
+  end
+end
 
 require'jot-lsp'.setup()
 lspconfig = require'lspconfig'
@@ -874,35 +880,87 @@ lsputil = require'lspconfig/util'
 -- typescript
 lspconfig.tsserver.setup{
   on_attach = on_attach,
+  on_init = on_init,
   -- root_dir = function(fname)
   --   return lspconfig.util.find_git_ancestor(fname) -- or lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")
   -- end;
 }
 lspconfig.eslint.setup{
   on_attach = on_attach,
+  on_init = on_init,
 }
 
-lspconfig.clangd.setup{ on_attach = on_attach }
-lspconfig.bashls.setup{ on_attach = on_attach }
-lspconfig.dockerls.setup{ on_attach = on_attach }
-lspconfig.flow.setup{ on_attach = on_attach }
-lspconfig.fsharp.setup{ on_attach = on_attach }
-lspconfig.gopls.setup{ on_attach = on_attach }
--- lspconfig.hie.setup{ on_attach = on_attach }
-lspconfig.haskell.setup{ on_attach = on_attach }
-lspconfig.jot.setup{
-  on_attach = on_attach
+lspconfig.clangd.setup{
+  on_attach = on_attach,
+  on_init = on_init,
 }
-lspconfig.ocamlls.setup{ on_attach = on_attach }
-lspconfig.ocamllsp.setup{ on_attach = on_attach }
-lspconfig.pyls_ms.setup{ on_attach = on_attach }
--- lspconfig.rls.setup{ on_attach = on_attach }
-lspconfig.rust_analyzer.setup{ on_attach = on_attach }
-lspconfig.solargraph.setup{ on_attach = on_attach }
-lspconfig.terraformls.setup{ on_attach = on_attach }
-lspconfig.vimls.setup{ on_attach = on_attach }
+lspconfig.bashls.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.dockerls.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+-- lspconfig.flow.setup{
+--   on_attach = on_attach,
+--   on_init = on_init,
+-- }
+lspconfig.fsharp.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.gopls.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+-- lspconfig.hie.setup{
+--   on_attach = on_attach,
+--   on_init = on_init,
+-- }
+lspconfig.haskell.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.jot.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.ocamlls.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.ocamllsp.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.pyls_ms.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+-- lspconfig.rls.setup{
+--   on_attach = on_attach,
+--   on_init = on_init,
+-- }
+lspconfig.rust_analyzer.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.solargraph.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.terraformls.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
+lspconfig.vimls.setup{
+  on_attach = on_attach,
+  on_init = on_init,
+}
 lspconfig.yamlls.setup{
   on_attach = on_attach,
+  on_init = on_init,
   settings = {
     yaml = {
       schemaStore = {
@@ -916,6 +974,7 @@ lspconfig.yamlls.setup{
 }
 lspconfig.jsonls.setup{
   on_attach = on_attach,
+  on_init = on_init,
   filetypes = {'json', 'jsonc'},
   capabilities = {
     textDocument = {
@@ -989,6 +1048,7 @@ local sumneko_root_path = vim.fn.stdpath('cache')..'/lua-language-server'
 local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
 lspconfig.sumneko_lua.setup {
   on_attach = on_attach;
+  on_init = on_init,
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
   settings = {
     Lua = {

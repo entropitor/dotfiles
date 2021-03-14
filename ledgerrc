@@ -1,3 +1,5 @@
 --strict
 --explicit
---date-format=%d-%b-%Y
+--date-format=%Y-%m-%d
+# --date-format=%d-%b-%Y
+--file ./journal.ledger

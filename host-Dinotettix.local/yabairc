@@ -19,7 +19,7 @@ yabai -m signal --add label=display-changed-reload event=display_changed action=
 
 # Rules for specific applications
 yabai -m rule --add label=dbeaver app="DBeaver Community" title!="DBeaver \d+.\d+.\d+.*" manage=off
-yabai -m rule --add label=zoom app="zoom.us" title="Zoom Meeting" space=@work:0
+# yabai -m rule --add label=zoom app="zoom.us" space=@work:0
 yabai -m rule --add label=lens app="Lens" space=@work:4
 
 echo "yabai configuration loaded.."

@@ -43,7 +43,11 @@ alias dc=". dc"
 eval $(opam env)
 
 function aws-login {
-  if [[ -z "$OP_SESSION_datacamp" ]]; then
+  if [[ -z "${OP_SESSION_datacamp}" ]]; then
+    echo "Did not found a OnePassword token in the env..."
+    eval $(op signin datacamp)
+  elif ! op signin datacamp --raw --session ${OP_SESSION_datacamp} >/dev/null 2>&1 ; then
+    echo "OnePassword token is invalid..."
     eval $(op signin datacamp)
   fi
   jo username=jens password=$(op get item OneLogin | jq -r '.details.fields[] | select(.designation == "password").value') -s otp=$(op get totp OneLogin) | onelogin-aws login -C $1

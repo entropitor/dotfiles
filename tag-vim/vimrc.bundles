@@ -855,24 +855,24 @@ call SetupLspHaskell()
 lua << EOF
 local on_attach = function(client, _bufnr)
   require'completion'.on_attach()
-  vim.cmd('highlight LspDiagnosticsUnderlineError guibg=DarkRed gui=underline')
+  vim.cmd('highlight LspDiagnosticsUnderlineError guisp=DarkRed gui=underline')
   vim.cmd('highlight LspDiagnosticsSignError guibg=DarkRed')
 
-  vim.cmd('highlight LspDiagnosticsUnderlineWarning guibg=LightYellow gui=underline')
+  vim.cmd('highlight LspDiagnosticsUnderlineWarning guisp=LightYellow gui=underline')
   vim.cmd('highlight LspDiagnosticsSignWarning guibg=LightYellow')
 
-  vim.cmd('highlight LspDiagnosticsUnderlineInformation guibg=LightBlue gui=underline')
+  vim.cmd('highlight LspDiagnosticsUnderlineInformation guisp=LightBlue gui=underline')
   vim.cmd('highlight LspDiagnosticsSignInformation guibg=LightBlue')
 
-  vim.cmd('highlight LspDiagnosticsUnderlineHint guibg=LightGrey gui=underline')
+  vim.cmd('highlight LspDiagnosticsUnderlineHint guisp=LightGrey gui=underline')
   vim.cmd('highlight LspDiagnosticsSignHint guibg=LightGrey')
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+      hi LspReferenceRead gui=underline guisp=Blue
+      hi LspReferenceText gui=underline guisp=Blue
+      hi LspReferenceWrite gui=underline guisp=Blue
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()

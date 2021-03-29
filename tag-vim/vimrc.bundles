@@ -599,7 +599,7 @@ let g:ledger_bin = "ledger"
 let g:ledger_default_commodity = "€"
 let g:ledger_commodity_sep = " "
 let g:ledger_commodity_before = 1
-let g:ledger_align_at = 70
+let g:ledger_align_at = 73
 let g:ledger_align_commodity = 1
 function! LedgerSetupBindings ()
 lua <<EOF

@@ -168,9 +168,13 @@ nnoremap <silent> <leader>lA <cmd>lua require'entropitor.hello'.all_code_actions
 let g:which_key_map.l.d = 'document-symbol'
 nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.document_symbol()<CR>
 let g:which_key_map.l.e = 'show-line-diagnostics'
-nnoremap <silent> <leader>le <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>le <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+let g:which_key_map.l.E = 'fill-loclist'
+nnoremap <silent> <leader>lE <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 let g:which_key_map.l.f = 'show-references'
 nnoremap <silent> <leader>lf <cmd>lua vim.lsp.buf.references()<CR>
+let g:which_key_map.l.g = 'workspace-symbol'
+nnoremap <silent> <leader>lg <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 let g:which_key_map.l.h = 'highlight'
 nnoremap <silent> <leader>lh <cmd>lua vim.lsp.buf.document_highlight()<CR>
 let g:which_key_map.l.i = 'implementation'
@@ -187,8 +191,13 @@ let g:which_key_map.l.t = 'type-definition'
 nnoremap <silent> <leader>lt <cmd>lua vim.lsp.buf.type_definition()<CR>
 let g:which_key_map.l.q = 'force-reload'
 nnoremap <silent> <leader>lq <cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR><cmd>edit<CR>
-let g:which_key_map.l.w = 'workspace-symbol'
-nnoremap <silent> <leader>lw <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+let g:which_key_map.l.w = { 'name': '+workspace' }
+let g:which_key_map.l.w.a = 'add-folder'
+nnoremap <silent> <leader>lwa <cmd>lua vim.lsp.buf.add_workspace_folder()<CR>
+let g:which_key_map.l.w.l = 'list-folders'
+nnoremap <silent> <leader>lwl <cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
+let g:which_key_map.l.w.r = 'remove-folder'
+nnoremap <silent> <leader>lwr <cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>
 let g:which_key_map.l.x = 'capabilities'
 nnoremap <silent> <leader>lx <cmd>lua print(vim.inspect(vim.lsp.buf))<CR>
 
@@ -844,7 +853,7 @@ call SetupLspEslint()
 call SetupLspHaskell()
 
 lua << EOF
-local on_attach = function()
+local on_attach = function(client, _bufnr)
   require'completion'.on_attach()
   vim.cmd('highlight LspDiagnosticsUnderlineError guibg=DarkRed gui=underline')
   vim.cmd('highlight LspDiagnosticsSignError guibg=DarkRed')
@@ -857,6 +866,20 @@ local on_attach = function()
 
   vim.cmd('highlight LspDiagnosticsUnderlineHint guibg=LightGrey gui=underline')
   vim.cmd('highlight LspDiagnosticsSignHint guibg=LightGrey')
+
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_exec([[
+      hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+      hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+      hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]], false)
+  end
 end
 local on_init = function (client)
   client.config.flags = {}

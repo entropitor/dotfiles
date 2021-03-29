@@ -41,8 +41,10 @@ function node_run() {
     $runner run $target $@
   fi
 }
-alias yr="node_run yarn $@"
-alias nr="node_run npm $@"
+alias yrr="node_run yarn $@"
+alias nrr="node_run npm $@"
+alias yr="yarn run"
+alias nr="npm run"
 
 # TMUX
 alias tal="tmux attach" # tmux attach last

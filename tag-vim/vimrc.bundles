@@ -499,28 +499,6 @@ Plug 'ionide/Ionide-vim', {
     \ 'do':  'make fsautocomplete',
     \ }
 
-" Locally install fsharp-language-server so we can use it in vim-lsp below
-Plug 'fsprojects/fsharp-language-server', {
-    \ 'do': 'npm install && dotnet build -c Release'
-    \}
-" Setup fsharp-language-server
-function! SetupLspFsharp ()
-lua << EOF
-local lspconfig = require'lspconfig'
-local util = require'lspconfig/util'
-local configs = require'lspconfig/configs'
-if not configs.fsharp then
-  configs.fsharp = {
-    default_config = {
-      cmd = {"dotnet", vim.env.HOME .. "/.vim/bundle/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/FSharpLanguageServer.dll"};
-      filetypes = {"fsharp"};
-      root_dir = util.root_pattern("*.fsproj", "*.sln", ".git");
-    };
-  }
-end
-EOF
-endfunction
-
 let g:ale_fixers['fsharp'] = [
   \  { buffer -> {
   \     'command': 'fantomas %t',
@@ -848,7 +826,6 @@ let g:ale_fixers['yaml'] = ['prettier']
 " ================================
 function! SetupLspServers()
 call SetupLspEslint()
-call SetupLspFsharp()
 call SetupLspHaskell()
 
 lua << EOF
@@ -906,7 +883,8 @@ lspconfig.dockerls.setup{
 --   on_attach = on_attach,
 --   on_init = on_init,
 -- }
-lspconfig.fsharp.setup{
+lspconfig.fsautocomplete.setup{
+  cmd = {"dotnet", vim.env.HOME .. "/.vim/bundle/Ionide-vim/fsac/fsautocomplete.dll", "--background-service-enabled"},
   on_attach = on_attach,
   on_init = on_init,
 }

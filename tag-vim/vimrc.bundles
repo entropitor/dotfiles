@@ -199,6 +199,17 @@ nmap [A <Esc>[D<leader>la
 
 Plug 'RishabhRD/popfix', { 'do': 'make' }
 Plug 'RishabhRD/nvim-lsputils'
+lua <<EOF
+vim.g.lsp_utils_location_opts = {
+	height = 24,
+	mode = 'editor',
+}
+vim.g.lsp_utils_symbols_opts = {
+	height = 24,
+	mode = 'editor',
+	prompt = {},
+}
+EOF
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'

@@ -912,7 +912,7 @@ lspconfig.ocamllsp.setup{
   on_attach = on_attach,
   on_init = on_init,
 }
-lspconfig.pyls_ms.setup{
+lspconfig.pyls.setup{
   on_attach = on_attach,
   on_init = on_init,
 }

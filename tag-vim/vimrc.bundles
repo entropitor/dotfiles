@@ -608,8 +608,9 @@ let g:ledger_bin = "ledger"
 let g:ledger_default_commodity = "€"
 let g:ledger_commodity_sep = " "
 let g:ledger_commodity_before = 1
-let g:ledger_align_at = 73
+let g:ledger_align_at = 76
 let g:ledger_align_commodity = 1
+let g:ledger_decimal_sep = "."
 function! LedgerSetupBindings ()
 lua <<EOF
   -- @c: Clear Expenses
@@ -641,7 +642,6 @@ augroup ledger-bindings
   autocmd Filetype ledger nnoremap <buffer> <silent> <leader>lr :Register
   autocmd Filetype ledger call LedgerSetupBindings()
 augroup end
-Plug 'entropitor/vim-ledger', {'for': ['ledger']}
 
 Plug 'arecarn/vim-selection'
 Plug 'arecarn/vim-crunch'

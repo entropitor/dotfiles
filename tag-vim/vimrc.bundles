@@ -161,10 +161,10 @@ nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 let g:which_key_map.l.a = 'code-action'
 " nnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>la <cmd>lua require'entropitor.hello'.code_action()<CR>
+nnoremap <silent> <leader>la <cmd>lua require'entropitor.lsp.commands'.code_action()<CR>
 vnoremap <silent> <leader>la :<C-U>lua vim.lsp.buf.range_code_action()<CR>
-let g:which_key_map.l.a = 'all-code-actions'
-nnoremap <silent> <leader>lA <cmd>lua require'entropitor.hello'.all_code_actions()<CR>
+let g:which_key_map.l.A = 'all-code-actions'
+nnoremap <silent> <leader>lA <cmd>lua require'entropitor.lsp.commands'.all_code_actions()<CR>
 let g:which_key_map.l.d = 'document-symbol'
 nnoremap <silent> <leader>ld <cmd>lua vim.lsp.buf.document_symbol()<CR>
 let g:which_key_map.l.e = 'show-line-diagnostics'
@@ -835,8 +835,8 @@ end
 EOF
 endfunction
 
-command! EslintFixAll lua require'entropitor.hello'.eslint_fix_all()
-nmap <leader>lF <cmd>lua require'entropitor.hello'.eslint_fix_all()<CR>
+command! EslintFixAll lua require'entropitor.lsp.commands'.eslint_fix_all()
+nmap <leader>lF <cmd>lua require'entropitor.lsp.commands'.eslint_fix_all()<CR>
 
 " ----------------
 " ---   Yaml   ---

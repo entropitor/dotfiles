@@ -1,8 +1,8 @@
 local M = {}
 
 function M.__reload ()
-  package.loaded['entropitor.hello'] = nil
-  print('Reloaded entropitor.hello')
+  package.loaded['entropitor.lsp.commands'] = nil
+  print('Reloaded entropitor.lsp.commands')
 end
 
 function M.code_action ()

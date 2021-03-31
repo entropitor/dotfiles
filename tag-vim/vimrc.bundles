@@ -1050,9 +1050,6 @@ EOF
 echom "Setup Lsp Servers"
 endfunction
 
-" This conflicts with Plug 'donniewest/asyncomplete_neovim_lsp'
-" As we also have an asyncomplete omni completer which will cause double
-" completions
 autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 call plug#end()

@@ -153,12 +153,38 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 Plug 'ncm2/float-preview.nvim'
 
 Plug 'neovim/nvim-lspconfig'
+lua <<EOF
+local function preview_location_callback(_, _, result)
+  if result == nil or vim.tbl_isempty(result) then
+    return nil
+  end
+  vim.lsp.util.preview_location(result[1])
+end
+
+function PeekDefinition()
+  local params = vim.lsp.util.make_position_params()
+  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+end
+function PeekDeclaration()
+  local params = vim.lsp.util.make_position_params()
+  return vim.lsp.buf_request(0, 'textDocument/declaration', params, preview_location_callback)
+end
+function PeekImplementation()
+  local params = vim.lsp.util.make_position_params()
+  return vim.lsp.buf_request(0, 'textDocument/implementation', params, preview_location_callback)
+end
+
+vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua PeekDeclaration()<CR>', {noremap=true, silent=true})
+vim.api.nvim_set_keymap('n', 'gR', '<cmd>lua PeekDefinition()<CR>', {noremap=true, silent=true})
+vim.api.nvim_set_keymap('n', 'gI', '<cmd>lua PeekImplementation()<CR>', {noremap=true, silent=true})
+EOF
+
 nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr         <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gi         <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+" nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 let g:which_key_map.l.a = 'code-action'
 " nnoremap <silent> <leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <leader>la <cmd>lua require'entropitor.lsp.commands'.code_action()<CR>

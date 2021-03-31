@@ -1060,60 +1060,11 @@ call plug#end()
 " After plug#end()
 call SetupLspServers()
 call which_key#register('<Space>', "g:which_key_map")
-lua require('telescope').load_extension('gh')
-lua require('telescope').load_extension('dap')
-
-lua << EOF
-local dap = require('dap')
-dap.adapters.node = {
-  type = 'executable';
-  command = 'node';
-  args = {
-    os.getenv('HOME') .. '/.vim/bundle/vscode-node-debug2/out/src/nodeDebug.js';
-  };
-}
-dap.configurations.javascript = {
-  {
-    type = 'node';
-    request = 'launch';
-    name = "Launch file";
-    program = "${workspaceFolder}/${file}";
-  },
-}
-EOF
 
 lua <<EOF
-vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
-vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
-EOF
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-    disable = {
-      "sh",
-      "ledger",
-    }
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "<leader>et",
-      node_incremental = "<leader>ej",
-      scope_incremental = "<leader>eJ",
-      node_decremental = "<leader>ek",
-    },
-  },
-  indent = {
-    enable = false,
-  },
-}
+require('entropitor.dap')
+require('entropitor.lsp.commands')
+require('entropitor.lsp.handlers')
+require('entropitor.treesitter')
+require('entropitor.telescope')
 EOF

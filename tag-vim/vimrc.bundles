@@ -232,6 +232,8 @@ nmap [a <Esc>[d<leader>la
 nmap ]A <Esc>]D<leader>la
 nmap [A <Esc>[D<leader>la
 
+autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
 Plug 'RishabhRD/popfix', { 'do': 'make' }
 Plug 'RishabhRD/nvim-lsputils'
 lua <<EOF
@@ -567,22 +569,6 @@ Plug 'jparise/vim-graphql', {'for': ['graphql']}
 " -------------------
 " ---   Haskell   ---
 " -------------------
-function! SetupLspHaskell ()
-lua << EOF
-local lspconfig = require'lspconfig'
-local util = require'lspconfig/util'
-local configs = require'lspconfig/configs'
-if not configs.haskell then
-  configs.haskell = {
-    default_config = {
-      cmd = {"haskell-language-server-wrapper", "--lsp"};
-      filetypes = {"haskell"};
-      root_dir = util.root_pattern("*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml", ".git");
-    };
-  }
-end
-EOF
-endfunction
 
 " ----------------
 " ---   HTML   ---
@@ -788,79 +774,8 @@ let g:ale_linters_ignore['typescriptreact'] = ['tslint', 'deno']
 Plug 'microsoft/vscode-eslint', {
     \ 'do': 'npm install && npm run webpack'
     \}
-" Setup eslint-server
-function! SetupLspEslint ()
-lua << EOF
-local lspconfig = require'lspconfig'
-local util = require'lspconfig/util'
-local configs = require'lspconfig/configs'
-if not configs.eslint then
-  configs.eslint = {
-    default_config = {
-      cmd = {"node", vim.env.HOME .. "/.vim/bundle/vscode-eslint/server/out/eslintServer.js", "--stdio"};
-      filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"};
-      -- root_dir = util.root_pattern(".eslintrc.json", ".eslintrc.js", "package.json", "tsconfig.json", ".git");
-      root_dir = util.root_pattern(".eslintrc.json", ".eslintrc.js");
-      settings = {
-        validate = "on";
-        packageManager = "yarn";
-        codeAction = {
-          disableRuleComment = {
-            enable = true;
-            location = 'separateLine'
-          };
-          showDocumentation = {
-            enable = true;
-          };
-        };
-        codeActionOnSave = {
-          enable = false;
-          mode = 'all';
-        };
-        format = false;
-        quiet = false;
-        onIgnoredFiles = 'off';
-        options = null;
-        run = 'onType';
-        nodePath = '/usr/local/bin/node';
-        workspaceFolder = null;
-      };
-      handlers = {
-        ['client/registerCapability'] = function(_, _, result, client_id)
-          if not result then return end
-          return {}
-        end;
-        ['eslint/noConfig'] = function(_, _, result, client_id)
-          if not result then return end
-          print('calling eslint/noConfig')
-          return {}
-        end;
-        ['eslint/noLibrary'] = function(_, _, result, client_id)
-          if not result then return end
-          print('calling eslint/noLibrary')
-          return {}
-        end;
-        ['eslint/openDoc'] = function(_, _, result, client_id)
-          if not result then return end
-          vim.cmd('!open ' .. result.url)
-          return {}
-        end;
-        ['eslint/probeFailed'] = function(_, _, result, client_id)
-          if not result then return end
-          print('calling eslint/probeFailed')
-          return {}
-        end;
-        ['eslint/confirmESLintExecution'] = function(_, _, result, client_id)
-          if not result then return end
-          print('asking for eslint execution')
-          return 4 -- approved
-        end;
-      }
-    };
-  }
-end
-EOF
-endfunction
+" This is just here to install the LSP server locally, which is set-up from
+" lua. Hopefully we can someday install it globally instead of locally
 
 command! EslintFixAll lua require'entropitor.lsp.commands'.eslint_fix_all()
 nmap <leader>lF <cmd>lua require'entropitor.lsp.commands'.eslint_fix_all()<CR>
@@ -872,29 +787,14 @@ autocmd FileType yaml setlocal foldmethod=indent
 Plug 'ingydotnet/yaml-vim', {'for': ['yaml']}
 let g:ale_fixers['yaml'] = ['prettier']
 
-" ================================
-" ===   LSP Config   ===
-" ================================
-function! SetupLspServers()
-call SetupLspEslint()
-call SetupLspHaskell()
-
-lua << EOF
-require('entropitor.lsp.servers')
-EOF
-echom "Setup Lsp Servers"
-endfunction
-
-autocmd FileType * setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
 call plug#end()
 
 " After plug#end()
-call SetupLspServers()
 call which_key#register('<Space>', "g:which_key_map")
 
 lua <<EOF
 require('entropitor.dap')
+require('entropitor.lsp.servers')
 require('entropitor.lsp.commands')
 require('entropitor.lsp.handlers')
 require('entropitor.treesitter')

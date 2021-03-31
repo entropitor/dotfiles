@@ -1,3 +1,6 @@
+require("entropitor.lsp.servers.eslint")
+require("entropitor.lsp.servers.haskell")
+
 local on_attach = function(client, _bufnr)
     require "completion".on_attach()
     vim.cmd("highlight LspDiagnosticsUnderlineError guisp=DarkRed gui=underline")

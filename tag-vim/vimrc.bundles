@@ -892,6 +892,9 @@ require'jot-lsp'.setup()
 lspconfig = require'lspconfig'
 lsputil = require'lspconfig/util'
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true;
+
 local servers = {
   "eslint",
   "clangd",
@@ -913,12 +916,14 @@ local servers = {
 }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     on_init = on_init,
   }
 end
 
 lspconfig.tsserver.setup{
+  capabilities = capabilities,
   on_attach = on_attach,
   on_init = on_init,
   -- root_dir = function(fname)
@@ -928,10 +933,12 @@ lspconfig.tsserver.setup{
 
 lspconfig.fsautocomplete.setup{
   cmd = {"dotnet", vim.env.HOME .. "/.vim/bundle/Ionide-vim/fsac/fsautocomplete.dll", "--background-service-enabled"},
+  capabilities = capabilities,
   on_attach = on_attach,
   on_init = on_init,
 }
 lspconfig.yamlls.setup{
+  capabilities = capabilities,
   on_attach = on_attach,
   on_init = on_init,
   settings = {
@@ -949,15 +956,7 @@ lspconfig.jsonls.setup{
   on_attach = on_attach,
   on_init = on_init,
   filetypes = {'json', 'jsonc'},
-  capabilities = {
-    textDocument = {
-      completion = {
-        completionItem = {
-          snippetSupport = true
-        }
-      }
-    }
-  },
+  capabilities = capabilities,
   settings = {
     json = {
       schemas = {
@@ -1022,6 +1021,7 @@ local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-s
 lspconfig.sumneko_lua.setup {
   on_attach = on_attach;
   on_init = on_init,
+  capabilities = capabilities,
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
   settings = {
     Lua = {

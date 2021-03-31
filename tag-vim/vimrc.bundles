@@ -676,6 +676,7 @@ let g:crunch_result_type_append=2
 " ---------------
 " ---   Lua   ---
 " ---------------
+let g:ale_fixers['lua'] = ['luafmt']
 
 " ------------------
 " ---   Prolog   ---

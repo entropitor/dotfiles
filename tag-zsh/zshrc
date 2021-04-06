@@ -12,7 +12,7 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
 
-zinit ice wait lucid atload="after_load_git"; zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit ice wait lucid atload="after_load_git"; zinit snippet OMZP::git
 function after_load_git () {
   alias ggpush='git push origin "$(git rev-parse --abbrev-ref HEAD)"'
 }
@@ -42,22 +42,24 @@ autoload -U colors && colors
 
 # Lazy load packages
 zinit wait lucid for \
-  OMZ::lib/compfix.zsh \
-  OMZ::lib/completion.zsh \
-  OMZ::lib/git.zsh \
-  OMZ::lib/directories.zsh \
-  OMZ::lib/theme-and-appearance.zsh \
-  OMZ::plugins/kubectl/kubectl.plugin.zsh \
-  OMZ::plugins/minikube/minikube.plugin.zsh \
-  OMZ::plugins/helm/helm.plugin.zsh \
-  OMZ::plugins/rbenv/rbenv.plugin.zsh \
-  OMZ::plugins/pyenv/pyenv.plugin.zsh \
-  OMZ::plugins/tmux/tmux.plugin.zsh \
-  OMZ::plugins/terraform/terraform.plugin.zsh
+  OMZL::compfix.zsh \
+  OMZL::completion.zsh \
+  OMZL::git.zsh \
+  OMZL::directories.zsh \
+  OMZL::theme-and-appearance.zsh \
+  OMZP::kubectl \
+  OMZP::minikube \
+  OMZP::helm \
+  OMZP::rbenv \
+  OMZP::pyenv \
+  OMZP::terraform
 alias k="kubectl"
 alias kg="kubectl get"
 alias kd="kubectl describe"
 alias kdel="kubectl delete"
+
+export ZSH_TMUX_CONFIG="$HOME/.tmux.conf"
+zinit wait lucid svn for OMZP::tmux
 
 HYPHEN_INSENSITIVE="true"
 HIST_STAMPS="dd.mm.yyyy"

@@ -17,6 +17,7 @@ function update-alacritty {
   local TARGET="${HOME}/.${ALACRITTY_PATH}"
   rm ${TARGET} 2>/dev/null || true
   cp ${DOTFILES_DIR}/${ALACRITTY_PATH} ${TARGET}
+
   yq -iy .colors=$(yq .colors ${BASE16_DIR}/templates/alacritty/colors/base16-${THEME}.yml -c) ${TARGET}
 }
 
@@ -45,6 +46,11 @@ function update-fzf {
 
 function copy-kitty {
   cp -r ${BASE16_DIR}/templates/kitty/colors/ ~/.config/kitty
+
+  local KITTY_CONFIG_PATH="config/kitty/kitty.conf"
+  local TARGET="${HOME}/.${KITTY_CONFIG_PATH}"
+  rm ${TARGET} 2>/dev/null || true
+  (cat ${DOTFILES_DIR}/${KITTY_CONFIG_PATH} | grep -v include ; echo "include base16-$THEME.conf" ) > ${TARGET}
 }
 function update-kitty {
   if [[ -z "$TMUX" ]]; then

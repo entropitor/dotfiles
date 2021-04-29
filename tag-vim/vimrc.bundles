@@ -688,7 +688,7 @@ let g:tagbar_type_prolog = {
 " ------------------
 " ---   Python   ---
 " ------------------
-let g:ale_fixers['python'] = ['autopep8']
+let g:ale_fixers['python'] = ['black']
 
 " ------------------
 " ---   Reason   ---

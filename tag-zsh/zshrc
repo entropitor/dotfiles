@@ -73,8 +73,8 @@ zinit ice wait lucid; zinit light zsh-users/zaw
 zinit ice wait lucid atinit"zicompinit; zicdreplay"; zinit light zsh-users/zsh-syntax-highlighting
 
 
-# Popular: onedark, datacamp, eighties
-export THEME=onedark
+# Popular: onedark, datacamp, eighties, darcula, tomorrow-night-eighties
+export THEME=darcula
 alias b="~/.dotfiles/.base16/install.sh"
 # User configuration
 if [ -f ~/.zshrc.local ]; then

@@ -43,11 +43,24 @@ function update-fzf {
   # echo source ${BASE16_DIR}/templates/fzf/bash/base16-${THEME}.config
 }
 
+function copy-kitty {
+  cp -r ${BASE16_DIR}/templates/kitty/colors/ ~/.config/kitty
+}
+function update-kitty {
+  if [[ -z "$TMUX" ]]; then
+    kitty @ set-colors -c -a ~/.config/kitty/base16-${THEME}.conf
+  else
+    echo "Cannot update this shell from a TMUX session"
+  fi
+}
+
 if [[ "$1" == "update" ]]; then
   update
+  copy-kitty
   update-vim
   update-vim-airline
 fi
 update-alacritty
+update-kitty
 update-tmux
 update-fzf

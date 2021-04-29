@@ -64,3 +64,6 @@ alias tfs="tfswitch"
 alias lg="lazygit"
 
 alias kc="kubectl config unset current-context"
+
+alias cac="cargo check"
+alias car="cargo run"

@@ -364,7 +364,7 @@ nnoremap <leader>x <cmd>Telescope commands<CR>
 " ==========================
 " ===   Test Managment   ===
 " ==========================
-Plug 'janko-m/vim-test'
+Plug 'vim-test/vim-test'
 let test#strategy = "neovim"
 " let test#strategy = "dispatch"
 " let g:test#javascript#jest#options = '--reporters ~/.config/yarn/global/node_modules/jest-vim-reporter/index.js'

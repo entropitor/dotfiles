@@ -635,6 +635,8 @@ lua <<EOF
 
   -- @a: Rewrite assignee
   vim.api.nvim_buf_set_keymap(0, 'n', '@a', '0f*f)wc$', {})
+  -- @A: Tag Albrechtplein
+  vim.api.nvim_buf_set_keymap(0, 'n', '@A', '{jo; House: Albrechtplein<Esc>', {})
   -- @d: Assign to Datacamp
   vim.api.nvim_buf_set_keymap(0, 'n', '@d', '@cRL:R:D<Tab><Esc>', {})
   -- @e: Edit Expenses

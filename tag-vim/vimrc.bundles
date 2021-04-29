@@ -619,6 +619,7 @@ Plug 'entropitor/jot-lsp', {
 " ------------------
 " ---   Ledger   ---
 " ------------------
+Plug 'ledger/vim-ledger'
 let g:ledger_main = "journal.ledger"
 let g:ledger_bin = "ledger"
 let g:ledger_default_commodity = "€"

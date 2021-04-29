@@ -122,6 +122,7 @@ highlight TabLineSel guibg=Green
 lua <<EOF
 require'bufferline'.setup{
   options = {
+    view = 'multiwindow',
     max_name_length = 30,
     diagnostics = "nvim_lsp",
   },

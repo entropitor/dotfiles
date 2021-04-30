@@ -365,22 +365,32 @@ nnoremap <leader>x <cmd>Telescope commands<CR>
 " ===   Test Managment   ===
 " ==========================
 Plug 'vim-test/vim-test'
+Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 let test#strategy = "neovim"
 " let test#strategy = "dispatch"
 " let g:test#javascript#jest#options = '--reporters ~/.config/yarn/global/node_modules/jest-vim-reporter/index.js'
 
 let g:which_key_map.t.n= 'test-nearest'
-nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tn :UltestNearest<CR>
+let g:which_key_map.t.N= 'test-nearest (using vim-test)'
+nmap <silent> <leader>tN :TestNearest<CR>
 let g:which_key_map.t.f= 'test-file'
-nmap <silent> <leader>tf :TestFile<CR>
-let g:which_key_map.t.s= 'test-suite'
-nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tf :Ultest<CR>
+let g:which_key_map.t.F= 'test-file (using vim-test)'
+nmap <silent> <leader>tF :TestFile<CR>
 let g:which_key_map.t.l= 'test-last'
 nmap <silent> <leader>tl :TestLast<CR>
+let g:which_key_map.t.o= 'test-output'
+nmap <silent> <leader>to :UltestOutput<CR>
+let g:which_key_map.t.s= 'test-summary'
+nmap <silent> <leader>ts :UltestSummary<CR>
 let g:which_key_map.t.v= 'test-visit'
 nmap <silent> <leader>tv :TestVisit<CR>
 
+nmap [u <Plug>(ultest-prev-fail)
+nmap ]u <Plug>(ultest-next-fail)
 let g:test#javascript#runner = 'jest'
+let test#javascript#jest#options = "--color=always"
 
 " Dependencies
 Plug 'tpope/vim-dispatch'

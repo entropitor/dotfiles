@@ -68,18 +68,75 @@ function reorder() {
   yabai -m query --displays | jq '.[] | .index' | xargs -n 1 zabai reorder_display
 }
 
+MODE_FILE=~/.cache/yabai-mode
 function mode() {
-  cat ~/.cache/yabai-mode 2> /dev/null || echo work
+  cat ${MODE_FILE} 2> /dev/null || echo work
 }
 
 function set_mode() {
   local new_mode=$1
-  echo $new_mode > ~/.cache/yabai-mode
+  echo $new_mode > ${MODE_FILE}
+
+  reload
 }
 
 function move_mode() {
   local new_mode=$1
+
   yabai -m window --space "@${new_mode}:0"
+
+  reload
+}
+
+FOCUS_FILE=~/.cache/yabai-focus
+function focus() {
+  if [[ -e ${FOCUS_FILE} ]]; then
+    echo "focus"
+    true
+  else
+    echo "unfocus"
+    false
+  fi
+}
+
+function set_focus() {
+  local new_focus=$1
+
+  if [[ ${new_focus} -eq 0 ]]; then
+    rm ${FOCUS_FILE} 2>/dev/null || true
+  elif [[ ${new_focus} -eq 1 ]]; then
+    touch ${FOCUS_FILE}
+  else
+    echo "Not sure what to set focus to"
+  fi
+
+  reload
+}
+
+function space_for_index() {
+  local index=$1
+  echo "@$(mode):${index}"
+}
+function focus_on_space() {
+  local index=$1
+
+  if $(focus >/dev/null) && test $index -ge 8; then
+    echo "In focus mode..."
+  else
+    yabai -m space --focus "$(space_for_index $index)"
+  fi
+
+}
+function move_to_space() {
+  local index=$1
+  local space=$(space_for_index $index)
+
+  if $(focus >/dev/null) && test $index -ge 8; then
+    echo "In focus mode..."
+  else
+    yabai -m window --space "${space}"
+    yabai -m space --focus "${space}"
+  fi
 }
 
 

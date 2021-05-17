@@ -60,7 +60,7 @@ function reorder_display () {
 
   local sorted_space_labels=$(echo $spaces | jq '.[].label' -r | sort -r)
   for label in $sorted_space_labels; do
-    yabai -m space $label --move $first_space
+    yabai -m space $label --move $first_space || break
   done
 }
 

@@ -392,8 +392,11 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 nmap [u <Plug>(ultest-prev-fail)
 nmap ]u <Plug>(ultest-next-fail)
+
 let g:test#javascript#runner = 'jest'
 let test#javascript#jest#options = "--color=always"
+" Don't show ultest output when on test
+let g:ultest_output_on_line=0
 
 " Dependencies
 Plug 'tpope/vim-dispatch'

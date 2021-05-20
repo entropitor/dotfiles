@@ -18,7 +18,8 @@ function __dc_change_dir () {
 
     __dc_change_dir $result
   elif [[ -d $workspace/$name ]]; then
-    cd $workspace/$name
+    # cd $workspace/$name
+    __dc_cd $name
   else
     cd $workspace
     git clone git@github.com:datacamp-engineering/$name.git
@@ -105,8 +106,19 @@ function __dc_ci () {
   open "https://app.circleci.com/pipelines/github/datacamp-engineering/${repo_name}?branch=${branch_encoded}"
 }
 
+function __dc_cd () {
+  local directory=$1
+
+  tmux new-window -t cli -c ~/Workspace/${directory} -S -n ${directory}
+  tmux new-window -t vim -c ~/Workspace/${directory} -S -n ${directory} nvim
+}
+
+function __dc_. () {
+  __dc_change_dir $repo_name
+}
+
 function __dc_all () {
-  echo "all gh pr ci update show-env"
+  echo "all gh pr ci update show-env cd ."
 }
 
 if [[ $(__dc_all | grep -w ${1:-"not found"}) ]]; then

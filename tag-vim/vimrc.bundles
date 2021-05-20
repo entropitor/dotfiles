@@ -328,6 +328,9 @@ nnoremap <leader>sr :Ack!
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+Plug 'vijaymarupudi/nvim-fzf'
+Plug 'vijaymarupudi/nvim-fzf-commands'
+
 let g:which_key_map.e.s = 'insert-snippet'
 nnoremap <leader>es <cmd>Snippets<CR>
 
@@ -626,6 +629,7 @@ Plug 'entropitor/jot-lsp', {
       \ 'do': 'cd server && yarn && yarn tsc'
       \}
 
+Plug 'megalithic/zk.nvim'
 " ------------------
 " ---   Ledger   ---
 " ------------------
@@ -816,4 +820,9 @@ require('entropitor.lsp.commands')
 require('entropitor.lsp.handlers')
 require('entropitor.treesitter')
 require('entropitor.telescope')
+
+require('zk').setup({
+  fuzzy_finder = "fzf",
+  link_format = "markdown",
+})
 EOF

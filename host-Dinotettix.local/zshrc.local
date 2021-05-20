@@ -69,3 +69,5 @@ function terraform-local {
 alias tfl="terraform-local"
 
 if [ -e /Users/jens/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/jens/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export ZK_NOTEBOOK_DIR="$HOME/Workspace/zettels"

@@ -1,5 +1,6 @@
 require("entropitor.lsp.servers.eslint")
 require("entropitor.lsp.servers.haskell")
+require("entropitor.lsp.servers.zk")
 
 local on_attach = function(client, _bufnr)
     require "completion".on_attach()
@@ -62,7 +63,8 @@ local servers = {
     "rust_analyzer",
     "solargraph",
     "terraformls",
-    "vimls"
+    "vimls",
+    "zk"
 }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {

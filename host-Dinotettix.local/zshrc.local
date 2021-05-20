@@ -68,6 +68,8 @@ function terraform-local {
 }
 alias tfl="terraform-local"
 
+export AWS_REGION=us-east-1
+
 if [ -e /Users/jens/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/jens/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 export ZK_NOTEBOOK_DIR="$HOME/Workspace/zettels"

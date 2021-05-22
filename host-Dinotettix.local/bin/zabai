@@ -139,5 +139,21 @@ function move_to_space() {
   fi
 }
 
+function toggle_space_layout() {
+  local layouts=(bsp stack)
+  local current_layout=$(yabai -m query --spaces --space | jq .type -r)
+  i=0
+  while [ $i -lt ${#layouts[@]} ]; do
+    if [[ ${layouts[$i]} == ${current_layout} ]]; then
+      local next=$((i+1))
+      if [[ $next -eq ${#layouts[@]} ]]; then
+        next=0
+      fi
+      yabai -m space --layout ${layouts[$next]}
+      break
+    fi
+    i=$((i+1))
+  done
+}
 
 "$@"

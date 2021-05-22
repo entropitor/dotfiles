@@ -11,6 +11,7 @@ cmd - 0x32 : /Applications/Bitwarden.app/Contents/MacOS/Bitwarden
 
 # ctrl + shift - t : /Applications/Alacritty.app/Contents/MacOS/alacritty
 ctrl + shift - t : /Applications/kitty.app/Contents/MacOS/kitty -1 --directory=$HOME
+alt + shift - t : ~/.bin/floating_terminal toggle
 
 ctrl + shift - m ; select_yabai_mode
 select_yabai_mode < p : skhd -k escape ; ~/.bin/zabai set_mode personal

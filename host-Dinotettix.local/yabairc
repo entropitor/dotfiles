@@ -23,4 +23,6 @@ yabai -m rule --add label=dbeaver app="DBeaver Community" title!="DBeaver \d+.\d
 yabai -m rule --add label=lens app="Lens" space=@work:4
 yabai -m rule --add label=pokerstars app="PokerStarsBE" manage=off
 
+yabai -m rule --add label=floating_terminal app="kitty" title="floating_terminal" sticky=on opacity=0.9 layer=above grid=2:1:0:0:1:1
+
 echo "yabai configuration loaded.."

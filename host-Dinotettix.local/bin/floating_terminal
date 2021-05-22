@@ -1,0 +1,43 @@
+#!/bin/bash
+
+NAME="floating_terminal"
+
+function pid () {
+  yabai -m query --windows | jq 'map(select(.app=="kitty" and .title=="floating_terminal")) | .[0].pid'
+}
+function yabai_id () {
+  yabai -m query --windows | jq 'map(select(.app=="kitty" and .title=="floating_terminal")) | .[0].id'
+}
+
+function is_shown () {
+  local minimized=$(yabai -m query --windows | jq 'map(select(.app=="kitty" and .title=="floating_terminal")) | .[0].minimized')
+  test ${minimized} -eq 0
+}
+
+function open () {
+  kitty -T ${NAME} -1 --directory $HOME &
+  local pid=$!
+  echo $pid
+}
+
+function hide () {
+  yabai -m window "$(yabai_id)" --minimize
+}
+
+function show () {
+  yabai -m window "$(yabai_id)" --deminimize --focus
+}
+
+function toggle () {
+  local yid=$(yabai_id)
+  if [[ $yid == "null" ]]; then
+    open
+  elif $(is_shown); then
+    hide
+  else
+    show
+  fi
+}
+
+
+"$@"

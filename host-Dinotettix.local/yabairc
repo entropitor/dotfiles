@@ -18,12 +18,15 @@ yabai -m config auto_balance                 off
 yabai -m signal --add label=space-changed-reload event=space_changed action="~/.bin/zabai reload"
 yabai -m signal --add label=display-changed-reload event=display_changed action="~/.bin/zabai reload"
 
-# Rules for specific applications
-yabai -m rule --add label=dbeaver app="DBeaver Community" title!="DBeaver \d+.\d+.\d+.*" manage=off
+# Rules for specific application
 # yabai -m rule --add label=zoom app="zoom.us" space=@work:0
+yabai -m rule --add label=dbeaver app="DBeaver Community" title!="DBeaver \d+.\d+.\d+.*" manage=off
 yabai -m rule --add label=lens app="Lens" space=@work:4
 yabai -m rule --add label=pokerstars app="PokerStarsBE" manage=off
-yabai -m rule --add label=system-preferences app="^System Preferences$" manage=off
+yabai -m rule --add label=system-preferences app="^System Preferences$" manage=off layer=above
+yabai -m rule --add label=slack app="Slack" space=@work:9
+yabai -m rule --add label=cli app="kitty" title="cli" space=@work:3
+yabai -m rule --add label=editor app="kitty" title="editor" space=@work:2
 
 yabai -m rule --add label=floating_terminal app="kitty" title="floating_terminal" sticky=on opacity=0.9 layer=above grid=2:1:0:0:1:1
 

@@ -134,3 +134,5 @@ alt - p : yabai -m window --toggle float;\
 
 # change layout of desktop
 alt - space : ~/.bin/zabai toggle_space_layout
+alt - tab : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+shift + alt - tab : yabai -m window --focus stack.prev || yabai -m window --focus stack.last

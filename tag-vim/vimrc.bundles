@@ -547,6 +547,7 @@ Plug 'jrozner/vim-antlr', {'for': ['antlr']}
 " -------------------
 " ---   C / C++   ---
 " -------------------
+let g:ale_fixers['cpp']=['clang-format']
 
 " ---------------
 " ---   CSS   ---

@@ -28,6 +28,6 @@ yabai -m rule --add label=slack app="Slack" space=@work:9
 yabai -m rule --add label=cli app="kitty" title="cli" space=@work:3
 yabai -m rule --add label=editor app="kitty" title="editor" space=@work:2
 
-yabai -m rule --add label=floating_terminal app="kitty" title="floating_terminal" sticky=on opacity=0.9 layer=above grid=2:1:0:0:1:1
+yabai -m rule --add label=floating_terminal app="kitty" title="floating_terminal" sticky=on opacity=0.95 layer=above grid=3:1:0:0:1:2
 
 echo "yabai configuration loaded.."

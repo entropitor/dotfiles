@@ -14,6 +14,7 @@ cmd - 0x32 : /Applications/Bitwarden.app/Contents/MacOS/Bitwarden
 # ctrl + shift - t : /Applications/Alacritty.app/Contents/MacOS/alacritty
 ctrl + shift - t : /Applications/kitty.app/Contents/MacOS/kitty -1 --directory=$HOME
 alt + shift - t : ~/.bin/floating_terminal toggle
+alt - t : ~/.bin/floating_terminal toggle
 
 ctrl + shift - m ; select_yabai_mode
 select_yabai_mode < p : skhd -k escape ; ~/.bin/zabai set_mode personal
@@ -50,10 +51,16 @@ shift + alt - 0 : yabai -m space --balance
 
 # make floating window fill screen
 shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
+# make floating window fill part of screen
+shift + alt - down     : yabai -m window --grid 3:1:0:0:1:2
 # make floating window fill left-half of screen
 shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 # make floating window fill right-half of screen
 shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
+
+# minimize
+alt - down  : yabai -m window --minimize
+alt - up  : ~/.bin/floating_terminal show
 
 # fast focus desktop
 ctrl - 1 : ~/.bin/zabai focus_on_space 1
@@ -112,7 +119,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 alt - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
-alt - t : yabai -m window --toggle float;\
+alt - p : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
 
 # # toggle sticky (show on all spaces)

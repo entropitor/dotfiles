@@ -150,6 +150,7 @@ function toggle_space_layout() {
         next=0
       fi
       yabai -m space --layout ${layouts[$next]}
+      reload
       break
     fi
     i=$((i+1))

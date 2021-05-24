@@ -7,23 +7,23 @@ token_cache=$cache_dir/github_token
 # Assumes ~/Workspace/<name>
 repo_name=$(pwd | sed "s/$(echo $HOME | sed 's/\//\\\//g')\/Workspace\/\([^\/]*\).*/\1/")
 
-function __dc_change_dir () {
+function __dc_ls () {
+  ls $workspace | cat - $repositories_cache | sort | uniq | fzf
+}
+
+function __dc_prompt_change_dir () {
   local name=$1
 
   if [[ -z $name ]]; then
-    local result=$(ls $workspace | cat - $repositories_cache | sort | uniq | fzf)
+    local result=$(__dc_ls)
+
     if [[ -z $result ]]; then
       return false
     fi
 
-    __dc_change_dir $result
-  elif [[ -d $workspace/$name ]]; then
-    # cd $workspace/$name
-    __dc_cd $name
+    __dc_cd $result
   else
-    cd $workspace
-    git clone git@github.com:datacamp-engineering/$name.git
-    cd $name
+    __dc_cd $name
   fi
 }
 
@@ -107,23 +107,28 @@ function __dc_ci () {
 }
 
 function __dc_cd () {
-  local directory=$1
+  local name=$1
 
-  tmux new-window -t cli -c ~/Workspace/${directory} -S -n ${directory}
-  tmux new-window -t vim -c ~/Workspace/${directory} -S -n ${directory} nvim
+  if [[ ! -d $workspace/$name ]]; then
+    cd $workspace
+    git clone git@github.com:datacamp-engineering/$name.git
+  fi
+
+  tmux new-window -t cli -c ${workspace}/${name} -S -n ${name}
+  tmux new-window -t vim -c ${workspace}/${name} -S -n ${name} nvim
 }
 
 function __dc_. () {
-  __dc_change_dir $repo_name
+  __dc_cd $repo_name
 }
 
 function __dc_all () {
-  echo "all gh pr ci update show-env cd ."
+  echo "all gh pr ci update show-env cd . ls"
 }
 
 if [[ $(__dc_all | grep -w ${1:-"not found"}) ]]; then
   # Execute the arguments given
   "__dc_$@"
 else
-  __dc_change_dir $@
+  __dc_prompt_change_dir $@
 fi

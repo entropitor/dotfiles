@@ -12,9 +12,9 @@ function fix() {
   ')
   for yabai_space_id in $space_ids; do
     if [[ id -le 9 ]]; then
-      yabai -m space $yabai_space_id --label "@work:$((id % 10))"
-    else
       yabai -m space $yabai_space_id --label "@personal:$((id % 10))"
+    else
+      yabai -m space $yabai_space_id --label "@work:$((id % 10))"
     fi
     id=$((id + 1))
   done

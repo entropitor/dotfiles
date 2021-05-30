@@ -624,6 +624,7 @@ Plug 'vim-scripts/idp.vim'
 " ---   JSON   ---
 " ----------------
 let g:ale_fixers['json'] = ['prettier']
+let g:ale_fixers['jsonc'] = ['prettier']
 
 " JavaScript
 let g:ale_fixers['javascript'] = ['prettier', 'eslint']

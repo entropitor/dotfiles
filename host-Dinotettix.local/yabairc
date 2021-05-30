@@ -1,6 +1,6 @@
 yabai -m config layout bsp
 yabai -m config focus_follows_mouse         autofocus
-yabai -m config mouse_follows_focus         on
+# yabai -m config mouse_follows_focus         off
 yabai -m config mouse_action1 resize
 
 # yabai -m config window_opacity on
@@ -17,6 +17,10 @@ yabai -m config auto_balance                 off
 # refresh display workspaces
 yabai -m signal --add label=space-changed-reload event=space_changed action="~/.bin/zabai reload"
 yabai -m signal --add label=display-changed-reload event=display_changed action="~/.bin/zabai reload"
+yabai -m signal --add label=window_created-reload event=window_created action="~/.bin/zabai reload"
+yabai -m signal --add label=window_destroyed-reload event=window_destroyed action="~/.bin/zabai reload"
+yabai -m signal --add label=window_minimized-reload event=window_minimized action="~/.bin/zabai reload"
+yabai -m signal --add label=window_deminimized-reload event=window_deminimized action="~/.bin/zabai reload"
 
 # Rules for specific application
 # yabai -m rule --add label=zoom app="zoom.us" space=@work:0

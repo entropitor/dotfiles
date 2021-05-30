@@ -192,13 +192,14 @@ lspconfig.sumneko_lua.setup {
             diagnostics = {
                 enable = true,
                 -- Get the language server to recognize the `vim` global
-                globals = {"vim"}
+                globals = {"vim", "hs"}
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
                 library = {
                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                    [vim.fn.expand("$HOME/.hammerspoon/build/stubs")] = true
                 }
             }
         }

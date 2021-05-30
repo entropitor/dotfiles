@@ -576,6 +576,18 @@ let g:ale_fixers['fsharp'] = [
   \  }
   \]
 
+" ------------------
+" ---   Fennel   ---
+" ------------------
+" https://git.sr.ht/~technomancy/fnlfmt
+let g:ale_fixers['fennel'] = [
+  \  { buffer -> {
+  \     'command': 'fnlfmt --fix %t',
+  \     'read_temporary_file': 1,
+  \     }
+  \  }
+  \]
+
 " --------------
 " ---   Go   ---
 " --------------

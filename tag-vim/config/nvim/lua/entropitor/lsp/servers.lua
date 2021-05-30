@@ -3,7 +3,6 @@ require("entropitor.lsp.servers.haskell")
 require("entropitor.lsp.servers.zk")
 
 local on_attach = function(client, _bufnr)
-    require "completion".on_attach()
     vim.cmd("highlight LspDiagnosticsUnderlineError guisp=DarkRed gui=underline")
     vim.cmd("highlight LspDiagnosticsSignError guibg=DarkRed")
 
@@ -45,6 +44,13 @@ local lspconfig = require "lspconfig"
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits"
+    }
+}
 
 local servers = {
     "eslint",

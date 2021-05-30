@@ -141,12 +141,9 @@ let g:UltiSnipsSnippetDirectories = ["UltiSnips"]
 "   \ "\<Cmd>lua require'completion'.triggerCompletion()<CR>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-imap <tab> <Plug>(completion_smart_tab)
-imap <s-tab> <Plug>(completion_smart_s_tab)
 
-imap <silent> <c-space> <Plug>(completion_trigger)
 
-set completeopt=menuone,noinsert,noselect,menu
+set completeopt=menuone,noselect
 set shortmess+=c
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -248,8 +245,6 @@ vim.g.lsp_utils_symbols_opts = {
 }
 EOF
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
 
 nnoremap [d <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap ]d <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
@@ -258,36 +253,8 @@ nnoremap [D <cmd>lua vim.lsp.diagnostic.goto_next { cursor_position = {0,0} }<CR
 " Last Diagnostic
 nnoremap ]D <cmd>lua vim.lsp.diagnostic.goto_prev { cursor_position = {0,0} }<CR>
 
-Plug 'haorenW1025/completion-nvim'
-autocmd! User completion-nvim autocmd BufEnter * lua require'completion'.on_attach()
-let g:completion_enable_snippet = 'UltiSnips'
-let g:completion_auto_change_source = 1
-let g:completion_sorting = 'none'
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-let g:completion_enable_auto_popup = 1
 
-imap <c-j> <Plug>(completion_next_source)
-imap <c-k> <Plug>(completion_prev_source)
-
-let g:completion_chain_complete_list = {
-    \ 'default' : {
-    \   'default': [
-    \       {'complete_items': ['lsp']},
-    \       {'complete_items': ['snippet']},
-    \       {'complete_items': ['buffers', 'path']},
-    \       {'mode': '<c-p>'},
-    \       {'mode': '<c-n>'}],
-    \   'comment': [
-    \       {'complete_items': ['buffers']}],
-    \   'string': [
-    \       {'complete_items': ['buffers']}]
-    \   }
-    \}
-
-Plug 'steelsojka/completion-buffers'
-
-Plug 'vigoux/completion-treesitter'
-let g:complete_ts_highlight_at_point = 1
+Plug 'hrsh7th/nvim-compe'
 
 Plug 'pechorin/any-jump.vim'
 let g:any_jump_disable_default_keybindings = 1
@@ -831,6 +798,7 @@ call plug#end()
 call which_key#register('<Space>', "g:which_key_map")
 
 lua <<EOF
+require('entropitor.completion')
 require('entropitor.dap')
 require('entropitor.lsp.servers')
 require('entropitor.lsp.commands')

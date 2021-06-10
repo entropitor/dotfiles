@@ -115,7 +115,7 @@ function __dc_cd () {
   fi
 
   tmux new-window -t cli -c ${workspace}/${name} -S -n ${name}
-  tmux new-window -t vim -c ${workspace}/${name} -S -n ${name} nvim
+  tmux new-window -t vim -c ${workspace}/${name} -S -n ${name} zsh -c 'eval $(fnm env) ; fnm use ; nvim'
 }
 
 function __dc_. () {

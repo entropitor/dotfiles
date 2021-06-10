@@ -53,7 +53,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local servers = {
-    "eslint",
+    -- "eslint",
     "clangd",
     "bashls",
     "dockerls",
@@ -79,6 +79,15 @@ for _, lsp in ipairs(servers) do
         on_init = on_init
     }
 end
+
+lspconfig.eslint.setup {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        vim.b.ale_enabled = 0
+    end,
+    on_init = on_init
+}
 
 lspconfig.tsserver.setup {
     capabilities = capabilities,

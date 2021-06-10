@@ -74,3 +74,7 @@ export AWS_REGION=us-east-1
 if [ -e /Users/jens/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/jens/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 export ZK_NOTEBOOK_DIR="$HOME/Workspace/zettels"
+
+function ecr-docker-login() {
+  AWS_PROFILE="datacamp-staging-developer" aws ecr get-login-password | docker login --username AWS --password-stdin 487088987264.dkr.ecr.us-east-1.amazonaws.com
+}

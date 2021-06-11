@@ -392,8 +392,8 @@ nnoremap <leader>fs :Startify<ESC>
 Plug 'tpope/vim-eunuch'
 
 " Tags sidebar
-Plug 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
+" Plug 'majutsushi/tagbar'
+" nmap <F8> :TagbarToggle<CR>
 
 " bottombar
 Plug 'vim-airline/vim-airline'

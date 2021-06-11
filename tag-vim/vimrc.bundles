@@ -392,8 +392,9 @@ nnoremap <leader>fs :Startify<ESC>
 Plug 'tpope/vim-eunuch'
 
 " Tags sidebar
-" Plug 'majutsushi/tagbar'
-" nmap <F8> :TagbarToggle<CR>
+Plug 'liuchengxu/vista.vim'
+let g:vista_default_executive="nvim_lsp"
+nmap <F8> :Vista!!<CR>
 
 " bottombar
 " Plug 'vim-airline/vim-airline'

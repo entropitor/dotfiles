@@ -392,9 +392,11 @@ nnoremap <leader>fs :Startify<ESC>
 Plug 'tpope/vim-eunuch'
 
 " Tags sidebar
-Plug 'liuchengxu/vista.vim'
-let g:vista_default_executive="nvim_lsp"
-nmap <F8> :Vista!!<CR>
+Plug 'simrat39/symbols-outline.nvim'
+let g:symbols_outline = {
+    \ "auto_preview": v:false,
+\ }
+nnoremap <F8> :SymbolsOutline<CR>
 
 " bottombar
 " Plug 'vim-airline/vim-airline'

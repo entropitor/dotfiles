@@ -396,19 +396,19 @@ Plug 'tpope/vim-eunuch'
 " nmap <F8> :TagbarToggle<CR>
 
 " bottombar
-Plug 'vim-airline/vim-airline'
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
+" Plug 'vim-airline/vim-airline'
+" if !exists('g:airline_symbols')
+"   let g:airline_symbols = {}
+" endif
 
-set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
-let g:airline_powerline_fonts=1
-set laststatus=2 "Start drawing on start of session
-let g:airline_enable_branch = 0
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline_section_b = ''
-let g:airline_section_y = ''
-let g:airline_section_z = '%l:%c'
+" set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+" let g:airline_powerline_fonts=1
+" set laststatus=2 "Start drawing on start of session
+" let g:airline_enable_branch = 0
+" let g:airline#extensions#whitespace#enabled = 0
+" let g:airline_section_b = ''
+" let g:airline_section_y = ''
+" let g:airline_section_z = '%l:%c'
 
 " Devicons for nerdtree, startify, ...
 Plug 'ryanoasis/vim-devicons'

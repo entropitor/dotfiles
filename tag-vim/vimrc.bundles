@@ -304,6 +304,7 @@ nnoremap <leader>es <cmd>Snippets<CR>
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 let g:which_key_map.f.b = 'buffers'
 nnoremap <leader>fb :Telescope buffers<CR>
 let g:which_key_map.f.f = 'files'

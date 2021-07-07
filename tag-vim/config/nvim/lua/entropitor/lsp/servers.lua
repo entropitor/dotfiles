@@ -107,10 +107,12 @@ lspconfig.yamlls.setup {
     capabilities = capabilities,
     on_attach = on_attach,
     on_init = on_init,
+    filetypes = {"yaml", "yaml.docker-compose"},
     settings = {
         yaml = {
             schemaStore = {
-                enable = true
+                enable = true,
+                url = "https://www.schemastore.org/api/json/catalog.json"
             }
             -- schemas = {
             --  kubernetes = "*"

@@ -213,7 +213,7 @@ inoremap <silent> <leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
 let g:which_key_map.l.t = 'type-definition'
 nnoremap <silent> <leader>lt <cmd>lua vim.lsp.buf.type_definition()<CR>
 let g:which_key_map.l.q = 'force-reload'
-nnoremap <silent> <leader>lq <cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR><cmd>edit<CR>
+nnoremap <silent> <leader>lq <cmd>LspRestart<CR><cmd>edit<CR>
 let g:which_key_map.l.w = { 'name': '+workspace' }
 let g:which_key_map.l.w.a = 'add-folder'
 nnoremap <silent> <leader>lwa <cmd>lua vim.lsp.buf.add_workspace_folder()<CR>

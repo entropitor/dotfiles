@@ -398,6 +398,9 @@ let g:symbols_outline = {
 \ }
 nnoremap <F8> :SymbolsOutline<CR>
 
+" Show same icons in autocomplete
+Plug 'onsails/lspkind-nvim'
+
 " bottombar
 " Plug 'vim-airline/vim-airline'
 " if !exists('g:airline_symbols')
@@ -814,4 +817,6 @@ require('zk').setup({
   fuzzy_finder = "fzf",
   link_format = "markdown",
 })
+
+require('lspkind').init()
 EOF

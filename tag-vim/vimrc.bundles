@@ -306,13 +306,17 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 let g:which_key_map.f.b = 'buffers'
-nnoremap <leader>fb :Telescope buffers<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fB :Telescope buffers<CR>
 let g:which_key_map.f.f = 'files'
-nnoremap <leader>ff :Telescope find_files<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fF :Telescope find_files<CR>
 let g:which_key_map.f.g = 'git-files'
-nnoremap <leader>fg :Telescope git_files<CR>
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>fG :Telescope git_files<CR>
 let g:which_key_map.f.c = 'edited-files'
-nnoremap <leader>fc :Telescope git_status<CR>
+nnoremap <leader>fc :GFiles?<CR>
+nnoremap <leader>fC :Telescope git_status<CR>
 
 let g:which_key_map.f.v = 'edit-vimrc'
 nnoremap <leader>fv :e ~/.vimrc<CR>

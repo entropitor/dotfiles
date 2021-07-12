@@ -473,8 +473,8 @@ Plug 'tpope/vim-projectionist'
 let g:projectionist_heuristics = {
       \   "package.json": {
       \     "*.ts":  {"alternate": ["{}.spec.ts", "{}.spec.tsx", "{dirname}/__mocks__/{basename}.ts", "{dirname}/../{basename}.ts"]},
-      \     "*.tsx": {"alternate": ["{}.spec.tsx"]},
-      \     "*.spec.ts": {"alternate": ["{}.ts"]},
+      \     "*.tsx": {"alternate": ["{}.spec.tsx", "{}.spec.ts"]},
+      \     "*.spec.ts": {"alternate": ["{}.ts", "{}.tsx"]},
       \     "*.spec.tsx": {"alternate": ["{}.ts", "{}.tsx"]},
       \     "*.js":  {"alternate": ["{}.spec.js", "{}.spec.jsx"]},
       \     "*.jsx": {"alternate": ["{}.spec.jsx"]},

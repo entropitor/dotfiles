@@ -451,6 +451,7 @@ nnoremap <leader>dl <cmd>lua require'dap'.run_last{}<cr>
 
 " Adapters
 Plug 'microsoft/vscode-node-debug2', { 'do': 'npm install && npm run-script build' }
+Plug 'microsoft/vscode-js-debug', { 'do': 'npm install && npm run-script compile' }
 
 " Requires treesitter
 Plug 'theHamsta/nvim-dap-virtual-text'

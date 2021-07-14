@@ -510,6 +510,9 @@ Plug 'joshdick/onedark.vim'
 " Base16 color schemes
 Plug 'chriskempson/base16-vim'
 
+" Utilities for setting up highlighting groups
+Plug 'rktjmp/lush.nvim'
+
 " =====================
 " ===   Languages   ===
 " =====================

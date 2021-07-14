@@ -3,25 +3,10 @@ require("entropitor.lsp.servers.haskell")
 require("entropitor.lsp.servers.zk")
 
 local on_attach = function(client, _bufnr)
-    vim.cmd("highlight LspDiagnosticsUnderlineError guisp=DarkRed gui=underline")
-    vim.cmd("highlight LspDiagnosticsSignError guibg=DarkRed")
-
-    vim.cmd("highlight LspDiagnosticsUnderlineWarning guisp=LightYellow gui=underline")
-    vim.cmd("highlight LspDiagnosticsSignWarning guibg=LightYellow")
-
-    vim.cmd("highlight LspDiagnosticsUnderlineInformation guisp=LightBlue gui=underline")
-    vim.cmd("highlight LspDiagnosticsSignInformation guibg=LightBlue")
-
-    vim.cmd("highlight LspDiagnosticsUnderlineHint guisp=LightGrey gui=underline")
-    vim.cmd("highlight LspDiagnosticsSignHint guibg=LightGrey")
-
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec(
             [[
-      hi LspReferenceRead gui=undercurl guisp=White
-      hi LspReferenceText gui=undercurl guisp=White
-      hi LspReferenceWrite gui=undercurl guisp=White
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()

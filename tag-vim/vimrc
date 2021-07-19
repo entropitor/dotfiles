@@ -141,6 +141,4 @@ require'bufferline'.setup{
     },
   };
 }
-
-require("entropitor.colors").fix_highlighting()
 EOF

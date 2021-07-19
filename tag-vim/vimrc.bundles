@@ -827,3 +827,5 @@ require('zk').setup({
 
 require('lspkind').init()
 EOF
+
+au ColorScheme * lua require("entropitor.colors").fix_highlighting()

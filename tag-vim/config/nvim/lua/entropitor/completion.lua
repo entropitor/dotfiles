@@ -12,6 +12,7 @@ require("compe").setup {
     max_menu_width = 100,
     documentation = true,
     source = {
+        emoji = true,
         path = true,
         buffer = true,
         calc = true,

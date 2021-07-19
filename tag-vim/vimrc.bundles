@@ -3,18 +3,24 @@ if &compatible
 end
 set t_Co=256
 
+lua require('entropitor.plugins')
+augroup Packer
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
+
 call plug#begin('~/.vim/bundle')
 
 " ======================================
 " ===   Show keybindings when lost   ===
 " ======================================
-Plug 'liuchengxu/vim-which-key'
-nnoremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
-nnoremap <silent> <leader>? :<c-u>WhichKey '<leader>'<CR>
-vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<leader>'<CR>
-set timeoutlen=500
-let g:which_key_flatten=0
-let g:which_key_default_group_name='which_key_ignore'
+" Plug 'liuchengxu/vim-which-key'
+" nnoremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
+" nnoremap <silent> <leader>? :<c-u>WhichKey '<leader>'<CR>
+" vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<leader>'<CR>
+" set timeoutlen=500
+" let g:which_key_flatten=0
+" let g:which_key_default_group_name='which_key_ignore'
 let g:which_key_map = {}
 let g:which_key_map.d = { 'name': '+debug' }
 let g:which_key_map.e = { 'name': '+edit' }
@@ -40,7 +46,7 @@ Plug 'idanarye/vim-merginal'
 " Add git diff symbols in the gutter
 Plug 'airblade/vim-gitgutter'
 
-Plug 'pwntester/octo.nvim'
+" Plug 'pwntester/octo.nvim'
 
 " ========================
 " ===   Improved VIM   ===

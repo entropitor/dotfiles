@@ -17,6 +17,10 @@ if [ ! -e $HOME/.vim/autoload/plug.vim ]; then
 fi
 nvim +PlugInstall +PlugClean! +qa -
 
+if [ ! -e $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+  git clone https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
+
 if is_installed "brew" && [ -e ~/.Brewfile ]; then
   brew bundle install --file=~/.Brewfile --verbose
 fi

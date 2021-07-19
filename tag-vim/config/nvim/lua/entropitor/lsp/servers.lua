@@ -48,7 +48,7 @@ local servers = {
     "jot",
     "ocamlls",
     "ocamllsp",
-    "pyls",
+    "pylsp",
     -- "rls",
     "rust_analyzer",
     "solargraph",

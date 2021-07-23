@@ -8,9 +8,13 @@ M.fix_highlighting = function()
     local grey = hsl("#" .. vim.g.base16_gui05)
     local white = hsl("#" .. vim.g.base16_gui07)
     local red = hsl("#" .. vim.g.base16_gui08)
+    local orange = hsl("#" .. vim.g.base16_gui09)
     local yellow = hsl("#" .. vim.g.base16_gui0A)
     local green = hsl("#" .. vim.g.base16_gui0B)
     local blue = hsl("#" .. vim.g.base16_gui0C)
+    local cyan = hsl("#" .. vim.g.base16_gui0D)
+    local purple = hsl("#" .. vim.g.base16_gui0E)
+    local brown = hsl("#" .. vim.g.base16_gui0F)
 
     local spec =
         lush.parse(
@@ -63,6 +67,29 @@ M.fix_highlighting = function()
                 },
                 LspReferenceRead {
                     LspReferenceText
+                },
+                -- Ultest
+                UltestPass {
+                    fg = green
+                },
+                UltestFail {
+                    fg = red
+                },
+                UltestRunning {
+                    fg = yellow
+                },
+                UltestBorder {
+                    fg = purple
+                },
+                UltestSummaryInfo {
+                    fg = cyan,
+                    gui = "bold"
+                },
+                UltestSummaryFile {
+                    UltestSummaryInfo
+                },
+                UltestSummaryNamespace {
+                    UltestSummaryInfo
                 }
             }
         end
